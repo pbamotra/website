@@ -1,0 +1,57 @@
+html, body {
+	font-family: "Open Sans";
+}
+
+h1, h2, h3 {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+.post-meta {
+	margin-bottom: 0;
+}
+
+.site-header {
+	border-bottom: none;
+}
+
+.site-footer {
+	border-top: none;
+
+	text-align: center;
+
+}
+
+a {
+	
+	display: inline;
+	color: $brand-color;
+
+	&:hover {
+		color: darken($brand-color, 15%);
+		text-decoration: none;
+	}
+}
+
+.wrapper {
+	width: 650px;
+}
+
+.logo {
+	width: 34px;
+	height: 34px;
+	border-radius: 16px;
+	transition: border-radius 0.25s;
+}
+
+.logo:hover {
+	border-radius: 0;
+	transition: border-radius 0.25s;
+}
+
+header {
+	.wrapper {
+		margin-bottom: 20px;
+		padding: 20px;
+	}
+}
