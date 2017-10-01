@@ -16,9 +16,9 @@
 title: Bennett Hardwick
 email: bennettwhardwick@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  The result of torturous tinkering and misplaced motivation. Bennett Hardwick 2017.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+  The result of torturous tinkering and misplaced motivation. 2017. 
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "bennetthardwick.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: bennettbackward
 github_username:  bennetthardwick
 

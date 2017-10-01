@@ -34,7 +34,7 @@ a {
 }
 
 .wrapper {
-	width: 650px;
+	max-width: 650px;
 }
 
 .logo {
@@ -51,7 +51,7 @@ a {
 
 header {
 	.wrapper {
-		margin-bottom: 20px;
-		padding: 20px;
+		margin-bottom: $spacing-unit;
+		padding: $spacing-unit;
 	}
 }
