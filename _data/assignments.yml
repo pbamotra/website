@@ -1,0 +1,21 @@
+---
+- title: Distributed Hangman
+  byline: Create a client/server system that allows users to play the game Hangman in C, using TCP and POSIX Threads. 
+  date: October 20 2017
+  link: http://github.com/bennetthardwick/cab403-distributed-hangman
+- title: Alien Advance
+  byline: An alien game written in C and compiled for AVR architecture (specifically the ATMEGA32U4).
+  date: May 26 2017
+  link: http://github.com/bennetthardwick/cab202-alien-advance
+- title: Games Library
+  byline: Implement a variety of games including Pig, Twenty One and Solitaire in C#. 
+  date: May 5 2017
+  link: http://github.com/bennetthardwick/cab201-games-library
+- title: The Diamonds of Doom
+  byline: A terminal-based game written in C using a custom QUT graphics library. 
+  date: April 7 2017
+  link: http://github.com/bennetthardwick/cab202-diamonds-of-doom
+- title: Doraemon Turtle Graphics
+  byline: Write a Turtle app which draws a jigsaw puzzle of a famous character in Python 2. I used my own implementation of B-Splines and a tracing tool to quickly draw the image.
+  date: September 9 2016
+  link: http://github.com/bennetthardwick/ifb104-jigsaw-puzzle

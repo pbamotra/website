@@ -6,11 +6,12 @@ layout: default
 
   {{ content }}
 
+  <h1> Projects </h1>
+
   <ul class="post-list">
     {% for post in site.data.projects %}
       <li>
         {% assign date_format = site.date_format | default: "%b %-d, %Y" %}
-
         <h2>
           <a class="post-link" href="{{ post.link }}">{{ post.title | escape }}</a>
         </h2>
@@ -21,4 +22,22 @@ layout: default
       </li>
     {% endfor %}
   </ul>
+
+  <h1> Assignments </h1>
+
+  <ul class="post-list">
+    {% for post in site.data.assignments %}
+      <li>
+        {% assign date_format = site.date_format | default: "%b %-d, %Y" %}
+        <h2>
+          <a class="post-link" href="{{ post.link }}">{{ post.title | escape }}</a>
+        </h2>
+        <p>
+          {{ post.byline }} <span class="post-meta">{{ post.date | date: date_format }}</span>
+
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+
 </div>

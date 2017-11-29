@@ -1,6 +1,5 @@
 ---
-- title: Google
-  byline: I'm not trying to say anything, it's just has anyone ever seen me and Google in the same room before?
-  date: October 1 2017
-  link: http://google.com
----
+- title: Knowledge Bank
+  byline: A NodeJS, Express, Angular 2 and Mongoose stack app written in Typescript. It aims to become a non-linear notebook useful for note-taking and study.  
+  date: In Progress
+  link: https://github.com/bennetthardwick/knowledge-bank
