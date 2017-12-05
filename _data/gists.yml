@@ -1,0 +1,13 @@
+---
+languages:
+  - javascript
+  - typescript
+  - c
+  - c++
+  - markdown
+  - python
+  
+
+featured:
+  - title: mongoose-population.js
+    link: https://gist.github.com/bennetthardwick/a282c535fcc1b2532cbb0a18ede4f46a
