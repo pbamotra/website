@@ -1,0 +1,49 @@
+---
+layout: default
+---
+<div class="search">
+	{{ content }}
+	<input id="search" placeholder="Search through my gists!" /><button id="search-button"><i class="fa fa-search" aria-hidden="true"></i>
+	</button>
+
+	
+
+	<h2 class="margin-top">Featured Gists</h2>
+	<ul class="featured">
+		{% for featured in site.data.gists.featured %}
+			<li><a href="{{featured.link}}">{{featured.title}}</a></li>
+		{% endfor %}
+	</ul>
+	<h2 class="margin-top">Languages</h2>
+	<div class="language-search">
+		{% for lang in site.data.gists.languages %}
+			&nbsp;<a target="_blank" href="https://gist.github.com/search?q=language:{{lang}}+user:bennetthardwick">{{lang}}</a>
+		{% endfor %}
+	</div>
+
+</div>
+
+<script>
+
+	var search = function() {
+		var user = "bennetthardwick";
+		var website = "https://gist.github.com/search?";
+		var term = document.getElementById("search").value;
+
+		if (term.replace(/^\s+$/, "") === "") {
+			document.getElementById("search").value = "";
+		} else {
+			window.open(website + "q=" + term + "+" + "user:" + user);
+		}
+	}
+
+	document.getElementById("search-button")
+		.addEventListener("click", search);
+
+	document.getElementById("search")
+		.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				search();
+			}
+		}, true);
+</script>

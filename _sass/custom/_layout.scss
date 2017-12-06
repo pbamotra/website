@@ -52,3 +52,79 @@ header {
 		padding: $spacing-unit;
 	}
 }
+
+div.search {
+
+	width: 100%;
+	text-align: center;
+	box-sizing: border-box;
+
+	input {
+
+		display: inline;
+		padding: 8px 12px;
+		border-radius: 2px 0 0 2px;
+		outline: none;
+		width: 421px;
+		border: solid lighten($grey-color, 15%) 1px;
+		font-size: 12pt;
+
+		&:focus{
+			border-color: $brand-color;
+		}
+	}
+
+	button {
+
+		padding: 8px 26px 8px 26px;
+		outline: none;
+		border: solid lighten($grey-color, 15%) 1px;
+		font-size: 12pt;
+		border-radius: 0 2px 2px 0;
+		background-color: $grey-color-light;
+		color: $grey-color-dark;
+		border-left: none;
+
+		&:hover {
+			color: darken($grey-color-dark, 4%);
+			background-color: lighten($grey-color-light, 4%);
+		}
+
+		&:active {
+			color: $brand-color;
+			background-color: lighten($grey-color-light, 2%);
+		}
+
+	}
+
+	ul.featured {
+		list-style: none;
+		margin: 0;
+		
+		li {
+			margin: 0;
+		}
+
+	}
+
+}
+
+.margin-top {
+	margin-top: 20px;
+}
+
+@include media-query($on-palm){
+	div.search {
+
+		input {
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		button {
+			border: solid lighten($grey-color, 15%) 1px;
+			margin-top: 20px;
+			width: 50%;
+		}
+	}
+}
