@@ -48,6 +48,11 @@ a {
 
 header {
 	.wrapper {
+
+		.page-link {
+			margin: 0 $spacing-unit / 2 0;
+		}
+
 		margin-bottom: $spacing-unit;
 		padding: $spacing-unit;
 	}
@@ -114,6 +119,25 @@ div.search {
 }
 
 @include media-query($on-palm){
+
+	.site-header {
+		.wrapper {
+			.site-nav {
+				float: none;
+				text-align: center;
+			}
+
+			.brand {
+				text-align: center;
+			}
+
+			.site-title {
+				float: none;
+				display: inline;
+			}
+		}
+	}
+
 	div.search {
 
 		input {
