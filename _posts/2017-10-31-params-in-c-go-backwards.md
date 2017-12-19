@@ -13,21 +13,7 @@ Coming from a background in JavaScript, I went through a complete paradigm shift
 
 A lot of JavaScript logic is present in C. Functions are executed sequentially, multiplying two numbers together returns their product, and up until recently, I would have assumed that function arguments were executed from left to right. Take a look at this:  
 
-```c
-#include <stdio.h>
-
-int a = 0;
-
-int increment(){
-    return ++a;
-}
-
-int main(){
-    printf("%d and %d\n", 1, 2);
-    printf("%d and %d\n", increment(), increment());
-    return 0;
-}
-```
+{% gist 37d1eb6f6585efb8e623941991a04cc8 file-backwards-parameters-c %}
 
 I’ve written a function which increments a global variable `a`, and returns the result. The first line returns `1 and 2`, but what’s surprising is that the second line returns `2 and 1`. 
 
