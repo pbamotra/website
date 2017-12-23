@@ -1,4 +1,9 @@
 ---
+- title: GetSync Tracking
+  byline: Created a bespoke product page for a local vehicle tracking startup using NodeJS, Express and Stripe, in order to replace their existing Shopify site.
+  date: 20/12/2017
+  link: https://getsync.com.au
+  
 - title: Knowledge Bank
   byline: A NodeJS, Express, Angular 2 and Mongoose stack app written in Typescript. It aims to become a non-linear notebook useful for note-taking and study.  
   date: In Progress
