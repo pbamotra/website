@@ -9,5 +9,9 @@ languages:
   
 
 featured:
+  - title: brisbane_area_suburbs.json
+    link: https://gist.github.com/bennetthardwick/49c8c1277fdaab4e49fb6f0ec1f5c787
+  - title: minimal-stripe.js
+    link: https://gist.github.com/bennetthardwick/9a9b49e78503364a5898d7b9a5b02175
   - title: mongoose-population.js
     link: https://gist.github.com/bennetthardwick/a282c535fcc1b2532cbb0a18ede4f46a
