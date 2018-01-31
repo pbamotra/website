@@ -3,7 +3,7 @@ languages:
   - javascript
   - typescript
   - c
-  - c++
+  - cpp
   - markdown
   - python
   
