@@ -118,6 +118,13 @@ div.search {
 	margin-top: 20px;
 }
 
+.footer-col-wrapper {
+	a {
+		text-decoration: none;
+	}
+}
+
+
 @include media-query($on-palm){
 
 	.site-header {
@@ -125,6 +132,8 @@ div.search {
 			.site-nav {
 				float: none;
 				text-align: center;
+
+
 			}
 
 			.brand {

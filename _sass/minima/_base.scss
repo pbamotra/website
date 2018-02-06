@@ -93,6 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: $brand-color;
   text-decoration: none;
+  text-decoration: underline;
 
   .social-media-list &:hover {
     text-decoration: none;
@@ -128,13 +129,12 @@ blockquote {
 pre,
 code {
   @include relative-font-size(0.9375);
-  border: 1px solid $grey-color-light;
-  border-radius: 3px;
-  background-color: #eef;
 }
 
 code {
   padding: 1px 5px;
+  border: 1px solid $grey-color-light;
+  border-radius: 3px;
 }
 
 pre {

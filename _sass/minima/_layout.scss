@@ -37,9 +37,13 @@
   }
 
   .page-link {
-    color: $text-color;
+    color: $top-link-text-color;
+    text-decoration: none;
     line-height: $base-line-height;
-
+  
+    &:hover {
+      color: $text-color;
+    }
   }
 }
 
@@ -153,7 +157,7 @@
 }
 
 .post-title {
-  @include relative-font-size(2.625);
+  @include relative-font-size(4.625);
   letter-spacing: -1px;
   line-height: 1;
 
