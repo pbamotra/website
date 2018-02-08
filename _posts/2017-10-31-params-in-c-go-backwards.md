@@ -61,6 +61,6 @@ int main(){
 ```
 
 
-[passing-args-reverse]:(https://stackoverflow.com/questions/18690322/what-is-the-point-of-passing-arguments-in-the-reverse-order-in-c)
+[passing-args-reverse]:https://stackoverflow.com/questions/18690322/what-is-the-point-of-passing-arguments-in-the-reverse-order-in-c
 
-[32-keywords]:(https://www.programiz.com/c-programming/list-all-keywords-c-language)
+[32-keywords]:https://www.programiz.com/c-programming/list-all-keywords-c-language
