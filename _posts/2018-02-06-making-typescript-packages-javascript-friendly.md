@@ -4,6 +4,7 @@ title: Making Typescript Packages JavaScript Friendly
 byline: Everyone assumes that Typescript packages are backwards compatible with JavaScript by default, but importing won't always work exactly how you think.
 date: 2018-02-06 
 tags: [javascript, typescript, beginner]
+comments: true
 ---
 I don't know about you, but when I first started using Typescript it was an absolute game changer for me. Even for simple projects, where I'd be writing less than 100 lines of JavaScript, I'd always opt-in to using Typescript instead. 
 
@@ -107,4 +108,4 @@ Voilà! We've created a module that's intuitive to import with both Typescript a
 
 There are a few caveats though, most notably that if the main export class has any methods that share the same name as other exports there's going to be issues. This won't be a problem 50% because of naming conventions (classes having capital letters or whatever), but if you're exporting a similarly named function or variable you're going to run into issues. 
 
-Just on a final note, [kinda like my first article](http://bennetthardwick.com/2017/10/31/params-in-c-go-backwards.html) this whole making Typescript packages intuitive to use with JavaScript final is really a non-issue, since no one guesses how to use a package without first reading the documentation. Oh well.  
+Just on a final note, [kinda like my first article](http://bennetthardwick.com/2017/10/31/params-in-c-go-backwards.html) this whole making Typescript packages intuitive to use with JavaScript is really a non-issue, since no one guesses how to use a package without first reading the documentation. Oh well.  
