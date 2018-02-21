@@ -4,13 +4,8 @@ title: About Me
 permalink: /about/
 ---
 
-Hi! My name is Bennett. I'm an Australian Computer Science student, studying at QUT. I love programming, especially web technologies, and have dabbled in everything from low-level systems programming and micro-controllers to Chrome Extensions! 
-
-## Current Projects
-- Trekking the terrifyingly treacherous territories of TypeScript
-- Apps that help you make apps
-- A wiki for your brain
-- Tetris tips
+Hi! My name is Bennett. I'm an Australian student of Computer Science, studying at QUT. I love programming and messing with
+web technologies.  
 
 ## Books I've Liked
 - [The Power of Habit - Charles Duhigg](http://charlesduhigg.com/the-power-of-habit/)
