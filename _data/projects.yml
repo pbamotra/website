@@ -3,7 +3,7 @@
   byline: A small Angular 5 app that generates random app names. Was made in a few hours for the CODE Network showcase.
   date: 27/02/2018
   link: http://bennetthardwick.com/projects/app-names
-#- title: GetSync Tracking
-#  byline: Created a bespoke product page for a local vehicle tracking startup using NodeJS, Express and Stripe, in order to replace their existing Shopify site.
-#  date: 20/12/2017
-#  link: https://getsync.com.au
+- title: GetSync Tracking
+  byline: Created a bespoke product page for a local vehicle tracking startup using NodeJS, Express and Stripe, in order to replace their existing Shopify site.
+  date: 20/12/2017
+  link: https://getsync.com.au
