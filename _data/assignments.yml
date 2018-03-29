@@ -7,10 +7,6 @@
   byline: An alien game written in C and compiled for AVR architecture (specifically the ATMEGA32U4).
   date: May 26 2017
   link: http://github.com/bennetthardwick/cab202-alien-advance
-- title: Games Library
-  byline: Implement a variety of games including Pig, Twenty One and Solitaire in C#. 
-  date: May 5 2017
-  link: http://github.com/bennetthardwick/cab201-games-library
 - title: The Diamonds of Doom
   byline: A terminal-based game written in C using a custom QUT graphics library. 
   date: April 7 2017
