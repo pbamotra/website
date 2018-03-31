@@ -13,7 +13,7 @@ Hi! My name is Bennett. I'm an Australian Computer Science student, studying at 
 - Tetris tips
 
 ## Books I've Liked
-- [The Power of Habit - Charles Duhigg](http://charlesduhigg.com/the-power-of-habit/)
+- [The Power of Habit - Charles Duhigg](https://charlesduhigg.com/the-power-of-habit/)
 - [The Productivity Project - Chris Bailey](https://alifeofproductivity.com/book/)
 - [The Barefoot Investor - Scott Pape](https://barefootinvestor.com/)
 - [The Happiness Equation - Neil Pasricha](https://www.goodreads.com/book/show/22571656-the-happiness-equation)
