@@ -4,7 +4,7 @@ title: JavaScript by Reference AKA Opening Up a Box of Function Side Effects
 byline: Objects and Arrays are passed by reference to JavaScript functions. Who would have known.
 date: 2018-03-30 
 tags: [javascript, typescript, beginner, reference, lodash, pointers]
-comments: true
+comments: false
 ---
 I've been using JavaScript for quite a long time. Up until now, I felt like I was some kind of expert - no project was too large or too small for me to complete! I was unstoppable! 
 

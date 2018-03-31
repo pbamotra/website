@@ -4,7 +4,7 @@ title: Parameters Go Backwards In C
 byline: C parameters don’t work like other programming languages… except when they do.
 date: 2017-10-31 
 tags: [c, beginner]
-comments: true
+comments: false
 ---
 The funny thing about C, is that it gets harder the longer you spend trying to learn it.  
 

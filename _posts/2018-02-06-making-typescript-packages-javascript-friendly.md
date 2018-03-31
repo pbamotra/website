@@ -4,7 +4,7 @@ title: Making Typescript Packages JavaScript Friendly
 byline: Everyone assumes that Typescript packages are backwards compatible with JavaScript by default, but importing won't always work exactly how you think.
 date: 2018-02-06 
 tags: [javascript, typescript, beginner]
-comments: true
+comments: false
 ---
 I don't know about you, but when I first started using Typescript it was an absolute game changer for me. Even for simple projects, where I'd be writing less than 100 lines of JavaScript, I'd always opt-in to using Typescript instead. 
 
