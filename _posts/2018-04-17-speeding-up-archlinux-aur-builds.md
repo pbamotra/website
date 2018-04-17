@@ -19,7 +19,7 @@ cmake -j6 -G "Unix Makefiles" ../ \
 make -j6
 ...
 ```
-The `-j6` option for `cmake` and `make` means that it will run up to 6 parallel jobs. Whilst my computer only has 4 cores, it's best practice to run 1.5x more jobs than the amount of cores / hardware threads you have at your disposal. This is because whenever a job stop to wait for IO, there will still be something for the core to do while it's waiting.
+The `-j6` option for `cmake` and `make` means that it will run up to 6 parallel jobs. Whilst my computer only has 4 cores, it's best practice to run 1.5x more jobs than the amount of cores / hardware threads you have at your disposal. This is because whenever a job stops to wait for IO, there will still be something for the core to do while it's waiting.
 
 Unfortunately, in my short time of searching, I haven't found a global solution, but to be honest I'm not too upset with that. I've been searching for a reason to inspect the `PKBUILD` files, and I think doing this will give me a better understanding of what's really being installed on my system.
 
