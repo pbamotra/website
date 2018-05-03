@@ -169,3 +169,34 @@ $picture-size: 34px;
 	border-radius: 8px;
 	transition: border-radius 0.25s;
 }
+
+article.post {
+
+	h2, h3, h4 {
+
+		position: relative;
+
+		&::before {
+			opacity: 0.6;
+			position: absolute;
+			width: 100px;
+			left: -116px;
+			text-align: right;
+		}
+
+	}
+	
+	h2::before {
+		content: '## ';		
+	}
+
+	h3::before {
+		content: '### ';
+	}
+	
+	h4::before {
+		content: '#### ';
+	}
+
+}
+
