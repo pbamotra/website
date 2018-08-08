@@ -38,6 +38,18 @@ a {
 	}
 }
 
+.home {
+
+	.home-title {
+		margin: 36px 0px;
+	}
+
+	ul {
+		padding-bottom: 34px;
+	}
+
+}
+
 header {
 	.wrapper {
 
@@ -168,6 +180,11 @@ $picture-size: 34px;
 .logo:hover {
 	border-radius: 8px;
 	transition: border-radius 0.25s;
+}
+
+h2 {
+	line-height: 1.1;
+	margin-bottom: 12px;
 }
 
 article.post {
