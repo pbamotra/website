@@ -27,6 +27,8 @@
 .site-nav {
   float: right;
   line-height: $base-line-height * $base-font-size * 2.25;
+  font-size: 12px;
+  text-transform: uppercase;
 
   .nav-trigger {
       display: none;
