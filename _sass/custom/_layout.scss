@@ -185,6 +185,11 @@ article.post {
 		}
 
 	}
+
+	a.edit-post {
+		margin-left: 12px;
+		text-decoration: none;
+	}
 	
 	h2::before {
 		content: '## ';		
