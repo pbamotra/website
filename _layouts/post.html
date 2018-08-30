@@ -14,7 +14,10 @@ layout: default
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
         {{ page.date | date: date_format }}
-      </time></p>
+      </time>
+				- 
+				<a class="edit-post" href="https://github.com/bennetthardwick/bennetthardwick.github.io/blob/master/{{page.path}}">Edit</a>
+		</p>
     {{ content }}
   </div>
 </article>
