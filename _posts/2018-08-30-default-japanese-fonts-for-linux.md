@@ -16,9 +16,9 @@ So I'm writing this as a reference in case I ever need to do it again.
 
 The first issue I'll normally run into is broken fonts. After finishing up an install, non-latin fonts look like this:
 
---
+!["Split the nugget please Dad](/assets/images/nagetto-watte-touchan.png)
 
-This is easily fixed by creating a user font configuration file, at the path `~/.config/fontconfig/fonts.conf`, and filling it with the following:
+A bit squished. Well this is easily fixed by creating a user font configuration file, at the path `~/.config/fontconfig/fonts.conf`, and filling it with the following:
 ```xml
 <fontconfig>
   <alias>
@@ -51,6 +51,8 @@ As the user specified config is one of the first to be matched,
 the Noto Sans Mono CJK JP font could be matched quite early, which doesn't look great for English characters.
 
 To combat this, you could not specify a monospace font, or you could edit the system configuration at `/etc/fonts/conf.d/65-nonlatin.conf`.
+
+I find it's a lot easier having the `~/.config/` folder though, since I can sync it with [the rest of my dotfiles](https://github.com/bennetthardwick/dotfiles).
 
 ## Input Method
 

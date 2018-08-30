@@ -29,6 +29,12 @@ collections:
   projects:
     output: true
 
+defaults:
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+
 plugins: 
   - jekyll-seo-tag
   - jekyll-sitemap

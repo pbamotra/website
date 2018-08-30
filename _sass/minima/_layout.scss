@@ -171,6 +171,13 @@
 .post-content {
   margin-bottom: $spacing-unit;
 
+	p {
+		img {
+			display: block;
+			margin: 24px auto;
+		}
+	}
+
   h2 {
     @include relative-font-size(2);
 
