@@ -146,7 +146,6 @@ div.search {
 
 			.site-title {
 				float: none;
-				display: inline;
 			}
 		}
 	}
@@ -217,3 +216,6 @@ article.post {
 
 }
 
+.highlight code {
+	font-family: 'Roboto Mono', monospace;
+}
