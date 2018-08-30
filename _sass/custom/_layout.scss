@@ -18,9 +18,18 @@ h1, h2, h3 {
 
 .site-footer {
 	border-top: none;
-
 	text-align: center;
+	margin-top: 84px;
+}
 
+.post-content {
+	h2 {
+		margin-top: 42px;
+	}
+
+	h3 {
+		margin-top: 21px;
+	}
 }
 
 h2 a.post-link { text-decoration: none }
