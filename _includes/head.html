@@ -15,4 +15,9 @@
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+	{% if site.google-verify %}
+	<meta name="google-site-verification" content="{{ site.google-verify }}" />
+	{% endif %}
+
 </head>
