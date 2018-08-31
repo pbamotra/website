@@ -18,9 +18,23 @@ h1, h2, h3 {
 
 .site-footer {
 	border-top: none;
-
 	text-align: center;
+	margin-top: 84px;
+}
 
+.post-content {
+
+	blockquote {
+		margin: 32px 12px;
+	}
+
+	h2 {
+		margin-top: 42px;
+	}
+
+	h3 {
+		margin-top: 21px;
+	}
 }
 
 h2 a.post-link { text-decoration: none }
@@ -146,7 +160,6 @@ div.search {
 
 			.site-title {
 				float: none;
-				display: inline;
 			}
 		}
 	}
@@ -221,3 +234,6 @@ article.post {
 
 }
 
+.highlight code {
+	font-family: 'Roboto Mono', monospace;
+}

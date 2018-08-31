@@ -11,7 +11,7 @@ layout: default
 	<h2 class="margin-top">Featured Gists</h2>
 	<ul class="featured">
 		{% for featured in site.data.gists.featured %}
-			<li><a href="{{featured.link}}">{{featured.title}}</a></li>
+			<li><a href="{{featured.link}}" target="_blank">{{featured.title}}</a></li>
 		{% endfor %}
 	</ul>
 	<h2 class="margin-top">Languages</h2>

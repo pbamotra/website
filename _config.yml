@@ -14,9 +14,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Bennett Hardwick
-email: bennettwhardwick@gmail.com
+email: me (at) bennetthardwick (dot) com
 description: > # this means to ignore newlines until "baseurl:"
-  The result of torturous tinkering and misplaced motivation. 2018. 
+  The result of torturous tinkering and misplaced motivation.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "bennetthardwick.com" # the base hostname & protocol for your site, e.g. https://example.com
 twitter_username: bennettbackward
@@ -29,6 +29,12 @@ markdown: kramdown
 collections:
   projects:
     output: true
+
+defaults:
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
 
 plugins: 
   - jekyll-seo-tag

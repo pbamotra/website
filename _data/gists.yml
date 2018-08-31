@@ -9,9 +9,11 @@ languages:
   
 
 featured:
+  - title: better-anki-cards.css
+    link: https://gist.github.com/bennetthardwick/14f51e4ccce9a11819b07c5c3d876341
+  - title: functional-javascript-quicksort.js
+    link: https://gist.github.com/bennetthardwick/438a8a3b9960438d98b43a75921ddef4
   - title: brisbane_area_suburbs.json
     link: https://gist.github.com/bennetthardwick/49c8c1277fdaab4e49fb6f0ec1f5c787
   - title: minimal-stripe.js
     link: https://gist.github.com/bennetthardwick/9a9b49e78503364a5898d7b9a5b02175
-  - title: mongoose-population.js
-    link: https://gist.github.com/bennetthardwick/a282c535fcc1b2532cbb0a18ede4f46a
