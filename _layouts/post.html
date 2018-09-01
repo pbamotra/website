@@ -8,7 +8,6 @@ layout: default
     
   </header>
 
-
   <div class="post-content" itemprop="articleBody">
     <p class="post-meta">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
@@ -20,7 +19,6 @@ layout: default
 		</p>
     {{ content }}
   </div>
-	
 
 	{% if page.previous or page.next %}
 	<div class="pagination post">
@@ -44,16 +42,12 @@ layout: default
 		{% endif %}
 	{% endif %}
 
-
-
-
 </article>
 
 {% if page.comments %}
 
 <div id="disqus_thread"></div>
 <script>
-
 
 /**
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
