@@ -1,0 +1,57 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  {{ content }}
+
+  <ul class="post-list">
+    {% for post in paginator.posts %}
+      <li>
+        {% assign date_format = site.date_format | default: "%b %-d, %Y" %}
+
+        <h2>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h2>
+        <p>
+          {{ post.byline }} <span class="post-meta">{{ post.date | date: date_format }}</span>
+
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+{% if paginator.previous_page or paginator.next_page %}
+<div class="pagination">
+
+	{% if paginator.previous_page %}
+		<a href="{{ paginator.previous_page_path }}" class="previous">
+			<span class="previous">
+				{% octicon chevron-left %}
+			</span>
+		</a>
+	{% else %}
+		<span class="previous disabled">
+			{% octicon chevron-left %}
+		</span>
+	{% endif %}
+
+  <span class="page_number ">{{ paginator.page }}  of  {{ paginator.total_pages }}</span>
+
+	{% if paginator.next_page %}
+		<span class="next">
+			<a href="{{ paginator.next_page_path }}" class="next">
+				{% octicon chevron-right %}
+			</a>
+		</span>
+	{% else %}
+		<span class="next disabled">
+				{% octicon chevron-right %}
+		</span>
+	{% endif %}
+{% endif %}
+
+</div>

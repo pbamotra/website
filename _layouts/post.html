@@ -20,6 +20,33 @@ layout: default
 		</p>
     {{ content }}
   </div>
+	
+
+	{% if page.previous or page.next %}
+	<div class="pagination post">
+
+		{% if page.previous %}
+			<a href="{{ page.previous.url }}" class="previous">
+					{% octicon chevron-left %} <span class="title"> {{ page.previous.title }} </span>
+			</a>
+		{% else %}
+			<span class="previous">
+			</span>
+		{% endif %}
+
+		{% if page.next %}
+				<a href="{{ page.next.url }}" class="next">
+				 <span class="title">	{{ page.next.title }} </span> {% octicon chevron-right %} 
+				</a>
+			</span>
+		{% else %}
+			<span class="next">
+		{% endif %}
+	{% endif %}
+
+
+
+
 </article>
 
 {% if page.comments %}

@@ -36,9 +36,17 @@ defaults:
     values:
       image: true
 
+paginate: 8
+paginate_path: "/blog/page:num/"
+jekyll-mentions: https://twitter.com
+
 plugins: 
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-mentions
+  - jekyll-octicons
+  - jekyll-avatar
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
