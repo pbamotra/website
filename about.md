@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About Me - Bennett Hardwick
+title: About Me
 permalink: /about/
 ---
 

@@ -1,5 +1,5 @@
 ---
 layout: projects
-title: Projects - Bennett Hardwick
+title: Projects
 permalink: /
 ---
