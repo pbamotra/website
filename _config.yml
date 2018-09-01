@@ -19,6 +19,7 @@ description: > # this means to ignore newlines until "baseurl:"
   The result of torturous tinkering and misplaced motivation.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://bennetthardwick.com" # the base hostname & protocol for your site, e.g. https://example.com
+
 twitter_username: bennettbackward
 github_username:  bennetthardwick
 
@@ -47,6 +48,7 @@ plugins:
   - jekyll-mentions
   - jekyll-octicons
   - jekyll-avatar
+  - jemoji
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

@@ -248,7 +248,9 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  jekyll (~> 3.7.3)
   jekyll-octicons
+  jemoji
   minima (~> 2.0)
   tzinfo-data
 
