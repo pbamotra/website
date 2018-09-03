@@ -50,4 +50,12 @@ It's really easy to install the snippet as well. Inside the `<head>` of your pag
 { % endif % }
 ```
 
+Then, on every page that should include interactive snippets, add the following front matter: 
+
+```
+---
+console: true
+---
+```
+
 If you want to include the console on your site too, you can visit the [GitHub Repo](https://github.com/bennetthardwick/interactive-javascript-console) or download the bundle by clicking [here](https://raw.githubusercontent.com/bennetthardwick/interactive-javascript-console/master/dist/bundle.js).
