@@ -20,6 +20,10 @@
 	{% if site.google-verify %}
 	<meta name="google-site-verification" content="{{ site.google-verify }}" />
   {% endif %}
+
+  {% if page.console %}
+  <script src="{{ '/assets/interactive-console.js' | relative_url }}"></script>
+  {% endif %}
   
   {% seo %}
 
