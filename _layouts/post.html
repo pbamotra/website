@@ -18,7 +18,13 @@ layout: default
 				<a class="edit-post" href="https://github.com/bennetthardwick/bennetthardwick.github.io/blob/master/{{page.path}}">Edit</a>
 		</p>
     {{ content }}
-  </div>
+	</div>
+	
+	<div class="go-up">
+		<button onclick="document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })">
+			<i class="fa fa-angle-up" aria-hidden="true"></i>
+		</button>
+	</div>
 
 	{% if page.previous or page.next %}
 	<div class="pagination post">

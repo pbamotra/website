@@ -4,18 +4,11 @@ title: About Me
 permalink: /about/
 ---
 
-Hi! My name is Bennett. I'm an Australian Computer Science student, studying at QUT. I love programming, especially web technologies, and have dabbled in everything from low-level systems programming and micro-controllers to Chrome Extensions!
+![header image of my face on dark background](http://localhost:4000/assets/images/og-image.jpg)
 
+# Hello!
 
-## Current Projects
-- Trekking the terrifyingly treacherous territories of TypeScript
-- Apps that help you make apps
-- A wiki for your brain
-- Tetris tips
+I'm Bennett Hardwick, a Software Developer living in Brisbane, Australia and working at [Clipchamp](https://clipchamp.com/).
 
-## Books I've Liked
-- [The Power of Habit - Charles Duhigg](https://charlesduhigg.com/the-power-of-habit/)
-- [The Productivity Project - Chris Bailey](https://alifeofproductivity.com/book/)
-- [The Barefoot Investor - Scott Pape](https://barefootinvestor.com/)
-- [The Happiness Equation - Neil Pasricha](https://www.goodreads.com/book/show/22571656-the-happiness-equation)
-- ...and other books that all start with "the" 
+I'm still a full-time student, but you'll barely see me at QUT. Rather, you'll probably find me breaking builds, [ricing Archlinux](https://github.com/bennetthardwick/dotfiles) or coming up with [ideas for apps](https://bennetthardwick.com/projects/app-names/#/) I'm never going to finish.
+

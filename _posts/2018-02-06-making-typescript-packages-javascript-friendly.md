@@ -43,7 +43,7 @@ Let's try importing that with Typescript
 ```typescript
 import { Greeting } from 'Greeting';
 let hello = new Greeting('Me', 'Hi!');
-hello.greet();2
+hello.greet();
 // Me says Hi!
 ```
 And with JavaScript

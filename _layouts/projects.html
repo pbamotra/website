@@ -7,7 +7,6 @@ layout: default
   {{ content }}
 
 	<h1 class="home-title"> Projects </h1>
-
   <ul class="post-list">
     {% for post in site.data.projects %}
       <li>
@@ -23,8 +22,33 @@ layout: default
     {% endfor %}
   </ul>
 
-  <h1 class="home-title"> Class Assignments </h1>
+  <h1 class="home-title"> Recent Posts </h1>
+  <ul class="post-list">
+    {% assign recent_posts = site.posts | slice:0, 3 %}
+    {% for post in recent_posts %}
+      <li>
+        {% assign date_format = site.date_format | default: "%b %-d, %Y" %}
+        <h2>
+          <a class="post-link" href="{{ post.link }}" target="_blank">{{ post.title | escape }}</a>
+        </h2>
+        <p>
+          {{ post.byline }} <span class="post-meta">{{ post.date | date: date_format }}</span>
 
+        </p>
+      </li>
+    {% endfor %}
+
+    <div class="read-more">
+      <a href="/blog">
+        <h3>
+          See more posts...
+        </h3>
+      </a>
+    </div>
+
+  </ul>
+
+  <h1 class="home-title"> Class Assignments </h1>
   <ul class="post-list">
     {% for post in site.data.assignments %}
       <li>
