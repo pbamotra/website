@@ -4,7 +4,7 @@ title: About Me
 permalink: /about/
 ---
 
-![header image of my face on dark background](http://localhost:4000/assets/images/og-image.jpg)
+![header image of my face on dark background](/assets/images/og-image.jpg)
 
 # Hello!
 
