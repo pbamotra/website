@@ -24,6 +24,10 @@
   {% if page.console %}
   <script src="{{ '/assets/interactive-console.js' | relative_url }}"></script>
   {% endif %}
+
+  {% if page.side-by-side %}
+  <script src="{{ '/assets/side-by-side.js' | relative_url }}"></script>
+  {% endif %}
   
   {% seo %}
 

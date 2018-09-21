@@ -16,8 +16,15 @@ layout: default
       </time>
 				- 
 				<a class="edit-post" href="https://github.com/bennetthardwick/bennetthardwick.github.io/blob/master/{{page.path}}">Edit</a>
+
+				{% if page.side-by-side%}
+				-
+				<a class="edit-post" id="change-mode" href="#">Change Mode</a>
+				{% endif %}
 		</p>
-    {{ content }}
+		<div sbs-post-content>
+		{{ content }}
+		</div>
 	</div>
 	
 	<div class="go-up">

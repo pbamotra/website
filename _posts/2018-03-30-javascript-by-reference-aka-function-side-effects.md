@@ -5,10 +5,13 @@ byline: Objects and Arrays are passed by reference to JavaScript functions. Who 
 date: 2018-03-30 
 tags: [javascript, typescript, beginner, reference, lodash, pointers]
 comments: false
+side-by-side: true
 ---
 I've been using JavaScript for quite a long time. Up until now, I felt like I was some kind of expert - no project was too large or too small for me to complete! I was unstoppable! 
 
 That was until I found out that objects and arrays are created by reference, and my world collapsed. 
+
+<sbs-break />
 
 Normally, I'd write something like this:
 
@@ -30,6 +33,8 @@ Whoa! That could cause some serious bugs.
 
 Well apparently I hadn't read the [docs very well](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice), because it clearly shows it working how it's supposed to.
 
+<sbs-break />
+
 Okay, fine, whatever. Let's try something else. 
 
 ```js
@@ -38,17 +43,20 @@ let hello = hey;
 let hi = hello;
 
 hi.push("there");
+```
 
+Yep. Even though I only pushed to `hi`, they all changed.
+
+```js
 console.log(hi); // [ 'hi', 'there' ]
 console.log(hey); // [ 'hi', 'there' ]
 console.log(hello); // [ 'hi', 'there' ]
 ```
-Yep. Even though I only pushed to `hi`, they all changed.
 
 By now it should be obvious how JavaScript really works, and to be honest, it's quite embarrassing that I hadn't figured it out earlier. Tutorials on the internet are riddled with lines like:
 
 ```js
-let elem = document.getElementById("elem")`
+let elem = document.getElementById("elem")
 elem.innerHTML = "wow"
 ```
 How did I miss it? Maybe adding the DOM into the equation threw me a curveball? Who knows. 
