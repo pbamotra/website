@@ -3,7 +3,7 @@ layout: post
 title: Interactive JavaScript Code Snippets for Jekyll
 byline: An interactive alternative to JavaScript code snippets that integrates well with Jekyll.
 date: 2018-09-03
-tags: [c, beginner]
+tags: [jekyll]
 comments: false
 console: true
 ---

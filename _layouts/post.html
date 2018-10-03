@@ -34,25 +34,25 @@ layout: default
 	</div>
 
 	{% if page.previous or page.next %}
-	<div class="pagination post">
-
-		{% if page.previous %}
-			<a href="{{ page.previous.url }}" class="previous">
-					{% octicon chevron-left %} <span class="title"> {{ page.previous.title }} </span>
-			</a>
-		{% else %}
-			<span class="previous">
-			</span>
-		{% endif %}
-
-		{% if page.next %}
-				<a href="{{ page.next.url }}" class="next">
-				 <span class="title">	{{ page.next.title }} </span> {% octicon chevron-right %} 
+		<div class="pagination post">
+			{% if page.previous %}
+				<a href="{{ page.previous.url }}" class="previous">
+						{% octicon chevron-left %} <span class="title"> {{ page.previous.title }} </span>
 				</a>
-			</span>
-		{% else %}
-			<span class="next">
-		{% endif %}
+			{% else %}
+				<span class="previous">
+				</span>
+			{% endif %}
+
+			{% if page.next %}
+					<a href="{{ page.next.url }}" class="next">
+					<span class="title">	{{ page.next.title }} </span> {% octicon chevron-right %} 
+					</a>
+				</span>
+			{% else %}
+				<span class="next"></span>
+			{% endif %}
+		</div>
 	{% endif %}
 
 </article>
