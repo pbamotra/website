@@ -2,7 +2,7 @@
 layout: post
 title: Changing From X.org and i3wm to Sway and Wayland
 byline: Today I decided to embrace the dark side and move from i3wm to Sway... Why didn't I do this sooner!
-date: 2018-10-05
+date: 2018-10-06
 tags: [i3wm, sway]
 comments: false
 ---
