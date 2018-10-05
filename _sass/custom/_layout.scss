@@ -24,6 +24,10 @@ h1, h2, h3 {
 
 .post-content {
 
+  p {
+    line-height: 1.8;
+  }
+
 	blockquote {
 		margin: 32px 12px;
 	}
@@ -48,7 +52,7 @@ ul.post-list {
 h2 a.post-link { text-decoration: none }
 
 a {
-	
+
 	display: inline;
 	color: $brand-color;
 
@@ -131,7 +135,7 @@ div.search {
 	ul.featured {
 		list-style: none;
 		margin: 0;
-		
+
 		li {
 			margin: 0;
 		}
@@ -235,15 +239,15 @@ article.post {
 	a.edit-post {
 		color: inherit;
 	}
-	
+
 	h2::before {
-		content: '## ';		
+		content: '## ';
 	}
 
 	h3::before {
 		content: '### ';
 	}
-	
+
 	h4::before {
 		content: '#### ';
 	}
