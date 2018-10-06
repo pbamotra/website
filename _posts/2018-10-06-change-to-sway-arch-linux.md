@@ -75,3 +75,21 @@ Now that VS Code is fine, Chromium has started to feel really slow. I'm starting
 Since Sway does all the work, I have to rely on the graphical optimisations and configuration that it provides me. I haven't had much time to explore just yet, but I feel it might take a bit of work to make everything feel seamless.
 
 But until then, I'll definitely keep using Sway! It's an obvious improvement over i3wm and a fantastic step towards wider adoption of Wayland.
+
+<br />
+
+---
+
+## The Next Day
+
+I've been using Sway for the first part of today and everything has been pretty good, but there are some things that are a bit annoying.
+
+Firstly, XWayland is pretty trash. All the apps that need the X compatibility layer to run (firefox, chromium, etc) aren't fantastic. I've started trying to build the [firefox-wayland](https://aur.archlinux.org/packages/firefox-wayland/) package from the AUR, so I'll see how that goes.
+
+On the other hand, GTK+ applications are working great! I tried swapping them over to use the X11 backend and the different is astounding. +10 for Wayland.
+
+One issue I did run in to was that my GTK theme wasn't being used. After a bit of searching, I found [the GNOME docs](https://developer.gnome.org/gtk3/stable/gtk-running.html) and they suggested I export the variable `GTK_THEME` to set it, and it worked!
+
+I don't know if this is an issue with Sway or not, but `fcitx` and [japanese input]({% post_url 2018-08-30-default-japanese-fonts-for-linux %}) stopped working. All I had to do to fix this was re-install the `fcitx-im` group with pacman.
+
+That's pretty much it! Every
