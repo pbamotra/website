@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Fixing Japanese on Arch Linux
+title: Fixing Broken Japanese Fonts on Arch Linux
 byline: How to configure default system fonts and input for working with Japanese on Arch Linux.
 date: 2018-08-30
 tags: [linux, beginner, japanese]
 comments: false
 ---
 
-Setting up fonts for non-latin languages can be a bit difficult on Arch Linux. I find that every time I configure a new system I forget how to make it work perfectly,
+Setting up fonts for Japanese and other non-latin languages can be a bit difficult on Arch Linux. I find that every time I configure a new system I forget how to make it work perfectly,
 and I end up wasting hours trying to find the right answers. 
 
 So I'm writing this as a reference in case I ever need to do it again.
@@ -43,9 +43,10 @@ A bit squished. Well this is easily fixed by creating a user font configuration 
   </alias>
 </fontconfig>
 ```
+
 It's important to note that I added my default monospace font into the configuration file as well, above the Japanese mono font.
 
-When Arch Linux tries to match a font, it works it's way down through a list of fonts until it finds one that matches.
+When Arch Linux tries to match a font, it works it's way down through the list of fonts until it finds one that matches.
 
 As the user specified config is one of the first to be matched,
 the Noto Sans Mono CJK JP font could be matched quite early, which doesn't look great for English characters.
@@ -70,7 +71,7 @@ You can find more details about installing `fcitx` at the [Archlinux Wiki](https
 
 1. Install `fcitx` and `fcitx-mozc` and the config tool.
 ```
-sudo pacman -Sy fcitx fcitx-mozc fcitx-configtool
+sudo pacman -Sy fcitx-im fcitx-mozc fcitx-configtool
 ```
 
 2. Set `XMODIFIERS` variables
@@ -84,4 +85,3 @@ XMODIFIERS=@im=fcitx" >> ~/.pam_environment
 After doing those steps, Fcitx and Mozc should both be installed. Go ahead and issue the command `fcitx` to start the daemon. 
 
 You can now change up the hotkeys or enable auto-starting, but I prefer only executing it when I need to.
-
