@@ -43,12 +43,13 @@ paginate: 8
 paginate_path: "/blog/page/:num/"
 jekyll-mentions: https://twitter.com
 
-plugins: 
+plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-mentions
   - jekyll-octicons
+  - jekyll-redirect-from
   - jekyll-avatar
   - jekyll-feed
   - jemoji
