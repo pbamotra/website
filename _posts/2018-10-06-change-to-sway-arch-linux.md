@@ -90,6 +90,6 @@ On the other hand, GTK+ applications are working great! I tried swapping them ov
 
 One issue I did run in to was that my GTK theme wasn't being used. After a bit of searching, I found [the GNOME docs](https://developer.gnome.org/gtk3/stable/gtk-running.html) and they suggested I export the variable `GTK_THEME` to set it, and it worked!
 
-I don't know if this is an issue with Sway or not, but `fcitx` and [japanese input]({% post_url 2018-08-30-default-japanese-fonts-for-linux %}) stopped working. All I had to do to fix this was re-install the `fcitx-im` group with pacman.
+I don't know if this is an issue with Sway or not, but `fcitx` and [japanese input]({% post_url 2018-08-30-fixing-broken-japanese-fonts-arch-linux %}) stopped working. All I had to do to fix this was re-install the `fcitx-im` group with pacman.
 
 That's pretty much it!
