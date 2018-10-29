@@ -22,7 +22,7 @@ layout: default
     {% endfor %}
   </ul>
 
-  <h1 class="home-title"> Recent Posts </h1>
+  <h1 class="home-title"><a href="/blog">Recent Posts</a></h1>
   <ul class="post-list">
     {% assign recent_posts = site.posts | slice:0, 3 %}
     {% for post in recent_posts %}
@@ -37,15 +37,6 @@ layout: default
         </p>
       </li>
     {% endfor %}
-
-    <div class="read-more">
-      <a href="/blog">
-        <h3>
-          See more posts...
-        </h3>
-      </a>
-    </div>
-
   </ul>
 
   <h1 class="home-title"> Class Assignments </h1>

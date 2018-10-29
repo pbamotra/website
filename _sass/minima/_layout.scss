@@ -41,7 +41,7 @@
     color: $top-link-text-color;
     text-decoration: none;
     line-height: $base-line-height;
-  
+
     &:hover {
       color: $text-color;
     }
@@ -178,18 +178,18 @@ html, body {
 			display: block;
 			margin: 24px auto;
     }
-    
-    margin: 1.6em 0px; 
+
+    margin: 1.6em 0px;
 
   }
-  
+
   div.highlight {
 
     position: relative;
     margin: 32px 0px;
 
     &::after {
-
+      display: none;
       position: absolute;
       content: '';
       background: inherit;
@@ -201,8 +201,8 @@ html, body {
       bottom: 0;
     }
 
-    padding: 32px 0px;
-    border-radius: 4px;
+    padding: 32px 22px;
+    border-radius: 2px;
 
     pre.highlight {
       margin: 0;
