@@ -1,5 +1,6 @@
 html, body {
 	font-family: 'Open Sans', sans-serif !important;
+
 }
 
 h1, h2, h3 {
@@ -260,8 +261,31 @@ article.post {
 
 }
 
-.highlight code {
-	font-family: 'Roboto Mono', monospace;
+.highlighter-rouge .highlight {
+  width: initial !important;
+  max-width: 100%;
+}
+
+pre.highlight {
+
+  &::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+    border-radius: 3px;
+    background: #383838;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #484848;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #585858;
+  }
+
+  code {
+    font-family: 'Roboto Mono', monospace;
+  }
 }
 
 interactive-console {
