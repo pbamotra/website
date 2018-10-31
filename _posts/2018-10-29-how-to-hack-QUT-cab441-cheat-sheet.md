@@ -45,8 +45,7 @@ This sheet has been broken up into sections to match the three exam questions. C
 ## Network Security
 
 ### Iptables
-[Cheat Sheet!](https://duckduckgo.com/?q=iptables+cheat+sheet&atb=v138-7__&ia=cheatsheet&iax=1) You can also use `man iptables`.
-[Graph iptables rules](http://jekor.com/gressgraph/)
+Here's a cool [cheat sheet](https://duckduckgo.com/?q=iptables+cheat+sheet&atb=v138-7__&ia=cheatsheet&iax=1). `man iptables` and `main iptables-extensions` are both very useful. If you want to visualise your iptables rules, [check this out](http://jekor.com/gressgraph/).
 
 #### Chains
 There are five built in `iptables` chains.
