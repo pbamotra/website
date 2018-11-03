@@ -2,11 +2,11 @@
 layout: default
 ---
 
-<div class="home">
+<div class="default">
 
   {{ content }}
 
-	<h1 class="home-title"> Projects </h1>
+	<h1 class="default-title"> Projects </h1>
   <ul class="post-list">
     {% for post in site.data.projects %}
       <li>
@@ -22,7 +22,7 @@ layout: default
     {% endfor %}
   </ul>
 
-  <h1 class="home-title"><a href="/blog">Recent Posts</a></h1>
+  <h1 class="default-title"><a href="/blog">Recent Posts</a></h1>
   <ul class="post-list">
     {% assign recent_posts = site.posts | slice:0, 3 %}
     {% for post in recent_posts %}
@@ -39,7 +39,7 @@ layout: default
     {% endfor %}
   </ul>
 
-  <h1 class="home-title"> Class Assignments </h1>
+  <h1 class="default-title"> Class Assignments </h1>
   <ul class="post-list">
     {% for post in site.data.assignments %}
       <li>

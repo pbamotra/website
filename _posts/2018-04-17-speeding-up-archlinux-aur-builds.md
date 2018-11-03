@@ -3,7 +3,7 @@ layout: post
 title: Speeding Up Arch Linux AUR Builds
 byline: Compiling packages from the AUR takes forever, here's how to change that.
 date: 2018-04-17 
-tags: [linux, archlinux, beginner]
+tags: [archlinux, beginner]
 comments: false
 ---
 I have a T440s that runs Arch Linux. It's the computer that I use at University and I spend a lot of time programming on it. One of the things that I hate about it however, is the amount of time it takes to build a package from the AUR.
