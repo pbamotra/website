@@ -33,7 +33,7 @@ This sheet has been broken up into sections to match the three exam questions. C
 - [Take Control](#take-control)
 - [Tips](#tips)
 
-> [Exploting Buffer Overflows](#exploiting-buffer-overflows)
+> [Exploiting Buffer Overflows](#exploiting-buffer-overflows)
 - [Resources](#resources-1)
 - [Steps](#steps-1)
 - [Attack](#attack-1)
