@@ -89,7 +89,7 @@ ul.post-list {
 		p {
 			margin-top: 2px;
 		}
-		
+
 	}
 }
 
@@ -281,7 +281,7 @@ h2 {
 
 /**
 * Post Content
-*/ 
+*/
 article.post {
 
 	h2,
@@ -291,7 +291,7 @@ article.post {
 		position: relative;
 
 		&::before {
-			opacity: 0.6;
+			opacity: 0.15;
 			position: absolute;
 			width: 100px;
 			left: -116px;
