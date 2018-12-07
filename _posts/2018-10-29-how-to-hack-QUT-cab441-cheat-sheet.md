@@ -13,7 +13,7 @@ This cheat sheet is the main resource coming in with me into my CAB441 Network S
 ## Table of contents
 This sheet has been broken up into sections to match the three exam questions. Click any of the links in this table to quickly navigate to that section of the sheet.
 
-> [Network Security](#network-security)
+1. [Network Security](#network-security)
 - [iptables](#iptables)
   - [chains](#chains)
   - [tables](#tables)
@@ -26,19 +26,19 @@ This sheet has been broken up into sections to match the three exam questions. C
   - [TCP Flags](#tcp-flags)
   - [Examples](#exmplaes)
 
-> [Web Penetration Testing](#web-penetration-testing)
-- [Resources](#resources)
-- [Steps](#steps)
-- [Attack](#attack)
-- [Take Control](#take-control)
-- [Tips](#tips)
+2. [Web Penetration Testing](#web-penetration-testing)
+ - [Resources](#resources)
+ - [Steps](#steps)
+ - [Attack](#attack)
+ - [Take Control](#take-control)
+ - [Tips](#tips)
 
-> [Exploiting Buffer Overflows](#exploiting-buffer-overflows)
-- [Resources](#resources-1)
-- [Steps](#steps-1)
-- [Attack](#attack-1)
-- [Take Control](#take-control-1)
-- [Tips](#tips-1)
+3. [Exploiting Buffer Overflows](#exploiting-buffer-overflows)
+ - [Resources](#resources-1)
+ - [Steps](#steps-1)
+ - [Attack](#attack-1)
+ - [Take Control](#take-control-1)
+ - [Tips](#tips-1)
 
 
 
@@ -446,9 +446,9 @@ Before attempting a buffer overflow, you should read up on how the CPU works on 
     
 7. Once you've found a module with the previous security features turned off, you must search for the command `JMP ESP` inside it. The shellcode for this command is `FFE4` which can be found using the `nasm-shell.rb` utility in metasploit. Return to the command box and issue:
 
-  ```bash
-  !mona find -s "\xff\xe4" -m <target-dll>
-  ```
+    ```bash
+    !mona find -s "\xff\xe4" -m <target-dll>
+    ```
 
     Note down the address of the memory that contains the command. As Windows is little endian, the bytes of the address should be reversed.
 

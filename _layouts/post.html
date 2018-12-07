@@ -5,16 +5,21 @@ layout: default
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
-    
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <p class="post-meta">
+        {% if page.author %}
+          {{ page.author }}
+        {% else %}
+          {{ 'Bennett' }}
+        {% endif %}
+        on
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
         {{ page.date | date: date_format }}
       </time>
-				- 
+				-
 				<a class="edit-post" href="https://github.com/bennetthardwick/bennetthardwick.github.io/blob/master/{{page.path}}">Edit</a>
 
 				{% if page.side-by-side%}
@@ -26,11 +31,19 @@ layout: default
 		{{ content }}
 		</div>
 	</div>
-	
+
 	<div class="go-up">
 		<button onclick="document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })">
 			<i class="fa fa-angle-up" aria-hidden="true"></i>
 		</button>
+
+  {% if page.author %}
+    {% assign author = site.data.authors[page.author] %}
+  {% else %}
+    {% assign author = site.data.authors["bennett"] %}
+  {% endif %}
+  {% include author.html %}
+
 	</div>
 
 	{% if page.previous or page.next %}
@@ -46,7 +59,7 @@ layout: default
 
 			{% if page.next %}
 					<a href="{{ page.next.url }}" class="next">
-					<span class="title">	{{ page.next.title }} </span> {% octicon chevron-right %} 
+					<span class="title">	{{ page.next.title }} </span> {% octicon chevron-right %}
 					</a>
 				</span>
 			{% else %}
@@ -55,7 +68,10 @@ layout: default
 		</div>
 	{% endif %}
 
+
+
 </article>
+
 
 {% if page.comments %}
 

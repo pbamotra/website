@@ -1,4 +1,7 @@
 ---
 bennett:
+  name: Bennett
   picture: /assets/logo.jpg
   twitter: bennettbackward
+  github: bennetthardwick
+  about: Bennett is a Software Developer working at <a href="https://clipchamp.com">Clipchamp</a>. He spends most of his day arguing with Angular and editing videos.

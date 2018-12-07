@@ -103,8 +103,6 @@ ul.post-list {
 	@include relative-font-size(1.5);
 }
 
-
-
 /**
  * Posts
  */
@@ -203,6 +201,7 @@ ul.post-list {
 .go-up {
 
 	display: flex;
+  flex-direction: column;
 	justify-content: center;
 
 	button {
@@ -252,6 +251,38 @@ a {
 		text-decoration: none;
 	}
 }
+
+.author {
+
+  display: flex;
+  border-top: 1px solid $grey-color-light;
+  margin-top: $spacing-unit;
+  padding: 18px;
+
+  div {
+    padding: 18px;
+  }
+
+  .about p {
+    margin-top: 8px;
+  }
+
+  .image {
+    flex-shrink: 0;
+
+    img {
+      width: 96px;
+      height: 96px;
+
+      box-shadow: 8px 8px 0px 0px rgba($brand-color, 0.3);
+      border: 2px solid $grey-color-dark;
+      border-radius: 3px;
+
+    }
+  }
+
+}
+
 
 /**
 * Default Page
