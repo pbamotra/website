@@ -120,7 +120,7 @@ If it has a exactly two of a character - increment the `twos` count. Also, if it
 
 ```rust
         if add_twos {
-            twos z+= 1;
+            twos += 1;
         }
         if add_threes {
             threes += 1;
