@@ -1,0 +1,9 @@
+---
+- title: Darknet.js
+  byline: A Node wrapper of pjreddie's open source neural network framework Darknet, using the Foreign Function Interface Library.
+  date: 27/05/2018
+  link: https://www.npmjs.com/package/darknet
+- title: Clipchamp Interview Challenge
+  byline: An Angular 5 chatting system that communicates using the WebRTC API. It was an internship interview challenge set by Clipchamp.
+  link: https://github.com/bennetthardwick/clipchamp-webrtc-challenge
+  date: 02/04/2018
