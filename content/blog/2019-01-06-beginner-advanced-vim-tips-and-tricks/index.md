@@ -4,7 +4,7 @@ title: 8 Vim Tips and Tricks for Advanced Beginners
 byline: Some tips and tricks I've learned along my short journey of becomming a Vim advanced beginner.
 date: 2019-01-06
 tags: [vim, neovim, beginner]
-reidrect_from:
+redirect_from:
     - "/2019/01/06/beginner-advanced-vim-tips-and-tricks.html"
 comments: false
 ---
