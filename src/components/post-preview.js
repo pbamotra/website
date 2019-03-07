@@ -1,10 +1,11 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import { rhythm } from '../utils/typography';
+import React from "react"
+import { Link } from "gatsby"
+import { rhythm } from "../utils/typography"
 
 export class PostPreview extends React.Component {
-    render() {
-        return <div>
+  render() {
+    return (
+      <div>
         {this.props.posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -27,6 +28,7 @@ export class PostPreview extends React.Component {
             </div>
           )
         })}
-        </div>
-    }
+      </div>
+    )
+  }
 }

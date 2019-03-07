@@ -10,22 +10,36 @@ class Layout extends React.Component {
     const blogPath = `${__PATH_PREFIX__}/blog`
     let header
 
-    let blogLink;
+    let blogLink
 
-    if (location.pathname === rootPath || (location.pathname !== blogPath && location.pathname.startsWith(blogPath))) {
-      blogLink = <Link to={blogPath} style={{ fontSize: rhythm(0.8) }}>Blog</Link>;
+    if (
+      location.pathname === rootPath ||
+      (location.pathname !== blogPath && location.pathname.startsWith(blogPath))
+    ) {
+      blogLink = (
+        <Link to={blogPath} style={{ fontSize: rhythm(0.8) }}>
+          Blog
+        </Link>
+      )
     }
 
-    const profile = <StaticQuery query={avatarQuery} render={data => <Image
-      fixed={data.avatar.childImageSharp.fixed}
-      style={{
-        minWidth: 50,
-        borderRadius: `100%`,
-      }}
-      imgStyle={{
-        borderRadius: `50%`,
-      }} />}
-    />
+    const profile = (
+      <StaticQuery
+        query={avatarQuery}
+        render={data => (
+          <Image
+            fixed={data.avatar.childImageSharp.fixed}
+            style={{
+              minWidth: 50,
+              borderRadius: `100%`,
+            }}
+            imgStyle={{
+              borderRadius: `50%`,
+            }}
+          />
+        )}
+      />
+    )
 
     if (location.pathname === rootPath) {
       header = (
@@ -33,14 +47,12 @@ class Layout extends React.Component {
           style={{
             marginBottom: rhythm(2.5),
             marginTop: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-        <div style={{marginBottom: rhythm(0.25)}}>
-            {profile}
-        </div>
+          <div style={{ marginBottom: rhythm(0.25) }}>{profile}</div>
           {blogLink}
         </div>
       )
@@ -50,9 +62,9 @@ class Layout extends React.Component {
           style={{
             marginTop: 0,
             marginBottom: rhythm(1.5),
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <Link
@@ -60,7 +72,7 @@ class Layout extends React.Component {
               boxShadow: `none`,
               textDecoration: `none`,
               color: `inherit`,
-              backgroundImage: `none`
+              backgroundImage: `none`,
             }}
             to={`/`}
           >
@@ -81,8 +93,11 @@ class Layout extends React.Component {
       >
         <header>{header}</header>
         <main>{children}</main>
-        <footer style={{ opacity: 0.5, marginTop: rhythm(4), textAlign: 'center' }}>
-          The result of torturous tinkering and misplaced motivation. I'm just waiting for things to break.
+        <footer
+          style={{ opacity: 0.5, marginTop: rhythm(4), textAlign: "center" }}
+        >
+          The result of torturous tinkering and misplaced motivation. I'm just
+          waiting for things to break.
         </footer>
       </div>
     )

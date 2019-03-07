@@ -45,14 +45,14 @@ class BlogPostTemplate extends React.Component {
             padding: 0,
           }}
         >
-          <li style={{ flex: '1 1 0', marginRight: rhythm(0.25) }}>
+          <li style={{ flex: "1 1 0", marginRight: rhythm(0.25) }}>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
-          <li style={{ flex: '1 1 0', marginLeft: rhythm(0.25) }}>
+          <li style={{ flex: "1 1 0", marginLeft: rhythm(0.25) }}>
             {next && (
               <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →

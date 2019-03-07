@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { PostPreview } from "../components/post-preview";
+import { PostPreview } from "../components/post-preview"
 
 class BlogIndex extends React.Component {
   render() {
@@ -14,11 +14,15 @@ class BlogIndex extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO
           title="Blog"
-          keywords={[`blog`, `javascript`, `typescript`, `programming`, 'bennetthardwick']}
+          keywords={[
+            `blog`,
+            `javascript`,
+            `typescript`,
+            `programming`,
+            "bennetthardwick",
+          ]}
         />
-        <h1>
-          Blog
-        </h1>
+        <h1>Blog</h1>
         <PostPreview posts={posts} />
       </Layout>
     )

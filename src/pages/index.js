@@ -2,16 +2,16 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { PostPreview } from "../components/post-preview";
-import About from '../components/about';
-import Projects from "../components/projects";
+import { PostPreview } from "../components/post-preview"
+import About from "../components/about"
+import Projects from "../components/projects"
 
 export default class Home extends React.Component {
   render() {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
-    const projects = data.allProjectsYaml.edges;
+    const projects = data.allProjectsYaml.edges
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -27,7 +27,6 @@ export default class Home extends React.Component {
 
         <h2>Recent Posts</h2>
         <PostPreview posts={posts.slice(0, 3)} />
-
       </Layout>
     )
   }
@@ -62,13 +61,12 @@ export const pageQuery = graphql`
     allProjectsYaml {
       edges {
         node {
-          title,
-          byline,
-          date,
+          title
+          byline
+          date
           link
         }
       }
     }
   }
 `
-

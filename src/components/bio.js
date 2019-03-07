@@ -38,8 +38,11 @@ function Bio() {
               }}
             />
             <p>
-              <strong>Bennett</strong> is a Software Developer working at <a href="https://clipchamp.com">Clipchamp</a>.
-              He spends most of his day arguing with Angular and editing videos. Why don't you follow him on <a href="https://github.com/bennetthardwick">Github</a>?
+              <strong>Bennett</strong> is a Software Developer working at{" "}
+              <a href="https://clipchamp.com">Clipchamp</a>. He spends most of
+              his day arguing with Angular and editing videos. Why don't you
+              follow him on{" "}
+              <a href="https://github.com/bennetthardwick">Github</a>?
             </p>
           </div>
         )
