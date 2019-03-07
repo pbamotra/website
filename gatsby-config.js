@@ -52,7 +52,6 @@ module.exports = {
         ],
       },
     },    
-    'gatsby-plugin-page-transitions',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-feed`,
