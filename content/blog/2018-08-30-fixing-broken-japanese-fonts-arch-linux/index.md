@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Fixing Broken Japanese Fonts on Arch Linux
 byline: How to configure default system fonts and input for working with Japanese on Arch Linux.
 date: 2018-08-30

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Parameters Go Backwards In C
 byline: C parameters don’t work like other programming languages… except when they do.
 date: "2017-10-31"

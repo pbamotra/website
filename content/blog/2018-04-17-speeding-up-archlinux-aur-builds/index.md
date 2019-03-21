@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Speeding Up Arch Linux AUR Builds
 byline: Compiling packages from the AUR takes forever, here's how to change that.
 date: 2018-04-17 

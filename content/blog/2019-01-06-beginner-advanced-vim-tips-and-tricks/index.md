@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 8 Vim Tips and Tricks for Advanced Beginners
 byline: Some tips and tricks I've learned along my short journey of becomming a Vim advanced beginner.
 date: 2019-01-06

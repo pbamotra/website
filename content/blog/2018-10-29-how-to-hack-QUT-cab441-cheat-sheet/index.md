@@ -1,5 +1,4 @@
 ---
-layout: post
 title: How to Hack (QUT CAB441 Cheat Sheet)
 byline: My cheat sheets and preparation heading into the CAB441 Network Security exam.
 date: 2018-10-29
