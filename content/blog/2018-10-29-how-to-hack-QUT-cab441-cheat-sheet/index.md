@@ -16,38 +16,42 @@ This cheat sheet is the main resource coming in with me into my CAB441 Network S
 This sheet has been broken up into sections to match the three exam questions. Click any of the links in this table to quickly navigate to that section of the sheet.
 
 1. [Network Security](#network-security)
-- [iptables](#iptables)
-  - [chains](#chains)
-  - [tables](#tables)
-  - [targets](#targets)
-  - [rules](#rules)
-  - [iptables extensions](#iptables-extensions)
-- [snort](#snort)
-  - [Actions](#actions)
-  - [Rule Options](#rule-options)
-  - [TCP Flags](#tcp-flags)
-  - [Examples](#exmplaes)
+    - [iptables](#iptables)
+        - [chains](#chains)
+        - [tables](#tables)
+        - [targets](#targets)
+        - [rules](#rules)
+        - [iptables extensions](#iptables-extensions)
+    - [snort](#snort)
+        - [Actions](#actions)
+        - [Rule Options](#rule-options)
+        - [TCP Flags](#tcp-flags)
+        - [Examples](#exmplaes)
 
 2. [Web Penetration Testing](#web-penetration-testing)
- - [Resources](#resources)
- - [Steps](#steps)
- - [Attack](#attack)
- - [Take Control](#take-control)
- - [Tips](#tips)
+    - [Resources](#resources)
+    - [Steps](#steps)
+    - [Attack](#attack)
+    - [Take Control](#take-control)
+    - [Tips](#tips)
 
 3. [Exploiting Buffer Overflows](#exploiting-buffer-overflows)
- - [Resources](#resources-1)
- - [Steps](#steps-1)
- - [Attack](#attack-1)
- - [Take Control](#take-control-1)
- - [Tips](#tips-1)
+    - [Resources](#resources-1)
+    - [Steps](#steps-1)
+    - [Attack](#attack-1)
+    - [Take Control](#take-control-1)
 
-
+<span id="network-security" />
 
 ## Network Security
 
-### Iptables
+<span id="iptables" />
+
+### Iptables 
+
 Here's a cool [cheat sheet](https://duckduckgo.com/?q=iptables+cheat+sheet&atb=v138-7__&ia=cheatsheet&iax=1). `man iptables` and `main iptables-extensions` are both very useful. If you want to visualise your iptables rules, [check this out](http://jekor.com/gressgraph/).
+
+<span id="chains" />
 
 #### Chains
 There are five built in `iptables` chains.
@@ -59,6 +63,9 @@ There are five built in `iptables` chains.
 - POSTROUTING
 
 ![iptables flow chart](https://cs.senecac.on.ca/~michal.heidenreich/ops335/iptables.png)
+
+
+<span id="tables" />
 
 #### Tables
 There are five built-in `iptables` tables. The first three are the most common. The following descriptions have been taken from the `TABLES` section of the man pages. The previous flow chart also shows the different tables.
@@ -73,6 +80,8 @@ There are five built-in `iptables` tables. The first three are the most common. 
     > This table is used for specialized packet alteration.  Until kernel 2.4.17 it  had  two  built-in chains:  PREROUTING  (for  altering  incoming  packets  before  routing) and OUTPUT (for altering locally-generated packets before routing).  Since kernel 2.4.18, three other built-in chains  are also  supported:  INPUT  (for  packets coming into the box itself), FORWARD (for altering packets being routed through the box), and POSTROUTING (for altering packets as  they  are  about  to  go out).
 
 There are also `raw` and `security` tables.
+
+<span id="targets" />
 
 #### Targets
 There are six `iptables` targets.
@@ -92,6 +101,8 @@ There are six `iptables` targets.
 
 Note: there are more targets that have very specific cases. For example, the `DNAT` target can only exist in the `nat` table and will only be valid in the `PREROUTING` and `OUTPUT` chains. More info about these targets can be found in the `iptables` and `iptables-extensions` man pages.
 
+<span id="rules" />
+
 #### Rules
 
 Delete all rules:
@@ -110,6 +121,8 @@ iptables -A <chain> -p <protocol> -j <target>
 
 # Valid: tcp / udp / icmp / all ...
 ```
+
+<span id="iptables-extensions" />
 
 #### Iptables Extensions
 `iptables` can use extended packet matching and target modules using the `-m` option. 
@@ -149,6 +162,9 @@ iptables -t nat -A PREROUTING \
 
 View `man iptables-extensions` for more information.
 
+
+<span id="snort" />
+
 ### Snort
 
 You can write rules for snort by creating a `.rules` file in the `/etc/snort/rules` folder. Alternatively, you can edit the `snort.conf` file or use the `local.rules` file. Read more about how to write `snort` rules [here](http://books.gigatux.nl/mirror/snortids/0596006616/snortids-CHP-7-SECT-3.html).
@@ -163,6 +179,8 @@ Basic `snort` rule syntax:
 
 Note: the 
 
+<span id="actions" />
+
 #### Actions
 - **alert**: alerts and logs the packet when triggered
 - **log**: only logs the packet when triggered
@@ -171,6 +189,8 @@ Note: the
 - **drop**: block and log the packet
 - **reject**: block the packet, log it, and then send an unreachable message
 - **sdrop**: block the packet but do not log it
+
+<span id="rule-options" />
 
 #### Rule Options
 
@@ -185,6 +205,9 @@ Note: the
 
 You can find more information about rule options [at the snort docs](http://manual-snort-org.s3-website-us-east-1.amazonaws.com/node32.html#SECTION004524000000000000000).
 
+
+<span id="tcp-flags" />
+
 #### TCP Flags
 - **A** = ACK
 - **F** = FIN
@@ -196,6 +219,8 @@ You can find more information about rule options [at the snort docs](http://manu
 - **1** = most significant bit
 - **0** = no flags
 
+<span id="examples" />
+
 #### Examples
 
 Alert when a URL is over 200 bytes long.
@@ -204,7 +229,11 @@ alert tcp $EXTERNAL_NET any -> $HOME_NET any \
   (msg:"More than 200 bytes";urilen:>200)
 ```
 
+<span id="web-penetration-testing" />
+
 ## Web Penetration Testing
+
+<span id="resources" />
 
 ### Resources
 
@@ -224,6 +253,8 @@ alert tcp $EXTERNAL_NET any -> $HOME_NET any \
 
 5. [sqlmap Cheat Sheet](https://www.security-sleuth.com/sleuth-blog/2017/1/3/sqlmap-cheat-sheet)
     Sqlmap scanner cheat sheet. `man sqlmap` can also be used on Kali.
+
+<span id="steps" />
 
 ### Steps
 
@@ -267,6 +298,9 @@ alert tcp $EXTERNAL_NET any -> $HOME_NET any \
 6. Nikto will return a bunch of information relating to your query. Most likely you'll see a bunch of directories and files on the server that may be of interest. You should inspect these files and look for any SQL injection opportunities.
 
 7. Plan in advance how you intend to get a reverse shell, as the exam has a fixed time and `sqlmap` can take a long time to run. In the case of the practical, it was obvious that it would be through the wordpress site. Once I'd gathered enough information, I decided that the easiest way to get into the wordpress site would be finding an admin user's password.
+
+
+<span id="attack" />
 
 ### Attack
 When a page with a form or endpoint that is vulnerable to SQL injection is found, use the `sqlmap` tool to perform an attack.
@@ -315,8 +349,12 @@ Note: Instead of going through step by step like I explained, you could use the 
 sqlmap -u "<url>" --wizard
 ```
 
+<span id="take-control" />
+
 ### Take Control
 The steps to get a reverse shell will depend on the content of the database. In the case of the practical, finding the contents of the database allowed you to log into the wordpress site that was present. After logging in, a php reverse shell script could easily be added to the site.
+
+<span id="tips" />
 
 ### Tips
 
@@ -346,7 +384,11 @@ The steps to get a reverse shell will depend on the content of the database. In 
 
 7. John the Ripper is a useful piece of software in Kali that can crack passwords.
 
+<span id="exploiting-buffer-overflows" />
+
 ## Exploiting Buffer Overflows
+
+<span id="resources-1" />
 
 ### Resources
 
@@ -357,6 +399,8 @@ Before attempting a buffer overflow, you should read up on how the CPU works on 
 4. [SLMail Buffer Overflow Tutorial](https://www.hugohirsh.com/?p=509)
 5. [Writing An Exploit](https://www.offensive-security.com/metasploit-unleashed/writing-an-exploit/)
 6. [Simple Buffer Overflows](https://netsec.ws/?p=180)
+
+<span id="steps-1" />
 
 ### Steps
 
@@ -480,6 +524,8 @@ Before attempting a buffer overflow, you should read up on how the CPU works on 
       "\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff" ) 
     ```
 
+<span id="attack-1" />
+
 ### Attack
 
 Now that you've got all the information required to execute code on the target machine. This can be done using the tools `msfvenom` and `shikata_ga_nai`.
@@ -505,6 +551,8 @@ payload = "A" * offset + return_address + \
     len(malicous_payload) - \
     offset - len(return_address) - 16) 
 ```
+
+<span id="take-control-1" />
 
 ### Take Control
 

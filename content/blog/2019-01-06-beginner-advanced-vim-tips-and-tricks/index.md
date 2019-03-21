@@ -83,6 +83,8 @@ ci(nothing  " change inner bracket to "nothing"
     This is a surprisingly useful one. This text object is the next occurrence of the last used search pattern.
     `cgn` or `dgn` to change / delete the next occurence of a search is very convenient, especially when used with `#`.
 
+<span id="3-motion">
+
 ## 3. Motion
 Learning how to use `hjkl` is not the end of movement in Vim, there's a number of ways to get around.
 
@@ -219,6 +221,8 @@ It's a super fun game that requires you transform a piece of text using the leas
 You'll be super surprised about how easily people can achieve some complex transformations.
 
 If after all this, you're still craving some more Vim tips. I'd suggest reading the book [Practical Vim - Edit Text at the Speed of Thought](https://pragprog.com/book/dnvim2/practical-vim-second-edition) by Drew Neil.
+
+<span id="8-some-cute-tricks">
 
 ## 8. Some Cute Tricks
 
