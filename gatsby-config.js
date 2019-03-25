@@ -24,6 +24,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-yaml`,
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -51,7 +52,7 @@ module.exports = {
           `gatsby-remark-smartypants`,
         ],
       },
-    },    
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-feed`,
