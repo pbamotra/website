@@ -2,7 +2,7 @@
 title: Falling in Love with Gatsby.js
 date: 2019-01-10
 byline: I'm head over heels for a blazing fast, modern static site generator build with React! Is that weird?
-draft: false
+draft: true
 comments: false
 ---
 
