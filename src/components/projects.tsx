@@ -8,7 +8,7 @@ export default class Projects extends React.Component {
         {this.props.projects.map(({ node }) => {
           const title = node.title
           return (
-            <div>
+            <div key={title}>
               <h3
                 style={{
                   marginBottom: rhythm(1 / 4),

@@ -56,6 +56,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-feed`,
+    `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -63,8 +64,8 @@ module.exports = {
         short_name: `Bennett`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
+        theme_color: `#1ca086`,
+        display: `standalone`,
         icon: `content/assets/profile.jpg`,
       },
     },

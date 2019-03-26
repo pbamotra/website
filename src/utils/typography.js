@@ -1,10 +1,7 @@
 import Typography from "typography"
-import CodePlugin from "typography-plugin-code"
 import Theme from "typography-theme-fairy-gates"
 
 import "../css/prism-code-highlighting.css"
-
-Theme.plugins = [new CodePlugin()]
 
 Theme.overrideThemeStyles = () => {
   return {
