@@ -1,17 +1,15 @@
-import React from "react"
+import React, { StatelessComponent } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { PostPreview } from "../components/post-preview"
 
-class BlogIndex extends React.Component {
-  render() {
-    const { data } = this.props
-    const siteTitle = data.site.siteMetadata.title
-    const posts = data.allMarkdownRemark.edges
+export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
+  const title = data.site.siteMetadata.title;
+  const posts = data.allMarkdownRemark.edges.map(x => x.node) as Post[];
 
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
+  return (
+      <Layout location={location}>
         <SEO
           title="Blog"
           keywords={[
@@ -26,7 +24,6 @@ class BlogIndex extends React.Component {
         <PostPreview posts={posts} />
       </Layout>
     )
-  }
 }
 
 export default BlogIndex
