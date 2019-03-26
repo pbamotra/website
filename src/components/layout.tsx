@@ -13,7 +13,7 @@ const LayoutContainer = styled.div`
 
 class Layout extends React.Component {
   render() {
-    const { children } = this.props
+    const { location, children } = this.props
     return (
       <LayoutContainer>
         <header>
