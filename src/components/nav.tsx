@@ -24,6 +24,10 @@ const NavContainer = styled.div<{ side: boolean }>`
 
 `;
 
+const LinksContainer = styled.div`
+  display: flex;
+`
+
 const HomeButton = styled(Link)`
   background-image: none;
 `;
@@ -54,7 +58,9 @@ export const Nav: StatelessComponent<{ path: string }> = ({ path }) => (
             }} />
         )} />
     </HomeButton>
-    {path !== BLOG_PATH ? BlogLink : undefined}
+    <LinksContainer>
+      {path !== BLOG_PATH ? BlogLink : undefined}
+    </LinksContainer>
   </NavContainer>
 );
 

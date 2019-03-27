@@ -1,16 +1,14 @@
-import React from "react"
+import React, { StatelessComponent } from "react"
 import Helmet from "react-helmet"
 import { Link, graphql } from "gatsby"
-import kebabCase from "lodash/kebabCase"
-import Layout from "../components/layout"
+import Layout from "../../components/layout"
 
-class TagsPageRoute extends React.Component {
-  render() {
-    const title = this.props.data.site.siteMetadata.title
-    const allTags = this.props.data.allMarkdownRemark.group
+const AllTagsPage: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
+  const title = data.site.siteMetadata.title;
+  const allTags = data.allMarkdownRemark.group;
 
-    return (
-      <Layout location={this.props.location}>
+  return (
+      <Layout location={location}>
         <Helmet title={title} />
         <div>
           <h1>Tags</h1>
@@ -21,7 +19,7 @@ class TagsPageRoute extends React.Component {
                   style={{
                     textDecoration: "none",
                   }}
-                  to={`/tags/${kebabCase(tag.fieldValue)}/`}
+                  to={`/blog/tag/${tag.fieldValue}/`}
                 >
                   {tag.fieldValue} ({tag.totalCount})
                 </Link>
@@ -30,11 +28,11 @@ class TagsPageRoute extends React.Component {
           </ul>
         </div>
       </Layout>
-    )
-  }
+  )
+
 }
 
-export default TagsPageRoute
+export default AllTagsPage;
 
 export const pageQuery = graphql`
   query TagsQuery {

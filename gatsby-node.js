@@ -5,6 +5,8 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
+  const tagPage = path.resolve(`./src/templates/tag-page.tsx`)
+
   return graphql(
     `
       {
@@ -20,6 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
               frontmatter {
                 title
+                tags
               }
             }
           }
@@ -33,6 +36,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     // Create blog posts pages.
     const posts = result.data.allMarkdownRemark.edges
+    const tags = new Set(posts.reduce((acc, post) => acc.concat(post.node.frontmatter.tags || []), []))
 
     posts.forEach((post, index) => {
       const previous = index === posts.length - 1 ? null : posts[index + 1].node
@@ -48,6 +52,17 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
     })
+
+    tags.forEach(tag => {
+      createPage({
+        path: `/blog/tag/${tag}`,
+        component: tagPage,
+        context: {
+          tag
+        }
+      })
+    })
+
   })
 }
 

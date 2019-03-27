@@ -1,71 +1,98 @@
-import React from "react"
+import React, { StatelessComponent } from "react"
 import { Link, graphql } from "gatsby"
-
+import styled from 'styled-components';
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.markdownRemark
-    const siteTitle = this.props.data.site.siteMetadata.title
-    const { previous, next } = this.props.pageContext
-
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO
-          title={post.frontmatter.title}
-          description={post.frontmatter.byline || post.excerpt}
-        />
-        <h1>{post.frontmatter.title}</h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: `block`,
-            marginBottom: rhythm(1),
-          }}
-        >
-          {post.frontmatter.date}
-        </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
-        <Bio />
-
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li style={{ flex: "1 1 0", marginRight: rhythm(0.25) }}>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li style={{ flex: "1 1 0", marginLeft: rhythm(0.25) }}>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </Layout>
-    )
+const TagList = styled.ul`
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 0;
   }
+`
+
+const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any }> = ({
+  data,
+  location,
+  pageContext
+}) => {
+  const post = data.markdownRemark;
+  const { previous, next } = pageContext;
+  const tags = post.frontmatter.tags || [];
+
+  return (
+    <Layout location={location}>
+      <SEO
+        title={post.frontmatter.title}
+        description={post.frontmatter.byline || post.excerpt}
+      />
+      <h1>{post.frontmatter.title}</h1>
+      <p
+        style={{
+          ...scale(-1 / 5),
+          display: `block`,
+          marginBottom: rhythm(1),
+        }}
+      >
+        {post.frontmatter.date}
+        {tags.length ?
+          <>
+            &nbsp;-&nbsp;<TagList>
+              {
+                tags.map(tag => <li>
+                  <Link to={`/blog/tag/${tag}`}>
+                    {tag}
+                  </Link>
+                </li>)
+              }
+            </TagList>
+          </>
+          : undefined}
+      </p>
+      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <hr
+        style={{
+          marginBottom: rhythm(1),
+        }}
+      />
+      <Bio />
+
+      <ul
+        style={{
+          display: `flex`,
+          flexWrap: `wrap`,
+          justifyContent: `space-between`,
+          listStyle: `none`,
+          padding: 0,
+        }}
+      >
+        <li style={{ flex: "1 1 0", marginRight: rhythm(0.25) }}>
+          {previous && (
+            <Link to={previous.fields.slug} rel="prev">
+              ← {previous.frontmatter.title}
+            </Link>
+          )}
+        </li>
+        <li style={{ flex: "1 1 0", marginLeft: rhythm(0.25) }}>
+          {next && (
+            <Link to={next.fields.slug} rel="next">
+              {next.frontmatter.title} →
+              </Link>
+          )}
+        </li>
+      </ul>
+    </Layout>
+  )
 }
 
-export default BlogPostTemplate
+export default BlogPost
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -83,6 +110,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         byline
+        tags
       }
     }
   }

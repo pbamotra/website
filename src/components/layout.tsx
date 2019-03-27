@@ -12,9 +12,7 @@ const LayoutContainer = styled.div`
 
 export const Layout: StatelessComponent<{ location: any }> = ({ location, children }) =>
   <LayoutContainer>
-    <header>
-      <Nav path={location.pathname} />
-    </header>
+    <Nav path={location.pathname} />
     <main>{children}</main>
     <footer
       style={{ opacity: 0.5, marginTop: rhythm(4), textAlign: "center" }}
