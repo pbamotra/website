@@ -1,9 +1,9 @@
 
 import React, { StatelessComponent } from "react"
 import { Link, graphql } from "gatsby"
-import Helmet from "react-helmet"
 import Layout from "../components/layout"
 import PostPreview from "../components/post-preview";
+import SEO from "../components/seo";
 
 const TagPage: StatelessComponent<{ data: any, location: any, pageContext: any }> = ({ data, location, pageContext }) => {
 
@@ -11,7 +11,7 @@ const TagPage: StatelessComponent<{ data: any, location: any, pageContext: any }
     const title = data.site.siteMetadata.title
 
     return <Layout location={location}>
-        <Helmet title={title} />
+        <SEO title={`Posts tagged ${pageContext.tag}`} />
         <h2>
             {data.allMarkdownRemark.totalCount} posts tagged with "{pageContext.tag}"
         </h2>
