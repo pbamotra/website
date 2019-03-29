@@ -5,7 +5,6 @@ import SEO from "../components/seo"
 import { PostPreview } from "../components/post-preview"
 
 export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
-  const title = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.edges.map(x => x.node) as Post[];
 
   return (

@@ -2,7 +2,7 @@ const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
   const tagPage = path.resolve(`./src/templates/tag-page.tsx`)
@@ -33,6 +33,12 @@ exports.createPages = ({ graphql, actions }) => {
     if (result.errors) {
       throw result.errors
     }
+
+    createRedirect({
+      fromPath: '/about',
+      toPath: '/',
+      statusCode: 302
+    });
 
     // Create blog posts pages.
     const posts = result.data.allMarkdownRemark.edges
