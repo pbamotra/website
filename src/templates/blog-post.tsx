@@ -6,12 +6,12 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-const TagList = styled.ul`
+const TagList = styled.div`
   display: inline-block;
   list-style: none;
   margin: 0;
   padding: 0;
-  li {
+  span {
     display: inline-block;
     margin-right: 10px;
     padding: 0;
@@ -46,11 +46,11 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
           <>
             &nbsp;-&nbsp;<TagList>
               {
-                tags.map(tag => <li>
+                tags.map(tag => <span>
                   <Link to={`/blog/tag/${tag}`}>
                     {tag}
                   </Link>
-                </li>)
+                </span>)
               }
             </TagList>
           </>
