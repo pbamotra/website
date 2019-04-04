@@ -56,7 +56,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-feed`,
     `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-manifest`,
