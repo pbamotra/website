@@ -25,7 +25,7 @@ export const StaggerAnimationContainer = styled.div<{ visible: boolean }>`
 
 export const Stagger = ({ children, id, ...rest }) => <Stagger id={id} {...rest}>{children}</Stagger>
 
-export const StaggerWrapper: StatelessComponent = props => {
+export const StaggerWrapper: StatelessComponent = ({ children, ...rest }) => {
     const [stateVisible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -34,9 +34,9 @@ export const StaggerWrapper: StatelessComponent = props => {
 
     const isVisible = typeof window === 'undefined' ? true : stateVisible;
 
-    return <Flipper {...props} flipKey={isVisible} staggerConfig={{ default: { speed: .2 } }}>
+    return <Flipper {...rest} flipKey={isVisible} staggerConfig={{ default: { speed: .2 } }}>
         <StaggerAnimationContainer>
-            {props.children}
+            {children}
         </StaggerAnimationContainer>
     </Flipper>
 }
