@@ -5,8 +5,8 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
-import { Flipper, Flipped } from "react-flip-toolkit";
-import { StaggerAnimationContainer } from "../components/stagger-wrapper";
+import { Flipper } from "react-flip-toolkit";
+import { StaggerAnimationContainer, StaggerWrapper, Stagger } from "../components/stagger-wrapper";
 
 const TagList = styled.span`
   display: inline-block;
@@ -29,26 +29,17 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
   const { previous, next } = pageContext;
   const tags = post.frontmatter.tags || [];
 
-  const [stateVisible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setVisible(true);
-  }, [false])
-
-  const isVisible = window === undefined ? true : stateVisible;
-
   return (
     <Layout location={location}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.byline || post.excerpt}
       />
-      <Flipper flipKey={isVisible} staggerConfig={{ default: { speed: .1 }}} >
-        <StaggerAnimationContainer visible={isVisible}>
-          <Flipped stagger="default" flipId="fade-in">
+        <StaggerWrapper>
+          <Stagger id="fade-in">
             <h1>{post.frontmatter.title}</h1>
-          </Flipped>
-          <Flipped stagger="default" flipId="fade-in-2">
+          </Stagger>
+          <Stagger id="fade-in-2">
             <p
               style={{
                 ...scale(-1 / 5),
@@ -71,12 +62,11 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
                 </>
                 : undefined}
             </p>
-          </Flipped>
-          <Flipped stagger="default" flipId="fade-in-3">
+          </Stagger>
+          <Stagger id="fade-in-3">
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
-          </Flipped>
-        </StaggerAnimationContainer>
-      </Flipper>
+          </Stagger>
+        </StaggerWrapper>
       <hr
         style={{
           marginBottom: rhythm(1),

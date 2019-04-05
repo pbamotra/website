@@ -2,8 +2,8 @@ import React, { StatelessComponent } from "react"
 import { Link } from "gatsby"
 import { rhythm } from "../utils/typography"
 import styled from 'styled-components';
-import { node } from "prop-types";
-import { Flipper, Flipped } from "react-flip-toolkit";
+import { Flipped } from "react-flip-toolkit";
+import { Stagger } from "./stagger-wrapper";
 
 export const PostTitle = styled.h3`
   margin-bottom: ${rhythm(1 / 4)}
@@ -23,7 +23,7 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
         const { slug } = post.fields;
         const { excerpt } = post;
 
-        return <Flipped key={slug} stagger="default" flipId={slug + '-' + i}><PostPreviewContainer>
+        return <Stagger key={slug} id={slug + '-' + i}><PostPreviewContainer>
           <PostTitle>
             <Link to={slug}>
               { title }
@@ -34,7 +34,7 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
             __html: byline || excerpt
           }} />
         </PostPreviewContainer>
-        </Flipped>
+        </Stagger>
 
       })
 

@@ -4,21 +4,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { PostPreview } from "../components/post-preview"
 import { Flipped, Flipper } from "react-flip-toolkit";
-import { StaggerAnimationContainer } from "../components/stagger-wrapper";
+import { StaggerAnimationContainer, Stagger, StaggerWrapper } from "../components/stagger-wrapper";
 
 export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
   const posts = data.allMarkdownRemark.edges.map(x => x.node) as Post[];
-
-
-  const [stateVisible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setVisible(true);
-  }, [false])
-
-  const isVisible = window === undefined ? true : stateVisible;
-
-
   return (
     <Layout location={location}>
       <SEO
@@ -31,14 +20,12 @@ export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ da
           "bennetthardwick",
         ]}
       />
-      <Flipper flipKey={isVisible} staggerConfig={{ default: { speed: .2 } }}>
-        <StaggerAnimationContainer visible={isVisible}>
-          <Flipped stagger="default" flipId="blog-title">
-            <h1>Blog</h1>
-          </Flipped>
-          <PostPreview posts={posts} />
-        </StaggerAnimationContainer>
-      </Flipper>
+      <StaggerWrapper>
+        <Stagger id="blog-title">
+          <h1>Blog</h1>
+        </Stagger>
+        <PostPreview posts={posts} />
+      </StaggerWrapper>
     </Layout>
   )
 }
