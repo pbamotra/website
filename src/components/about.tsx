@@ -1,7 +1,7 @@
 import React from "react"
 
-export default () => (
-  <div>
+export default props => (
+  <div {...props}>
     <h2>Hello, Bennett here.</h2>
     <p>
       I’m a Software Developer living in Brisbane, working on making cool things

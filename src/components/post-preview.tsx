@@ -18,12 +18,12 @@ export const PostContent = styled.p``;
 export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) => (
   <>
     {
-      posts.map(post => {
+      posts.map((post, i) => {
         const { title, date, byline } = post.frontmatter;
         const { slug } = post.fields;
         const { excerpt } = post;
 
-        return <Flipped flipId={slug}><PostPreviewContainer key={slug}>
+        return <Flipped key={slug} stagger="default" flipId={slug + '-' + i}><PostPreviewContainer>
           <PostTitle>
             <Link to={slug}>
               { title }

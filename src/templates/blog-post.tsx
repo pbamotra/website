@@ -1,10 +1,12 @@
-import React, { StatelessComponent } from "react"
+import React, { StatelessComponent, useState, useEffect } from "react"
 import { Link, graphql } from "gatsby"
 import styled from 'styled-components';
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import { Flipper, Flipped } from "react-flip-toolkit";
+import { StaggerAnimationContainer } from "../components/stagger-wrapper";
 
 const TagList = styled.span`
   display: inline-block;
@@ -27,36 +29,54 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
   const { previous, next } = pageContext;
   const tags = post.frontmatter.tags || [];
 
+  const [stateVisible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(true);
+  }, [false])
+
+  const isVisible = stateVisible === undefined ? true : stateVisible;
+
   return (
     <Layout location={location}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.byline || post.excerpt}
       />
-      <h1>{post.frontmatter.title}</h1>
-      <p
-        style={{
-          ...scale(-1 / 5),
-          display: `block`,
-          marginBottom: rhythm(1),
-        }}
-      >
-        {post.frontmatter.date}
-        {tags.length ?
-          <>
-            &nbsp;-&nbsp;<TagList>
-              {
-                tags.map(tag => <span>
-                  <Link to={`/blog/tag/${tag}`}>
-                    {tag}
-                  </Link>
-                </span>)
-              }
-            </TagList>
-          </>
-          : undefined}
-      </p>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <Flipper flipKey={isVisible} staggerConfig={{ default: { speed: .1 }}} >
+        <StaggerAnimationContainer visible={isVisible}>
+          <Flipped stagger="default" flipId="fade-in">
+            <h1>{post.frontmatter.title}</h1>
+          </Flipped>
+          <Flipped stagger="default" flipId="fade-in-2">
+            <p
+              style={{
+                ...scale(-1 / 5),
+                display: `block`,
+                marginBottom: rhythm(1),
+              }}
+            >
+              {post.frontmatter.date}
+              {tags.length ?
+                <>
+                  &nbsp;-&nbsp;<TagList>
+                    {
+                      tags.map(tag => <span>
+                        <Link to={`/blog/tag/${tag}`}>
+                          {tag}
+                        </Link>
+                      </span>)
+                    }
+                  </TagList>
+                </>
+                : undefined}
+            </p>
+          </Flipped>
+          <Flipped stagger="default" flipId="fade-in-3">
+            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          </Flipped>
+        </StaggerAnimationContainer>
+      </Flipper>
       <hr
         style={{
           marginBottom: rhythm(1),
