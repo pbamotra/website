@@ -16,14 +16,14 @@ export const StaggerAnimationContainer = styled.div<{ visible: boolean }>`
     & {
         div, h1, h2, h3, p {
             opacity: 0;
-            transform: translateY(10px);
+            transform: translateY(15px);
             position: relative;
         }
     }
   `}
 `
 
-export const Stagger = ({ children, id, ...rest }) => <Stagger id={id} {...rest}>{children}</Stagger>
+export const Stagger = ({ children, id, ...rest }) => <Flipped stagger="default" flipId={id} {...rest}>{children}</Flipped>
 
 export const StaggerWrapper: StatelessComponent = ({ children, ...rest }) => {
     const [stateVisible, setVisible] = useState(false);
@@ -35,7 +35,7 @@ export const StaggerWrapper: StatelessComponent = ({ children, ...rest }) => {
     const isVisible = typeof window === 'undefined' ? true : stateVisible;
 
     return <Flipper {...rest} flipKey={isVisible} staggerConfig={{ default: { speed: .2 } }}>
-        <StaggerAnimationContainer>
+        <StaggerAnimationContainer visible={isVisible}>
             {children}
         </StaggerAnimationContainer>
     </Flipper>
