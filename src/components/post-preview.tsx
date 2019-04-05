@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { rhythm } from "../utils/typography"
 import styled from 'styled-components';
 import { node } from "prop-types";
+import { Flipper, Flipped } from "react-flip-toolkit";
 
 export const PostTitle = styled.h3`
   margin-bottom: ${rhythm(1 / 4)}
@@ -22,7 +23,7 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
         const { slug } = post.fields;
         const { excerpt } = post;
 
-        return <PostPreviewContainer key={slug}>
+        return <Flipped flipId={slug}><PostPreviewContainer key={slug}>
           <PostTitle>
             <Link to={slug}>
               { title }
@@ -33,6 +34,7 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
             __html: byline || excerpt
           }} />
         </PostPreviewContainer>
+        </Flipped>
 
       })
 

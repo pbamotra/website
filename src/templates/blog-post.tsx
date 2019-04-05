@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-const TagList = styled.div`
+const TagList = styled.span`
   display: inline-block;
   list-style: none;
   margin: 0;

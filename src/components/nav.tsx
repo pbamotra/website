@@ -1,13 +1,15 @@
-import React, { StatelessComponent } from "react";
+import React, { StatelessComponent, useEffect, useState } from "react";
 import { graphql, StaticQuery, Link } from "gatsby";
 import Image from 'gatsby-image';
 import styled, { css } from 'styled-components';
 import { rhythm } from "../utils/typography";
+import { Flipper, Flipped } from 'react-flip-toolkit';
 
 const NavContainer = styled.div<{ side: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
+  min-height: 92px;
 
   ${props => props.side ? css`
     flex-direction: row;
@@ -35,34 +37,56 @@ const HomeButton = styled(Link)`
 const ROOT_PATH = `${__PATH_PREFIX__}/`
 const BLOG_PATH = `${__PATH_PREFIX__}/blog`
 
-const BlogLink = (
-  <Link to={BLOG_PATH} style={{ fontSize: rhythm(0.8) }} >
-    Blog
-  </Link>
-);
+const BlogLink = styled(Link)`
+  font-size: ${rhythm(0.8)};
+`
 
-export const Nav: StatelessComponent<{ path: string }> = ({ path }) => (
-  <NavContainer side={path !== ROOT_PATH} >
-    <HomeButton to={'/'}>
-      <StaticQuery
-        query={avatarQuery}
-        render={data => (
-          <Image
-            fixed={data.avatar.childImageSharp.fixed}
-            style={{
-              minWidth: 50,
-              borderRadius: `50%`
-            }}
-            imgStyle={{
-              borderRadius: `50%`
-            }} />
-        )} />
-    </HomeButton>
-    <LinksContainer>
-      {path !== BLOG_PATH ? BlogLink : undefined}
-    </LinksContainer>
-  </NavContainer>
-);
+// middle to side = 
+
+let previousPath = undefined;
+
+export const Nav: StatelessComponent<{ path: string }> = ({ path: currentPath }) => {
+
+  const [ statePath, setPath ] = useState(previousPath || currentPath);
+
+  const path = statePath || currentPath;
+
+  useEffect(() => {
+    setPath(currentPath);
+    previousPath = currentPath;
+  }, [false]);
+
+  return (
+      <Flipper flipKey={path !== ROOT_PATH}>
+      <NavContainer side={path !== ROOT_PATH} >
+        <Flipped flipId="home-button">
+          <HomeButton to={'/'}>
+            <StaticQuery
+              query={avatarQuery}
+              render={data => (
+                <Image
+                  fixed={data.avatar.childImageSharp.fixed}
+                  style={{
+                    minWidth: 50,
+                    borderRadius: `50%`
+                  }}
+                  imgStyle={{
+                    borderRadius: `50%`
+                  }} />
+              )} />
+          </HomeButton>
+        </Flipped>
+        <LinksContainer>
+          <Flipped flipId="blog-button">
+            <BlogLink to={BLOG_PATH}>
+              Blog
+            </BlogLink>
+          </Flipped>
+        </LinksContainer>
+      </NavContainer>
+      </Flipper>
+  )
+};
 
 export default Nav;
 
