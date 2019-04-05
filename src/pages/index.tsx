@@ -18,7 +18,7 @@ export const Home: StatelessComponent<{ data: any, location: any }> = ({ data, l
     setVisible(true);
   }, [false])
 
-  const isVisible = stateVisible === undefined ? true : stateVisible
+  const isVisible = window === undefined ? true : stateVisible
 
   return (
     <Layout location={location}>

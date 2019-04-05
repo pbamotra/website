@@ -16,7 +16,7 @@ export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ da
     setVisible(true);
   }, [false])
 
-  const isVisible = stateVisible === undefined ? true : stateVisible;
+  const isVisible = window === undefined ? true : stateVisible;
 
 
   return (

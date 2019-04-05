@@ -35,7 +35,7 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
     setVisible(true);
   }, [false])
 
-  const isVisible = stateVisible === undefined ? true : stateVisible;
+  const isVisible = window === undefined ? true : stateVisible;
 
   return (
     <Layout location={location}>
