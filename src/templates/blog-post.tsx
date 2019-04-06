@@ -52,7 +52,7 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
                 <>
                   &nbsp;-&nbsp;<TagList>
                     {
-                      tags.map(tag => <span>
+                      tags.map(tag => <span key={tag}>
                         <Link to={`/blog/tag/${tag}`}>
                           {tag}
                         </Link>
