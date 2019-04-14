@@ -15,9 +15,9 @@ const Template: StatelessComponent<{ location: any, pageContext: { note: BaseNot
   const PreloadedLayout = (
     <Layout location={location}>
       <SEO
-        title="Notes"
+        title={'Notes: ' + note.title}
         keywords={[
-          `blog`,
+          `notes`,
           `javascript`,
           `typescript`,
           `programming`,
