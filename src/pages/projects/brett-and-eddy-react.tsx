@@ -132,13 +132,20 @@ export const Template = props => {
 
     const twoSetStart = 507
 
+    const width = Math.min(typeof window !== 'undefined' ? window.innerWidth - 19 * 2 : 640, 640);
+    const height = (9 / 16) * width;
+
     const twoSetPlayer = YoutubePlayer(twoSet.current!, {
       videoId: "BvsvaCU6i1M",
+      height,
+      width,
       playerVars: { autoplay: 0, controls: 0, start: twoSetStart },
     })
 
     const normalPlayer = YoutubePlayer(normal.current!, {
       videoId: payload.videoId,
+      height,
+      width,
       playerVars: { autoplay: 0, controls: 0, start: payload.startTime },
     })
 
@@ -168,9 +175,10 @@ export const Template = props => {
           normalPlayer.seekTo(payload.startTime, true),
         ])
 
+
         await normalPlayer.playVideo()
 
-        console.log("first time")
+        setHideTwoSet(true)
 
         twoSetPlayer.seekTo(twoSetStart, true)
         twoSetPlayer.pauseVideo()
@@ -192,7 +200,6 @@ export const Template = props => {
 
         firstTime = false
 
-        setHideTwoSet(true)
       }
 
       while (!destroyed) {
