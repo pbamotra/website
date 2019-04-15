@@ -24,7 +24,7 @@ const NotesContainer = styled.div<{ height?: number; width: number }>`
   width: ${props => props.width}px;
   min-height: 50vh;
   transition: height 0.2s;
-  height: ${props => (props.height !== undefined ? props.height + "px" : "auto")};
+  height: ${props => (props.height ? props.height + "px" : "auto")};
   margin: auto;
 `
 
