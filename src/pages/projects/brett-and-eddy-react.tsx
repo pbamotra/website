@@ -104,9 +104,9 @@ function parsePayload(): Payload | Partial<Payload> {
 
   if (isNaN(startTime) || isNaN(endTime) || !videoId) {
     return {
-        startTime: 0,
-        endTime: 13,
-        videoId: 'yQFB9M2UdK0'
+        startTime: 85,
+        endTime: 99,
+        videoId: 'TcMBFSGVi1c'
     }
   }
 
