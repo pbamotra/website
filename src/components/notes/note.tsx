@@ -40,7 +40,6 @@ const NoteContainer = styled.div<{
   topElement?: boolean
   server?: boolean
 }>`
-
   ${props => props.server ? css`
     width: 100%;
     height: fit-content;
@@ -49,12 +48,12 @@ const NoteContainer = styled.div<{
     }
   ` : css`
     position: absolute;
+    height: auto;
     width: ${NOTE_WIDTH + 'px'};
   `};
 
   top: 0;
   left: 0;
-  height: auto;
   min-height: 60px;
   border: solid #e0e0e0 1px;
   padding: 12px 16px;
