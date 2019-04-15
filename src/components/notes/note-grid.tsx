@@ -2,7 +2,7 @@ import React, { StatelessComponent, useEffect, useRef, useState } from "react"
 import { NOTE_WIDTH, MARGIN_SIZE, Note } from "./note"
 import styled from "styled-components"
 import { Flipped, Flipper } from "react-flip-toolkit"
-import { BaseNote } from "./note-types/module";
+import { BaseNote } from "./note-types/module"
 
 // declare var ___loader: any;
 
@@ -69,14 +69,19 @@ const calculateColumnCount = () =>
 
 const WINDOW_COLUMN_COUNT = () => (!isSSR() ? calculateColumnCount() : 4)
 
-
-export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({ children, notesList, ...rest }) => {
+export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({
+  children,
+  notesList,
+  ...rest
+}) => {
   const [shouldUpdate, setShouldUpdate] = useState(false)
   const [shouldRecalculatePosition, setRecalculatePosition] = useState(false)
   const [columnCount, setColumnCount] = useState(WINDOW_COLUMN_COUNT())
   const [notesMap, setNotesMap] = useState({})
-  const [containerHeight, setContainerHeight] = useState(0);
-  const [columnSize, setColumnSize] = useState(Array.from({ length: columnCount }).map(() => 0));
+  const [containerHeight, setContainerHeight] = useState(0)
+  const [columnSize, setColumnSize] = useState(
+    Array.from({ length: columnCount }).map(() => 0)
+  )
   const [selected, setSelected] = useState(undefined)
   const [topElement, setTopElement] = useState(undefined)
 
@@ -84,18 +89,16 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({ 
 
   useEffect(() => {
     measureNoteRects()
-  }, [notesList]);
+  }, [notesList])
 
   function measureNoteRects(): void {
+    const newNotes = Array.from(
+      notesRef.current!.getElementsByClassName("preview-note")
+    )
 
-    const newNotes = 
-      Array.from(
-        notesRef.current!.getElementsByClassName("preview-note")
-      );
-
-      if (newNotes.length <= 0) {
-        return
-      }
+    if (newNotes.length <= 0) {
+      return
+    }
 
     setNotesMap(
       newNotes.reduce(
@@ -167,7 +170,7 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({ 
   }
 
   function recalculateNoteSizes(): void {
-    const newColumns = Array.from({ length: columnCount }).map(() => 0);
+    const newColumns = Array.from({ length: columnCount }).map(() => 0)
 
     setNotesMap(
       notesList
@@ -194,7 +197,7 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({ 
         )
     )
 
-    setColumnSize(newColumns);
+    setColumnSize(newColumns)
     setContainerHeight(Math.max(...newColumns))
     setRecalculatePosition(false)
     setShouldUpdate(!shouldUpdate)
@@ -220,12 +223,14 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({ 
   }
 
   function closeNotes(): void {
+    console.error("closing")
+
     setSelected(undefined)
     setShouldUpdate(!shouldUpdate)
   }
 
   function updateAnimation(): void {
-    setShouldUpdate(!shouldUpdate);
+    setShouldUpdate(!shouldUpdate)
   }
 
   return (
@@ -274,6 +279,7 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({ 
                     topElement={x.id === topElement}
                     open={x.id === selected}
                     onSelected={selectNote}
+                    onClosed={closeNotes}
                     visible={notesMap[x.id].visible}
                     key={x.id}
                     rect={columnCount !== 1 && notesMap[x.id]}
