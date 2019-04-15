@@ -175,7 +175,6 @@ export const Template = props => {
         twoSetPlayer.seekTo(twoSetStart, true)
         twoSetPlayer.pauseVideo()
 
-        await twoSetPlayer.seekTo(twoSetStart, true)
         await promiseTimeout(totalDuration - twoSetDuration)
 
         await twoSetPlayer.playVideo()
