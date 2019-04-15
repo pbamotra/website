@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, FunctionComponent } from "react"
 import Layout from "../../components/projects/layout"
 import SEO from "../../components/seo"
 import { rhythm } from "../../utils/typography"
@@ -48,6 +48,7 @@ const VideoContainer = styled.div<{
   position: relative;
   width: fit-content;
   margin: auto;
+  margin-top: 48px;
 
   ${InvisibleCover} {
       width: 100%;
@@ -90,9 +91,9 @@ interface Payload {
   endTime: number
 }
 
-function parsePayload(): Payload | undefined {
+function parsePayload(): Payload | Partial<Payload> {
   if (typeof window === "undefined") {
-    return
+    return {};
   }
 
   const params = new URLSearchParams(window.location.search)
@@ -102,7 +103,11 @@ function parsePayload(): Payload | undefined {
   const videoId = params.get("videoId")
 
   if (isNaN(startTime) || isNaN(endTime) || !videoId) {
-    return undefined
+    return {
+        startTime: 0,
+        endTime: 13,
+        videoId: 'yQFB9M2UdK0'
+    }
   }
 
   return {
@@ -112,7 +117,7 @@ function parsePayload(): Payload | undefined {
   }
 }
 
-export const Template = props => {
+export const Template: FunctionComponent<{ location: any }> = ({ location, ...props }) => {
   const [hidden, setHidden] = useState(false)
   const [playerShowing, setShowPlayer] = useState(false)
   const [payload, setPayload] = useState(parsePayload())
@@ -123,12 +128,9 @@ export const Template = props => {
   const normal = useRef<HTMLDivElement>()
 
   useEffect(() => {
-    if (!payload) {
+    if (payload.startTime === undefined || payload.endTime === undefined || !payload.videoId) {
       return
     }
-
-    let timeouts
-    let startInterval
 
     const twoSetStart = 507
 
@@ -215,7 +217,7 @@ export const Template = props => {
   }, [payload])
 
   return (
-    <Layout {...props}>
+    <Layout location={location} {...props}>
       <SEO
         title={"Brett and Eddy React to Videos"}
         keywords={["TwoSet Violin", "Brett Yang", "Eddy Chen", "YouTube"]}
@@ -235,9 +237,9 @@ export const Template = props => {
         <br />
         <br />
         <h2>Create Your Own!</h2>
-          Youtube Video ID: <input name="videoId" />
-          &nbsp; Start (s): <input name="startTime" />
-          &nbsp; End (s): <input name="endTime" />
+          Youtube Video ID: <input defaultValue={payload.videoId} name="videoId" />
+          &nbsp; Start (s): <input defaultValue={(payload.startTime || 0) + ''} name="startTime" />
+          &nbsp; End (s): <input defaultValue={(payload.endTime || 10) + ''} name="endTime" />
           &nbsp;
           <button type="submit">CREATE!</button>
         </CTA>
