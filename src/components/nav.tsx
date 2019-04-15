@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { rhythm } from "../utils/typography";
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
-const LinksContainer = styled.div`
+export const LinksContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -15,7 +15,7 @@ const LinksContainer = styled.div`
   }
 `
 
-const NavContainer = styled.div<{ side: boolean }>`
+export const NavContainer = styled.div<{ side: boolean, projectsNav: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -31,6 +31,22 @@ const NavContainer = styled.div<{ side: boolean }>`
       flex-direction: column;
     }
   `}
+
+  ${props => props.projectsNav ? css`
+    ${HomeButton} {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+
+      opacity: 0.22;
+      transition: opacity 0.4s;
+
+      :hover {
+        opacity: 1;
+      }
+
+    }
+  ` :''}
   
   > * {
     display: flex;
@@ -39,7 +55,7 @@ const NavContainer = styled.div<{ side: boolean }>`
   }
 `;
 
-const HomeButton = styled(Link)`
+export const HomeButton = styled(Link)`
   background-image: none;
 `;
 
@@ -57,7 +73,7 @@ const NavLink = styled(Link)`
 
 let previousPath = undefined;
 
-export const Nav: StatelessComponent<{ path: string }> = ({ path: currentPath, children, ...rest }) => {
+export const Nav: StatelessComponent<{ path: string, hideLinks?: boolean }> = ({ path: currentPath, hideLinks, children, ...rest }) => {
 
   const [statePath, setPath] = useState(previousPath || currentPath);
 
@@ -68,11 +84,14 @@ export const Nav: StatelessComponent<{ path: string }> = ({ path: currentPath, c
     previousPath = currentPath;
   }, [false]);
 
+  const side = path !== ROOT_PATH;
+  const projectsNav = path.startsWith('/projects/');
+
   return (
     <nav>
-      <Flipper flipKey={path !== ROOT_PATH}>
-        <NavContainer {...rest} side={path !== ROOT_PATH} >
-          <Flipped flipId="home-button">
+      <Flipper flipKey={previousPath === currentPath}>
+        <NavContainer {...rest} side={side && !projectsNav} projectsNav={projectsNav} >
+          <Flipped translate flipId="home-button">
             <HomeButton to={'/'}>
               <StaticQuery
                 query={avatarQuery}
@@ -89,7 +108,7 @@ export const Nav: StatelessComponent<{ path: string }> = ({ path: currentPath, c
                 )} />
             </HomeButton>
           </Flipped>
-          <LinksContainer>
+          { !hideLinks && <LinksContainer>
             <Flipped flipId="notes-button">
               <NavLink to={NOTES_PATH}>
                 Notes
@@ -101,7 +120,7 @@ export const Nav: StatelessComponent<{ path: string }> = ({ path: currentPath, c
                 Blog
             </NavLink>
             </Flipped>
-          </LinksContainer>
+          </LinksContainer>}
         </NavContainer>
       </Flipper>
     </nav>

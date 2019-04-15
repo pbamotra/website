@@ -49,7 +49,8 @@
     "typography": "^0.16.19",
     "typography-plugin-code": "^0.16.19",
     "typography-theme-fairy-gates": "^0.16.19",
-    "typography-theme-wordpress-2016": "^0.16.19"
+    "typography-theme-wordpress-2016": "^0.16.19",
+    "youtube-player": "^5.5.2"
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
