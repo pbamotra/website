@@ -7,7 +7,8 @@ type Data = {
 }
 
 const DetailedTitle = styled.h2`
-  margin-top: 1.1rem;
+  margin-top: 0.75rem;
+  margin-right: 1rem;
 `;
 
 export const TextNote: FunctionComponent<

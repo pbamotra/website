@@ -152,7 +152,7 @@ exports.createPages = async ({
         name
         childMarkdownRemark {
           html
-          excerpt(format: HTML, pruneLength: 500)
+          excerpt(format: HTML, pruneLength: 350)
           frontmatter {
             title
             type

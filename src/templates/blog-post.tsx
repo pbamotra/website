@@ -67,11 +67,6 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
           </Stagger>
         </StaggerWrapper>
-      <hr
-        style={{
-          marginBottom: rhythm(1),
-        }}
-      />
       <Bio />
 
       <ul

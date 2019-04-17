@@ -3,8 +3,7 @@ import { NOTE_WIDTH, MARGIN_SIZE, Note } from "./note"
 import styled from "styled-components"
 import { Flipped, Flipper } from "react-flip-toolkit"
 import { BaseNote } from "./note-types/module"
-
-// declare var ___loader: any;
+import { isMobileBrowser } from "../../utils/mobile";
 
 const SelectedBackdrop = styled.div<{ open: boolean }>`
   position: fixed;
@@ -35,15 +34,15 @@ const SSRNotesContainer = styled.div`
   margin: auto;
 
   @media (min-width: 1100px) {
-    grid-template-columns: ${NOTE_WIDTH}px ${NOTE_WIDTH}px ${NOTE_WIDTH}px ${NOTE_WIDTH}px;
+    grid-template-columns: repeat(4, ${NOTE_WIDTH}px);
   }
 
   @media (max-width: 1100px) {
-    grid-template-columns: ${NOTE_WIDTH}px ${NOTE_WIDTH}px ${NOTE_WIDTH}px;
+    grid-template-columns: repeat(3, ${NOTE_WIDTH}px);
   }
 
   @media (max-width: 800px) {
-    grid-template-columns: ${NOTE_WIDTH * 1.25}px ${NOTE_WIDTH * 1.25}px;
+    grid-template-columns: repeat(2, ${NOTE_WIDTH * 1.25}px);
   }
 
   @media (max-width: 680px) {
@@ -128,7 +127,7 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({
   }, [selected])
 
   useEffect(() => {
-    setShouldUpdate(!shouldUpdate)
+    updateAnimation();
   }, [selected])
 
   useEffect(() => {
@@ -200,7 +199,7 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({
     setColumnSize(newColumns)
     setContainerHeight(Math.max(...newColumns))
     setRecalculatePosition(false)
-    setShouldUpdate(!shouldUpdate)
+    updateAnimation();
   }
 
   useEffect(() => {
@@ -211,7 +210,7 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({
 
       if (!notesMap[note.id].visible) {
         setNotesMap(setAllNotesVisible(notesMap))
-        setShouldUpdate(!shouldUpdate)
+        updateAnimation();
         break
       }
     }
@@ -219,18 +218,18 @@ export const NotesGrid: StatelessComponent<{ notesList: BaseNote<any>[] }> = ({
 
   function selectNote(id: string): void {
     setSelected(id)
-    setShouldUpdate(!shouldUpdate)
+    updateAnimation()
   }
 
   function closeNotes(): void {
-    console.error("closing")
-
     setSelected(undefined)
-    setShouldUpdate(!shouldUpdate)
+    updateAnimation()
   }
 
   function updateAnimation(): void {
-    setShouldUpdate(!shouldUpdate)
+    if (!isMobileBrowser()) {
+      setShouldUpdate(!shouldUpdate)
+    }
   }
 
   return (

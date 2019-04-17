@@ -32,7 +32,7 @@ const PreviewNote = styled.div<{ set?: boolean }>`
         `
       : ""}
 `
-const DetailNote = styled.div``
+const DetailNote = styled.div``;
 
 const NoteContainer = styled.div<{
   rect?: { height: number; left: number; top: number }
@@ -76,9 +76,16 @@ const NoteContainer = styled.div<{
   ${DetailNote} {
     position: ${props => (!props.open ? "absolute" : "relative")};
     opacity: ${props => (!props.open ? 0 : 1)};
-    padding: 12px 16px;
     top: 0;
     left: 0;
+    font-size: ${rhythm(0.65)};
+    padding: 0px ${rhythm(0.5)};
+
+    code[class*="language-"],
+    pre[class*="language-"] {
+      font-size: ${rhythm(0.5)};
+    }
+
   }
 
   ${props => (props.topElement ? "z-index: 10;" : "")}
@@ -87,7 +94,7 @@ const NoteContainer = styled.div<{
     if (open) {
       return css`
         height: fit-content;
-        width: 600px;
+        width: 500px;
         z-index: 10;
         top: 10vh;
         max-height: 88vh;
@@ -108,7 +115,7 @@ const NoteContainer = styled.div<{
           background-color: rgba(28, 28, 28, 0.3);
         }
 
-        left: calc(50% - 300px);
+        left: calc(50% - 250px);
         position: fixed;
         box-shadow: 1px 2px 16px rgba(28, 28, 28, 0.1);
 
