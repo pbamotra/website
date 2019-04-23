@@ -25,5 +25,5 @@ function withComponent<
 
 // Example Usage:
 
-const Link = withComponent(ButtonComponent, 'a');
+const Link = withComponent(Button, 'a');
 ```
