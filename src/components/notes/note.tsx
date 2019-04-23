@@ -1,8 +1,9 @@
 import React, { StatelessComponent, useEffect, useState } from "react"
-import styled, { css } from "styled-components"
+import styled, { css, StyledComponent } from "styled-components"
 import { rhythm } from "../../utils/typography"
 import { NOTE_TYPE_MAP, BaseNote } from "./note-types/module"
-import { Link, PageRenderer, parsePath } from "gatsby"
+import { Link, PageRenderer, parsePath }
+from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 
@@ -11,6 +12,13 @@ export const MARGIN_SIZE = 8
 
 const TOP_PADDING = 12
 const LEFT_PADDING = 16
+
+function withComponent<
+    C extends StyledComponent<any, any>,
+    T extends React.ComponentType<any> | keyof JSX.IntrinsicElements
+  > (Component: C, type: T) {
+    return styled((props => <Component as={type} {...props} />) as unknown as T)``;
+  }
 
 const PreviewNote = styled.div<{ set?: boolean }>`
   overflow: hidden;
@@ -33,6 +41,8 @@ const PreviewNote = styled.div<{ set?: boolean }>`
       : ""}
 `
 const DetailNote = styled.div``;
+
+const c = () => <DetailNote as={'a'} />
 
 const NoteContainer = styled.div<{
   rect?: { height: number; left: number; top: number }
