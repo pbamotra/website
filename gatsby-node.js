@@ -28,6 +28,18 @@ function formatNote(note) {
     }
   }
 
+  if (note.childNotesYaml) {
+    type = note.childNotesYaml.type;
+    title = note.childNotesYaml.title;
+    if (type === 'flashcards') {
+      data = {
+        category: note.childNotesYaml.category,
+        cards: note.childNotesYaml.cards,
+        cardCount: note.childNotesYaml.cards.length
+      }
+    }
+  }
+
   return {
     name,
     id,
@@ -47,6 +59,16 @@ function generatePreview(note) {
       data: {
         ...newNote.data,
         html: undefined
+      }
+    }
+  }
+
+  if (newNote.type === 'flashcards') {
+    newNote = {
+      ...newNote,
+      data: {
+        ...newNote.data,
+        cards: undefined
       }
     }
   }
@@ -156,6 +178,15 @@ exports.createPages = async ({
           frontmatter {
             title
             type
+          }
+        }
+        childNotesYaml{
+          title
+          type
+          category
+          cards {
+            front
+            back
           }
         }
       }

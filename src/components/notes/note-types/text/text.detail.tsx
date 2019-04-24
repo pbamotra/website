@@ -12,10 +12,10 @@ const DetailedTitle = styled.h2`
 `;
 
 export const TextNote: FunctionComponent<
-  BaseNote<Data> & { showTitle?: boolean }
-> = ({ children, data, showTitle, title, ...rest }) => (
+  BaseNote<Data> & { modal?: boolean }
+> = ({ children, data, modal, title, ...rest }) => (
   <>
-    {showTitle ? <DetailedTitle>{title}</DetailedTitle> : undefined}
+    {modal ? <DetailedTitle>{title}</DetailedTitle> : undefined}
     <div dangerouslySetInnerHTML={{ __html: data.html }} {...rest} />
   </>
 )

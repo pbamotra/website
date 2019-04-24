@@ -13,13 +13,6 @@ export const MARGIN_SIZE = 8
 const TOP_PADDING = 12
 const LEFT_PADDING = 16
 
-function withComponent<
-    C extends StyledComponent<any, any>,
-    T extends React.ComponentType<any> | keyof JSX.IntrinsicElements
-  > (Component: C, type: T) {
-    return styled((props => <Component as={type} {...props} />) as unknown as T)``;
-  }
-
 const PreviewNote = styled.div<{ set?: boolean }>`
   overflow: hidden;
   user-select: none;
@@ -42,7 +35,16 @@ const PreviewNote = styled.div<{ set?: boolean }>`
 `
 const DetailNote = styled.div``;
 
-const c = () => <DetailNote as={'a'} />
+export const DETAIL_NOTE_SIZE = css`
+  @media (max-width: 693px) {
+    width: 94vw;
+    left: calc(50% - 47vw);
+  }
+  width: 500px;
+  padding: 0px ${rhythm(0.5)};
+  padding-bottom: ${rhythm(0.5)};
+  font-size: ${rhythm(0.65)};
+`;
 
 const NoteContainer = styled.div<{
   rect?: { height: number; left: number; top: number }
@@ -104,7 +106,6 @@ const NoteContainer = styled.div<{
     if (open) {
       return css`
         height: fit-content;
-        width: 500px;
         z-index: 10;
         top: 10vh;
         max-height: 88vh;
@@ -129,10 +130,7 @@ const NoteContainer = styled.div<{
         position: fixed;
         box-shadow: 1px 2px 16px rgba(28, 28, 28, 0.1);
 
-        @media (max-width: 693px) {
-          width: 94vw;
-          left: calc(50% - 47vw);
-        }
+        ${DETAIL_NOTE_SIZE}
       `
     } else if (rect) {
       return css`
@@ -202,6 +200,11 @@ export const Note: StatelessComponent<
   })
 
   function selectNote() {
+
+    if (open) {
+      return;
+    }
+
     ;(window || ({} as any)).__NOTES_LAYOUT_LOADED = true
 
     if (loadStarted) {
