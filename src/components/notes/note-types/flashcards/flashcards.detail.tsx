@@ -5,6 +5,8 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import Flippy, { FrontSide, BackSide } from "react-flippy"
 import { DETAIL_NOTE_SIZE } from "../../note"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faRandom, faStepBackward } from "@fortawesome/free-solid-svg-icons"
 
 type Data = {
   title: string
@@ -22,7 +24,7 @@ const Subtitle = styled.h3`
   margin-top: 0.75rem;
   margin-right: 1rem;
   text-align: center;
-`;
+`
 
 type FlashCardFunction = FunctionComponent<BaseNote<Data> & { modal?: boolean }>
 
@@ -66,11 +68,11 @@ const FlashCardContent = styled.div<{ length?: number }>`
   justify-content: center;
   ${({ length }) => {
     if (length && length <= 10) {
-      return 'font-size: 42px';
+      return "font-size: 42px"
     }
-    return '';
+    return ""
   }}
-`;
+`
 
 const FlashCardTitle = styled.h4`
   text-align: center;
@@ -78,7 +80,7 @@ const FlashCardTitle = styled.h4`
   margin-bottom: 24px;
   opacity: 0.6;
   color: #1ca086;
-`;
+`
 
 const CategoryTitle = styled.h2`
   text-align: center;
@@ -94,42 +96,61 @@ const ModalCategoryTitle = styled(CategoryTitle)`
   margin-bottom: 0;
   margin-top: 16px;
   opacity: 0.9;
+`
+
+const Button = styled.button`
+  opacity: 0.45;
+  cursor: pointer;
+  padding: 4px;
+  transition: opacity 0.3s;
+  background: none;
+  border: none;
+  outline: none;
+  :hover {
+    opacity: 1;
+  }
 `;
 
 const HIDDEN_FLASH_KEY = "flashcard-hidden"
 
+
+
 const ModalLayout: FlashCardFunction = ({ data, title }) => {
-  
   const [frontIndex, setFrontIndex] = useState(0)
   const [backIndex, setBackIndex] = useState(0)
-  const [frontShowing, setFrontShowing] = useState(true);
+  const [frontShowing, setFrontShowing] = useState(true)
+  const [isFlipped, setIsFlipped] = useState(false)
 
-  const [cards] = useState(
+  const flipTimerState = useRef({ flipTimer: undefined });
+
+  const [cards, setCards] = useState(
     data.cards.map((x, i) => ({ ...x, key: i + "--card" }))
   )
   const [height, setHeight] = useState(0)
 
-  function flipFactory() {
-    let flipTimer;
-    return () => {
-      if (flipTimer) {
-        clearTimeout(flipTimer);
-        return;
-      } else {
-        flipTimer = setTimeout(() => {
-          if (!frontShowing) {
-            setFrontShowing(true);
-            setBackIndex((backIndex + 1) % cards.length);
-          } else {
-            setFrontShowing(false);
-            setFrontIndex((frontIndex + 1) % cards.length);
-          }
-        }, 600);
-      }
-    }
-  }
+  function flipComplete() {
 
-  const flipComplete = flipFactory();
+      const { flipTimer } = flipTimerState.current;
+
+      setIsFlipped(!isFlipped);
+
+      if (flipTimer) {
+        clearTimeout(flipTimer)
+        flipTimerState.current.flipTimer = undefined;
+        return
+      } else {
+        flipTimerState.current.flipTimer = setTimeout(() => {
+          if (!frontShowing) {
+            setFrontShowing(true)
+            setBackIndex((backIndex + 1) % cards.length)
+          } else {
+            setFrontShowing(false)
+            setFrontIndex((frontIndex + 1) % cards.length)
+          }
+          flipTimerState.current.flipTimer = undefined;
+        }, 600)
+      }
+  }
 
   const CardsToMeasure: FunctionComponent = props => (
     <HiddenFlashCardContainer {...props}>
@@ -163,52 +184,90 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
 
   useEffect(() => {
     if (height <= 0) {
-
-      const container = document.createElement('div');
-      document.body.appendChild(container);
+      const container = document.createElement("div")
+      document.body.appendChild(container)
 
       ReactDOM.render(<CardsToMeasure />, container, () => {
         setHeight(
-          Array.from(
-            container.querySelectorAll("." + HIDDEN_FLASH_KEY)
-          )
+          Array.from(container.querySelectorAll("." + HIDDEN_FLASH_KEY))
             .map(x => {
-              console.log(x.getBoundingClientRect().height)
               return x.getBoundingClientRect().height
             })
             .reduce((acc, a) => Math.max(acc, a), 0)
-        );
-        container.remove();
+        )
+        container.remove()
       })
     }
   }, [false])
 
+  function backToStart(e: React.MouseEvent) {
+    setBackIndex(0)
+    setFrontIndex(0)
+    setIsFlipped(false)
+    setFrontShowing(true)
+    e.stopPropagation()
+    e.preventDefault()
+  }
+
+  function shuffle(e: React.MouseEvent) {
+    const newCards = cards.slice()
+
+    var currentIndex = newCards.length,
+      temporaryValue,
+      randomIndex
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex -= 1
+
+      // And swap it with the current element.
+      temporaryValue = newCards[currentIndex]
+      newCards[currentIndex] = newCards[randomIndex]
+      newCards[randomIndex] = temporaryValue
+    }
+
+    setCards(newCards)
+    backToStart(e);
+  }
+
   return (
     <>
       <DetailedTitle>{title}</DetailedTitle>
-      <ModalCategoryTitle as={'p'}>
+      <ModalCategoryTitle as={"p"}>
         <strong>{data.cards.length}</strong> flascards in the{" "}
-        <strong>{data.category}</strong> category. <br /> Click the cards to see answers!
+        <strong>{data.category}</strong> category. <br /> Click the cards to see
+        answers!
       </ModalCategoryTitle>
+
+      <Button onClick={backToStart}>
+        <FontAwesomeIcon icon={faStepBackward} />
+      </Button>{" "}
+      &nbsp;{" "}
+      <Button onClick={shuffle}>
+        <FontAwesomeIcon icon={faRandom} />
+      </Button>
+
       <FlashCardContainer>
-          <Flippy style={{ cursor: "pointer" }}>
-            <FrontSide>
-              <FlashCard onClick={flipComplete} height={height}>
-                <FlashCardTitle>Front</FlashCardTitle>
-                <FlashCardContent length={cards[frontIndex].front.length}>
-                  { cards[frontIndex].front }
-                </FlashCardContent>
-              </FlashCard>
-            </FrontSide>
-            <BackSide>
-              <FlashCard onClick={flipComplete} height={height}>
-                <FlashCardTitle>Back</FlashCardTitle>
-                <FlashCardContent length={cards[backIndex].back.length}>
-                  { cards[backIndex].back }
-                </FlashCardContent>
-              </FlashCard>
-            </BackSide>
-          </Flippy>
+        <Flippy isFlipped={isFlipped} style={{ cursor: "pointer" }}>
+          <FrontSide>
+            <FlashCard onClick={flipComplete} height={height}>
+              <FlashCardTitle>Front</FlashCardTitle>
+              <FlashCardContent length={cards[frontIndex].front.length}>
+                {cards[frontIndex].front}
+              </FlashCardContent>
+            </FlashCard>
+          </FrontSide>
+          <BackSide>
+            <FlashCard onClick={flipComplete} height={height}>
+              <FlashCardTitle>Back</FlashCardTitle>
+              <FlashCardContent length={cards[backIndex].back.length}>
+                {cards[backIndex].back}
+              </FlashCardContent>
+            </FlashCard>
+          </BackSide>
+        </Flippy>
       </FlashCardContainer>
     </>
   )
