@@ -20,12 +20,6 @@ const DetailedTitle = styled.h2`
   text-align: center;
 `
 
-const Subtitle = styled.h3`
-  margin-top: 0.75rem;
-  margin-right: 1rem;
-  text-align: center;
-`
-
 type FlashCardFunction = FunctionComponent<BaseNote<Data> & { modal?: boolean }>
 
 const FlashCardContainer = styled.div`
@@ -36,6 +30,7 @@ const FlashCardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
 
   > * {
     width: 100%;
@@ -46,6 +41,7 @@ const HiddenFlashCardContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  visibility: hidden;
   pointer-events: none;
   ${DETAIL_NOTE_SIZE}
 
@@ -57,6 +53,8 @@ const HiddenFlashCardContainer = styled.div`
 const FlashCard = styled.div<{ height?: number }>`
   padding: 12px 20px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   height: ${({ height }) => (height ? height + "px" : "fit-content")};
 `
@@ -65,9 +63,12 @@ const FlashCardContent = styled.div<{ length?: number }>`
   padding: 4px;
   display: flex;
   flex-align: center;
+  flex-grow: 1;
+  align-items: center;
+  text-align: center;
   justify-content: center;
   ${({ length }) => {
-    if (length && length <= 10) {
+    if (length && length <= 12) {
       return "font-size: 42px"
     }
     return ""
@@ -109,11 +110,9 @@ const Button = styled.button`
   :hover {
     opacity: 1;
   }
-`;
+`
 
 const HIDDEN_FLASH_KEY = "flashcard-hidden"
-
-
 
 const ModalLayout: FlashCardFunction = ({ data, title }) => {
   const [frontIndex, setFrontIndex] = useState(0)
@@ -121,7 +120,7 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
   const [frontShowing, setFrontShowing] = useState(true)
   const [isFlipped, setIsFlipped] = useState(false)
 
-  const flipTimerState = useRef({ flipTimer: undefined });
+  const flipTimerState = useRef({ flipTimer: undefined })
 
   const [cards, setCards] = useState(
     data.cards.map((x, i) => ({ ...x, key: i + "--card" }))
@@ -129,27 +128,26 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
   const [height, setHeight] = useState(0)
 
   function flipComplete() {
+    const { flipTimer } = flipTimerState.current
 
-      const { flipTimer } = flipTimerState.current;
+    setIsFlipped(!isFlipped)
 
-      setIsFlipped(!isFlipped);
-
-      if (flipTimer) {
-        clearTimeout(flipTimer)
-        flipTimerState.current.flipTimer = undefined;
-        return
-      } else {
-        flipTimerState.current.flipTimer = setTimeout(() => {
-          if (!frontShowing) {
-            setFrontShowing(true)
-            setBackIndex((backIndex + 1) % cards.length)
-          } else {
-            setFrontShowing(false)
-            setFrontIndex((frontIndex + 1) % cards.length)
-          }
-          flipTimerState.current.flipTimer = undefined;
-        }, 600)
-      }
+    if (flipTimer) {
+      clearTimeout(flipTimer)
+      flipTimerState.current.flipTimer = undefined
+      return
+    } else {
+      flipTimerState.current.flipTimer = setTimeout(() => {
+        if (!frontShowing) {
+          setFrontShowing(true)
+          setBackIndex((backIndex + 1) % cards.length)
+        } else {
+          setFrontShowing(false)
+          setFrontIndex((frontIndex + 1) % cards.length)
+        }
+        flipTimerState.current.flipTimer = undefined
+      }, 600)
+    }
   }
 
   const CardsToMeasure: FunctionComponent = props => (
@@ -172,10 +170,14 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
           )
           .map(({ content, key }) => (
             <FlashCard className={HIDDEN_FLASH_KEY} key={key}>
-              <FlashCardTitle>Back</FlashCardTitle>
-              <FlashCardContent length={content.length}>
-                {content}
-              </FlashCardContent>
+              <Flippy>
+                <FrontSide>
+                  <FlashCardTitle>Back</FlashCardTitle>
+                  <FlashCardContent length={content.length}>
+                    {content}
+                  </FlashCardContent>
+                </FrontSide>
+              </Flippy>
             </FlashCard>
           ))}
       </FlashCardContainer>
@@ -188,14 +190,16 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
       document.body.appendChild(container)
 
       ReactDOM.render(<CardsToMeasure />, container, () => {
-        setHeight(
-          Array.from(container.querySelectorAll("." + HIDDEN_FLASH_KEY))
-            .map(x => {
-              return x.getBoundingClientRect().height
-            })
-            .reduce((acc, a) => Math.max(acc, a), 0)
-        )
-        container.remove()
+        setTimeout(() => {
+          setHeight(
+            Array.from(container.querySelectorAll("." + HIDDEN_FLASH_KEY))
+              .map(x => {
+                return x.getBoundingClientRect().height
+              })
+              .reduce((acc, a) => Math.max(acc, a), 0)
+          )
+          container.remove()
+        }, 2)
       })
     }
   }, [false])
@@ -229,7 +233,7 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
     }
 
     setCards(newCards)
-    backToStart(e);
+    backToStart(e)
   }
 
   return (
@@ -240,7 +244,6 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
         <strong>{data.category}</strong> category. <br /> Click the cards to see
         answers!
       </ModalCategoryTitle>
-
       <Button onClick={backToStart}>
         <FontAwesomeIcon icon={faStepBackward} />
       </Button>{" "}
@@ -248,7 +251,6 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
       <Button onClick={shuffle}>
         <FontAwesomeIcon icon={faRandom} />
       </Button>
-
       <FlashCardContainer>
         <Flippy isFlipped={isFlipped} style={{ cursor: "pointer" }}>
           <FrontSide>
