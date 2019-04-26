@@ -96,9 +96,11 @@ exports.createPages = async ({
          nodes {
           sourceInstanceName
           id
-           childMarkdownRemark {
+           childMdx {
              id
-             html
+             code {
+               body
+             }
              frontmatter {
                title
              }
@@ -106,7 +108,7 @@ exports.createPages = async ({
          }
         }
 
-        allMarkdownRemark(
+        allMdx(
           sort: { fields: [frontmatter___date], order: DESC }
           filter: { frontmatter: { draft: { ne: true } } }
           limit: 1000
@@ -135,10 +137,10 @@ exports.createPages = async ({
     statusCode: 302
   });
 
-  const postIds = new Set(result.data.allFile.nodes.filter(x => x.sourceInstanceName === 'blog' && x.childMarkdownRemark).map(x => x.childMarkdownRemark.id));
+  const postIds = new Set(result.data.allFile.nodes.filter(x => x.sourceInstanceName === 'blog' && x.childMdx).map(x => x.childMdx.id));
 
   // Create blog posts pages.
-  const posts = result.data.allMarkdownRemark.nodes.filter(x => postIds.has(x.id));
+  const posts = result.data.allMdx.nodes.filter(x => postIds.has(x.id));
   const tags = new Set(posts.reduce((acc, post) => acc.concat(post.frontmatter.tags || []), []))
 
   posts.forEach((post, index) => {
@@ -240,7 +242,7 @@ exports.onCreateNode = ({
     createNodeField
   } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const value = createFilePath({
       node,
       getNode

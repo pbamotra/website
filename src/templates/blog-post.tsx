@@ -5,8 +5,9 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
-import { Flipper } from "react-flip-toolkit";
-import { StaggerAnimationContainer, StaggerWrapper, Stagger } from "../components/stagger-wrapper";
+import { StaggerWrapper, Stagger } from "../components/stagger-wrapper";
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+
 
 const TagList = styled.span`
   display: inline-block;
@@ -25,7 +26,7 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
   location,
   pageContext
 }) => {
-  const post = data.markdownRemark;
+  const post = data.mdx;
   const { previous, next } = pageContext;
   const tags = post.frontmatter.tags || [];
 
@@ -64,7 +65,9 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
             </p>
           </Stagger>
           <Stagger id="fade-in-3">
-            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+            <MDXRenderer>
+              { post.code.body }
+            </MDXRenderer>
           </Stagger>
         </StaggerWrapper>
       <Bio />
@@ -107,10 +110,12 @@ export const pageQuery = graphql`
         author
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      code {
+        body
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

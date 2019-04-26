@@ -8,7 +8,7 @@ import Projects from "../components/projects"
 import { Stagger, StaggerWrapper } from "../components/stagger-wrapper";
 
 export const Home: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
-  const posts = data.allMarkdownRemark.edges.map(x => x.node) as Post[];
+  const posts = data.allMdx.edges.map(x => x.node) as Post[];
   const projects = data.allProjectsYaml.edges.map(x => x.node) as Project[];
   return (
     <Layout location={location}>
@@ -44,7 +44,7 @@ export default Home;
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(
+    allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
       limit: 1000

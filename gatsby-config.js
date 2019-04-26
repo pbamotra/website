@@ -24,6 +24,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-yaml`,
+    `gatsby-transformer-remark`,
     `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -40,13 +41,39 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-mdx`,
+      options: {
+        extensions: ['.mdx'],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 655,
+              sizeByPixelDensity: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: null,
+              aliases: {},
+            },
+          },
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-smartypants`,
+        ],
+      },
+    },
+
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 590,
+              maxWidth: 440,
             },
           },
           {
@@ -61,6 +88,7 @@ module.exports = {
         ],
       },
     },
+
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-styled-components`,
@@ -87,7 +115,6 @@ module.exports = {
     },
     'gatsby-plugin-sitemap',
     'gatsby-plugin-catch-links',
-    'gatsby-redirect-from',
     'gatsby-plugin-meta-redirect'
   ],
 }

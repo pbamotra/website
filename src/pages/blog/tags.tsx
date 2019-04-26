@@ -9,7 +9,7 @@ const AllTagsPage: StatelessComponent<{ data: any; location: any }> = ({
   location,
 }) => {
   const title = data.site.siteMetadata.title
-  const allTags = data.allMarkdownRemark.group
+  const allTags = data.allMdx.group
 
   return (
     <Layout location={location}>
@@ -50,7 +50,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
+    allMdx(
       limit: 2000
       filter: { frontmatter: { draft: { ne: true } } }
     ) {

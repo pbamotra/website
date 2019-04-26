@@ -6,7 +6,7 @@ import { PostPreview } from "../components/post-preview"
 import { Stagger, StaggerWrapper } from "../components/stagger-wrapper";
 
 export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
-  const posts = data.allMarkdownRemark.edges.map(x => x.node) as Post[];
+  const posts = data.allMdx.edges.map(x => x.node) as Post[];
   return (
     <Layout location={location}>
       <SEO
@@ -38,7 +38,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
+    allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
       limit: 1000

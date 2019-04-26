@@ -10,7 +10,7 @@ const TagPage: StatelessComponent<{
   location: any
   pageContext: any
 }> = ({ data, location, pageContext }) => {
-  const posts = data.allMarkdownRemark.edges.map(x => x.node)
+  const posts = data.allMdx.edges.map(x => x.node)
   const title = data.site.siteMetadata.title
 
   return (
@@ -19,7 +19,7 @@ const TagPage: StatelessComponent<{
       <StaggerWrapper>
         <Stagger id={'posts-tag-title'}>
           <h2>
-            {data.allMarkdownRemark.totalCount} posts tagged with "
+            {data.allMdx.totalCount} posts tagged with "
             {pageContext.tag}"
           </h2>
         </Stagger>
@@ -43,7 +43,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
+    allMdx(
       limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {

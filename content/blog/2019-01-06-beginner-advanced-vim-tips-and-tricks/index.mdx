@@ -35,7 +35,7 @@ In Vim, searching, substituting and the global command are some of the most powe
     Using the `&` you can reinsert the text matched in a substitution.
     
     ```
-:%s/cats/"&"/g
+    :%s/cats/"&"/g
     ```
 
     ![reinsert substituted text](./vim-reinsert-text.gif)
@@ -45,7 +45,7 @@ In Vim, searching, substituting and the global command are some of the most powe
     You can dictate capture groups using escaped brackets in a search. They can then be accessed in the replacement using escaped numbers.
 
     ```
-:%s/\(\w\) and/\1 but not/g
+    :%s/\(\w\) and/\1 but not/g
     ```
 
     ![vim capture groups](./capture-groups.gif)
@@ -63,9 +63,9 @@ To get an idea of all the text objects that exist, use the `:help text-objects` 
     I often use this to quickly change whats inside function parameters.
 
     ```
-f(          " find the bracket
-ci(nothing  " change inner bracket to "nothing"
-+f(.        " repeat the action on the next line
+    f(          " find the bracket
+    ci(nothing  " change inner bracket to "nothing"
+    +f(.        " repeat the action on the next line
     ```
     ![change inner bracket](./change-inner-text-object.gif)
 
@@ -82,7 +82,7 @@ ci(nothing  " change inner bracket to "nothing"
     This is a surprisingly useful one. This text object is the next occurrence of the last used search pattern.
     `cgn` or `dgn` to change / delete the next occurence of a search is very convenient, especially when used with `#`.
 
-<span id="3-motion">
+<span id="3-motion" />
 
 ## 3. Motion
 Learning how to use `hjkl` is not the end of movement in Vim, there's a number of ways to get around.
@@ -180,13 +180,13 @@ Here's a few tips for making macros work more often.
     The following command brings together everything, finishing off the macro on the next line with `+`.
 
     ```
-qq                 " start macro "q"
-cwimport * as<Esc> " change word to "import * as"
-f=w                " find "=" and move forward a word
-ct'from <Esc>      " change until "'" to "from"
-f)x                " find ")" and remove it
-+q                 " finish macro on next line
-3@q                " Repeat the macro thrice
+    qq                 " start macro "q"
+    cwimport * as<Esc> " change word to "import * as"
+    f=w                " find "=" and move forward a word
+    ct'from <Esc>      " change until "'" to "from"
+    f)x                " find ")" and remove it
+    +q                 " finish macro on next line
+    3@q                " Repeat the macro thrice
     ```
 
     ![update imports](./update-imports.gif)
@@ -221,7 +221,7 @@ You'll be super surprised about how easily people can achieve some complex trans
 
 If after all this, you're still craving some more Vim tips. I'd suggest reading the book [Practical Vim - Edit Text at the Speed of Thought](https://pragprog.com/book/dnvim2/practical-vim-second-edition) by Drew Neil.
 
-<span id="8-some-cute-tricks">
+<span id="8-some-cute-tricks" />
 
 ## 8. Some Cute Tricks
 
@@ -232,10 +232,10 @@ If after all this, you're still craving some more Vim tips. I'd suggest reading 
     Instead, you can use the new search match (`gn`) text object with the change command (`c`) to change searches.
     This small action can then be repeated as many times as you like using the "repeat last command" command (`.`).
 
-    ```
-/cats<Enter> " search for "cats"
-cgndogs<Esc> " change the next search match to "dogs"
-.            " repeat the last command
+    ```text
+    /cats<Enter> " search for "cats"
+    cgndogs<Esc> " change the next search match to "dogs"
+    .            " repeat the last command
     ```
 
     ![search and change](./search-and-change.gif)
@@ -248,12 +248,12 @@ cgndogs<Esc> " change the next search match to "dogs"
     Rather, you use the `|` command mentioned in the [motion](#3-motion) section.
 
     ```
-qq        " start a macro "q"
-f"        " find the " character
-10i <Esc> " insert 10 spaces
-d18|      " delete to screen column 18
-+q        " finish the macro on the next line
-4@q       " run the macro 4 times
+    qq        " start a macro "q"
+    f"        " find the " character
+    10i <Esc> " insert 10 spaces
+    d18|      " delete to screen column 18
+    +q        " finish the macro on the next line
+    4@q       " run the macro 4 times
     ```
 
     ![align comments](./align-comments.gif)
@@ -264,14 +264,14 @@ d18|      " delete to screen column 18
     Check out this one to sort a key - value list.
 
     ```
-6j       " jump down 6 lines
-qq       " start a macro "q"
-yy       " yank the current line
-ww#      " go to the value and search backwards
-I- <Esc> " insert a - at the start of the line
-wwd$>>   " delete the value and indent the line
-``dd     " jump back and delete the line
-q6@q     " finish the macro and repeat 6 times
+    6j       " jump down 6 lines
+    qq       " start a macro "q"
+    yy       " yank the current line
+    ww#      " go to the value and search backwards
+    I- <Esc> " insert a - at the start of the line
+    wwd$>>   " delete the value and indent the line
+    ``dd     " jump back and delete the line
+    q6@q     " finish the macro and repeat 6 times
     ```
 
     ![sort a list](./sort-a-list.gif)
