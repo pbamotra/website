@@ -1,6 +1,7 @@
 ---
 title: Haskell Quicksort in JavaScript
 type: text
+category: javascript
 ---
 
 Haskell is a really neat language! In fact, you can implement quicksort in [just one line](https://wiki.haskell.org/Introduction#Brevity).

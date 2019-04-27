@@ -1,6 +1,7 @@
 ---
 title: Get Function Parameters and Return Types with Typescript
 type: text
+category: javascript
 ---
 When creating advanced functions in Typescript, it can be difficult
 to get everything to work without resorting to using `any`.

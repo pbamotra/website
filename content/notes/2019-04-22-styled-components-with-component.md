@@ -1,6 +1,7 @@
 ---
 title: Fix styled-components withComponent Method
 type: text
+category: react
 ---
 styled-components have deprecated the `withComponent` method in favour of the inline `as` prop.
 Unfortunately, [@types/styled-components](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/fe76831d67c996da2b5859407e9bc92aea3544af/types/styled-components/index.d.ts#L188) says you should use `withComponent` method and not the `as` prop.

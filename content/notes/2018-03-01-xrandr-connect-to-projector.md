@@ -1,6 +1,7 @@
 ---
 title: Connect to a Projector with xrandr
 type: text
+category: archlinux
 ---
 It almost seems like a rite of passage, connecting to a projector after ditching the floating WM.
 While it may seem hard, it's actually quite easy!
