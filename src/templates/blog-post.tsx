@@ -5,7 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
-import { StaggerWrapper, Stagger } from "../components/stagger-wrapper";
+import { StaggerWrapper, Stagger } from "staggered";
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
 
@@ -37,10 +37,10 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
         description={post.frontmatter.byline || post.excerpt}
       />
         <StaggerWrapper>
-          <Stagger id="fade-in">
+          <Stagger staggerId="fade-in">
             <h1>{post.frontmatter.title}</h1>
           </Stagger>
-          <Stagger id="fade-in-2">
+          <Stagger staggerId="fade-in-2">
             <p
               style={{
                 ...scale(-1 / 5),
@@ -64,7 +64,7 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
                 : undefined}
             </p>
           </Stagger>
-          <Stagger id="fade-in-3">
+          <Stagger staggerId="fade-in-3">
             <MDXRenderer>
               { post.code.body }
             </MDXRenderer>

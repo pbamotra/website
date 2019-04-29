@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { rhythm } from "../utils/typography"
 import styled from 'styled-components';
 import { Flipped } from "react-flip-toolkit";
-import { Stagger } from "./stagger-wrapper";
+import { Stagger } from "staggered";
 
 export const PostTitle = styled.h3`
   margin-bottom: ${rhythm(1 / 4)}
@@ -23,7 +23,7 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
         const { slug } = post.fields;
         const { excerpt } = post;
 
-        return <Stagger key={slug} id={slug + '-' + i}><PostPreviewContainer>
+        return <Stagger key={slug} staggerId={slug + '-' + i}><PostPreviewContainer>
           <PostTitle>
             <Link to={slug}>
               { title }

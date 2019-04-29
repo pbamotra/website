@@ -4,7 +4,7 @@ import styled, { css } from "styled-components"
 import Layout from "../../components/layout"
 import { NotesGrid } from "../../components/notes/note-grid"
 import { SEO } from "../../components/seo"
-import { Stagger, StaggerWrapper } from "../../components/stagger-wrapper"
+import { Stagger, StaggerWrapper } from "staggered"
 import { rhythm } from "../../utils/typography"
 import { BaseNote } from "../../components/notes/note-types/module"
 
@@ -58,10 +58,10 @@ export const Notes: StatelessComponent<{
 
       <header>
         <StaggerWrapper>
-          <Stagger id="notes">
+          <Stagger staggerId="notes">
             <h1>Notes</h1>
           </Stagger>
-          <Stagger id="stuff">
+          <Stagger staggerId="stuff">
             <p>Some stuff I done learned. Click on a note to read more.</p>
           </Stagger>
         </StaggerWrapper>

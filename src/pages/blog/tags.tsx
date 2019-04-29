@@ -2,7 +2,7 @@ import React, { StatelessComponent } from "react"
 import Helmet from "react-helmet"
 import { Link, graphql } from "gatsby"
 import Layout from "../../components/layout"
-import { Stagger, StaggerWrapper } from "../../components/stagger-wrapper"
+import { Stagger, StaggerWrapper } from "staggered"
 
 const AllTagsPage: StatelessComponent<{ data: any; location: any }> = ({
   data,
@@ -16,10 +16,10 @@ const AllTagsPage: StatelessComponent<{ data: any; location: any }> = ({
       <Helmet title={title} />
       <div>
         <StaggerWrapper>
-          <Stagger id="all-tags-title">
+          <Stagger staggerId="all-tags-title">
             <h1>Tags</h1>
           </Stagger>
-          <Stagger id="tags">
+          <Stagger staggerId="tags">
             <ul>
               {allTags.map(tag => (
                 <li key={tag.fieldValue}>

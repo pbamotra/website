@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import PostPreview from "../components/post-preview"
 import SEO from "../components/seo"
-import { StaggerWrapper, Stagger } from "../components/stagger-wrapper"
+import { StaggerWrapper, Stagger } from "staggered"
 
 const TagPage: StatelessComponent<{
   data: any
@@ -17,14 +17,14 @@ const TagPage: StatelessComponent<{
     <Layout location={location}>
       <SEO title={`Posts tagged ${pageContext.tag}`} />
       <StaggerWrapper>
-        <Stagger id={'posts-tag-title'}>
+        <Stagger staggerId={'posts-tag-title'}>
           <h2>
             {data.allMdx.totalCount} posts tagged with "
             {pageContext.tag}"
           </h2>
         </Stagger>
         <PostPreview posts={posts} />
-        <Stagger id="browse-tags">
+        <Stagger staggerId="browse-tags">
           <div>
             <Link to={"/blog/tags"}>Browse All Tags</Link>
           </div>

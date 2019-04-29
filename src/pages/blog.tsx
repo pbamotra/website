@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { PostPreview } from "../components/post-preview"
-import { Stagger, StaggerWrapper } from "../components/stagger-wrapper";
+import { Stagger, StaggerWrapper } from "staggered";
 
 export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
   const posts = data.allMdx.edges.map(x => x.node) as Post[];
@@ -20,7 +20,7 @@ export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ da
         ]}
       />
       <StaggerWrapper>
-        <Stagger id="blog-title">
+        <Stagger staggerId="blog-title">
           <h1>Blog</h1>
         </Stagger>
         <PostPreview posts={posts} />

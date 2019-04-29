@@ -5,7 +5,7 @@ import SEO from "../components/seo"
 import { PostPreview } from "../components/post-preview"
 import About from "../components/about"
 import Projects from "../components/projects"
-import { Stagger, StaggerWrapper } from "../components/stagger-wrapper";
+import { Stagger, StaggerWrapper } from "staggered";
 
 export const Home: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
   const posts = data.allMdx.edges.map(x => x.node) as Post[];
@@ -19,17 +19,17 @@ export const Home: StatelessComponent<{ data: any, location: any }> = ({ data, l
 
       <StaggerWrapper>
 
-        <Stagger id="about-section-wow" >
+        <Stagger staggerId="about-section-wow" >
           <About />
         </Stagger>
 
-        <Stagger id="project" >
+        <Stagger staggerId="project" >
         <h2>Projects</h2>
         </Stagger>
 
         <Projects projects={projects} />
 
-        <Stagger id="posts-to-flip" >
+        <Stagger staggerId="posts-to-flip" >
         <h2>Recent Posts</h2>
         </Stagger>
 
