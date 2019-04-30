@@ -7,6 +7,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy"
 import { DETAIL_NOTE_SIZE } from "../../note"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faRandom, faStepBackward } from "@fortawesome/free-solid-svg-icons"
+import { Furigana } from "../../../../components/furigana";
 
 type Data = {
   title: string
@@ -54,6 +55,7 @@ const FlashCard = styled.div<{ height?: number }>`
   padding: 12px 20px;
   width: 100%;
   display: flex;
+  line-height: 1;
   flex-direction: column;
   box-sizing: border-box;
   height: ${({ height }) => (height ? height + "px" : "fit-content")};
@@ -257,7 +259,7 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
             <FlashCard onClick={flipComplete} height={height}>
               <FlashCardTitle>Front</FlashCardTitle>
               <FlashCardContent length={cards[frontIndex].front.length}>
-                {cards[frontIndex].front}
+                {data.category === 'japanese' ? <Furigana>{cards[frontIndex].front}</Furigana> : cards[frontIndex].front}
               </FlashCardContent>
             </FlashCard>
           </FrontSide>
@@ -265,7 +267,7 @@ const ModalLayout: FlashCardFunction = ({ data, title }) => {
             <FlashCard onClick={flipComplete} height={height}>
               <FlashCardTitle>Back</FlashCardTitle>
               <FlashCardContent length={cards[backIndex].back.length}>
-                {cards[backIndex].back}
+                {data.category === 'japanese' ? <Furigana>{cards[backIndex].back}</Furigana> : cards[backIndex].back}
               </FlashCardContent>
             </FlashCard>
           </BackSide>

@@ -3,6 +3,7 @@ import Theme from 'typography-theme-fairy-gates'
 import CodePlugin from 'typography-plugin-code';
 
 import "../css/prism-code-highlighting.css"
+import "katex/dist/katex.min.css"
 
 Theme.plugins = [ new CodePlugin() ]
 
