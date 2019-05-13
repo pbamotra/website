@@ -1,3 +1,5 @@
+const GTAG_ID = 'UA-111574706-1';
+
 module.exports = {
   siteMetadata: {
     title: `Bennett`,
@@ -68,6 +70,44 @@ module.exports = {
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
+      },
+    },
+
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: GTAG_ID,
+        anonymize: true,
+        respectDNT: true,
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: "bennetthardwick.com",
+      },
+    },
+
+    {
+      resolve: `gatsby-plugin-amp`,
+      options: {
+        analytics: {
+          type: 'gtag',
+          dataCredentials: 'include',
+          config: {
+            vars: {
+              gtag_id: GTAG_ID,
+              config: {
+                [GTAG_ID]: {
+                  page_location: '{{pathname}}'
+                },
+              },
+            },
+          },
+        },
+        canonicalBaseUrl: 'http://www.example.com/',
+        components: ['amp-form'],
+        excludedPaths: ['/404*', '/'],
+        pathIdentifier: '/amp/',
+        relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
+        useAmpClientIdApi: true,
       },
     },
 

@@ -3,8 +3,6 @@ const {
   createFilePath
 } = require(`gatsby-source-filesystem`)
 
-const fs = require('fs');
-
 function paginate(data, pageSize, pageNumber) {
     return data.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
 }
@@ -86,6 +84,7 @@ exports.createPages = async ({
   } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
+  const blogPostAmp = path.resolve(`./src/templates/blog-post.amp.tsx`)
   const tagPage = path.resolve(`./src/templates/tag-page.tsx`)
 
   let result = await graphql(
@@ -156,6 +155,17 @@ exports.createPages = async ({
         next,
       },
     })
+
+    createPage({
+      path: post.fields.slug + 'amp',
+      component: blogPostAmp,
+      context: {
+        slug: post.fields.slug,
+        previous,
+        next,
+      },
+    })
+
   })
 
   tags.forEach(tag => {
