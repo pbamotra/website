@@ -31,7 +31,7 @@ const Template: StatelessComponent<{ location: any, pageContext: { note: BaseNot
             <h1>{ note.title }</h1>
           </Stagger>
           <Stagger staggerId="about-notes">
-            <p>This is a note titled "{ note.name }" taken from my note Library. <Link to={'/notes'}>Return to Library.</Link>
+            <p>This is a note titled "{ note.name }" taken from my note Library. <Link to={'/notes/'}>Return to Library.</Link>
             </p>
           </Stagger>
           <Stagger staggerId="stuff">
