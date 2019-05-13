@@ -8,7 +8,7 @@ export default function HTML(props) {
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, shrink-to-fit=no" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.2/katex.min.css" />
+        <link rel="stylesheet" href="fonts.googleapis.com/css?family=Work+Sans:600|Quattrocento+Sans:400,400i,700" />
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

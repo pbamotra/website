@@ -7,6 +7,7 @@ import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import { StaggerWrapper, Stagger } from "staggered";
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { Helmet } from'react-helmet';
 
 const TagList = styled.span`
   display: inline-block;
@@ -31,6 +32,9 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
 
   return (
     <Layout location={location}>
+      <Helmet>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.2/katex.min.css" />
+      </Helmet>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.byline || post.excerpt}

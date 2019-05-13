@@ -110,7 +110,6 @@ module.exports = {
         useAmpClientIdApi: true,
       },
     },
-
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -162,6 +161,7 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+        omitGoogleFont: true
       },
     },
     'gatsby-plugin-sitemap',
