@@ -1,4 +1,4 @@
-import React, { StatelessComponent, useState, useEffect } from "react"
+import React, { StatelessComponent } from "react"
 import { Link, graphql } from "gatsby"
 import styled from 'styled-components';
 import Bio from "../components/bio"
@@ -8,6 +8,7 @@ import { rhythm, scale } from "../utils/typography"
 import { StaggerWrapper, Stagger } from "staggered";
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
+import "katex/dist/katex.min.css"
 
 const TagList = styled.span`
   display: inline-block;
