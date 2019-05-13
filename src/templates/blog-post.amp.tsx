@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet"
 
 const TagList = styled.span`
   display: inline-block;
@@ -32,9 +32,33 @@ const BlogPost: StatelessComponent<{
   return (
     <Layout location={location}>
       <Helmet>
-          <style>
-              {`amp-anim img { object-fit: contain; }`}
-          </style>
+        <style>{`amp-anim img { object-fit: contain; }`}</style>
+        <script type="application/ld+json">
+          {`{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://bennetthardwick.com/blog/${pageContext.slug}"
+  },
+  "headline": "${post.frontmatter.title}",
+  "datePublished": "${new Date(post.frontmatter.date).toISOString()}",
+  "dateModified": "${new Date(post.frontmatter.date).toISOString()}",
+  "author": {
+    "@type": "Person",
+    "name": "Bennett Hardwick"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": "bennetthardwick",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://bennetthardwick.com/og-image.jpg"
+    }
+  },
+  "description": "${post.frontmatter.byline || post.excerpt}"
+}`}
+        </script>
       </Helmet>
       <SEO
         title={post.frontmatter.title}
