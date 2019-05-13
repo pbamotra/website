@@ -157,7 +157,7 @@ exports.createPages = async ({
     })
 
     createPage({
-      path: post.fields.slug + 'amp',
+      path: post.fields.slug + 'amp/',
       component: blogPostAmp,
       context: {
         slug: post.fields.slug,
