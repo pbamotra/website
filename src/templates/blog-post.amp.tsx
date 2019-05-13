@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
+import { Helmet } from 'react-helmet';
 
 const TagList = styled.span`
   display: inline-block;
@@ -30,6 +31,11 @@ const BlogPost: StatelessComponent<{
 
   return (
     <Layout location={location}>
+      <Helmet>
+          <style>
+              {`amp-anim img { object-fit: contain; }`}
+          </style>
+      </Helmet>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.byline || post.excerpt}
