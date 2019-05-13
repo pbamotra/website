@@ -170,7 +170,7 @@ exports.createPages = async ({
 
   tags.forEach(tag => {
     createPage({
-      path: `/blog/tag/${tag}`,
+      path: `/blog/tag/${tag}/`,
       component: tagPage,
       context: {
         tag
@@ -218,7 +218,7 @@ exports.createPages = async ({
 
   for (const note of notes) {
     createPage({
-      path: `/notes/d/${note.name}`,
+      path: `/notes/d/${note.name}/`,
       component: singleNotePage,
       context: {
         note
@@ -231,7 +231,7 @@ exports.createPages = async ({
 
   for (let i = 0; i < pageCount; i++) {
     createPage({
-      path: `/notes${i === 0 ? '' : `/${i + 1}`}`,
+      path: `/notes${i === 0 ? '' : `/${i + 1}`}/`,
       component: allNotesPage,
       context: {
         notes: paginate(notes, PAGE_SIZE, i).map(generatePreview),
