@@ -8,8 +8,6 @@ import { rhythm, scale } from "../utils/typography"
 import { StaggerWrapper, Stagger } from "staggered";
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
-import "katex/dist/katex.min.css"
-
 const TagList = styled.span`
   display: inline-block;
   list-style: none;
