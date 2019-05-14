@@ -102,7 +102,7 @@ module.exports = {
             },
           },
         },
-        canonicalBaseUrl: 'http://www.example.com/',
+        canonicalBaseUrl: 'https://www.bennetthardwick.com/',
         components: ['amp-form'],
         excludedPaths: ['/404*', '/'],
         pathIdentifier: '/amp/',
