@@ -63,8 +63,12 @@
     "youtube-player": "^5.5.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "babel-plugin-styled-components": "^1.10.0",
     "gh-pages": "^2.0.1",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "remark-parse": "^6.0.3",
+    "webpack": "^4.31.0"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "keywords": [
