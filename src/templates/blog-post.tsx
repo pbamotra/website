@@ -1,4 +1,5 @@
 import React, { StatelessComponent } from "react"
+import Disqus from 'gatsby-plugin-disqus'
 import { Link, graphql } from "gatsby"
 import styled from 'styled-components';
 import Bio from "../components/bio"
@@ -27,6 +28,13 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
   pageContext
 }) => {
   const post = data.mdx;
+  const {
+    title,
+    byline,
+    excerpt,
+    date,
+    comments
+  } = post.frontmatter;
   const { previous, next } = pageContext;
   const tags = post.frontmatter.tags || [];
 
@@ -36,12 +44,12 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.2/katex.min.css" />
       </Helmet>
       <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.byline || post.excerpt}
+        title={title}
+        description={byline || excerpt}
       />
         <StaggerWrapper>
           <Stagger staggerId="fade-in">
-            <h1>{post.frontmatter.title}</h1>
+            <h1>{title}</h1>
           </Stagger>
           <Stagger staggerId="fade-in-2">
             <p
@@ -51,7 +59,7 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
                 marginBottom: rhythm(1),
               }}
             >
-              {post.frontmatter.date}
+              {date}
               {tags.length ?
                 <>
                   &nbsp;-&nbsp;<TagList>
@@ -99,6 +107,11 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
           )}
         </li>
       </ul>
+      { comments ? <Disqus 
+        identifier={post.id}
+        title={title}
+        url={`${'https://bennetthardwick.com'}${location.pathname}`}
+      /> : '' }
     </Layout>
   )
 }
@@ -124,6 +137,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         byline
         tags
+        comments
       }
     }
   }

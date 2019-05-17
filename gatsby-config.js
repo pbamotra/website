@@ -164,6 +164,12 @@ module.exports = {
         omitGoogleFont: true
       },
     },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `bennetthardwick`
+      }
+    },
     'gatsby-plugin-sitemap',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-meta-redirect'
