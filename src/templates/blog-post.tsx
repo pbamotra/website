@@ -81,7 +81,7 @@ const BlogPost: StatelessComponent<{ data: any, location: any, pageContext: any 
             </MDXRenderer>
           </Stagger>
         </StaggerWrapper>
-      <Bio />
+      <Bio isAmp={false} />
 
       <ul
         style={{

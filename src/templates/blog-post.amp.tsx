@@ -89,7 +89,7 @@ const BlogPost: StatelessComponent<{
         )}
       </p>
       <MDXRenderer>{post.code.body}</MDXRenderer>
-      <Bio />
+      <Bio isAmp={true} />
 
       <ul
         style={{

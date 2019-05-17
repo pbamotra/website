@@ -24,6 +24,8 @@ module.exports = {
         name: `assets`,
       },
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     `gatsby-transformer-yaml`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-netlify`,
@@ -137,9 +139,6 @@ module.exports = {
         ],
       },
     },
-
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-typescript`,
     {

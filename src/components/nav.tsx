@@ -4,6 +4,7 @@ import Image from 'gatsby-image';
 import styled, { css } from 'styled-components';
 import { rhythm } from "../utils/typography";
 import { Flipper, Flipped } from 'react-flip-toolkit';
+import { Avatar } from "./avatar";
 
 export const LinksContainer = styled.div`
   display: flex;
@@ -93,19 +94,7 @@ export const Nav: StatelessComponent<{ path: string, hideLinks?: boolean }> = ({
         <NavContainer {...rest} side={side && !projectsNav} projectsNav={projectsNav} >
           <Flipped translate flipId="home-button">
             <HomeButton to={'/'}>
-              <StaticQuery
-                query={avatarQuery}
-                render={data => (
-                  <Image
-                    fixed={data.avatar.childImageSharp.fixed}
-                    style={{
-                      minWidth: 50,
-                      borderRadius: `50%`
-                    }}
-                    imgStyle={{
-                      borderRadius: `50%`
-                    }} />
-                )} />
+              <Avatar isAmp={path.endsWith('/amp/')} />              
             </HomeButton>
           </Flipped>
           { !hideLinks && <LinksContainer>
