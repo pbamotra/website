@@ -212,6 +212,7 @@ exports.createPages = async ({
   const PAGE_SIZE = 50;
 
   const singleNotePage = path.resolve(`./src/templates/notes/detail-note.tsx`);
+  const singleNotePageAmp = path.resolve(`./src/templates/notes/detail-note.amp.tsx`);
   const allNotesPage = path.resolve(`./src/templates/notes/notes-home.tsx`);
 
   const notes = notesResults.data.allFile.nodes.map(formatNote);
@@ -225,6 +226,13 @@ exports.createPages = async ({
       }
     });
 
+    createPage({
+      path: `/notes/d/${note.name}/amp/`,
+      component: singleNotePageAmp,
+      context: {
+        note
+      }
+    });
   }
 
   const pageCount = Math.ceil(notes.length / PAGE_SIZE);
