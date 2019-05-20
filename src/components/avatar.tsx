@@ -10,24 +10,37 @@ const Image = styled(GatsbyImage)`
   }
 `
 
+const ImageContainer = styled.span`
+  border-radius: 50%;
+  margin: 0;
+  overflow: hidden;
+  display: inherit;
+`
+
 export const Avatar: FunctionComponent<{ isAmp: boolean }> = ({ isAmp }) => (
   <StaticQuery
     query={avatarQuery}
     render={data => {
       const image = data.avatar.childImageSharp
-      return  !isAmp ? (
-        <Image fixed={data.avatar.childImageSharp.fixed} alt={"Bennett Hardwick"} />
-      ) : (
-        <img
-          src={image.fixed.src}
-          alt={image.alt}
-          width={image.fixed.width}
-          height={image.fixed.height}
+      return !isAmp ? (
+        <Image
+          fixed={data.avatar.childImageSharp.fixed}
+          alt={"Bennett Hardwick"}
         />
+      ) : (
+        <ImageContainer>
+          <amp-img
+            src-set={image.fixed.srcSet}
+            src={image.fixed.src}
+            alt={"Bennett Hardwick"}
+            width={image.fixed.width}
+            height={image.fixed.height}
+          />
+        </ImageContainer>
       )
     }}
   />
-);
+)
 
 const avatarQuery = graphql`
   query AvatarQuery {

@@ -5,8 +5,12 @@ declare namespace JSX {
 	interface AmpImg {
 		alt?: string;
 		src?: string;
+		['src-set']?: string;
 		width?: string;
 		height?: string;
 		layout?: string;
+	}
+	interface IntrinsicElements {
+		'amp-img': AmpImg;
 	}
 }
