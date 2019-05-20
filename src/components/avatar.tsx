@@ -11,10 +11,12 @@ const Image = styled(GatsbyImage)`
 `
 
 const ImageContainer = styled.span`
-  border-radius: 50%;
-  margin: 0;
-  overflow: hidden;
-  display: inherit;
+  > * {
+    border-radius: 50%;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+  }
 `
 
 export const Avatar: FunctionComponent<{ isAmp: boolean }> = ({ isAmp }) => (
