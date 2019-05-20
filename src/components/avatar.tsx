@@ -32,7 +32,6 @@ export const Avatar: FunctionComponent<{ isAmp: boolean }> = ({ isAmp }) => (
       ) : (
         <ImageContainer>
           <amp-img
-            src-set={image.fixed.srcSet}
             src={image.fixed.src}
             alt={"Bennett Hardwick"}
             width={image.fixed.width}
