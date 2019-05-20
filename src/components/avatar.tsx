@@ -18,10 +18,9 @@ export const Avatar: FunctionComponent<{ isAmp: boolean }> = ({ isAmp }) => (
       return  !isAmp ? (
         <Image fixed={data.avatar.childImageSharp.fixed} alt={"Bennett Hardwick"} />
       ) : (
-        <amp-img
+        <img
           src={image.fixed.src}
           alt={image.alt}
-          layout="responsive"
           width={image.fixed.width}
           height={image.fixed.height}
         />

@@ -9,7 +9,4 @@ declare namespace JSX {
 		height?: string;
 		layout?: string;
 	}
-	interface IntrinsicElements {
-		'amp-img': AmpImg;
-	}
 }
