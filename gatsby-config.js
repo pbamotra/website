@@ -105,12 +105,72 @@ module.exports = {
         },
         canonicalBaseUrl: 'https://www.bennetthardwick.com/',
         components: ['amp-form'],
-        excludedPaths: ['/404*', '/', '/blog/', '/blog/tag*', '/notes/' ],
+        excludedPaths: ['/404*', '/', '/blog/', '/blog/tag*', '/notes/'],
         pathIdentifier: '/amp/',
         relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
         useAmpClientIdApi: true,
       },
     },
+
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [{
+          serialize: ({
+            query: {
+              site,
+              allMdx
+            }
+          }) => {
+            return allMdx.edges.map(edge => {
+              return Object.assign({}, edge.node.frontmatter, {
+                description: edge.node.excerpt,
+                date: edge.node.frontmatter.date,
+                url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                custom_elements: [{
+                  "content:encoded": edge.node.html
+                }],
+              })
+            })
+          },
+          query: `
+              {
+                allMdx(
+                  sort: { fields: [frontmatter___date], order: DESC }
+                  filter: { frontmatter: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
+                ) {
+                  edges {
+                    node {
+                      excerpt
+                      fields { slug }
+                      frontmatter {
+                        title
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+          output: "/rss.xml",
+          title: "Bennett Hardwick's Blog",
+        }, ],
+      },
+    },
+
     {
       resolve: `gatsby-transformer-remark`,
       options: {
