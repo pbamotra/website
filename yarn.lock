@@ -10361,6 +10361,11 @@ react-flippy@^0.1.2:
   resolved "https://registry.yarnpkg.com/react-flippy/-/react-flippy-0.1.2.tgz#8055c9be3f4c530831ef2920e16f005e61d18eec"
   integrity sha512-ldShzh+XC3ts15DOwuYl9QJQ03bn6k6QcDwUHQcuui8l47vH5B7gxpBYLg3ybtj+0li/4Zc4UUr8VwdDX7G/bQ==
 
+react-heatmap-grid@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/react-heatmap-grid/-/react-heatmap-grid-0.8.1.tgz#ab24e425534b7dbec58d41c3abdf9e7e7edc6a02"
+  integrity sha512-reDkqNwfzcUCZlpp1ld2IRakmbDqSNuhY3EQ0eeDUP/xe6siwagyM4fCN+OFZyeWSlyFVfeq6LuQITbo5zvbdw==
+
 react-helmet@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.1.tgz#16a7192fdd09951f8e0fe22ffccbf9bb3e591ffa"
