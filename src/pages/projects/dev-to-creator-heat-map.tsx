@@ -126,7 +126,7 @@ const Map: FunctionComponent<{ min: number; selected: string }> = ({
   )
 }
 
-export const Template = ({ children, ...props }) => {
+export const Template = ({ children, location, ...props }) => {
   const [selected, setSelected] = useState<string>("total")
 
   const [currentMin, setMin] = useState(Math.round((max - min) / 2))
