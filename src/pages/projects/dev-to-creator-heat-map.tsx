@@ -119,10 +119,10 @@ const Map: FunctionComponent<{ min: number; selected: string }> = ({
   )
 
   return (
-    <>
+    <div {...rest}>
       Since month {actualMin}, measure: {selected}
       <HeatMap data={data} xLabels={xLabels} yLabels={yLabels} />
-    </>
+    </div>
   )
 }
 
