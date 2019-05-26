@@ -73,19 +73,13 @@ module.exports = {
         ],
       },
     },
-
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-gtag`,
       options: {
         trackingId: GTAG_ID,
         anonymize: true,
-        respectDNT: true,
-        sampleRate: 5,
-        siteSpeedSampleRate: 10,
-        cookieDomain: "bennetthardwick.com",
       },
     },
-
     {
       resolve: `gatsby-plugin-amp`,
       options: {
