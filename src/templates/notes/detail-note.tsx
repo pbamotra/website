@@ -8,15 +8,11 @@ import {
 } from "../../components/notes/note-types/module"
 import { Link } from "gatsby"
 
-const hasNotesPageLoaded = pathname =>
-  typeof window !== "undefined" &&
-  window.location.pathname !== pathname &&
-  (window as any).__NOTES_LAYOUT_LOADED
-
 const Template: StatelessComponent<{
-  location: any
+  location: any,
+  modal?: boolean,
   pageContext: { note: BaseNote<any> }
-}> = ({ location, pageContext: { note } }) => {
+}> = ({ location, modal, pageContext: { note } }) => {
   const Detailed = NOTE_TYPE_MAP[note.type].detail
   const Note = props => <Detailed {...props} {...note} />
 
@@ -54,7 +50,7 @@ const Template: StatelessComponent<{
 
   const ModalLayout = <Note modal={true} />
 
-  return hasNotesPageLoaded(location.pathname) ? ModalLayout : PreloadedLayout
+  return modal ? ModalLayout : PreloadedLayout
 }
 
 export default Template

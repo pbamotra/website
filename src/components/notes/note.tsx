@@ -192,6 +192,8 @@ export const Note: StatelessComponent<
   const [loadComplete, setLoadComplete] = useState(false)
   const [shouldOpen, setShouldOpen] = useState(false)
 
+  const [loadedElement, setLoadedElement] = useState(<div />);
+
   useEffect(() => {
     if (shouldOpen && loadComplete) {
       onSelected(id)
@@ -213,7 +215,8 @@ export const Note: StatelessComponent<
 
     if (!loadComplete) {
       setLoadStarted(true)
-      ;(___loader as any).loadPage(detailsLink).then(() => {
+      ;(___loader as any).loadPage(detailsLink).then(({ component: C, json }) => {
+        setLoadedElement(<C location={location} modal={true} {...json} />);
         setLoadComplete(true)
         setLoadStarted(false)
         setShouldOpen(true)
@@ -259,7 +262,8 @@ export const Note: StatelessComponent<
             <FontAwesomeIcon icon={faTimes} />
           </CloseButton>
           <DetailNote>
-            <PageRenderer location={parsePath(detailsLink)} />
+            {loadedElement}
+            {/* <PageRenderer location={parsePath(detailsLink)} /> */}
           </DetailNote>
         </>
       )}
