@@ -213,7 +213,7 @@ export const Note: StatelessComponent<
 
     if (!loadComplete) {
       setLoadStarted(true)
-      ;(___loader as any).getResourcesForPathname(detailsLink).then(() => {
+      ;(___loader as any).loadPage(detailsLink).then(() => {
         setLoadComplete(true)
         setLoadStarted(false)
         setShouldOpen(true)

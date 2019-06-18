@@ -7,7 +7,7 @@ import { Stagger } from "staggered";
 
 export const PostTitle = styled.h3`
   margin-bottom: ${rhythm(1 / 4)}
-  ${Link} {
+  && a {
     box-shadow: none;
   }
 `;
@@ -25,7 +25,7 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
 
         return <Stagger key={slug} staggerId={slug + '-' + i}><PostPreviewContainer>
           <PostTitle>
-            <Link to={slug}>
+            <Link to={slug || ""}>
               { title }
             </Link>
           </PostTitle>

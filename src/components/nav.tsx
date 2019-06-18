@@ -1,5 +1,5 @@
 import React, { StatelessComponent, useEffect, useState } from "react"
-import { graphql, StaticQuery, Link } from "gatsby"
+import { Link } from "gatsby"
 import Image from "gatsby-image"
 import styled, { css } from "styled-components"
 import { rhythm } from "../utils/typography"
