@@ -4,7 +4,7 @@ const {
 } = require(`gatsby-source-filesystem`)
 
 function paginate(data, pageSize, pageNumber) {
-    return data.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
+  return data.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
 }
 
 function formatNote(note) {
@@ -49,7 +49,7 @@ function formatNote(note) {
 }
 
 function generatePreview(note) {
-  let newNote = { ...note };
+  let newNote = {...note};
 
   if (newNote.type === 'text') {
     newNote = {
@@ -251,6 +251,16 @@ exports.createPages = async ({
 
 }
 
+const FileReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}-.*$/g;
+
+const formatDate = d => (new Date(d).toISOString().substr(0, 10));
+
+const formatFileName = (val, d) => formatDate(d) + '-' + (
+  FileReg.test(val)
+    ? val.substr(11)
+    : val
+);
+
 exports.onCreateNode = ({
   node,
   actions,
@@ -264,11 +274,41 @@ exports.onCreateNode = ({
     const value = createFilePath({
       node,
       getNode
-    })
+    });
+
+    const fileNode = getNode(node.parent);
+
+    const date = node.frontmatter.date || fileNode.ctime;
+
     createNodeField({
       name: `slug`,
       node,
-      value: '/blog' + value,
+      value: '/blog/' + formatFileName(value.substr(1), date),
     })
+
+    createNodeField({
+      node,
+      name: 'sortTime',
+      value: date
+    });
+
+    createNodeField({
+      node,
+      name: 'draft',
+      value: value.startsWith('/draft')
+    });
+
+    createNodeField({
+      node,
+      name: 'modifiedAt',
+      value: fileNode.mtime
+    });
+
+    createNodeField({
+      node,
+      name: 'createdAt',
+      value: fileNode.ctime
+    });
+
   }
 }

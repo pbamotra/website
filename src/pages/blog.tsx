@@ -39,8 +39,8 @@ export const pageQuery = graphql`
       }
     }
     allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
+      sort: { fields: [fields___sortTime], order: DESC }
+      filter: { fields: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
       limit: 1000
     ) {
       edges {
@@ -48,9 +48,10 @@ export const pageQuery = graphql`
           excerpt
           fields {
             slug
+            date: createdAt(formatString: "MMMM DD, YYYY")
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            created: date(formatString: "MMMM DD, YYYY")
             title
             byline
           }

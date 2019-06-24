@@ -2,7 +2,6 @@ import React, { StatelessComponent } from "react"
 import { Link } from "gatsby"
 import { rhythm } from "../utils/typography"
 import styled from 'styled-components';
-import { Flipped } from "react-flip-toolkit";
 import { Stagger } from "staggered";
 
 export const PostTitle = styled.h3`
@@ -19,8 +18,8 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
   <>
     {
       posts.map((post, i) => {
-        const { title, date, byline } = post.frontmatter;
-        const { slug } = post.fields;
+        const { title, created, byline } = post.frontmatter;
+        const { slug, date } = post.fields;
         const { excerpt } = post;
 
         return <Stagger key={slug} staggerId={slug + '-' + i}><PostPreviewContainer>
@@ -29,7 +28,7 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
               { title }
             </Link>
           </PostTitle>
-          <small>{date}</small>
+          <small>{created || date}</small>
           <PostContent dangerouslySetInnerHTML={{
             __html: byline || excerpt
           }} />
