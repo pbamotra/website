@@ -42,8 +42,6 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
 
   const {date, createdAt, modifiedAt} = post.fields;
 
-  console.log(post);
-
   return (
     <Layout location={location}>
       {!isAmp &&
@@ -137,7 +135,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
           )}
         </li>
       </ul>
-      {comments ? <Disqus
+      {(!isAmp && comments) ? <Disqus
         identifier={post.id}
         title={title}
         url={`${'https://bennetthardwick.com'}${location.pathname}`}
