@@ -68,6 +68,7 @@ export const HomeButton = styled(Link)`
 const ROOT_PATH = `${__PATH_PREFIX__}/`
 const BLOG_PATH = `${__PATH_PREFIX__}/blog`
 const NOTES_PATH = `${__PATH_PREFIX__}/notes`
+const ABOUT_PATH = `${__PATH_PREFIX__}/about`
 
 const NavLink = styled(Link)`
   font-size: ${rhythm(0.8)};
@@ -118,6 +119,10 @@ export const Nav: StatelessComponent<{ path: string; hideLinks?: boolean }> = ({
                 <NavLink to={NOTES_PATH}>Notes</NavLink>
               </Flipped>
 
+              <Flipped flipId="about-button">
+                <NavLink to={ABOUT_PATH}>About</NavLink>
+              </Flipped>
+
               <Flipped flipId="blog-button">
                 <NavLink to={BLOG_PATH}>Blog</NavLink>
               </Flipped>
@@ -139,6 +144,7 @@ export const Nav: StatelessComponent<{ path: string; hideLinks?: boolean }> = ({
         {!hideLinks && (
           <LinksContainer>
             <NavLink to={NOTES_PATH}>Notes</NavLink>
+            <NavLink to={ABOUT_PATH}>About</NavLink>
             <NavLink to={BLOG_PATH}>Blog</NavLink>
           </LinksContainer>
         )}
