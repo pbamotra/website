@@ -251,7 +251,7 @@ exports.createPages = async ({
 
 }
 
-const FileReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}-/g;
+const FileReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}-/;
 
 const formatDate = d => (new Date(d).toISOString().substr(0, 10));
 
