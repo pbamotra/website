@@ -50,8 +50,8 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
         </Helmet>
       }
 
-      <script type="application/ld+json">
-        {JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "NewsArticle",
           "mainEntityOfPage": {
@@ -67,8 +67,8 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
             "name": "Bennett hardwick"
           },
           "description": byline || excerpt
-        })}
-      </script>
+        })
+      }} />
 
       <SEO
         title={title}
