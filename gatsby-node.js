@@ -130,12 +130,6 @@ exports.createPages = async ({
     throw result.errors
   }
 
-  createRedirect({
-    fromPath: '/about',
-    toPath: '/',
-    statusCode: 302
-  });
-
   const postIds = new Set(result.data.allFile.nodes.filter(x => x.sourceInstanceName === 'blog' && x.childMdx).map(x => x.childMdx.id));
 
   // Create blog posts pages.
