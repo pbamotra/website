@@ -59,9 +59,15 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
             "@id": location.url
           },
           "headline": title,
-          "image": [],
+          "image": [
+            "https://bennetthardwick.com/og-image.jpg"
+          ],
           "datePublished": manualTimestamp || createdAt,
           "dateModified": modifiedAt,
+          "publisher": {
+            "@type": "Person",
+            "name": "Bennett Hardwick",
+          },
           "author": {
             "@type": "Person",
             "name": "Bennett hardwick"
