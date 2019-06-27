@@ -28,6 +28,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
   pageContext,
   isAmp = false
 }) => {
+  const avatar: string = data.avatar.fixed.src;
   const post = data.mdx;
   const {
     title,
@@ -65,8 +66,9 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
           "datePublished": manualTimestamp || createdAt,
           "dateModified": modifiedAt,
           "publisher": {
-            "@type": "Person",
+            "@type": "Organization",
             "name": "Bennett Hardwick",
+            "logo": avatar
           },
           "author": {
             "@type": "Person",
@@ -160,6 +162,15 @@ export const pageQuery = graphql`
         author
       }
     }
+
+    avatar: file(absolutePath: { regex: "/profile.jpg/" }) {
+      childImageSharp {
+        fixed(width: 500, height: 500) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
