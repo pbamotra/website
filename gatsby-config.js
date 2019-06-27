@@ -99,7 +99,7 @@ module.exports = {
         },
         canonicalBaseUrl: 'https://bennetthardwick.com/',
         components: ['amp-form'],
-        excludedPaths: ['/404*', '/', '/blog/', '/blog/tag*', '/notes/'],
+        excludedPaths: ['/404*', '/', '/blog/', '/blog/tag*', '/blog/tag/*', '/notes/'],
         pathIdentifier: '/amp/',
         relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
         useAmpClientIdApi: true,
