@@ -26,6 +26,15 @@ export const pageQuery = graphql`
         author
       }
     }
+
+    avatar: file(absolutePath: { regex: "/profile.jpg/" }) {
+      childImageSharp {
+        fixed(width: 460, height: 460) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
