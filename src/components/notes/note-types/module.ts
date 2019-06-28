@@ -1,8 +1,10 @@
-import { StatelessComponent, FunctionComponent } from "react";
-import { TextNote } from "./text/text.detail";
-import { TextNotePreview } from "./text/text.preview";
-import { FlashcardsNotePreview } from "./flashcards/flashcards.preview";
-import { FlashcardsNote } from "./flashcards/flashcards.detail";
+import {FunctionComponent} from "react";
+import {TextNote} from "./text/text.detail";
+import {TextNotePreview} from "./text/text.preview";
+import {FlashcardsNotePreview} from "./flashcards/flashcards.preview";
+import {FlashcardsNote} from "./flashcards/flashcards.detail";
+import {AudioNotePreview} from './audio/audio.preview';
+import {AudioNote} from './audio/audio.detail';
 
 export type NoteType = keyof typeof NOTE_TYPE_MAP;
 
@@ -15,10 +17,10 @@ export interface BaseNote<T = any> {
 }
 
 interface NoteTypeMap {
-    [key: string]: {
-        preview: FunctionComponent<BaseNote>,
-        detail: FunctionComponent<BaseNote & { modal?: boolean }>
-    }
+  [key: string]: {
+    preview: FunctionComponent<BaseNote>,
+    detail: FunctionComponent<BaseNote & {modal?: boolean}>
+  }
 }
 
 export const NOTE_TYPE_MAP: NoteTypeMap = {
@@ -29,5 +31,9 @@ export const NOTE_TYPE_MAP: NoteTypeMap = {
   flashcards: {
     preview: FlashcardsNotePreview,
     detail: FlashcardsNote
+  },
+  audio: {
+    preview: AudioNotePreview,
+    detail: AudioNote
   }
 }

@@ -36,6 +36,13 @@ function formatNote(note) {
         cardCount: note.childNotesYaml.cards.length
       }
     }
+
+    if (type === 'audio') {
+      data = {
+        title,
+        link: note.childNotesYaml.link,
+      }
+    }
   }
 
   return {
@@ -190,6 +197,7 @@ exports.createPages = async ({
           title
           type
           category
+          link
           cards {
             front
             back

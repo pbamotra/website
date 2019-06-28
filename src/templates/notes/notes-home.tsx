@@ -1,4 +1,3 @@
-import { graphql } from "gatsby"
 import React, { StatelessComponent, useState } from "react"
 import styled, { css } from "styled-components"
 import Layout from "../../components/layout"
@@ -36,10 +35,9 @@ const NotesLayout = styled(Layout)`
 `
 
 export const Notes: StatelessComponent<{
-  data: any
   location: any
-  pageContext: { notes: BaseNote<any>[] }
-}> = ({ data, location, pageContext: { notes } }) => {
+  pageContext: { notes: BaseNote<any>[], max: number, current: number }
+}> = ({ location, pageContext: { notes } }) => {
 
   const [notesList, setNotesList] = useState(notes);
 
@@ -71,14 +69,4 @@ export const Notes: StatelessComponent<{
   )
 }
 
-export default Notes
-
-export const pageQuery = graphql`
-  query {
-    allFile(filter: { sourceInstanceName: { eq: "notes" } }) {
-      nodes {
-        id
-      }
-    }
-  }
-`
+export default Notes;

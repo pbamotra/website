@@ -1,9 +1,8 @@
 import React, { StatelessComponent, useEffect, useState } from "react"
-import styled, { css, StyledComponent } from "styled-components"
+import styled, { css } from "styled-components"
 import { rhythm } from "../../utils/typography"
 import { NOTE_TYPE_MAP, BaseNote } from "./note-types/module"
-import { Link, PageRenderer, parsePath }
-from "gatsby"
+import { Link } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 
@@ -214,8 +213,8 @@ export const Note: StatelessComponent<
     }
 
     if (!loadComplete) {
-      setLoadStarted(true)
-      ;(___loader as any).loadPage(detailsLink).then(({ component: C, json }) => {
+      setLoadStarted(true);
+      (___loader as any).loadPage(detailsLink).then(({ component: C, json }) => {
         setLoadedElement(<C location={location} modal={true} {...json} />);
         setLoadComplete(true)
         setLoadStarted(false)
@@ -263,7 +262,6 @@ export const Note: StatelessComponent<
           </CloseButton>
           <DetailNote>
             {loadedElement}
-            {/* <PageRenderer location={parsePath(detailsLink)} /> */}
           </DetailNote>
         </>
       )}
