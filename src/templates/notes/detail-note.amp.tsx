@@ -6,6 +6,7 @@ import {
   BaseNote,
 } from "../../components/notes/note-types/module"
 import { Link } from "gatsby"
+import Bio from '../../components/bio';
 
 const Template: StatelessComponent<{
   location: any
@@ -34,6 +35,7 @@ const Template: StatelessComponent<{
         </p>
       </header>
       <Note modal={false} />
+      <Bio isAmp={true} />
     </Layout>
   )
 }
