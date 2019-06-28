@@ -28,7 +28,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
   pageContext,
   isAmp = false
 }) => {
-  const avatar: string = data.avatar.fixed.src;
+  const avatar: string = data.avatar.childImageSharp.fixed.src;
   const post = data.mdx;
   const {
     title,
