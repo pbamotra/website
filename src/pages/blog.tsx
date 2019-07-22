@@ -1,11 +1,10 @@
-import React, { StatelessComponent } from "react"
-import { graphql } from "gatsby"
+import React, {StatelessComponent} from "react"
+import {graphql} from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { PostPreview } from "../components/post-preview"
-import { Stagger, StaggerWrapper } from "staggered";
+import {PostPreview} from "../components/post-preview"
 
-export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
+export const BlogIndex: StatelessComponent<{data: any, location: any}> = ({data, location}) => {
   const posts = data.allMdx.edges.map(x => x.node) as Post[];
   return (
     <Layout location={location}>
@@ -19,12 +18,8 @@ export const BlogIndex: StatelessComponent<{ data: any, location: any }> = ({ da
           "bennetthardwick",
         ]}
       />
-      <StaggerWrapper>
-        <Stagger staggerId="blog-title">
-          <h1>Blog</h1>
-        </Stagger>
-        <PostPreview posts={posts} />
-      </StaggerWrapper>
+      <h1>Blog</h1>
+      <PostPreview posts={posts} />
     </Layout>
   )
 }

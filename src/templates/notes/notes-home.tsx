@@ -1,11 +1,10 @@
-import React, { StatelessComponent, useState } from "react"
-import styled, { css } from "styled-components"
+import React, {StatelessComponent, useState} from "react"
+import styled, {css} from "styled-components"
 import Layout from "../../components/layout"
-import { NotesGrid } from "../../components/notes/note-grid"
-import { SEO } from "../../components/seo"
-import { Stagger, StaggerWrapper } from "staggered"
-import { rhythm } from "../../utils/typography"
-import { BaseNote } from "../../components/notes/note-types/module"
+import {NotesGrid} from "../../components/notes/note-grid"
+import {SEO} from "../../components/seo"
+import {rhythm} from "../../utils/typography"
+import {BaseNote} from "../../components/notes/note-types/module"
 
 const OriginalWidth = css`
   max-width: calc(${rhythm(24)} - calc(${rhythm(3 / 4)} * 2));
@@ -36,10 +35,10 @@ const NotesLayout = styled(Layout)`
 
 export const Notes: StatelessComponent<{
   location: any
-  pageContext: { notes: BaseNote<any>[], max: number, current: number }
-}> = ({ location, pageContext: { notes } }) => {
+  pageContext: {notes: BaseNote<any>[], max: number, current: number}
+}> = ({location, pageContext: {notes}}) => {
 
-  const [notesList, setNotesList] = useState(notes);
+  const [notesList] = useState(notes);
 
   return (
     <NotesLayout location={location}>
@@ -55,14 +54,8 @@ export const Notes: StatelessComponent<{
       />
 
       <header>
-        <StaggerWrapper>
-          <Stagger staggerId="notes">
-            <h1>Notes</h1>
-          </Stagger>
-          <Stagger staggerId="stuff">
-            <p>Some stuff I done learned. Click on a note to read more.</p>
-          </Stagger>
-        </StaggerWrapper>
+        <h1>Notes</h1>
+        <p>Some stuff I done learned. Click on a note to read more.</p>
       </header>
       <NotesGrid notesList={notesList} />
     </NotesLayout>

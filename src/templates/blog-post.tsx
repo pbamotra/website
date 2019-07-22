@@ -6,7 +6,6 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import {rhythm, scale} from "../utils/typography"
-import {StaggerWrapper, Stagger} from "staggered";
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import {Helmet} from 'react-helmet';
 
@@ -88,40 +87,32 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
         description={byline || excerpt}
       />
 
-      <StaggerWrapper shouldStagger={!isAmp}>
-        <Stagger staggerId="fade-in">
-          <h1>{title}</h1>
-        </Stagger>
-        <Stagger staggerId="fade-in-2">
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-            }}
-          >
-            {manualTimestampDate || date}
-            {tags.length ?
-              <>
-                &nbsp;-&nbsp;<TagList>
-                  {
-                    tags.map(tag => <span key={tag}>
-                      <Link to={`/blog/tag/${tag}`}>
-                        {tag}
-                      </Link>
-                    </span>)
-                  }
-                </TagList>
-              </>
-              : undefined}
-          </p>
-        </Stagger>
-        <Stagger staggerId="fade-in-3">
-          <MDXRenderer>
-            {post.code.body}
-          </MDXRenderer>
-        </Stagger>
-      </StaggerWrapper>
+      <h1>{title}</h1>
+      <p
+        style={{
+          ...scale(-1 / 5),
+          display: `block`,
+          marginBottom: rhythm(1),
+        }}
+      >
+        {manualTimestampDate || date}
+        {tags.length ?
+          <>
+            &nbsp;-&nbsp;<TagList>
+              {
+                tags.map(tag => <span key={tag}>
+                  <Link to={`/blog/tag/${tag}`}>
+                    {tag}
+                  </Link>
+                </span>)
+              }
+            </TagList>
+          </>
+          : undefined}
+      </p>
+      <MDXRenderer>
+        {post.code.body}
+      </MDXRenderer>
       <Bio isAmp={isAmp} />
 
       <ul

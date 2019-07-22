@@ -1,8 +1,7 @@
-import React, { StatelessComponent } from "react"
-import { Link } from "gatsby"
-import { rhythm } from "../utils/typography"
+import React, {StatelessComponent} from "react"
+import {Link} from "gatsby"
+import {rhythm} from "../utils/typography"
 import styled from 'styled-components';
-import { Stagger } from "staggered";
 
 export const PostTitle = styled.h3`
   margin-bottom: ${rhythm(1 / 4)}
@@ -14,18 +13,18 @@ export const PostTitle = styled.h3`
 export const PostPreviewContainer = styled.div``;
 export const PostContent = styled.p``;
 
-export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) => (
+export const PostPreview: StatelessComponent<{posts: Post[]}> = ({posts}) => (
   <>
     {
       posts.map((post, i) => {
-        const { title, created, byline } = post.frontmatter;
-        const { slug, date } = post.fields;
-        const { excerpt } = post;
+        const {title, created, byline} = post.frontmatter;
+        const {slug, date} = post.fields;
+        const {excerpt} = post;
 
-        return <Stagger key={slug} staggerId={slug + '-' + i}><PostPreviewContainer>
+        return <PostPreviewContainer key={'blog-' + i}>
           <PostTitle>
             <Link to={slug || ""}>
-              { title }
+              {title}
             </Link>
           </PostTitle>
           <small>{created || date}</small>
@@ -33,7 +32,6 @@ export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({ posts }) =>
             __html: byline || excerpt
           }} />
         </PostPreviewContainer>
-        </Stagger>
 
       })
 

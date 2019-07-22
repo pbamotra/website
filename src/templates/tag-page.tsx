@@ -1,35 +1,28 @@
-import React, { StatelessComponent } from "react"
-import { Link, graphql } from "gatsby"
+import React, {StatelessComponent} from "react"
+import {Link, graphql} from "gatsby"
 import Layout from "../components/layout"
 import PostPreview from "../components/post-preview"
 import SEO from "../components/seo"
-import { StaggerWrapper, Stagger } from "staggered"
 
 const TagPage: StatelessComponent<{
   data: any
   location: any
   pageContext: any
-}> = ({ data, location, pageContext }) => {
+}> = ({data, location, pageContext}) => {
   const posts = data.allMdx.edges.map(x => x.node)
   const title = data.site.siteMetadata.title
 
   return (
     <Layout location={location}>
-      <SEO title={`Posts tagged ${pageContext.tag}`} />
-      <StaggerWrapper>
-        <Stagger staggerId={'posts-tag-title'}>
-          <h2>
-            {data.allMdx.totalCount} posts tagged with "
+      <SEO title={`Posts tagged ${pageContext.tag} | ${title}`} />
+      <h2>
+        {data.allMdx.totalCount} posts tagged with "
             {pageContext.tag}"
           </h2>
-        </Stagger>
-        <PostPreview posts={posts} />
-        <Stagger staggerId="browse-tags">
-          <div>
-            <Link to={"/blog/tags"}>Browse All Tags</Link>
-          </div>
-        </Stagger>
-      </StaggerWrapper>
+      <PostPreview posts={posts} />
+      <div>
+        <Link to={"/blog/tags"}>Browse All Tags</Link>
+      </div>
     </Layout>
   )
 }

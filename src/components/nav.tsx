@@ -1,22 +1,10 @@
-import React, { StatelessComponent, useEffect, useState } from "react"
-import { Link } from "gatsby"
-import Image from "gatsby-image"
-import styled, { css } from "styled-components"
-import { rhythm } from "../utils/typography"
-import { Flipper, Flipped } from "react-flip-toolkit"
-import { Avatar } from "./avatar"
+import React, {StatelessComponent} from "react"
+import {Link} from "gatsby"
+import styled, {css} from "styled-components"
+import {Avatar} from "./avatar"
+import {Links, LinksContainer, ROOT_PATH} from './links';
 
-export const LinksContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  * {
-    margin: 0px 13px;
-  }
-`
-
-export const NavContainer = styled.div<{ side: boolean; projectsNav: boolean }>`
+export const NavContainer = styled.div<{side: boolean; projectsNav: boolean}>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -65,91 +53,32 @@ export const HomeButton = styled(Link)`
   background-image: none;
 `
 
-const ROOT_PATH = `${__PATH_PREFIX__}/`
-const BLOG_PATH = `${__PATH_PREFIX__}/blog`
-const NOTES_PATH = `${__PATH_PREFIX__}/notes`
-const ABOUT_PATH = `${__PATH_PREFIX__}/about`
-
-const NavLink = styled(Link)`
-  font-size: ${rhythm(0.8)};
-  display: inline-block;
-  width: fit-content;
-`
-
-// middle to side =
-
-let previousPath = undefined
-
-export const Nav: StatelessComponent<{ path: string; hideLinks?: boolean }> = ({
+export const Nav: StatelessComponent<{path: string; hideLinks?: boolean}> = ({
   path: currentPath,
   hideLinks,
+  path,
   children,
   ...rest
 }) => {
-  const [statePath, setPath] = useState(previousPath || currentPath)
-
-  const path = statePath || currentPath
-
-  useEffect(() => {
-    setPath(currentPath)
-    previousPath = currentPath
-  }, [false])
-
   const side = path !== ROOT_PATH
   const projectsNav = path.startsWith("/projects/")
 
   const isAmp = path.endsWith("/amp/")
 
-  return !isAmp ? (
-    <nav>
-      <Flipper flipKey={previousPath === currentPath}>
-        <NavContainer
-          {...rest}
-          side={side && !projectsNav}
-          projectsNav={projectsNav}
-        >
-          <Flipped translate flipId="home-button">
-            <HomeButton to={"/"}>
-              <Avatar isAmp={isAmp} />
-            </HomeButton>
-          </Flipped>
-          {!hideLinks && (
-            <LinksContainer>
-              <Flipped flipId="notes-button">
-                <NavLink to={NOTES_PATH}>Notes</NavLink>
-              </Flipped>
-
-              <Flipped flipId="about-button">
-                <NavLink to={ABOUT_PATH}>About</NavLink>
-              </Flipped>
-
-              <Flipped flipId="blog-button">
-                <NavLink to={BLOG_PATH}>Blog</NavLink>
-              </Flipped>
-            </LinksContainer>
-          )}
-        </NavContainer>
-      </Flipper>
-    </nav>
-  ) : (
-    <nav>
-      <NavContainer
-        {...rest}
-        side={side && !projectsNav}
-        projectsNav={projectsNav}
-      >
-        <HomeButton to={"/"}>
-          <Avatar isAmp={isAmp} />
-        </HomeButton>
-        {!hideLinks && (
-          <LinksContainer>
-            <NavLink to={NOTES_PATH}>Notes</NavLink>
-            <NavLink to={ABOUT_PATH}>About</NavLink>
-            <NavLink to={BLOG_PATH}>Blog</NavLink>
-          </LinksContainer>
-        )}
-      </NavContainer>
-    </nav>
+  return (<nav>
+    <NavContainer
+      {...rest}
+      side={side && !projectsNav}
+      projectsNav={projectsNav}
+    >
+      <HomeButton to={"/"}>
+        <Avatar isAmp={isAmp} />
+      </HomeButton>
+      {!hideLinks && (
+        <Links />
+      )}
+    </NavContainer>
+  </nav>
   )
 }
 

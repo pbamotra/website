@@ -1,41 +1,17 @@
-import React, { StatelessComponent } from "react"
-import { graphql } from "gatsby"
+import React, {StatelessComponent} from "react"
+import {graphql} from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { PostPreview } from "../components/post-preview"
 import About from "../components/about"
-import Projects from "../components/projects"
-import { Stagger, StaggerWrapper } from "staggered";
 
-export const Home: StatelessComponent<{ data: any, location: any }> = ({ data, location }) => {
-  const posts = data.allMdx.edges.map(x => x.node) as Post[];
-  const projects = data.allProjectsYaml.edges.map(x => x.node) as Project[];
+export const Home: StatelessComponent<{data: any, location: any}> = ({data, location}) => {
   return (
     <Layout location={location}>
       <SEO
         title="Projects"
         keywords={[`projects`, `gatsby`, `javascript`, `react`]}
       />
-
-      <StaggerWrapper>
-        <Stagger staggerId="about-section-wow" >
-          <About />
-        </Stagger>
-
-
-        <Stagger staggerId="project" >
-        <h2>Projects</h2>
-        </Stagger>
-
-        <Projects projects={projects} />
-
-        <Stagger staggerId="posts-to-flip" >
-        <h2>Recent Posts</h2>
-        </Stagger>
-
-        <PostPreview posts={posts.slice(0, 3)} />
-
-      </StaggerWrapper>
+      <About />
     </Layout>
   )
 }

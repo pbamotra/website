@@ -1,10 +1,9 @@
-import React, { StatelessComponent } from "react"
+import React, {StatelessComponent} from "react"
 import Helmet from "react-helmet"
-import { Link, graphql } from "gatsby"
+import {Link, graphql} from "gatsby"
 import Layout from "../../components/layout"
-import { Stagger, StaggerWrapper } from "staggered"
 
-const AllTagsPage: StatelessComponent<{ data: any; location: any }> = ({
+const AllTagsPage: StatelessComponent<{data: any; location: any}> = ({
   data,
   location,
 }) => {
@@ -15,27 +14,21 @@ const AllTagsPage: StatelessComponent<{ data: any; location: any }> = ({
     <Layout location={location}>
       <Helmet title={title} />
       <div>
-        <StaggerWrapper>
-          <Stagger staggerId="all-tags-title">
-            <h1>Tags</h1>
-          </Stagger>
-          <Stagger staggerId="tags">
-            <ul>
-              {allTags.map(tag => (
-                <li key={tag.fieldValue}>
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                    }}
-                    to={`/blog/tag/${tag.fieldValue}/`}
-                  >
-                    {tag.fieldValue} ({tag.totalCount})
+        <h1>Tags</h1>
+        <ul>
+          {allTags.map(tag => (
+            <li key={tag.fieldValue}>
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to={`/blog/tag/${tag.fieldValue}/`}
+              >
+                {tag.fieldValue} ({tag.totalCount})
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </Stagger>
-        </StaggerWrapper>
+            </li>
+          ))}
+        </ul>
       </div>
     </Layout>
   )
