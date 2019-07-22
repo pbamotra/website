@@ -1,7 +1,8 @@
-import React, {StatelessComponent, useEffect, useState} from "react"
+import React, {StatelessComponent} from "react"
 import {rhythm} from "../utils/typography"
 import Nav from "./nav";
 import styled, {css} from 'styled-components';
+import {ProfileContainer} from '../pages';
 
 const LayoutContainer = styled.div<{path: string}>`
   margin-left: auto;
@@ -16,6 +17,18 @@ const LayoutContainer = styled.div<{path: string}>`
       align-items: center;
       justify-content: center;
       footer { display: none };
+
+      max-width: 820px;
+
+      main {
+        display: flex;
+        align-items: center;
+
+        & > ${ProfileContainer} {
+          margin-right: 48px;
+          flex-shrink: 0;
+        }
+      }
 
       nav {
         display: none;

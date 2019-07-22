@@ -24,11 +24,17 @@ module.exports = {
       name: `assets`,
     },
   },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-yaml`,
-    `gatsby-transformer-remark`,
-    `gatsby-plugin-netlify`,
+  `gatsby-transformer-sharp`,
+
+  {
+    resolve: `gatsby-plugin-sharp`,
+    options: {
+      defaultQuality: 75,
+    },
+  },
+  `gatsby-transformer-yaml`,
+  `gatsby-transformer-remark`,
+  `gatsby-plugin-netlify`,
   {
     resolve: `gatsby-source-filesystem`,
     options: {
