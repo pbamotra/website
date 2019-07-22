@@ -4,10 +4,15 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import About from "../components/about"
 import GatsbyImage from 'gatsby-image';
-import {Links} from '../components/links';
+import {Links as L} from '../components/links';
 import styled from 'styled-components';
 
 export const ProfileContainer = styled.div`
+  @media(max-width: 700px) {
+    display: none;
+  }
+
+
   position: relative;
 
   > div {
@@ -35,6 +40,12 @@ export const ProfileContainer = styled.div`
     opacity: 0.25;
   }
 
+`;
+
+const Links = styled(L)`
+  @media(max-width: 700px) {
+    display: none;
+  }
 `;
 
 export const Home: StatelessComponent<{data: any, location: any}> = ({data, location}) => {

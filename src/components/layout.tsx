@@ -11,7 +11,7 @@ const LayoutContainer = styled.div<{path: string}>`
   padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
 
   ${({path}) => path === '/' ? css`
-    @media (min-width: 600px) {
+    @media (min-width: 700px) {
       display: flex;
       min-height: 100vh;
       align-items: center;
