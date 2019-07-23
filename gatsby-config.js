@@ -29,7 +29,8 @@ module.exports = {
   {
     resolve: `gatsby-plugin-sharp`,
     options: {
-      defaultQuality: 75,
+      defaultQuality: 100,
+      jpegProgressive: false
     },
   },
   `gatsby-transformer-yaml`,
