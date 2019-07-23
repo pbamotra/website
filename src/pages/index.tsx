@@ -74,7 +74,7 @@ export const pageQuery = graphql`
   
     sideImage: file(absolutePath: { regex: "/bennett.jpg/" }) {
       childImageSharp {
-        fixed(width: 280) {
+        fixed(width: 280, quality: 100) {
           ...GatsbyImageSharpFixed
         }
       }
