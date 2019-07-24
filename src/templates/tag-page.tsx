@@ -49,10 +49,11 @@ export const pageQuery = graphql`
         node {
           fields {
             slug
+            date: createdAt(formatString: "MMMM DD, YYYY")
           }
           frontmatter {
             title
-            date(formatString: "MMMM DD, YYYY")
+            created: date(formatString: "MMMM DD, YYYY")
             byline
           }
         }
