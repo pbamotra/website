@@ -38,9 +38,7 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      code {
-        body
-      }
+      body
       fields {
         createdAt,
         date: createdAt(formatString: "MMMM DD, YYYY")
@@ -48,8 +46,6 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
-        manualTimestamp: date,
-        manualTimestampDate: date(formatString: "MMMM DD, YYYY")
         byline
         tags
         comments

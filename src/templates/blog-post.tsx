@@ -6,7 +6,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import {rhythm, scale} from "../utils/typography"
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import {MDXRenderer} from 'gatsby-plugin-mdx';
 import {Helmet} from 'react-helmet';
 
 const TagList = styled.span`
@@ -38,8 +38,6 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
     title,
     byline,
     excerpt,
-    manualTimestamp,
-    manualTimestampDate,
     comments
   } = post.frontmatter;
   const {previous, next} = pageContext;
@@ -67,7 +65,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
           "image": [
             "https://bennetthardwick.com/og-image.jpg"
           ],
-          "datePublished": manualTimestamp || createdAt,
+          "datePublished": createdAt,
           "dateModified": modifiedAt,
           "publisher": {
             "@type": "Organization",
@@ -95,7 +93,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
           marginBottom: rhythm(1),
         }}
       >
-        {manualTimestampDate || date}
+        {date}
         {tags.length ?
           <>
             &nbsp;-&nbsp;<TagList>
@@ -111,7 +109,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
           : undefined}
       </p>
       <MDXRenderer>
-        {post.code.body}
+        {post.body}
       </MDXRenderer>
       <Bio isAmp={isAmp} />
 
@@ -170,9 +168,7 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      code {
-        body
-      }
+      body
       fields {
         createdAt,
         date: createdAt(formatString: "MMMM DD, YYYY")
@@ -180,8 +176,6 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
-        manualTimestamp: date,
-        manualTimestampDate: date(formatString: "MMMM DD, YYYY")
         byline
         tags
         comments

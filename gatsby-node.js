@@ -86,8 +86,7 @@ exports.createPages = async ({
   actions
 }) => {
   const {
-    createPage,
-    createRedirect
+    createPage
   } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
@@ -104,9 +103,7 @@ exports.createPages = async ({
           id
            childMdx {
              id
-             code {
-               body
-             }
+             body
              frontmatter {
                title
              }
@@ -263,6 +260,8 @@ const formatFileName = (val, d) => formatDate(d) + '-' + (
     : val
 );
 
+const { execSync } = require('child_process');
+
 exports.onCreateNode = ({
   node,
   actions,
@@ -280,18 +279,31 @@ exports.onCreateNode = ({
 
     const fileNode = getNode(node.parent);
 
-    const date = node.frontmatter.date || fileNode.ctime;
-
+    const created = new Date(new String(execSync(`git log --follow --format="%ad" -- ${fileNode.absolutePath} | tail -1`)));
+    const modified = new Date(new String(execSync(`git log -1 --follow  --format="%ad" -- ${fileNode.absolutePath} | cat`)));
+    
     createNodeField({
       name: `slug`,
       node,
-      value: '/blog/' + formatFileName(value.substr(1), date),
+      value: '/blog/' + formatFileName(value.substr(1), created),
     })
 
     createNodeField({
       node,
+      name: 'modifiedAt',
+      value: modified
+    });
+
+    createNodeField({
+      node,
+      name: 'createdAt',
+      value: created
+    });
+
+    createNodeField({
+      node,
       name: 'sortTime',
-      value: date
+      value: created
     });
 
     createNodeField({
@@ -300,17 +312,7 @@ exports.onCreateNode = ({
       value: value.startsWith('/draft')
     });
 
-    createNodeField({
-      node,
-      name: 'modifiedAt',
-      value: fileNode.mtime
-    });
 
-    createNodeField({
-      node,
-      name: 'createdAt',
-      value: fileNode.ctime
-    });
 
   }
 }
