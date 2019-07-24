@@ -45,6 +45,8 @@ export const pageQuery = graphql`
         modifiedAt
       }
       frontmatter {
+        manualCreatedAt: date
+        manualDate: date(formatString: "MMMM DD, YYYY")
         title
         byline
         tags

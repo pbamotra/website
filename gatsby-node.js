@@ -285,7 +285,7 @@ exports.onCreateNode = ({
     createNodeField({
       name: `slug`,
       node,
-      value: '/blog/' + formatFileName(value.substr(1), created),
+      value: '/blog/' + formatFileName(value.substr(1), node.frontmatter.date || created),
     })
 
     createNodeField({

@@ -38,7 +38,9 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
     title,
     byline,
     excerpt,
-    comments
+    comments,
+    manualDate,
+    manualCreatedAt
   } = post.frontmatter;
   const {previous, next} = pageContext;
   const tags = post.frontmatter.tags || [];
@@ -65,7 +67,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
           "image": [
             "https://bennetthardwick.com/og-image.jpg"
           ],
-          "datePublished": createdAt,
+          "datePublished": manualCreatedAt || createdAt,
           "dateModified": modifiedAt,
           "publisher": {
             "@type": "Organization",
@@ -93,7 +95,7 @@ export const BlogPost: StatelessComponent<{data: any, location: any, pageContext
           marginBottom: rhythm(1),
         }}
       >
-        {date}
+        {manualDate || date}
         {tags.length ?
           <>
             &nbsp;-&nbsp;<TagList>
@@ -175,6 +177,8 @@ export const pageQuery = graphql`
         modifiedAt
       }
       frontmatter {
+        manualCreatedAt: date
+        manualDate: date(formatString: "MMMM DD, YYYY")
         title
         byline
         tags
