@@ -25,7 +25,6 @@ module.exports = {
     },
   },
   `gatsby-transformer-sharp`,
-
   {
     resolve: `gatsby-plugin-sharp`,
     options: {
@@ -106,7 +105,7 @@ module.exports = {
       },
       canonicalBaseUrl: 'https://bennetthardwick.com/',
       components: ['amp-form'],
-      includePaths: ['/blob/*', '/notes/d/*'],
+      excludePaths: [ '/', '/notes/', '/blog/', '/about/' ],
       pathIdentifier: '/amp/',
       relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
       useAmpClientIdApi: true,
