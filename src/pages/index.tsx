@@ -52,8 +52,8 @@ export const Home: StatelessComponent<{data: any, location: any}> = ({data, loca
   return (
     <Layout location={location}>
       <SEO
-        title="Projects"
-        keywords={[`projects`, `gatsby`, `javascript`, `react`]}
+        title="Hello!"
+        keywords={[`gatsby`, `javascript`, `react`, `clipchamp`]}
       />
       <ProfileContainer>
         <GatsbyImage fixed={data.sideImage.childImageSharp.fixed} />
@@ -70,43 +70,10 @@ export default Home;
 
 export const pageQuery = graphql`
   query {
-
-  
     sideImage: file(absolutePath: { regex: "/bennett.jpg/" }) {
       childImageSharp {
         fixed(width: 280, quality: 100) {
           ...GatsbyImageSharpFixed
-        }
-      }
-    }
-
-
-    allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
-      limit: 1000
-    ) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            byline
-          }
-        }
-      }
-    }
-    allProjectsYaml {
-      edges {
-        node {
-          title
-          byline
-          date
-          link
         }
       }
     }
