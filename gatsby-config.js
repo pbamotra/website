@@ -43,13 +43,6 @@ module.exports = {
     },
   },
   {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      path: `./content/notes/`,
-      name: `notes`
-    },
-  },
-  {
     resolve: `gatsby-plugin-mdx`,
     options: {
       extensions: ['.mdx'],
