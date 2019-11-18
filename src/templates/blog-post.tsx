@@ -74,8 +74,6 @@ const Column = styled.div`
 const SideBySideWrapper = props => {
   const children = []
 
-  console.error(props)
-
   let text = []
   let code = []
 
