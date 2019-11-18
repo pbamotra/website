@@ -157,7 +157,7 @@ exports.onCreateNode = ({
     createNodeField({
       node,
       name: 'sortTime',
-      value: created
+      value: node.frontmatter.date || created
     });
 
     createNodeField({
