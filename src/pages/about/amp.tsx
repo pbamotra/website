@@ -1,8 +1,8 @@
 import React, {StatelessComponent} from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import A from '../components/about';
-import Bio from '../components/bio';
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
+import A from '../../components/about';
+import Bio from '../../components/bio';
 
 export const About: StatelessComponent<{location: any}> = ({location}) => (
   <Layout location={location}>

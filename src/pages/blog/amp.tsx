@@ -1,8 +1,8 @@
 import React, {StatelessComponent} from "react"
 import {graphql} from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import {PostPreview} from "../components/post-preview"
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
+import {PostPreview} from "../../components/post-preview"
 
 export const BlogIndex: StatelessComponent<{data: any, location: any}> = ({data, location}) => {
   const posts = data.allMdx.edges.map(x => x.node) as Post[];
