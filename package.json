@@ -87,6 +87,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "deploy": "npm run build && gh-pages -d public -b master",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "postinstall": "patch-package"
   }
 }

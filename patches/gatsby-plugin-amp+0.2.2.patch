@@ -1,0 +1,16 @@
+diff --git a/node_modules/gatsby-plugin-amp/gatsby-ssr.js b/node_modules/gatsby-plugin-amp/gatsby-ssr.js
+index 5a08631..bb81c29 100644
+--- a/node_modules/gatsby-plugin-amp/gatsby-ssr.js
++++ b/node_modules/gatsby-plugin-amp/gatsby-ssr.js
+@@ -284,6 +284,11 @@ const replaceRenderer = ({
+       const attributes = Object.keys(image.attributes);
+       const includedAttributes = attributes.map(key => {
+         const attribute = image.attributes[key];
++
++        if (attribute.name === 'loading') {
++          return attribute.name;
++        }
++
+         ampImage.setAttribute(attribute.name, attribute.value);
+         return attribute.name;
+       });
