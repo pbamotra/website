@@ -32,6 +32,17 @@ const Row = styled.div`
   @media (max-width: 700px) {
     flex-direction: column;
   }
+
+  &:after {
+   content: '';
+   left: 564px;
+   z-index: -1;
+   position: fixed;
+   right: 0;
+   background: #f5f2f0;
+   top: 0;
+   bottom: 0;
+  }
 `
 const Column = styled.div`
   @media (min-width: 700px) {
@@ -77,7 +88,9 @@ const SideBySideWrapper = props => {
   let text = []
   let code = []
 
-  React.Children.forEach(props.children, child => {
+  const lastIndex = props.children.length - 1
+
+  React.Children.forEach(props.children, (child, i) => {
     if (React.isValidElement(child) && !!child.props["data-language"]) {
       let children = (child.props as any).children
       if (!Array.isArray(children)) {
@@ -91,7 +104,7 @@ const SideBySideWrapper = props => {
       return code.push(child)
     }
 
-    if (code.length > 0) {
+    if (code.length > 0 || i == lastIndex) {
       children.push(
         <Row>
           <Column>{text}</Column>
@@ -105,6 +118,15 @@ const SideBySideWrapper = props => {
 
     text.push(child)
   })
+
+  if (text.length >= 1) {
+    children.push(
+      <Row>
+        <Column>{text}</Column>
+        <Column />
+      </Row>
+    )
+  }
 
   return children
 }
