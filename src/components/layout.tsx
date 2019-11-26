@@ -9,7 +9,6 @@ const LayoutContainer = styled.div<{ path: string; sidebyside: boolean }>`
   margin-right: auto;
   max-width: ${rhythm(24)};
   padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
-  padding-bottom: 0;
 
   ${({ sidebyside }) =>
     sidebyside
