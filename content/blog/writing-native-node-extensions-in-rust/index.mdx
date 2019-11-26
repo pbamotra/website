@@ -1,0 +1,64 @@
+---
+title: How to write a native Node.js extension with Rust and Neon
+slug: writing-safe-native-node-extensions-in-rust-and-neon
+byline: Neon allows you to take full advantage of your system's hardware by writing super fast native JavaScript modules with Rust.
+tags: [ rust, javascript, nodejs ]
+comments: true
+---
+
+When writing server applications with Node.js, sometimes JavaScript just doesn't cut it and you need to employ native code.
+This could be because of a few different reasons:
+
+1. You need to complete a CPU-bound task
+  
+  Because JavaScript runs inside a VM, every operation will take longer than the native equivalent. 
+  At a high level, this is because a VM needs to interpret the code and translate it into machine code to run on the system as the program is executing.
+  This process is greatly improved by techniques such as Just-In-Time (JIT) compilation but it's still nowhere close to native speeds.
+
+1. You need to quickly and often create and destroy memory
+  
+  As JavaScript is a garbage-collected language, creating and destroying lots of object and arrays can be very expensive and slow.
+  This is compounded by the fact that no-one really knows when the JavaScript garbage compiler runs, resulting in random and unpredictable stalls.
+
+1. You need to multi-thread your code
+
+  Node.js recently added the Worker API which allow developers to multi-thread their JavaScript code. 
+  Unfortunately, not only is the overhead of creating workers and message passing is quite high, but the interface is tedious.
+  Libraries like microjob have made efforts to combat both points, but projects like Rayon in Rust are more performant and easier to work with.
+
+Typically when you needed a native module you'd be stuck writing add-ons in C or C++ - but thanks to Neon, this is no longer the case.
+
+## Installing Rust
+
+In order to start developing Rust code to work with JavaScript - you first need to install the Rust development tool-chain. 
+This is first done by installing the Rust tool-chain manager `rustup`. [You can lean how to do it here.](https://www.rust-lang.org/tools/install).
+After installing `rustup` and configuring your `PATH`, it's time to install Neon.
+
+## Getting started with Neon
+
+Before starting a Neon project, you have to install the CLI. The Neon CLI can easily be installed by using the NPM package manager.
+
+```
+npm i -g neon-cli
+```
+
+After the installation is complete, you can bootstrap a new project by running the `new` command.
+
+```
+neon new <project-name>
+```
+
+With the new project created, navigate to the new `<project-name>` directory and run `npm install` to install dependencies.
+Neon also builds your rust code through the `install` command, so you'll see it compile as well. 
+If there are any errors at this point, ensure that you have the Rust tool-chain properly installed.
+
+```
+```
+
+## 
+
+The Neon CLI makes it super easily to bootstrap a new project. Simply run the command:
+
+```
+neon new <name>
+```

@@ -38,7 +38,7 @@ exports.createPages = async ({
         }
 
         allMdx(
-          sort: { fields: [frontmatter___date], order: DESC }
+          sort: { fields: [sortTime], order: DESC }
           filter: { frontmatter: { draft: { ne: true } } }
           limit: 1000
         ) {
