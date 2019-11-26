@@ -38,7 +38,7 @@ exports.createPages = async ({
         }
 
         allMdx(
-          sort: { fields: [sortTime], order: DESC }
+          sort: { fields: [fields___sortTime], order: DESC }
           filter: { frontmatter: { draft: { ne: true } } }
           limit: 1000
         ) {
@@ -133,6 +133,7 @@ exports.onCreateNode = ({
 
     const fileNode = getNode(node.parent);
 
+    // Warning! This only works for files that have been comitted
     const created = new Date(new String(execSync(`git log --follow --format="%ad" -- ${fileNode.absolutePath} | tail -1`)));
     const modified = new Date(new String(execSync(`git log -1 --follow  --format="%ad" -- ${fileNode.absolutePath} | cat`)));
     
