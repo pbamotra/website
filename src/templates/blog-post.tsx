@@ -29,23 +29,25 @@ const SideBySideContainer = styled.div``
 const Row = styled.div`
   display: flex;
 
-  @media (max-width: 700px) {
+  @media (max-width: 1400px) {
     flex-direction: column;
   }
 
-  &:after {
-   content: '';
-   left: 564px;
-   z-index: -1;
-   position: fixed;
-   right: 0;
-   background: #f5f2f0;
-   top: 0;
-   bottom: 0;
+  @media (min-width: 1400px) {
+    &:after {
+     content: '';
+     left: 564px;
+     z-index: -1;
+     position: fixed;
+     right: 0;
+     background: #f5f2f0;
+     top: 0;
+     bottom: 0;
+    }
   }
 `
 const Column = styled.div`
-  @media (min-width: 700px) {
+  @media (min-width: 1400px) {
     flex-grow: 1;
     background: #f5f2f0;
     overflow: auto;

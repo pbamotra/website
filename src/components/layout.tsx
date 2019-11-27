@@ -13,16 +13,16 @@ const LayoutContainer = styled.div<{ path: string; sidebyside: boolean }>`
   ${({ sidebyside }) =>
     sidebyside
       ? `
-    margin: 0;
-    max-width: 100%;
-
-    @media (min-width: 700px) {
+    @media (min-width: 1400px) {
       padding-right: 0;
+      margin: 0;
+      max-width: 100%;
+
+      nav {
+        max-width: ${rhythm(18)};
+      }
     }
 
-    nav {
-      max-width: ${rhythm(18)};
-    }
   `
       : ""}
 
