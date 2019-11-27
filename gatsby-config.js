@@ -1,4 +1,4 @@
-const GTAG_ID = "UA-111574706-1"
+const GTAG_ID = process.env.GTAG_ID;
 
 module.exports = {
   siteMetadata: {
