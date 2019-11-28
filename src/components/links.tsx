@@ -1,11 +1,12 @@
-import styled from 'styled-components';
-import {rhythm} from "../utils/typography"
-import React, {FunctionComponent} from 'react';
-import {Link} from 'gatsby';
+import styled from "styled-components"
+import { rhythm } from "../utils/typography"
+import React, { FunctionComponent } from "react"
+import { Link } from "gatsby"
 
 export const ROOT_PATH = `${__PATH_PREFIX__}/`
-export const BLOG_PATH = `${__PATH_PREFIX__}/blog`
-export const ABOUT_PATH = `${__PATH_PREFIX__}/about`
+export const BLOG_PATH = `${__PATH_PREFIX__}/blog/`
+export const PROJECT_PATH = `${__PATH_PREFIX__}/projects/`
+export const ABOUT_PATH = `${__PATH_PREFIX__}/about/`
 
 export const LinksContainer = styled.div`
   display: flex;
@@ -23,8 +24,10 @@ export const NavLink = styled(Link)`
   width: fit-content;
 `
 
-
-export const Links: FunctionComponent<{}> = props => (<LinksContainer {...props}>
-        <NavLink to={ABOUT_PATH}>About</NavLink>
-        <NavLink to={BLOG_PATH}>Blog</NavLink>
-</LinksContainer>);
+export const Links: FunctionComponent<{}> = props => (
+  <LinksContainer {...props}>
+    <NavLink to={ABOUT_PATH}>About</NavLink>
+    <NavLink to={PROJECT_PATH}>Projects</NavLink>
+    <NavLink to={BLOG_PATH}>Blog</NavLink>
+  </LinksContainer>
+)

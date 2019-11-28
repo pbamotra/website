@@ -60,10 +60,9 @@ export const Nav: StatelessComponent<{path: string; hideLinks?: boolean}> = ({
   children,
   ...rest
 }) => {
-  const side = path !== ROOT_PATH
-  const projectsNav = path.startsWith("/projects/")
-
-  const isAmp = path.endsWith("/amp/")
+  const side = path !== ROOT_PATH;
+  const projectsNav = path.startsWith("/projects/") && path !== "/projects/";
+  const isAmp = path.endsWith("/amp/");
 
   return (<nav>
     <NavContainer
