@@ -1,26 +1,70 @@
-import React, {StatelessComponent} from "react"
-import {graphql} from "gatsby"
+import React, { StatelessComponent } from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import About from "../components/about"
-import GatsbyImage from 'gatsby-image';
-import {Links as L} from '../components/links';
-import styled from 'styled-components';
+import GatsbyImage from "gatsby-image"
+import { Links as L } from "../components/links"
+import styled, { keyframes } from "styled-components"
+
+const ProfileFrames = keyframes`
+  0% {
+    clip-path: polygon(5% 3%,96% 3%,97% 93%,11% 96%);
+  }
+  25% {
+    clip-path: polygon(9% 4%, 99% 1%, 95% 97%, 7% 93%);
+  }
+  75% {
+    clip-path: polygon(5% 6%, 93% 2%, 94% 94%, 13% 96%);
+  }
+  100% {
+    clip-path: polygon(5% 3%,96% 3%,97% 93%,11% 96%);
+  }
+`
+
+const FrontFrames = keyframes`
+  0% {
+    clip-path: polygon(3% 2%, 98% 2%, 95% 92%, 9% 92%);
+  }
+  25% {
+    clip-path: polygon(5% 3%,96% 1%,97% 93%,11% 96%);
+  }
+  75% {
+    clip-path: polygon(9% 4%, 99% 1%, 95% 97%, 7% 93%);
+  }
+  100% {
+    clip-path: polygon(3% 2%, 98% 2%, 95% 92%, 9% 92%);
+  }
+`
+const BackFrames = keyframes`
+  0% {
+    clip-path: polygon(7% 0, 100% 4%, 92% 93%, 7% 90%);
+  }
+  25% {
+    clip-path: polygon(3% 2%, 98% 2%, 95% 92%, 9% 92%);
+  }
+  75% {
+    clip-path: polygon(5% 3%,96% 1%,97% 93%,11% 96%);
+  }
+  100% {
+    clip-path: polygon(7% 0, 100% 4%, 92% 93%, 7% 90%);
+  }
+`
 
 export const ProfileContainer = styled.div`
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     display: none;
   }
-
 
   position: relative;
 
   > div {
-    clip-path: polygon(5% 3%,96% 1%,97% 93%,11% 96%);
+    animation: ${ProfileFrames} infinite 10s;
   }
 
-  :after, :before {
-    content: '';
+  :after,
+  :before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -31,24 +75,26 @@ export const ProfileContainer = styled.div`
   }
 
   :after {
-    clip-path: polygon(3% 2%,98% 2%,95% 92%,9% 92%);
+    animation: ${FrontFrames} infinite 10s;
     opacity: 0.5;
   }
 
   :before {
-    clip-path: polygon(7% 0, 100% 4%, 92% 93%, 7% 90%);
+    animation: ${BackFrames} infinite 10s;
     opacity: 0.25;
   }
-
-`;
+`
 
 const Links = styled(L)`
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     display: none;
   }
-`;
+`
 
-export const Home: StatelessComponent<{data: any, location: any}> = ({data, location}) => {
+export const Home: StatelessComponent<{ data: any; location: any }> = ({
+  data,
+  location,
+}) => {
   return (
     <Layout location={location}>
       <SEO
@@ -66,7 +112,7 @@ export const Home: StatelessComponent<{data: any, location: any}> = ({data, loca
   )
 }
 
-export default Home;
+export default Home
 
 export const pageQuery = graphql`
   query {
