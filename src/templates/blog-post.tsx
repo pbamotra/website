@@ -25,7 +25,6 @@ const SizedContainer = styled.div`
   max-width: ${rhythm(18)};
 `
 
-const SideBySideContainer = styled.div``
 const Row = styled.div`
   display: flex;
 

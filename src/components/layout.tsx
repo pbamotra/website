@@ -11,8 +11,8 @@ const LayoutContainer = styled.div<{ path: string; sidebyside: boolean }>`
   padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
 
   ${({ sidebyside }) =>
-    sidebyside
-      ? `
+    sidebyside &&
+    `
     @media (min-width: 1400px) {
       padding-right: 0;
       margin: 0;
@@ -23,39 +23,37 @@ const LayoutContainer = styled.div<{ path: string; sidebyside: boolean }>`
       }
     }
 
-  `
-      : ""}
+  `}
 
   ${({ path }) =>
-    path === "/"
-      ? css`
-          @media (min-width: 700px) {
-            display: flex;
-            min-height: 100vh;
-            align-items: center;
-            justify-content: center;
-            footer {
-              display: none;
-            }
+    path === "/" &&
+    css`
+      @media (min-width: 700px) {
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        footer {
+          display: none;
+        }
 
-            max-width: 820px;
+        max-width: 820px;
 
-            main {
-              display: flex;
-              align-items: center;
+        main {
+          display: flex;
+          align-items: center;
 
-              & > ${ProfileContainer} {
-                margin-right: 48px;
-                flex-shrink: 0;
-              }
-            }
-
-            nav {
-              display: none;
-            }
+          & > ${ProfileContainer} {
+            margin-right: 48px;
+            flex-shrink: 0;
           }
-        `
-      : ""}
+        }
+
+        nav {
+          display: none;
+        }
+      }
+    `}
 `
 
 export const Layout: StatelessComponent<{

@@ -1,11 +1,14 @@
-import React, {StatelessComponent} from "react"
-import {graphql} from "gatsby"
+import React, { StatelessComponent } from "react"
+import { graphql } from "gatsby"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import {PostPreview} from "../../components/post-preview"
+import { PostPreview } from "../../components/post-preview"
 
-export const BlogIndex: StatelessComponent<{data: any, location: any}> = ({data, location}) => {
-  const posts = data.allMdx.edges.map(x => x.node) as Post[];
+export const BlogIndex: StatelessComponent<{ data: any; location: any }> = ({
+  data,
+  location,
+}) => {
+  const posts = data.allMdx.edges.map(x => x.node) as Post[]
   return (
     <Layout location={location}>
       <SEO
@@ -14,8 +17,11 @@ export const BlogIndex: StatelessComponent<{data: any, location: any}> = ({data,
           `blog`,
           `javascript`,
           `typescript`,
+          `rust`,
           `programming`,
-          "bennetthardwick",
+          `tech`,
+          `bennett`,
+          `hardwick`,
         ]}
       />
       <h1>Blog</h1>
@@ -35,7 +41,10 @@ export const pageQuery = graphql`
     }
     allMdx(
       sort: { fields: [fields___sortTime], order: DESC }
-      filter: { fields: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
+      filter: {
+        fields: { draft: { ne: true } }
+        fileAbsolutePath: { regex: "^/blog/" }
+      }
       limit: 1000
     ) {
       edges {
