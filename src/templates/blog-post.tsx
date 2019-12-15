@@ -23,6 +23,10 @@ const TagList = styled.span`
 
 const SizedContainer = styled.div`
   max-width: ${rhythm(18)};
+
+  @media (max-width: 1400px) {
+    max-width: 100%;
+  }
 `
 
 const Row = styled.div`
@@ -211,7 +215,7 @@ export const BlogPost: StatelessComponent<{
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "NewsArticle",
+            "@type": "BlogPosting",
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": location.url,
