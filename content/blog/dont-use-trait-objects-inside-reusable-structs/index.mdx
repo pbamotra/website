@@ -91,9 +91,12 @@ zoo.add_person(Box::new(Me { name: "Bennett" }));
 let person = zoo.last_person().unwrap();
 ```
 
-Unfortunately this is where it gets complex.
+This is where things get complex.
+We have a type with not much information that we want to turn back into our original type.
 
-// First we would have to update our trait to include
+The safe way do this is to cast a reference to `&dyn Any` and use the `downcast` family of functions to get a reference to our original type back.
+
+Unfortunately this means that we have to retrofit our original `Person` trait with a method that allows us to do this.
 
 ```rust
 trait Person {
@@ -102,7 +105,7 @@ trait Person {
 }
 ```
 
-// then we would have to update every struct that implements this trait to have the as_any method
+Since it's now on the root trait, we would also have to update every implementation of that trait to include this seemingly useless method - as well as force anyone that decides to use our trait to implement it as well.
 
 ```rust
 impl Person for Me {
@@ -116,7 +119,7 @@ impl Person for Me {
 }
 ```
 
-// Finally, we would have to execute a long chain of functions to get back to our original type.
+Finally, we would need to execute a long chain of functions to get back to our original type.
 
 ```rust
 let mut zoo: PeopleZoo<Me> = PeopleZoo { people: vec![] };
@@ -132,17 +135,17 @@ let me: &Me = zoo
 ```
 [Full Example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f4a5360fec6f40b7c68216214a52f060)
 
-It doesn't seem very nice, fortunately there is a solution.
+It doesn't seem very nice and we'd have to force this upon every user of our struct just in case someone might want to get back to their original type.
 
+Thankfully, we can refactor our struct to make this a little bit easier.
 
 ## Generics
 
-// I shouldn't have to worry about the trait having all the information I need to find my value again, it's not the traits responsibility.
-// the responsibility of the trait is to do the work of what it says it is - and I can't trust that every trait that is created will have
-// the necessary `as_any` field that I need.
-// Therefore, if i'm using a trait it's up to me to make sure I can do all I need with it
+When writing a trait, I shouldn't have to worry about providing information that is irrelevant to the function of that trait.
 
-// Firstly, update `PeopleZoo` to use generics
+It's better to instead leverage Rust's type system and use traits as a way to describe the form of the data that's provided, but let the user provide whatever data they like (provided it fits within the traits constraints).
+
+In the case of `PeopleZoo`, it's as simple as making it take a generic parameter `P` that is a `Person`. 
 
 ```rust
 struct PeopleZoo<P: Person> {
@@ -179,7 +182,11 @@ The previous version of `PeopleZoo` allowed any arbitrary number of objects impl
 
 ## Enum Wrappers for Trait Objects
 
-// Create another type to be used
+A common pattern that I've noticed which gives you full control of the data that you pass into a struct is creating an enum wrapper for trait objects.
+
+What I mean by this, is creating an enum that implements the same trait that each of it's values implements.
+
+To demonstrate this, I'll first create another struct implementing `Person`.
 
 ```rust
 struct Grandma {
@@ -193,10 +200,9 @@ impl Person for Grandma {
 }
 ```
 
-// Now create an enum which contains all the types
-// Enums in rust are tagged unions, which means they take up the space of the largest
-// entry in the enum, plus a few extra bytes for information about what they are.
-// This means they don't need to be heap allocated like a Box would
+Since I've now got more than one `Person`, it makes sense to create a wrapper enum to keep track of them and allow easy access through Rust's pattern matching syntax.
+
+Furthermore, since Rust enums are [tagged unions](http://patshaughnessy.net/2018/3/15/how-rust-implements-tagged-unions), they'll only have the memory footprint of the largest entry in the enum (plus a little bit more for type information), and since the size is known at compile time, there will also be no heap allocation like there would with a `Box`.
 
 ```rust
 enum People {
@@ -214,10 +220,12 @@ impl Person for People {
 }
 ```
 
-// With a few modifications it can be used just like before
+With a few small modifications, it can be used just like the `as_any` example.
 
 ```rust
-let mut zoo: PeopleZoo<People> = PeopleZoo { people: vec![] };
+let mut zoo: PeopleZoo<People> = PeopleZoo {
+  people: vec![] 
+};
 zoo.add_person(People::Me(Me { name: "Bennett" }));
 
 if let Some(People::Me(me)) = zoo.last_person() {
@@ -227,22 +235,26 @@ if let Some(People::Me(me)) = zoo.last_person() {
 
 [Full Example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=501693ad07bda2f1e83dc31d230f8a8a)
 
-This gives the person who is consuming `PeopleZoo` the most flexibility.
+This gives the person who is consuming `PeopleZoo` the most flexibility without having to modify the `Person` trait. It also has the added benefit of not needed to allocate any space on the heap for the `Person`. 
 
 ## Using `Box<dyn Trait>`
 
-// I'm not saying that using boxed trait objects is bad, just that it gives other developers consuming your struct
-// a hard time since there's not much flexibility. You should leave it up to however uses your struct to choose
-// to use Box<dyn Trait/>.
+Now I'm not trying to say that using boxed trait objects is bad, there are some cases where it makes a lot of sense.
+What I am saying, however, is that using `Box<dyn Trait>` gives other developers that may consume your struct a hard time as there's not much flexibility.
 
+You simply shouldn't force it upon anyone.
+
+However, you shouldn't make it hard to use them either.
 
 ### A `Box<dyn Trait>` trick
 
-// By default a `Box<dyn Trait>` doesn't implement the trait of the trait object that it contains.
-// This means that trying to construct `PeopleZoo<Box<dyn Person>>` will give a type error. 
-// Because of this, it's good practice to give a default implementation of your trait for it's boxed
-// version. This is done by calling `as_ref` or `as_mut` on the `Box` and calling then calling the
-// relevant method. This small bit of effort will help a bunch of people that consume your struct.
+By default a `Box<dyn Trait>` doesn't implement the trait of the object it contains.
+This means that trying to construct `PeopleZoo<Box<dyn Person>>` won't work out of the box and will give a type error.
+
+Because of this, it's good practice to give a default implementation of your trait for it's boxed counterpart.
+This can be done by calling `as_ref` or `as_mut` on the `Box` and calling the relevant method.
+
+For just a small bit of effort you can help a bunch of people that may consume your struct.
 
 ```rust
 trait Person {
@@ -256,14 +268,20 @@ impl Person for Box<dyn Person> {
 }
 
 fn main() {
-  let mut zoo: PeopleZoo<Box<dyn Person>> = PeopleZoo { people: vec![] };
+  let mut zoo: PeopleZoo<Box<dyn Person>> = PeopleZoo { 
+    people: vec![] 
+  };
 }
 ```
 
 ## Conclusion
 
-// Box traits make it really hard to get the original value back again.  
-// If a developer of a crate doesn't give a way for you to cast to any, you won't be able to get the original value back.  
-// Using generics you can let the user decide what type it should be - as long as they implement the trait.  
-// You can use enums to limit heap allocations and make it easier to find the original type,   
-// at the expense of greater memory consumption and slightly more code 
+- Boxed traits should not be used to represent data inside structs as they sacrifice flexibility.
+
+- Furthermore boxed traits make it really hard to get the original value back again and require you to provide an `as_any` implementation which pollutes the original trait.
+If a developer of a crate doesn't think about this, then you may not be able to safely get the original value back.
+
+- Using generics you can use traits to constrain the data that developers provide, but still let them decide the specifics.
+This method allows developers to use enums to limit heap allocations and make it easier to find the original type, at the expense of greater memory consumption and slightly more code.
+
+- Implementing your trait for it's boxed counterpart makes it easier to use boxed traits in generic parameters.
