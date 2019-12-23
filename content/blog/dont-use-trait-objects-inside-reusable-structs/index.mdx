@@ -1,17 +1,14 @@
 ---
-title: Don't use boxed trait objects in struct internals
+title: Don't use boxed trait objects for struct internals
 byline: ...
 tags: [rust,beginner]
-slug: dont-use-trait-objects-inside-reusable-components
+slug: dont-use-boxed-trait-objects-for-struct-internals
 comments: true
 ---
 
-As a software developer you're constantly told to stop re-inventing the wheel. 
+When writing a struct with the intention of it being reused, it's important not to use boxed trait objects to represent interior data.
 
-This is fantastic advice and something that I try and follow 80% of the time.
-However, there's often times in Rust where I back myself into a corner that I can't get out of without rewriting a whole lot of code.
-
-One such problem that I encountered recently, was working with boxed trait objects - `Box<dyn Trait>`.
+Namely, this is because turning an object into a `Box<dyn Trait>` loses a lot of type information about the object which is difficult to get back should the developer consuming your struct need it.
 
 ### What's a `Trait`?
 
@@ -19,16 +16,16 @@ According to the [rust book](https://doc.rust-lang.org/book/ch10-02-traits.html)
 Much like interfaces in other languages, Rust traits are a method of abstraction that allows you to define a schema through which you can
 communicate with an object - [and a lot more](https://blog.rust-lang.org/2015/05/11/traits.html).
 
+To me, a trait describes a certain behaviour and should only provide methods that achieve that behaviour.
+
 ### Boxed trait objects
 
-However, since the size of a trait is not known at compile time (anything can implement a trait, no matter what size) it's hard to store
-an object based on the trait it implements since the compiler doesn't know exactly how much space to make available.
-Rust's solution to this, is to put a trait inside a `Box`, `Arc` or `Rc` and store the container instead.
+Since the size of a trait is not known at compile time (anything can implement a trait, no matter what size) it's hard to store an object based on the trait it implements since the compiler doesn't know exactly how much space to make available.
+Rust's solution to this is to put a trait inside a `Box`, `Arc` or `Rc` and store the container instead.
 
 This is a very useful feature which allows you to do all kinds of awesome stuff - like creating vectors of traits of unknown sizes.
 
-However, like all things, this typically comes at a cost. Especially when designing a `struct` that will be consumed by different developers with
-unknown and evolving use cases.
+However, like all things, this typically comes at a cost. Especially when designing a struct that will be consumed by different developers with unknown and evolving use cases.
 
 ## Problems with an interior `Box<dyn Trait>`
 
@@ -43,8 +40,9 @@ trait Person {
 
 It would be super easy to implement and allow each different person to say hello in their own favourite greeting.
 
-Now my requirements for the people have changed, and I need to group them together in a `PeopleZoo`.
-Typically I might model this using a vector of boxed trait objects.
+Now my requirements for the people has changed - I need to group them together in a `PeopleZoo`.
+
+Typically, I might model this using a vector of boxed trait objects.
 
 ```rust
 struct PeopleZoo {
@@ -91,7 +89,7 @@ zoo.add_person(Box::new(Me { name: "Bennett" }));
 let person = zoo.last_person().unwrap();
 ```
 
-This is where things get complex.
+This is where things get a little annoying.
 We have a type with not much information that we want to turn back into our original type.
 
 The safe way do this is to cast a reference to `&dyn Any` and use the `downcast` family of functions to get a reference to our original type back.
