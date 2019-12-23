@@ -16,6 +16,9 @@ Theme.overrideThemeStyles = () => {
       color: "inherit",
       backgroundImage: "none",
     },
+    '.gatsby-highlight': {
+      marginBottom: '1.5rem'
+    }
   }
 }
 
