@@ -53,6 +53,7 @@ export const pageQuery = graphql`
           fields {
             slug
             date: createdAt(formatString: "MMMM DD, YYYY")
+            sortTime
           }
           frontmatter {
             created: date(formatString: "MMMM DD, YYYY")

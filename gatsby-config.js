@@ -142,7 +142,7 @@ module.exports = {
             query: `
               {
                 allMdx(
-                  sort: { fields: [frontmatter___date], order: DESC }
+                  sort: { fields: [fields___sortTime], order: DESC }
                   filter: { frontmatter: { draft: { ne: true } } fileAbsolutePath: { regex: "^\/blog\/" } }
                 ) {
                   edges {

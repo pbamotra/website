@@ -53,7 +53,7 @@ export const pageQuery = graphql`
 
     allMdx(
       limit: 1000
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [fields___sortTime], order: DESC }
       filter: {
         frontmatter: { tags: { in: [$tag] }, draft: { ne: true } }
         fileAbsolutePath: { regex: "^/blog/" }

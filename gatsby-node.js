@@ -1,19 +1,12 @@
 const path = require(`path`)
-const {
-  createFilePath
-} = require(`gatsby-source-filesystem`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
 function paginate(data, pageSize, pageNumber) {
-  return data.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
+  return data.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
 }
 
-exports.createPages = async ({
-  graphql,
-  actions
-}) => {
-  const {
-    createPage
-  } = actions
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
   const blogPostAmp = path.resolve(`./src/templates/blog-post.amp.tsx`)
@@ -22,19 +15,18 @@ exports.createPages = async ({
   let result = await graphql(
     `
       {
-
-	      allFile {
-         nodes {
-          sourceInstanceName
-          id
-           childMdx {
-             id
-             body
-             frontmatter {
-               title
-             }
-           }
-         }
+        allFile {
+          nodes {
+            sourceInstanceName
+            id
+            childMdx {
+              id
+              body
+              frontmatter {
+                title
+              }
+            }
+          }
         }
 
         allMdx(
@@ -43,28 +35,34 @@ exports.createPages = async ({
           limit: 1000
         ) {
           nodes {
-              id
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                tags
-              }
+            id
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              tags
             }
           }
+        }
       }
     `
-  );
+  )
   if (result.errors) {
     throw result.errors
   }
 
-  const postIds = new Set(result.data.allFile.nodes.filter(x => x.sourceInstanceName === 'blog' && x.childMdx).map(x => x.childMdx.id));
+  const postIds = new Set(
+    result.data.allFile.nodes
+      .filter(x => x.sourceInstanceName === "blog" && x.childMdx)
+      .map(x => x.childMdx.id)
+  )
 
   // Create blog posts pages.
-  const posts = result.data.allMdx.nodes.filter(x => postIds.has(x.id));
-  const tags = new Set(posts.reduce((acc, post) => acc.concat(post.frontmatter.tags || []), []))
+  const posts = result.data.allMdx.nodes.filter(x => postIds.has(x.id))
+  const tags = new Set(
+    posts.reduce((acc, post) => acc.concat(post.frontmatter.tags || []), [])
+  )
 
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
@@ -81,7 +79,7 @@ exports.createPages = async ({
     })
 
     createPage({
-      path: post.fields.slug + 'amp/',
+      path: post.fields.slug + "amp/",
       component: blogPostAmp,
       context: {
         slug: post.fields.slug,
@@ -89,7 +87,6 @@ exports.createPages = async ({
         next,
       },
     })
-
   })
 
   tags.forEach(tag => {
@@ -97,77 +94,78 @@ exports.createPages = async ({
       path: `/blog/tag/${tag}/`,
       component: tagPage,
       context: {
-        tag
-      }
+        tag,
+      },
     })
   })
-
 }
 
-const FileReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}-/;
+const FileReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}-/
 
-const formatDate = d => (new Date(d).toISOString().substr(0, 10));
+const formatDate = d => new Date(d).toISOString().substr(0, 10)
 
-const formatFileName = (val, d) => formatDate(d) + '-' + (
-  FileReg.test(val)
-    ? val.substr(11)
-    : val
-);
+const formatFileName = (val, d) =>
+  formatDate(d) + "-" + (FileReg.test(val) ? val.substr(11) : val)
 
-const { execSync } = require('child_process');
+const { execSync } = require("child_process")
 
-exports.onCreateNode = ({
-  node,
-  actions,
-  getNode
-}) => {
-  const {
-    createNodeField
-  } = actions
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
 
   if (node.internal.type === `Mdx`) {
     const value = createFilePath({
       node,
-      getNode
-    });
+      getNode,
+    })
 
-    const fileNode = getNode(node.parent);
+    const fileNode = getNode(node.parent)
 
     // Warning! This only works for files that have been comitted
-    const created = new Date(new String(execSync(`git log --follow --format="%ad" -- ${fileNode.absolutePath} | tail -1`)));
-    const modified = new Date(new String(execSync(`git log -1 --follow  --format="%ad" -- ${fileNode.absolutePath} | cat`)));
-    
+    const created = new Date(
+      new String(
+        execSync(
+          `git log --follow --format="%ad" -- ${fileNode.absolutePath} | tail -1`
+        )
+      )
+    )
+    const modified = new Date(
+      new String(
+        execSync(
+          `git log -1 --follow  --format="%ad" -- ${fileNode.absolutePath} | cat`
+        )
+      )
+    )
+
     createNodeField({
       name: `slug`,
       node,
-      value: '/blog/' + formatFileName(value.substr(1), node.frontmatter.date || created),
+      value:
+        "/blog/" +
+        formatFileName(value.substr(1), node.frontmatter.date || created),
     })
 
     createNodeField({
       node,
-      name: 'modifiedAt',
-      value: modified
-    });
+      name: "modifiedAt",
+      value: modified,
+    })
 
     createNodeField({
       node,
-      name: 'createdAt',
-      value: created
-    });
+      name: "createdAt",
+      value: created,
+    })
 
     createNodeField({
       node,
-      name: 'sortTime',
-      value: node.frontmatter.date || created
-    });
+      name: "sortTime",
+      value: node.frontmatter.date ? new Date(node.frontmatter.date) : created,
+    })
 
     createNodeField({
       node,
-      name: 'draft',
-      value: value.startsWith('/draft')
-    });
-
-
-
+      name: "draft",
+      value: value.startsWith("/draft"),
+    })
   }
 }

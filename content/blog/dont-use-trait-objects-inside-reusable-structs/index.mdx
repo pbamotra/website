@@ -1,5 +1,5 @@
 ---
-title: Don't use Trait Objects inside reusable structs
+title: Don't use boxed trait objects in struct internals
 byline: ...
 tags: [rust,beginner]
 slug: dont-use-trait-objects-inside-reusable-components
@@ -160,7 +160,7 @@ impl<P: Person> PeopleZoo<P> {
 }
 ```
 
-Next, remove the as_any calls from the traits and implementation. This then allows you to simplify the calls to get people from the zoo.
+Next, remove the `as_any` calls from the traits and implementation. This then allows you to simplify the calls to get people from the zoo.
 
 ```rust
 let mut zoo: PeopleZoo<Me> = PeopleZoo { people: vec![] };
