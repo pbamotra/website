@@ -1,5 +1,5 @@
 ---
-title: How to Hack (QUT CAB441 Cheat Sheet)
+title: How to hack (QUT CAB441 cheat sheet)
 byline: My cheat sheets and preparation heading into the CAB441 Network Security exam.
 date: 2018-10-29
 tags: [ infosec ]
@@ -123,7 +123,7 @@ iptables -A <chain> -p <protocol> -j <target>
 
 <span id="iptables-extensions" />
 
-#### Iptables Extensions
+#### Iptables extensions
 `iptables` can use extended packet matching and target modules using the `-m` option. 
 
 If a protocol is specified using the `-p` option, and an unknown extension option is encountered, `iptables` will load a match module identical to the name of the protocol. 
@@ -191,7 +191,7 @@ Note: the
 
 <span id="rule-options" />
 
-#### Rule Options
+#### Rule options
 
 - **msg: <sample message\>**: Logs the message into `/var/snort/log` on a successful match
 - **flags: <flags\>**: Match specific TCP flags (see below)
@@ -207,7 +207,7 @@ You can find more information about rule options [at the snort docs](http://manu
 
 <span id="tcp-flags" />
 
-#### TCP Flags
+#### TCP flags
 - **A** = ACK
 - **F** = FIN
 - **P** = PSH
@@ -350,7 +350,7 @@ sqlmap -u "<url>" --wizard
 
 <span id="take-control" />
 
-### Take Control
+### Take control
 The steps to get a reverse shell will depend on the content of the database. In the case of the practical, finding the contents of the database allowed you to log into the wordpress site that was present. After logging in, a php reverse shell script could easily be added to the site.
 
 <span id="tips" />
@@ -553,6 +553,6 @@ payload = "A" * offset + return_address + \
 
 <span id="take-control-1" />
 
-### Take Control
+### Take control
 
 Now that you've got your payload ready, it's just a matter of setting up a `nc` listener and performing the exploit. It's important that you test the payload before attacking a real machine, because you only get one shot. It's also important that you don't forget to make the return address the right one for the network you're on.

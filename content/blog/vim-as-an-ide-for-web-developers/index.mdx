@@ -1,6 +1,6 @@
 ---
-title: Using Vim as a Web Development IDE
-byline: I've traded in VSCode and started using neovim as my full-time IDE - here's what I learned.
+title: Using Vim as a web development IDE
+byline: I traded in VSCode and started using neovim as my full-time IDE - here's what I learned.
 date: 2019-06-23
 tags: [vim,javascript,react]
 comments: true
@@ -23,7 +23,7 @@ It has a variety of extensions and a runtime that allows users to create extensi
 
 Needless to say I have found bugs here and there, but by-and-large, I've found the whole experience surprisingly seamless.
 
-### Getting Started
+### Getting started
 
 After installing CoC and everything is working, I'd suggest installing all the plugins you would typically use in something like VS Code.
 For me, these were plugins for Typescript, Rust, Json, Angular and a few others.
@@ -46,7 +46,7 @@ Once it's installed, you can issue and select some plugins to download:
 If you don't want to install coc-marketplace, you can always [search on npm](https://www.npmjs.com/search?q=keywords%3Acoc.nvim).
 
 
-### Basic Commands
+### Basic commands
 
 There's a handful of CoC commands that I use on the daily. Mainly, there are `:CocCommand`, `:CocList`, `:CocAction` and `:CocRestart`.
 Typically, actions that I often use will have bindings. However, for seldom used features I will find myself typing these out.
@@ -96,7 +96,7 @@ The equivalent in Code, is how hovering over a symbol will give you a variety of
 
 Finally I the `:Format` command to format the entire buffer. Neat!
 
-## Search and Replace
+## Search and replace
 
 In many of my early attempts to change to exclusively using Vim, I ran into a a bunch of road-blocks trying to find a solution to search and replace.
 
@@ -119,7 +119,7 @@ Secondly, I use the fantastic ripgrep integration for [fzf.vim](https://github.c
 
 Unfortunately this command (at least by default) does not populate the quickfix list. However I've found that I use this command most when quickly trying to search for things, when I need to perform multiple changes across multiple files, I'll use the first method.
 
-## Other Great Features
+## Other great features
 
 I only have five plugins installed for Vim.
 
@@ -138,7 +138,7 @@ In fact, three of my five plugins are completely for aesthetic reasons!
 
 Here's a few cool things I do everyday, that you (could) do with a default Vim.
 
-### Windows and Tabs
+### Windows and tabs
 
 
 When working with a lot of files, you need to be able to navigate between a lot quickly.
@@ -159,7 +159,7 @@ Different groups of these files are set on different tabs.
 ```
 ![windows and tags](./tabs-windows.gif)
 
-### Exploring Files
+### Exploring files
 
 Vim has a great built-in file explorer called netrw.
 Issuing `:Explore` will open netrw in the parent directory as the current file.
@@ -174,7 +174,7 @@ jj<CR>    " navigate and open file
 ```
 ![explore directory](./explore.gif)
 
-### Folding Tags
+### Folding tags
 
 When working with React, it's not always great to fold by syntax.
 You might fold styles-components or functions or JSX.

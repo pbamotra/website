@@ -131,7 +131,7 @@ let me: &Me = zoo
     .downcast_ref::<Me>()
     .unwrap();
 ```
-[Full Example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f4a5360fec6f40b7c68216214a52f060)
+<p><a target="_blank" href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f4a5360fec6f40b7c68216214a52f060">Full Example</a></p>
 
 It doesn't seem very nice and we'd have to force this upon every user of our struct just in case someone might want to get back to their original type.
 
@@ -171,14 +171,14 @@ let me: &Me = zoo
     .last_person()
     .unwrap();
 ```
-[Full Example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=59c28f6fa71b2bf7888dca26b6f30854)
+<p><a target="_blank" href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=59c28f6fa71b2bf7888dca26b6f30854">Full Example</a></p>
 
 
 Our code is a lot simpler now, but unfortunately we've lost a lot of flexibility.
 The previous version of `PeopleZoo` allowed any arbitrary number of objects implementing the
 `Person` trait.
 
-## Enum Wrappers for Trait Objects
+## Enum wrappers for trait objects
 
 A common pattern that I've noticed which gives you full control of the data that you pass into a struct is creating an enum wrapper for trait objects.
 
@@ -231,7 +231,7 @@ if let Some(People::Me(me)) = zoo.last_person() {
 }
 ```
 
-[Full Example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=501693ad07bda2f1e83dc31d230f8a8a)
+<p><a target="_blank" href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=501693ad07bda2f1e83dc31d230f8a8a">Full Example</a></p>
 
 This gives the person who is consuming `PeopleZoo` the most flexibility without having to modify the `Person` trait. It also has the added benefit of not needed to allocate any space on the heap for the `Person`. 
 
