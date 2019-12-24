@@ -2,7 +2,6 @@
 title: Don't use boxed trait objects for struct internals
 byline: When writing a struct with the intention of it being reused, it’s important not to use boxed trait objects to represent interior data as they make it very hard to consume.
 tags: [rust,beginner]
-slug: dont-use-boxed-trait-objects-for-struct-internals
 comments: true
 ---
 
@@ -16,12 +15,13 @@ According to the [rust book](https://doc.rust-lang.org/book/ch10-02-traits.html)
 Much like interfaces in other languages, Rust traits are a method of abstraction that allows you to define a schema through which you can
 communicate with an object - [and a lot more](https://blog.rust-lang.org/2015/05/11/traits.html).
 
-To me, a trait describes a certain behaviour and should only provide methods that achieve that behaviour.
+At it's core, a trait describes a certain behaviour and should only provide methods that achieve that behaviour.
 
 ### Boxed trait objects
 
 Since the size of a trait is not known at compile time (anything can implement a trait, no matter what size) it's hard to store an object based on the trait it implements since the compiler doesn't know exactly how much space to make available.
-Rust's solution to this is to put a trait inside a `Box`, `Arc` or `Rc` and store the container instead.
+
+Rust's solution to this is to put a trait inside a `Box`, `Arc` or `Rc` and store that container instead.
 
 This is a very useful feature which allows you to do all kinds of awesome stuff - like creating vectors of traits of unknown sizes.
 
@@ -38,9 +38,9 @@ trait Person {
 }
 ```
 
-It would be super easy to implement and allow each different person to say hello in their own favourite greeting.
+It would be super easy to implement and allow each different person to say hello in their favourite greeting.
 
-Now my requirements for the people has changed - I need to group them together in a `PeopleZoo`.
+Down the track my requirements for people might change - I might need to group them in a `PeopleZoo`.
 
 Typically, I might model this using a vector of boxed trait objects.
 
@@ -141,7 +141,7 @@ Thankfully, we can refactor our struct to make this a little bit easier.
 
 When writing a trait, I shouldn't have to worry about providing information that is irrelevant to the function of that trait.
 
-It's better to instead leverage Rust's type system and use traits as a way to describe the form of the data that's provided, but let the user provide whatever data they like (provided it fits within the traits constraints).
+It's better to instead leverage Rust's type system and use traits as a way to describe the form of the data that's provided, whilst letting the user provide whatever data they like (provided it fits within the traits constraints).
 
 In the case of `PeopleZoo`, it's as simple as making it take a generic parameter `P` that is a `Person`. 
 
@@ -184,7 +184,7 @@ A common pattern that I've noticed which gives you full control of the data that
 
 What I mean by this, is creating an enum that implements the same trait that each of it's values implements.
 
-To demonstrate this, I'll first create another struct implementing `Person`.
+To demonstrate, I'll first create another struct implementing `Person`.
 
 ```rust
 struct Grandma {
@@ -200,7 +200,7 @@ impl Person for Grandma {
 
 Since I've now got more than one `Person`, it makes sense to create a wrapper enum to keep track of them and allow easy access through Rust's pattern matching syntax.
 
-Furthermore, since Rust enums are [tagged unions](http://patshaughnessy.net/2018/3/15/how-rust-implements-tagged-unions), they'll only have the memory footprint of the largest entry in the enum (plus a little bit more for type information), and since the size is known at compile time, there will also be no heap allocation like there would with a `Box`.
+Furthermore, since Rust enums are [tagged unions](http://patshaughnessy.net/2018/3/15/how-rust-implements-tagged-unions), they'll only have the memory footprint of the largest entry in the enum (plus a little bit more for type information), and since the size is known at compile time, there will be no heap allocation like there would with a `Box`.
 
 ```rust
 enum People {
@@ -237,12 +237,12 @@ This gives the person who is consuming `PeopleZoo` the most flexibility without 
 
 ## Using `Box<dyn Trait>`
 
-Now I'm not trying to say that using boxed trait objects is bad, there are some cases where it makes a lot of sense.
-What I am saying, however, is that using `Box<dyn Trait>` gives other developers that may consume your struct a hard time as there's not much flexibility.
+Now I'm not trying to say that using boxed trait objects is bad, there are some cases where they make a lot of sense.
+What I am saying is that using `Box<dyn Trait>` gives other developers that may consume your struct a hard time as there's not much flexibility.
 
-You simply shouldn't force it upon anyone.
+In other words, you simply shouldn't force them upon anyone if you don't have to.
 
-However, you shouldn't make it hard to use them either.
+That being said, you shouldn't make it hard to use them either.
 
 ### A `Box<dyn Trait>` trick
 
@@ -250,7 +250,7 @@ By default a `Box<dyn Trait>` doesn't implement the trait of the object it conta
 This means that trying to construct `PeopleZoo<Box<dyn Person>>` won't work out of the box and will give a type error.
 
 Because of this, it's good practice to give a default implementation of your trait for it's boxed counterpart.
-This can be done by calling `as_ref` or `as_mut` on the `Box` and calling the relevant method.
+This can be done by calling `as_ref` or `as_mut` on the `Box` and calling the references relevant method.
 
 For just a small bit of effort you can help a bunch of people that may consume your struct.
 
