@@ -68,7 +68,11 @@ export const SEO: StatelessComponent<SEOProps> = ({ description, lang = 'en', me
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: `@bennettbackward`,
+        },
+        {
+          name: 'twitter:site',
+          content: '@bennettbackward',
         },
         {
           name: `twitter:title`,
