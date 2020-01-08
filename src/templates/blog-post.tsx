@@ -1,5 +1,4 @@
 import React, { StatelessComponent } from "react"
-import Disqus from "gatsby-plugin-disqus"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 import Bio from "../components/bio"
@@ -187,15 +186,6 @@ export const BlogPost: StatelessComponent<{
           )}
         </li>
       </ul>
-      {!isAmp && comments ? (
-        <Disqus
-          identifier={post.id}
-          title={title}
-          url={`${"https://bennetthardwick.com"}${location.pathname}`}
-        />
-      ) : (
-        ""
-      )}
     </>
   )
 
