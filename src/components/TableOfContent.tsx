@@ -10,8 +10,8 @@ const Container = styled.div`
   border-radius: 3px;
   margin: 0px 20px;
   padding: 0px 20px;
-  background: #f5f2f0;
   border: dashed 1px #1ca086;
+  margin-bottom: 1rem;
 `
 
 const Title = styled.h2`
