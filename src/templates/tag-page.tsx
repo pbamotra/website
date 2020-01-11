@@ -62,13 +62,21 @@ export const pageQuery = graphql`
       totalCount
       edges {
         node {
+          excerpt(pruneLength: 250)
+          timeToRead
+
+          wordCount {
+            words
+          }
+
           fields {
             slug
             date: createdAt(formatString: "MMMM DD, YYYY")
+            sortTime
           }
           frontmatter {
-            title
             created: date(formatString: "MMMM DD, YYYY")
+            title
             byline
           }
         }
