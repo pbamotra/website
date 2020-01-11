@@ -1,42 +1,57 @@
-import React, {StatelessComponent} from "react"
-import {Link} from "gatsby"
-import {rhythm} from "../utils/typography"
-import styled from 'styled-components';
+import React, { StatelessComponent } from "react"
+import { Link } from "gatsby"
+import { rhythm } from "../utils/typography"
+import styled from "styled-components"
 
 export const PostTitle = styled.h3`
-  margin-bottom: ${rhythm(1 / 4)}
-  && a {
+  margin-bottom: ${rhythm(1 / 4)} && a {
     box-shadow: none;
   }
-`;
+`
 
-export const PostPreviewContainer = styled.div``;
-export const PostContent = styled.p``;
+const Info = styled.small`
+  opacity: 0.8;
+  margin-bottom: 0.1rem;
+  display: block;
+`
 
-export const PostPreview: StatelessComponent<{posts: Post[]}> = ({posts}) => (
+const Highlighted = styled.span`
+  color: #1ca086;
+`
+
+export const PostPreviewContainer = styled.div``
+export const PostContent = styled.p``
+
+export const PostPreview: StatelessComponent<{ posts: Post[] }> = ({
+  posts,
+}) => (
   <>
-    {
-      posts.map((post, i) => {
-        const {title, created, byline} = post.frontmatter;
-        const {slug, date} = post.fields;
-        const {excerpt} = post;
+    {posts.map((post, i) => {
+      const { title, created } = post.frontmatter
+      const { slug, date } = post.fields
+      const {
+        excerpt,
+        wordCount: { words },
+        timeToRead,
+      } = post
 
-        return <PostPreviewContainer key={'blog-' + i}>
+      return (
+        <PostPreviewContainer key={"blog-" + i}>
           <PostTitle>
-            <Link to={slug || ""}>
-              {title}
-            </Link>
+            <Link to={slug || ""}>{title}</Link>
           </PostTitle>
-          <small>{created || date}</small>
-          <PostContent dangerouslySetInnerHTML={{
-            __html: byline || excerpt
-          }} />
+          <Info>
+            {created || date} - <Highlighted>{words}</Highlighted> words -{" "}
+            <Highlighted>{timeToRead}</Highlighted> minute
+            {timeToRead > 1 ? "s" : ""}
+          </Info>
+          {excerpt.split("\n").map(x => (
+            <PostContent key={x}>{x}</PostContent>
+          ))}
         </PostPreviewContainer>
-
-      })
-
-    }
+      )
+    })}
   </>
 )
 
-export default PostPreview;
+export default PostPreview

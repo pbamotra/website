@@ -49,7 +49,13 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
-          excerpt
+          excerpt(pruneLength:250)
+          timeToRead
+
+          wordCount {
+            words
+          }
+
           fields {
             slug
             date: createdAt(formatString: "MMMM DD, YYYY")
