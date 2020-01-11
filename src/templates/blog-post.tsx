@@ -2,6 +2,7 @@ import React, { StatelessComponent } from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 import Bio from "../components/bio"
+import { TableOfContents } from "../components/TableOfContent"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
@@ -37,14 +38,14 @@ const Row = styled.div`
 
   @media (min-width: 1400px) {
     &:after {
-     content: '';
-     left: 564px;
-     z-index: -1;
-     position: fixed;
-     right: 0;
-     background: #f5f2f0;
-     top: 0;
-     bottom: 0;
+      content: "";
+      left: 564px;
+      z-index: -1;
+      position: fixed;
+      right: 0;
+      background: #f5f2f0;
+      top: 0;
+      bottom: 0;
     }
   }
 `
@@ -148,7 +149,7 @@ export const BlogPost: StatelessComponent<{
     title,
     byline,
     excerpt,
-    comments,
+    contents,
     manualDate,
     manualCreatedAt,
     sideBySide,
@@ -261,8 +262,11 @@ export const BlogPost: StatelessComponent<{
           undefined
         )}
       </p>
+      {contents && <TableOfContents items={post.tableOfContents.items} />}
       <MDXRenderer
-        components={sideBySide ? { wrapper: SideBySideWrapper } : undefined}
+        components={
+          sideBySide ? ({ wrapper: SideBySideWrapper } as any) : undefined
+        }
       >
         {post.body}
       </MDXRenderer>
@@ -294,6 +298,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       body
+      tableOfContents
       fields {
         createdAt
         date: createdAt(formatString: "MMMM DD, YYYY")
@@ -303,9 +308,9 @@ export const pageQuery = graphql`
         manualCreatedAt: date
         manualDate: date(formatString: "MMMM DD, YYYY")
         title
+        contents
         byline
         tags
-        comments
         sideBySide
       }
     }

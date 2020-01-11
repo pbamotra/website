@@ -10,6 +10,38 @@ const LayoutContainer = styled.div<{ path: string; sidebyside: boolean }>`
   max-width: ${rhythm(24)};
   padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    position: relative;
+
+    &:hover {
+      a.anchor {
+        opacity: 1;
+      }
+    }
+
+    a.anchor {
+      &,
+      &:hover,
+      &:active,
+      &:visited {
+        transition: opacity 0.1s;
+        opacity: 0;
+        position: absolute;
+        left: -18px;
+        text-decoration: none;
+        background-image: none;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
   ${({ sidebyside }) =>
     sidebyside &&
     `
