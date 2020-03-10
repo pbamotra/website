@@ -78,6 +78,24 @@ const DOTFILES = (
   </div>
 )
 
+const OBS_WRAPPER = (
+  <div>
+    <Title>
+      <a
+        href="https://github.com/bennetthardwick/rust-obs-plugins"
+        target="__blank"
+      >
+        Rust OBS Wrapper
+      </a>
+    </Title>
+    <small>March 10, 2020</small>
+    <p>
+      A safe Rust wrapper around the OBS API, useful for creating OBS sources,
+      filters and effects.
+    </p>
+  </div>
+)
+
 const DARKNET = (
   <div>
     <Title>
@@ -126,6 +144,7 @@ export const ProjectsIndex: React.FC<{ data: any; location: any }> = ({
       />
       <h1>Projects</h1>
       <p>A few small projects I've enjoyed working on over the years.</p>
+      {OBS_WRAPPER}
       {DARKNET}
       {GRUVBOX_GTK}
       {DOTFILES}
