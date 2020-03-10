@@ -1,5 +1,5 @@
 import React, { StatelessComponent } from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import About from "../components/about"
@@ -91,10 +91,20 @@ const Links = styled(L)`
   }
 `
 
+const BlogCta = styled.p`
+  text-align: center;
+  font-size: 14pt;
+`;
+
 export const Home: StatelessComponent<{ data: any; location: any }> = ({
   data,
   location,
 }) => {
+  const {
+    frontmatter: { title },
+    fields: { slug },
+  } = data.allMdx.nodes[0]
+
   return (
     <Layout location={location}>
       <SEO
@@ -106,6 +116,9 @@ export const Home: StatelessComponent<{ data: any; location: any }> = ({
       </ProfileContainer>
       <div>
         <About />
+        <BlogCta>
+          Read my latest post "<Link to={slug}>{title}</Link>"
+        </BlogCta>
         <Links />
       </div>
     </Layout>
@@ -120,6 +133,23 @@ export const pageQuery = graphql`
       childImageSharp {
         fixed(width: 280, quality: 100) {
           ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    allMdx(
+      sort: { fields: [fields___sortTime], order: DESC }
+      filter: {
+        frontmatter: { draft: { ne: true } }
+        fileAbsolutePath: { regex: "^/blog/" }
+      }
+      limit: 1
+    ) {
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
         }
       }
     }
