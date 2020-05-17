@@ -1,9 +1,0 @@
----
-- key: rust
-  description: Posts I've written about my new favourite programming language. Rust makes it easy to write fast, safe and easy to understand code.
-- key: beginner
-  description: Posts to help out people just getting into programming, technology - and using Vim.
-- key: vim
-  description: Some tips and tricks I've learnt while learning to use the modal text editor Vim.
-- key: archlinux
-  description: The tales of my adventures with the notoriously difficult, rolling release Linux distribution - Arch Linux.
