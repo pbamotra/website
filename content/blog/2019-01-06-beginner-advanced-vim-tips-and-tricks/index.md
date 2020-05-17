@@ -1,7 +1,6 @@
 +++
 title = "8 Vim tips and tricks for advanced beginners"
 description = "Some tips and tricks to help you overcome the valley of despair and become an advanced Vim user."
-aliases = ["/blog/2019-01-06-beginner-advanced-vim-tips-and-tricks/"]
 [taxonomies]
 tags = ["vim", "neovim", "beginner"]
 +++

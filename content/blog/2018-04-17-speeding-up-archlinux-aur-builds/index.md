@@ -1,7 +1,6 @@
 +++
 title = "Speeding up Arch Linux AUR build times"
 description = "Compiling packages from the AUR can take forever. You can speed them up dramatically by parallelizing the build."
-aliases = ["/blog/2018-04-17-speeding-up-archlinux-aur-builds/"]
 [taxonomies]
 tags = ["archlinux", "beginner"]
 +++

@@ -1,7 +1,6 @@
 +++
 title = "Parameters go backwards in C"
 description = "C parameters don’t work like other programming languages… except when they do."
-aliases = [ "/blog/2017-10-31-params-in-c-go-backwards/" ]
 [taxonomies]
 tags = ["c", "beginner"]
 +++

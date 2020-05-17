@@ -1,7 +1,6 @@
 +++
 title = "Changing from X.org and i3wm to Sway and Wayland"
 description = "Today I decided to embrace the dark side and move from i3wm to Sway... Why didn't I do this sooner!"
-aliases = ["/blog/2018-10-06-change-to-sway-arch-linux/"]
 [taxonomies]
 tags = [ "archlinux" ]
 +++

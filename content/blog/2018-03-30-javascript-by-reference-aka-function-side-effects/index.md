@@ -1,7 +1,6 @@
 +++
 title = "JavaScript by reference AKA opening up a box of function side effects"
 description = "Objects and Arrays are passed by reference to JavaScript functions. Who would have known."
-aliases = ["/blog/2018-03-30-javascript-by-reference-aka-function-side-effects/"]
 [taxonomies]
 tags = ["javascript"]
 +++

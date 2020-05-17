@@ -1,7 +1,6 @@
 +++
 title = "Fixing broken Japanese fonts on Arch Linux"
 description = "How to configure default system fonts and input for working with Japanese on Arch Linux."
-aliases = ["/blog/2018-08-30-fixing-broken-japanese-fonts-arch-linux/"]
 [taxonomies]
 tags = ["archlinux", "beginner", "japanese"]
 +++

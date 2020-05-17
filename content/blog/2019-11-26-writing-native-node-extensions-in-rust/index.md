@@ -3,7 +3,6 @@ title = "Writing safe, efficient and parallel Node.js extensions with Rust, Neon
 slug = "writing-safe-efficient-parallel-native-node-extensions-in-rust-and-neon"
 description = "Rayon and Neon allow you to take full advantage of your system's hardware by writing super fast parallel native JavaScript modules with Rust."
 side-by-side = true
-aliases = ["/blog/2019-11-26-writing-native-node-extensions-in-rust/"]
 [taxonomies]
 tags = [ "rust", "javascript", "nodejs" ]
 +++

@@ -1,7 +1,6 @@
 +++
 title = "Why you should be force pushing your branches"
 description = "Force pushing has been getting a bad wrap ever since it was invented, but it's actually the best way to push!"
-aliases = ["/blog/2019-05-27-why-you-should-be-force-pushing-your-branches/"]
 [taxonomies]
 tags = ["git","beginner"]
 +++

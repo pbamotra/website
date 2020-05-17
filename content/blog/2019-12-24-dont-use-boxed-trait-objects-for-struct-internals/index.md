@@ -1,7 +1,6 @@
 +++
 title = "Don't use boxed trait objects for struct internals"
 description = "When writing a struct with the intention of it being reused, it’s important not to use boxed trait objects to represent interior data as they make it very hard to consume."
-aliases = ["/blog/2019-12-24-dont-use-boxed-trait-objects-for-struct-internals/"]
 [taxonomies]
 tags = ["rust","beginner"]
 +++

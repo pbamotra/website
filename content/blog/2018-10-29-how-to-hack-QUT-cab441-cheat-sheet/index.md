@@ -1,7 +1,6 @@
 +++
 title = "How to hack (QUT CAB441 cheat sheet)"
 description = "My cheat sheets and preparation heading into the CAB441 Network Security exam."
-aliases = ["/blog/2018-10-29-how-to-hack-QUT-cab441-cheat-sheet/"]
 [taxonomies]
 tags = [ "infosec" ]
 +++
