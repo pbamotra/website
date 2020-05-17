@@ -7,7 +7,7 @@ command = """
 zola build && \
 wget https://github.com/bennetthardwick/static-site-to-amp/releases/download/0.1.0/static-site-to-amp && \
 chmod +x ./static-site-to-amp && \
-./static-site-to-amp ./public --base https://bennetthardwick.com --output ./public
+./static-site-to-amp ./public --base https://bennetthardwick.com --output ./output
 """
 
 [build.environment]
@@ -24,7 +24,7 @@ command = """
 zola build --base-url $DEPLOY_PRIME_URL && \
 wget https://github.com/bennetthardwick/static-site-to-amp/releases/download/0.1.0/static-site-to-amp && \
 chmod +x ./static-site-to-amp && \
-./static-site-to-amp ./public --base $DEPLOY_PRIME_URL --output ./public
+./static-site-to-amp ./public --base $DEPLOY_PRIME_URL --output ./output
 """
 
 [[ redirects ]]
