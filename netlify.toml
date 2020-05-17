@@ -2,8 +2,13 @@
 # This assumes that the Zola site is in a docs folder. If it isn't, you don't need
 # to have a `base` variable but you do need the `publish` and `command` variables.
 base    = "."
-publish = "./public"
-command = "zola build"
+publish = "./output"
+command = """
+zola build && \
+wget https://github.com/bennetthardwick/static-site-to-amp/releases/download/0.1.0/static-site-to-amp && \
+chmod +x static-site-to-amp && \
+static-site-to-amp ./public --base https://bennetthardwick.com --output ./public
+"""
 
 [build.environment]
 # Set the version name that you want to use and Netlify will automatically use it.
@@ -15,7 +20,12 @@ ZOLA_VERSION = "0.9.0"
 # `$DEPLOY_PRIME_URL`.
 
 [context.deploy-preview]
-command = "zola build --base-url $DEPLOY_PRIME_URL"
+command = """
+zola build --base-url $DEPLOY_PRIME_URL && \
+wget https://github.com/bennetthardwick/static-site-to-amp/releases/download/0.1.0/static-site-to-amp && \
+chmod +x static-site-to-amp && \
+static-site-to-amp ./public --base $DEPLOY_PRIME_URL --output ./public
+"""
 
 [[ redirects ]]
   from = "/blog/2018-04-17-speeding-up-archlinux-aur-builds/"
