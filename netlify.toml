@@ -16,3 +16,7 @@ ZOLA_VERSION = "0.9.0"
 
 [context.deploy-preview]
 command = "zola build --base-url $DEPLOY_PRIME_URL"
+
+[[ redirects ]]
+  from = "/blog/2018-04-17-speeding-up-archlinux-aur-builds/"
+  to = "/blog/speeding-up-archlinux-aur-builds/"
