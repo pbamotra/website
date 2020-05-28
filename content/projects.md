@@ -7,6 +7,20 @@ A few small projects I've enjoyed working on over the years.
 
 <div class="post-preview">
   <h3 class="post-title">
+    <a href="https://simple-dev-blog-zola-starter.netlify.app/">
+      Simple Dev Blog Zola Theme
+    </a>
+  </h3>
+  <small>
+    May 21, 2020
+  </small>
+  <div class="summary">
+    A Zola theme that is meant to replace simple Gatsby blogs by prerendering links and including all the basics needed for SEO. It's the theme that powers this blog.
+  </div>
+</div>
+
+<div class="post-preview">
+  <h3 class="post-title">
     <a href="https://github.com/bennetthardwick/rust-obs-plugins">
     Rust OBS Wrapper
     </a>
