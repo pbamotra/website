@@ -31,6 +31,8 @@ nav = [
   { name = "Blog", path = "/blog/" }
 ]
 
+author = "Bennett Hardwick"
+
 latest_text = "Check out my latest post:"
 
 icon = "icon.png"
