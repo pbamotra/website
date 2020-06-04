@@ -35,7 +35,26 @@ Google is currently pushing the [Core Web Vitals](https://web.dev/vitals/#core-w
 On the search front, these metrics will contribute to your [SEO ranking](https://www.searchenginejournal.com/googles-core-web-vitals-ranking-signal/370719/).
 Although the direct impact of a low score is not known, as seen in the previous [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fwww.gatsbyjs.org%2F&tab=mobile) screen shot, JavaScript is generally detrimental and limiting your usage can only do good.
 
-### Prerender your pages without JavaScript
+## No service worker, no worries
+
+The idea of progressive web apps (or PWAs) excites many, and in theory they sound great.
+But there's a few caveats that might catch up to you when you least expect it.
+
+When service workers go wrong, they really go wrong.
+
+- a bad service worker ruins your life
+- if you decide to use `gatsby-plugin-offline` you'll need to end up using [`gatsby-plugin-remove-serviceworker`](https://www.npmjs.com/package/gatsby-plugin-remove-serviceworker)
+
+## Gatsby speed with static sites
+
+So how do you actually build a speedy site without JavaScript? Here's a few tips that I used to build this site, with [Zola](https://www.getzola.org/).
+
+### Inline styles
+
+- inlining styles means you don't have to do another request
+- don't fetch google fonts, just include the style in your site
+
+### Prerender your pages
 
 One of the benefits of React and Gatsby apps is instant navigation.
 Not having to load a new web page means you can seamlessly navigate throughout the app without the user having the jarring experience of a page load.
@@ -65,28 +84,6 @@ For context, here's what the page looks like without the tags:
 
 It's still pretty good! But definitely not the buttery-smooth experience you'd expect from a modern website.
 
-## No service worker, no worries
-
-The idea of progressive web apps (or PWAs) excites many, and in theory they sound great.
-But there's a few caveats that might catch up to you when you least expect it.
-
-When service workers go wrong, they really go wrong. 
-
-
-- a bad service worker ruins your life
-- if you decide to use `gatsby-plugin-offline` you'll need to end up using [`gatsby-plugin-remove-serviceworker`](https://www.npmjs.com/package/gatsby-plugin-remove-serviceworker)
-
-## Gatsby speed with static sites
-
-### Inline styles
-
-- inlining styles means you don't have to do another request
-- don't fetch google fonts, just include the style in your site
-
-### Prerender links
-
-- like I said above
-
 ### Serve your data well
 
 - use a CDN
@@ -109,4 +106,3 @@ Feel free to spruce up your pages with JavaScript - just use it when you have to
 
 - Javascript is expensive. Time spent downloading, parsing and evaluating the code can add seconds to interactivity
 - Browsers have built in support for pre-fetching pages which can be used to speed up navigation
-
