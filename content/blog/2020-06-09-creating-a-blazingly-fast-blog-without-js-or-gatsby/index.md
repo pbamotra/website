@@ -1,7 +1,6 @@
 +++
 title = "Creating a blazing fast static website without Gatsby or JavaScript"
 description = "How to create a blazing fast static website without Gatsby or JavaScript that meets all the Core Web Vitals"
-draft = true
 [taxonomies]
 tags = ["webdev","beginner"]
 [extra]
