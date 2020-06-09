@@ -44,11 +44,13 @@ accent_light = "#82ade3"
 
 twitter = "bennettbackward"
 
+default_og_image = "og-image.png"
+
 gtag = "UA-153493405-1"
 
 footer_about = """
 Bennett is a Software Engineer working at [Clipchamp](https://clipchamp.com).
-He spends most of his day playing with React and Gatsby, and editing videos and his night's programming in Rust.
+He spends most of his day playing with React and Gatsby, and editing videos and his nights programming in Rust.
 You can follow him on [Github](https://github.com/bennetthardwick) or [Twitter](https://twitter.com/bennettbackward).
 """
 

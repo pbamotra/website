@@ -4,6 +4,8 @@ description = "How to create a blazing fast static website without Gatsby or Jav
 draft = true
 [taxonomies]
 tags = ["webdev","beginner"]
+[extra]
+thumbnail = "og-image.png"
 +++
 
 Gatsby, React, and static websites are all rage at the moment. Though they aren't without their flaws, for the most part, I've been riding the bandwagon.
@@ -16,10 +18,10 @@ I've too started to think that maybe life should be simpler.
 ## JavaScript costs seconds
 
 Blazing fast websites have a lot of logic that tries to make them fast.
-They have routines for fetching data, pre-fetching data, caching data, rendering data, hydrating and bootstrapping pages - all in the hopes of delivering the fastest most seamless experience possible.
+They have routines for fetching data, pre-fetching data, caching data, rendering data, hydrating and bootstrapping pages - all in the hopes of delivering the fastest, most seamless experience possible.
 This, however, comes at the cost of having to deliver and parse large amounts of JavaScript on the client.
 
-To see just significant a role JS plays, try using Google's [PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/about) on any of your favourite websites.
+To see just how significant a role JS plays, try using Google's [PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/about) on any of your favourite websites.
 
 Here's how the [Gatsby home page](https://gatsbyjs.org) fairs:
 
