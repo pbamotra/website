@@ -5,7 +5,7 @@ base    = "."
 publish = "./output"
 command = """
 zola build && \
-wget https://github.com/bennetthardwick/static-site-optimizer/releases/download/0.3.2/static-site-optimizer && \
+wget https://github.com/bennetthardwick/static-site-optimizer/releases/download/0.4.0/static-site-optimizer && \
 chmod +x ./static-site-optimizer && \
 ./static-site-optimizer ./public --base-url https://bennetthardwick.com --outdir ./output --amp --inline-styles
 """
@@ -22,7 +22,7 @@ ZOLA_VERSION = "0.11.0"
 [context.deploy-preview]
 command = """
 zola build --base-url $DEPLOY_PRIME_URL && \
-wget https://github.com/bennetthardwick/static-site-optimizer/releases/download/0.3.2/static-site-optimizer && \
+wget https://github.com/bennetthardwick/static-site-optimizer/releases/download/0.4.0/static-site-optimizer && \
 chmod +x ./static-site-optimizer && \
 ./static-site-optimizer ./public --base-url $DEPLOY_PRIME_URL --outdir ./output --amp --inline-styles
 """
