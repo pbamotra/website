@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+  {{ partial "head.html" . }}
+
+  {{ block "title" . }}
+    <title>{{ .Title }}</title>
+  {{ end }}
+
+  {{ block "stylesheet" . }}
+  {{ $style := resources.Get "sass/main.scss" | resources.ToCSS (dict "outputStyle" "compressed") }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" />
+  {{ end }}
+
+  {{ block "head" . }}
+  {{ end }}
+
+  <body>
+    {{ block "header" . }}
+    <header>
+      <a class="profile-icon" href="/">
+        {{ $profile := resources.Get .Site.Params.profile }}
+        {{ $icon := $profile.Fit "50x50" }}
+        <img src="{{ $icon.Permalink }}" width="50" height="50" alt="Bennett Hardwick" />
+      </a>
+      <nav>
+      <ul>
+       {{ $currentPage := . }}
+        {{ range .Site.Menus.main }}
+        <li>
+          <a class="{{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+        </li>
+      {{ end }}
+      </ul>
+      </nav>
+    </header>
+    {{ end }}
+    <main>{{ block "main" . }}{{ end }}</main>
+    {{ partial "footer.html" . }}
+
+    {{ if strings.HasSuffix "/amp/" .Permalink }}
+
+    {{ $prerender := resources.Get "js/prerender-links.js" }}
+    {{ $script:= $prerender | resources.Minify }}
+    <script src="{{ $script.Permalink }}"></script>
+
+    {{ end }}
+  </body>
+</html>

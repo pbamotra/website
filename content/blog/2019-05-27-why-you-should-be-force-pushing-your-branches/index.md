@@ -1,9 +1,11 @@
-+++
-title = "Why you should be force pushing your branches"
-description = "Force pushing has been getting a bad wrap ever since it was invented, but it's actually the best way to push!"
-[taxonomies]
-tags = ["git","beginner"]
-+++
+---
+title: "Why you should be force pushing your branches"
+description: "Force pushing has been getting a bad wrap ever since it was invented, but it's actually the best way to push!"
+date: 2019-05-27
+tags: 
+  - "git"
+  - "beginner"
+---
 
 A lot of people hate force pushing.
 I hear the same argument over and over again, that needing to force push to a branch means you've done something wrong.

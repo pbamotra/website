@@ -1,9 +1,12 @@
-+++
-title = "Fixing broken Japanese fonts on Arch Linux"
-description = "How to configure default system fonts and input for working with Japanese on Arch Linux."
-[taxonomies]
-tags = ["archlinux", "beginner", "japanese"]
-+++
+---
+title: "Fixing broken Japanese fonts on Arch Linux"
+description: "How to configure default system fonts and input for working with Japanese on Arch Linux."
+date: 2018-03-30
+tags:
+  - "archlinux"
+  - "beginner"
+  - "japanese"
+---
 
 Setting up fonts for Japanese and other non-latin languages can be a bit difficult on Arch Linux. I find that every time I configure a new system I forget how to make it work perfectly,
 and I end up wasting hours trying to find the right answers.

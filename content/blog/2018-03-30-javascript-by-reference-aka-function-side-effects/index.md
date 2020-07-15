@@ -1,9 +1,10 @@
-+++
-title = "JavaScript by reference AKA opening up a box of function side effects"
-description = "Objects and Arrays are passed by reference to JavaScript functions. Who would have known."
-[taxonomies]
-tags = ["javascript"]
-+++
+---
+title: "JavaScript by reference AKA opening up a box of function side effects"
+description: "Objects and Arrays are passed by reference to JavaScript functions. Who would have known."
+date: 2018-03-30
+tags: 
+  - "javascript"
+---
 
 I've been using JavaScript for quite a long time. Up until now, I felt like I was some kind of expert - no project was too large or too small for me to complete! I was unstoppable!
 

@@ -1,0 +1,7 @@
+{{ define "main" }}
+  {{ .Content }} 
+  {{ range .Site.Data.projects }}
+    {{ $data := dict "Title" .title "DateString" .date "SummaryMarkdown" .description "Permalink" .link }}
+    {{ partial "post-preview.html" $data }}
+  {{ end }}
+{{ end }}

@@ -1,6 +1,6 @@
-+++
-title = "Bennett's Rust Journal"
-+++
+---
+title: "Bennett's Rust Journal"
+---
 
 ## Hello, Bennett here.
 

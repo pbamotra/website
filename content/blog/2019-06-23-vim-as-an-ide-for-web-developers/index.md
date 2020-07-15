@@ -1,10 +1,14 @@
-+++
-title = "Using Vim as a web development IDE"
-description = "I traded in VSCode and started using neovim as my full-time IDE - here's what I learned."
-alises = ["/blog/2019-06-23-vim-as-an-ide-for-web-developers/"]
-[taxonomies]
-tags = ["vim","javascript","react"]
-+++
+---
+title: "Using Vim as a web development IDE"
+description: "I traded in VSCode and started using neovim as my full-time IDE - here's what I learned."
+date: 2019-06-23
+aliases:
+  - "/blog/2019-06-23-vim-as-an-ide-for-web-developers/"
+tags:
+  - "vim"
+  - "javascript"
+  - "react"
+---
 
 Two weeks ago I decided to make the jump - finally changing from Microsoft's Visual Studio Code (Code) editor to Vim.
 Despite months and months of strenuous [golfing](http://www.vimgolf.com/), there was always something in my road when I tried to change editors.

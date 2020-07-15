@@ -1,11 +1,13 @@
-+++
-title = "Writing safe, efficient and parallel Node.js extensions with Rust, Neon and Rayon"
-slug = "writing-safe-efficient-parallel-native-node-extensions-in-rust-and-neon"
-description = "Rayon and Neon allow you to take full advantage of your system's hardware by writing super fast parallel native JavaScript modules with Rust."
-side-by-side = true
-[taxonomies]
-tags = [ "rust", "javascript", "nodejs" ]
-+++
+---
+title: "Writing safe, efficient and parallel Node.js extensions with Rust, Neon and Rayon"
+slug: "writing-safe-efficient-parallel-native-node-extensions-in-rust-and-neon"
+description: "Rayon and Neon allow you to take full advantage of your system's hardware by writing super fast parallel native JavaScript modules with Rust."
+date: 2019-11-26
+tags:
+  - "rust"
+  - "javascript"
+  - "nodejs"
+---
 
 When writing server applications with Node.js, sometimes JavaScript just doesn't cut it and you need to employ native code.
 This could be because of a few different reasons:

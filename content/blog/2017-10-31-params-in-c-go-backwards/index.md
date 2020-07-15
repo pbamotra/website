@@ -1,9 +1,11 @@
-+++
-title = "Parameters go backwards in C"
-description = "C parameters don’t work like other programming languages… except when they do."
-[taxonomies]
-tags = ["c", "beginner"]
-+++
+---
+title: "Parameters go backwards in C"
+description: "C parameters don’t work like other programming languages… except when they do."
+date: 2017-10-31
+tags:
+    - "c"
+    - "beginner"
+---
 
 The funny thing about C, is that it gets harder the longer you spend trying to learn it.
 

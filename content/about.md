@@ -1,6 +1,6 @@
-+++
-template = "page.html"
-+++
+---
+title: "About - Bennett's Rust Journal"
+---
 
 ## Hello, Bennett here.
 

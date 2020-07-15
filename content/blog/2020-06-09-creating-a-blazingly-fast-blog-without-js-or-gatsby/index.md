@@ -1,11 +1,11 @@
-+++
-title = "Creating a blazing fast static website without Gatsby or JavaScript"
-description = "How to create a blazing fast static website without Gatsby or JavaScript that meets all the Core Web Vitals"
-[taxonomies]
-tags = ["webdev","beginner"]
-[extra]
-thumbnail = "og-image.png"
-+++
+---
+title: "Creating a blazing fast static website without Gatsby or JavaScript"
+description: "How to create a blazing fast static website without Gatsby or JavaScript that meets all the Core Web Vitals"
+date: 2020-06-09
+tags:
+  - "webdev"
+  - "beginner"
+---
 
 Gatsby, React, and static websites are all rage at the moment. Though they aren't without their flaws, for the most part, I've been riding the bandwagon.
 

@@ -1,10 +1,11 @@
-+++
-title = "How to complete the Advent of Code 2018 challenges with Rust"
-description = "An introduction to the Rust programming language through an Advent of Code 2018 challenge."
-alises = ["/blog/2018-12-07-introduction-to-rust-through-advent-of-code-2018/"]
-[taxonomies]
-tags = [ "rust" ]
-+++
+---
+title: "How to complete the Advent of Code 2018 challenges with Rust"
+description: "An introduction to the Rust programming language through an Advent of Code 2018 challenge."
+aliases: ["/blog/2018-12-07-introduction-to-rust-through-advent-of-code-2018/"]
+date: 2018-12-07
+tags:
+  - "rust"
+---
 
 Over the past month or so I've been learning the Rust programming language. When I heard that Advent of Code was starting up again, I figured it would be a great opportunity to put some of the skills I'd learned to the test.
 

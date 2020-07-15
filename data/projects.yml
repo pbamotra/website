@@ -1,0 +1,20 @@
+- title: Simple Dev Blog Zola Theme
+  link: https://simple-dev-blog-zola-starter.netlify.app/
+  date: May 21, 2020
+  description: "A Zola theme that is meant to replace simple Gatsby blogs by prerendering links and including all the basics needed for SEO. It's the theme that powers this blog."
+- title: Rust OBS Wrapper
+  link: https://github.com/bennetthardwick/rust-obs-plugins
+  date: March 10, 2020
+  description: "A safe Rust wrapper around the OBS API, useful for creating OBS sources, filters, transitions and effects."
+- title: Darknet.js
+  link: https://github.com/bennetthardwick/darknet.js
+  date: May 28, 2018
+  description: 'A Node.js wrapper of [pjreddie''s](https://pjreddie.com/) open source neural network framework Darknet.'
+- title: Gruvbox GTK
+  link: https://github.com/bennetthardwick/gruvbox-gtk
+  date: April 3, 2018
+  description: 'A simple GTK theme based on [Arc](https://github.com/horst3180/arc-theme), but with Gruvbox colours.'
+- title: Dotfiles
+  link: https://github.com/bennetthardwick/dotfiles
+  date: Always...
+  description: "An ongoing attempt to make myself ultra-productive and the very best - like no one ever was."

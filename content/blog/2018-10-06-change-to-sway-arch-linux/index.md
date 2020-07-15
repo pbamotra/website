@@ -1,9 +1,10 @@
-+++
-title = "Changing from X.org and i3wm to Sway and Wayland"
-description = "Today I decided to embrace the dark side and move from i3wm to Sway... Why didn't I do this sooner!"
-[taxonomies]
-tags = [ "archlinux" ]
-+++
+---
+title: "Changing from X.org and i3wm to Sway and Wayland"
+description: "Today I decided to embrace the dark side and move from i3wm to Sway... Why didn't I do this sooner!"
+date: 2018-10-06
+tags:
+  - "archlinux"
+---
 
 I decided to move my Arch Linux i3wm configuration over to Sway today. Partly because I was bored, but mainly because everything has been feeling really sluggish lately.
 

@@ -1,0 +1,7 @@
+{{ define "main" }}
+  {{ .Content }}
+  
+  {{ range .RegularPages }}
+    {{ partial "post-preview.html" . }}
+  {{ end }}
+{{ end }}

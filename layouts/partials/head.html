@@ -1,0 +1,38 @@
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+/>
+
+{{ if isset .Site.Params "accent" }}
+<meta name="theme-color" content="{{ .Site.Params.accent }}" />
+{{ end }}
+
+{{ if and (isset .Site.Params "accent") (isset .Site.Params "accent_light") }}
+<style>
+  :root {
+    --accent-color: {{ .Site.Params.accent }};
+    --accent-color-light: {{ .Site.Params.accent_light }};
+  }
+</style>
+{{ end }}
+
+{{ if isset .Site.Params "profile" }}
+{{ $profile := resources.Get .Site.Params.profile }}
+{{ $icon := $profile.Fit "48x48" }}
+<link rel="icon" href="{{ $icon.Permalink }}" />
+
+
+{{ range $icon_size := slice "48x48" "72x72" "96x96" "144x144" "192x192" "256x256" "384x384" "512x512" }}
+{{ $icon := $profile.Fit $icon_size }}
+<link
+  rel="apple-touch-icon"
+  sizes="{{ $icon_size }}"
+  href="{{ $icon.Permalink }}"
+/>
+{{ end }}
+{{ end }}
+
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">

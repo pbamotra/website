@@ -1,9 +1,12 @@
-+++
-title = "8 Vim tips and tricks for advanced beginners"
-description = "Some tips and tricks to help you overcome the valley of despair and become an advanced Vim user."
-[taxonomies]
-tags = ["vim", "neovim", "beginner"]
-+++
+---
+title: "8 Vim tips and tricks for advanced beginners"
+description: "Some tips and tricks to help you overcome the valley of despair and become an advanced Vim user."
+date: 2019-01-06
+tags:
+  - "vim"
+  - "neovim"
+  - "beginner"
+---
 
 A few weeks ago, I saw [this](https://robertheaton.com/2018/12/08/programming-projects-for-advanced-beginners/) post by Robert Hearton which outlined a few programming projects for advanced-beginners.
 It talked about the idea of the "valley of despair", and offered up some ways that might help you get out of it.
