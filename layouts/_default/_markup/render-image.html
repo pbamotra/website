@@ -14,9 +14,19 @@
   {{ $caption = . | safeHTML }}
 {{ end }}
 
+{{ if hasPrefix .Page.RelPermalink "/amp/" }}
+<amp-img
+  src="{{ $resized.RelPermalink }}"
+  width="{{ $resized.Width }}"
+  height="{{ $resized.Height }}"
+  layout="responsive"
+  alt="{{ if $alt }}{{ $alt }}{{ else if $caption }}{{ $caption | markdownify | plainify }}{{ else }}&nbsp;{{ end }}"
+  >
+{{ else }}
 <img
   src="{{ $resized.RelPermalink }}"
   width="{{ $resized.Width }}"
   height="{{ $resized.Height }}"
   alt="{{ if $alt }}{{ $alt }}{{ else if $caption }}{{ $caption | markdownify | plainify }}{{ else }}&nbsp;{{ end }}"
   >
+{{ end }}

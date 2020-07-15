@@ -3,6 +3,9 @@ languageCode = "en"
 title = "My New Hugo Site"
 summaryLength = 40
 
+[outputs]
+page = [ "HTML", "AMP" ]
+
 [params]
 
 json_ld_time_format = "2006-01-02T15:04:05JST"

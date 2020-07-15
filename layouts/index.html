@@ -13,7 +13,11 @@
     <div class="profile-container">
       {{ $profile := resources.Get .Site.Params.profile_large }}
       {{ $image := $profile.Fit "280x373" }}
-      <img src="{{ $image.Permalink }}" width="280" height="373" alt="Bennett Hardwick">
+      {{ if hasPrefix .Page.RelPermalink "/amp/" }}
+        <amp-img layout="responsive" src="{{ $image.Permalink }}" width="280" height="373" alt="Bennett Hardwick">
+      {{ else }}
+        <img src="{{ $image.Permalink }}" width="280" height="373" alt="Bennett Hardwick">
+      {{ end }}
     </div>
   </div>
   <div class="content">

@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 
+{{ if hasPrefix .RelPermalink "/amp/" }}
+<html ⚡>
+{{ else }}
 <html>
+{{ end }}
   {{ partial "head.html" . }}
+
 
   {{ block "title" . }}
     <title>{{ .Title }}</title>
@@ -9,7 +14,18 @@
 
   {{ block "stylesheet" . }}
   {{ $style := resources.Get "sass/main.scss" | resources.ToCSS (dict "outputStyle" "compressed") }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}" />
+
+  {{ if hasPrefix .RelPermalink "/amp/" }}
+    <style amp-custom>
+        :root {
+          --accent-color: {{ .Site.Params.accent }};
+          --accent-color-light: {{ .Site.Params.accent_light }};
+        }
+        {{ $style.Content | safeCSS }}
+    </style>
+  {{ else }}
+      <link rel="stylesheet" href="{{ $style.Permalink }}" />
+  {{ end }}
   {{ end }}
 
   {{ block "head" . }}
@@ -21,7 +37,12 @@
       <a class="profile-icon" href="/">
         {{ $profile := resources.Get .Site.Params.profile }}
         {{ $icon := $profile.Fit "50x50" }}
-        <img src="{{ $icon.Permalink }}" width="50" height="50" alt="Bennett Hardwick" />
+
+        {{ if hasPrefix .RelPermalink "/amp/" }}
+            <amp-img layout="responsive" src="{{ $icon.Permalink }}" width="50" height="50" alt="Bennett Hardwick" />
+        {{ else }}
+            <img src="{{ $icon.Permalink }}" width="50" height="50" alt="Bennett Hardwick" />
+        {{ end }}
       </a>
       <nav>
       <ul>
