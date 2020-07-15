@@ -7,6 +7,20 @@
 
 <meta charset="utf-8">
 
+{{ if .Description }}
+<meta name="description" content="{{ .Description }}">
+<meta name="twitter:description" content="{{ .Description }}">
+{{ else if .Site.Params.description }}
+<meta name="description" content="{{ .Site.Params.description }}">
+<meta name="twitter:description" content="{{ .Site.Params.description }}">
+{{ end }}
+
+<meta name="twitter:card" content="summary">
+{{ if isset .Site.Params "twitter" }}
+  <meta name="twitter:creator" content="@{{ .Site.Params.twitter }}">
+  <meta name="twitter:site" content="@{{ .Site.Params.twitter }}">
+{{ end }}
+
 {{ if isset .Site.Params "accent" }}
 <meta name="theme-color" content="{{ .Site.Params.accent }}" />
 {{ end }}
@@ -44,4 +58,3 @@
 {{ end }}
 
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">

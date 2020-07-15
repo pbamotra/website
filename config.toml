@@ -8,6 +8,10 @@ page = [ "HTML", "AMP" ]
 
 [params]
 
+description = "The personal website and thoughts of me Bennett Hardwick - Software Developer living in Brisbane and working at Clipchamp."
+
+twitter = "bennettbackward"
+
 gtag = "UA-153493405-1"
 
 json_ld_time_format = "2006-01-02T15:04:05JST"
