@@ -15,6 +15,20 @@
   {{ block "stylesheet" . }}
   {{ $style := resources.Get "sass/main.scss" | resources.ToCSS (dict "outputStyle" "compressed") }}
 
+  {{ if .Site.Params.gtag }}
+    {{ if hasPrefix .RelPermalink "/amp/" }}
+      <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    {{ else }}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.gtag }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ .Site.Params.gtag }}');
+      </script>
+    {{ end }}
+  {{ end }}
+
   {{ if hasPrefix .RelPermalink "/amp/" }}
     <style amp-custom>
         :root {
@@ -32,6 +46,22 @@
   {{ end }}
 
   <body>
+    {{ if and .Site.Params.gtag (hasPrefix .RelPermalink "/amp/") }}
+      <amp-analytics type="gtag" data-credentials="include">
+        <script type="application/json">
+          {
+            "vars": {
+              "gtag_id": "{{ .Site.Params.gtag }}",
+              "config": {
+                "{{ .Site.Params.gtag }}": { "groups": "default" }
+              }
+            }
+          }
+        </script>
+      </amp-analytics>
+    {{ end }}
+
+
     {{ block "header" . }}
     <header>
       <a class="profile-icon" href="/">
@@ -59,12 +89,11 @@
     <main>{{ block "main" . }}{{ end }}</main>
     {{ partial "footer.html" . }}
 
-    {{ if strings.HasSuffix "/amp/" .Permalink }}
-
-    {{ $prerender := resources.Get "js/prerender-links.js" }}
-    {{ $script:= $prerender | resources.Minify }}
-    <script src="{{ $script.Permalink }}"></script>
-
+    {{ if hasPrefix .RelPermalink "/amp/" }}
+    {{ else }}
+      {{ $prerender := resources.Get "js/prerender-links.js" }}
+      {{ $script:= $prerender | resources.Minify }}
+      <script src="{{ $script.Permalink }}"></script>
     {{ end }}
   </body>
 </html>
