@@ -3,7 +3,7 @@
 {{ if hasPrefix .RelPermalink "/amp/" }}
 <html ⚡>
 {{ else }}
-<html>
+<html lang="{{ .Site.LanguageCode }}">
 {{ end }}
   {{ partial "head.html" . }}
 
