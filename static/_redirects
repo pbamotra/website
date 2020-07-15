@@ -59,3 +59,17 @@
 /projects/dev-to-creator-heat-map/amp/                                  /projects/amp/                                               301
 /projects/brett-and-eddy-react/amp/                                     /projects/amp/                                               301
 /projects/staggered-library/amp/                                        /projects/amp/                                               301
+
+/blog/params-in-c-go-backwards/amp/                                     /amp/blog/params-in-c-go-backwards/                          301
+/blog/making-typescript-packages-javascript-friendly/amp/               /amp/blog/making-typescript-packages-javascript-friendly/    301
+/blog/javascript-by-reference-aka-function-side-effects/amp/            /amp/blog/javascript-by-reference-aka-function-side-effects/ 301
+/blog/speeding-up-archlinux-aur-builds/amp/                             /amp/blog/speeding-up-archlinux-aur-builds/                  301
+/blog/fixing-broken-japanese-fonts-arch-linux/amp/                      /amp/blog/fixing-broken-japanese-fonts-arch-linux/           301
+/blog/change-to-sway-arch-linux/amp/                                    /amp/blog/change-to-sway-arch-linux/                         301
+/blog/how-to-hack-QUT-cab441-cheat-sheet/amp/                           /amp/blog/how-to-hack-QUT-cab441-cheat-sheet/                301
+/blog/introduction-to-rust-through-advent-of-code-2018/amp/             /amp/blog/introduction-to-rust-through-advent-of-code-2018/  301
+/blog/beginner-advanced-vim-tips-and-tricks/amp/                        /amp/blog/beginner-advanced-vim-tips-and-tricks/             301
+/blog/why-you-should-be-force-pushing-your-branches/amp/                /amp/blog/why-you-should-be-force-pushing-your-branches/     301
+/blog/vim-as-an-ide-for-web-developers/amp/                             /amp/blog/vim-as-an-ide-for-web-developers/                  301
+/blog/writing-native-node-extensions-in-rust/amp/                       /amp/blog/writing-native-node-extensions-in-rust/            301
+/blog/dont-use-boxed-trait-objects-for-struct-internals/amp/            /amp/blog/dont-use-boxed-trait-objects-for-struct-internals/ 301
