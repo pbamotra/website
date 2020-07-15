@@ -1,6 +1,6 @@
-baseURL = "http://example.org/"
+baseURL = "https://bennetthardwick.com/"
 languageCode = "en"
-title = "My New Hugo Site"
+title = "Bennett's Rust Journal"
 summaryLength = 40
 
 [outputs]
