@@ -1,0 +1,9 @@
+/*.png
+  cache-control: max-age=604800
+  cache-control: public
+/*.jpg
+  cache-control: max-age=604800
+  cache-control: public
+/*.gif
+  cache-control: max-age=604800
+  cache-control: public
