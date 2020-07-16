@@ -3,9 +3,9 @@ title: Old Is The New New
 date: 2020-07-01
 ---
 
-Tags: [youtube]
+{{< youtube AbgsfeGvg3E >}}
 
-([Youtube Link](https://www.youtube.com/watch?v=AbgsfeGvg3E))
+Tags: [youtube]
 
 - Programs you write should be small enough that others could rewrite it themselves [#thoughts]
 - I began to use the term "software engineering" to distinguish it from hardware and other kinds of engineering; yet, treat each type of engineering as part of the overall systems engineering process - [Margaret Hamilton], [#quotes]

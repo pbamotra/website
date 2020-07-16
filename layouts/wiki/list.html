@@ -1,14 +1,31 @@
 {{ define "title" }}
-  <title>Wiki - {{ .Title }}</title>
+  {{ if ne .Title "Wiki" }}
+    <title>Wiki - {{ .Title }}</title>
+  {{ else }}
+    <title>Wiki</title>
+  {{ end }} 
 {{ end }}
 
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  {{ if .Params.development }}
+  {{ if .Params.dev }}
     <blockquote>
       <p>Note: this section is still under development, who knows if it’ll exist in the future</p>
     </blockquote>
   {{ end }}
+
   {{ .Content }}
+
+  {{ if .Params.parent }}
+    <h2>Nested references</h2>
+    <ul>
+    {{ range sort .Pages "Lastmod" "desc" }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+    </ul>
+  {{ end }}
+
   {{ partial "backlinks.html" . }}
 {{ end }}

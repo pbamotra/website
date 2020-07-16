@@ -4,12 +4,12 @@
 {{ $noResults := true }}
 {{ $first := true }}
 
-{{ range where .Site.Pages "Section" "wiki" }}
+{{ range sort (where .Site.Pages "Section" "wiki") "Lastmod" "desc" }}
   {{ if findRE $path .Content }} 
     {{ if $first }}
       {{ $first = false }}
 
-      <h3>Linked References:</h3>
+      <h2>Linked References:</h2>
         <ul>
     {{ end }}
 

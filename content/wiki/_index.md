@@ -1,17 +1,21 @@
 ---
 title: Wiki
-development: true
+dev: true
 ---
 
-This is an [exobrain].
+Welcome to my wiki!
+
+It's an attempt at building an [exobrain], but you can read more in the [about] section.
 
 ## Quick links
-  - [Thoughts]
-  - [Exobrain]
-  - [About]
-  - [Rust]
+  - [about]
+  - [thoughts]
+  - [exobrain]
+  - [rust]
+  - [recently updated]
 
-[Exobrain]: exobrain.md
-[Thoughts]: thoughts/_index.md
-[About]: about.md
-[Rust]: ./rust/_index.md
+[exobrain]: exobrain.md
+[thoughts]: thoughts/_index.md
+[about]: about.md
+[rust]: ./rust/_index.md
+[recently updated]: ./recently-updated.md

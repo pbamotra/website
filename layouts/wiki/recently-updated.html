@@ -1,0 +1,24 @@
+{{ define "title" }}
+  <title>Wiki - {{ .Title }}</title>
+{{ end }}
+
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  <ul>
+
+  {{ $permalink := .Permalink }}
+
+  {{ range first 100 (sort (where .Site.Pages "Section" "wiki") "Lastmod" "desc") }}
+    {{ if ne $permalink .Permalink }}
+      <li>
+        <a href="{{ .Permalink | safeURL }}">{{ .Lastmod.Format "January 02, 2006" }} - {{ .Title }}</a>
+      </li>
+    {{ end }}
+  {{ end }}
+  </ul>
+
+
+  {{ partial "backlinks.html" . }}
+{{ end }}

@@ -4,6 +4,11 @@
 
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
+  {{ if .Params.dev }}
+    <blockquote>
+      <p>Note: this section is still under development, who knows if it’ll exist in the future</p>
+    </blockquote>
+  {{ end }}
   {{ .Content }}
   {{ partial "backlinks.html" . }}
 {{ end }}
