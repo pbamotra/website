@@ -4,6 +4,8 @@ title: Wiki
 
 # Wiki
 
+> Note: this section is still under development, who knows if it'll exist in the future
+
 This is an [exobrain].
 
 Quick links:

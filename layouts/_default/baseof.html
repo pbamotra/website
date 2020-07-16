@@ -7,7 +7,6 @@
 {{ end }}
   {{ partial "head.html" . }}
 
-
   {{ block "title" . }}
     <title>{{ .Title }}</title>
   {{ end }}
@@ -45,6 +44,7 @@
   {{ block "head" . }}
   {{ end }}
 
+
   <body>
     {{ if and .Site.Params.gtag (hasPrefix .RelPermalink "/amp/") }}
       <amp-analytics type="gtag" data-credentials="include">
@@ -60,7 +60,6 @@
         </script>
       </amp-analytics>
     {{ end }}
-
 
     {{ block "header" . }}
     <header>
@@ -86,8 +85,22 @@
       </nav>
     </header>
     {{ end }}
-    <main>{{ block "main" . }}{{ end }}</main>
-    {{ partial "footer.html" . }}
+    <main>
+      {{ block "main" . }}
+      {{ end }}
+
+      {{ block "footer" . }}
+        {{ if .File }}
+          <br>
+          <footer>
+            <small>
+              <a href="{{ path.Join .Site.Params.repo_edit_url .File.Path }}" target="_blank" rel="noreferrer">Edit on Github</a>
+            </small>
+          </footer>
+        {{ end }}
+      {{ end }}
+
+    </main>
 
     {{ if hasPrefix .RelPermalink "/amp/" }}
     {{ else }}

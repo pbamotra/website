@@ -9,6 +9,8 @@ page = [ "HTML", "AMP" ]
 
 [params]
 
+repo_edit_url = "https://github.com/bennetthardwick/website/edit/development/content/"
+
 description = "The personal website and thoughts of me Bennett Hardwick - Software Developer living in Brisbane and working at Clipchamp."
 
 twitter = "bennettbackward"
