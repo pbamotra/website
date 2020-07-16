@@ -16,4 +16,4 @@
   {{ $path = (printf "%s/" $path) }}
 {{ end }}
 
-<a class="ref" href="{{ $path | safeURL }}">{{ .Text }}</a>
+<a class="ref" href="{{ $path | safeURL }}">{{ .Text | safeHTML }}</a>
