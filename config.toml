@@ -2,6 +2,7 @@ baseURL = "https://bennetthardwick.com/"
 languageCode = "en"
 title = "Bennett's Rust Journal"
 summaryLength = 40
+canonifyURLs = true
 
 [outputs]
 page = [ "HTML", "AMP" ]

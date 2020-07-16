@@ -1,0 +1,29 @@
+{{ $path :=  printf "a class=\"ref\" href=\"%s\"" .RelPermalink }}
+
+
+{{ $noResults := true }}
+{{ $first := true }}
+
+{{ range where .Site.Pages "Section" "wiki" }}
+  {{ if findRE $path .Content }} 
+    {{ if $first }}
+      {{ $first = false }}
+
+      <h3>References:</h3>
+        <ul>
+    {{ end }}
+
+    {{ $noResults = false }}
+
+    <li>
+      {{ if .Date }}
+        {{ .Date.Format "January 02, 2006" }} -
+      {{ end }}
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+  {{ end }}
+{{ end }}
+
+{{ if not $noResults }}
+</ul>
+{{ end }}
