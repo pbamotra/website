@@ -11,6 +11,18 @@ This means that this wiki could be [viewed on Github], or as an [mdbook], or wit
 The code for this wiki lives in a Github repository ([bennetthardwick/website]) and is free to be forked, copied or stolen.
 At the bottom of each page is an "edit on Github" link in case you want to fix anything up.
 
+This [hugo] theme has several features which aid the wiki:
+  - bidirectional linking
+    - this is in the form of the "Linked references" section that appears at the bottom of the page
+    - sections with "Nested references" link to their children and their children to the parents 
+  - pre-rendering pages on hover
+    - this makes navigation feel almost instant
+  - resolve markdown links
+    - not possible with vanilla [hugo], this is done to avoid using [shortcodes] for linking
+  - search
+    - this hasn't been done yet, but once done will allow you to quickly jump to arbitrary pages
+    
+
 [exobrain]: ./exobrain.md
 [hugo]: ./hugo.md
 [shortcodes]: ./hugo.md#shortcodes
