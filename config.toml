@@ -3,6 +3,7 @@ languageCode = "en"
 title = "Bennett's Rust Journal"
 summaryLength = 40
 canonifyURLs = true
+enableGitInfo = true
 
 [outputs]
 page = [ "HTML", "AMP" ]
@@ -39,20 +40,24 @@ guessSyntax = true
 projects = "/:section/:slug/"
 
 [[menu.main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 1
+
+[[menu.main]]
   name = "About"
   url = "/about/"
   weight = 2
 
 [[menu.main]]
-  name = "Projects"
-  url = "/projects/"
-  weight = 1
-
+  name = "Wiki"
+  url = "/wiki/"
+  weight = 3
 
 [[menu.main]]
   name = "Blog"
   url = "/blog/"
-  weight = 3
+  weight = 4
 
 [taxonomies]
   tags = "tags"

@@ -10,7 +10,11 @@
       "headline": "{{ .Title }}",
       "image": [],
       "datePublished": "{{ .Date.Format $.Site.Params.json_ld_time_format }}",
-      "dateModified": "{{ .Date.Format $.Site.Params.json_ld_time_format }}",
+      {{ if .GitInfo }}
+        "dateModified": "{{ .Lastmod.Format $.Site.Params.json_ld_time_format }}",
+      {{ else }}
+        "dateModified": "{{ .Date.Format $.Site.Params.json_ld_time_format }}",
+      {{ end }}
       "author": {
         "@type": "Person",
         "name": "Bennett Hardwick"

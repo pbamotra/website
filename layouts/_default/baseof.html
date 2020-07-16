@@ -94,7 +94,10 @@
           <br>
           <footer>
             <small>
-              <a href="{{ path.Join .Site.Params.repo_edit_url .File.Path }}" target="_blank" rel="noreferrer">Edit on Github</a>
+              {{ if .GitInfo }}
+              Last modified {{ .Lastmod.Format "January 02, 2006" }} - 
+              {{ end }}
+              <a href="{{ path.Join .Site.Params.repo_edit_url .File.Path }}" target="_blank" rel="noreferrer">edit on Github</a>
             </small>
           </footer>
         {{ end }}

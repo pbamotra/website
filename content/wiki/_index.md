@@ -1,18 +1,17 @@
 ---
 title: Wiki
+development: true
 ---
-
-# Wiki
-
-> Note: this section is still under development, who knows if it'll exist in the future
 
 This is an [exobrain].
 
-Quick links:
-  - [thoughts]
-  - [exobrain]
-  - [about]
+## Quick links
+  - [Thoughts]
+  - [Exobrain]
+  - [About]
+  - [Rust]
 
-[exobrain]: exobrain.md
-[thoughts]: thoughts/_index.md
-[about]: about.md
+[Exobrain]: exobrain.md
+[Thoughts]: thoughts/_index.md
+[About]: about.md
+[Rust]: ./rust/_index.md
