@@ -22,6 +22,9 @@
   {{ $path = path.Join $path "/" }}
   {{ $path = printf "%s/%s" $path $hash }}
 
+  {{ $tag := hasPrefix .Text "#" }}
+  
+  <a class="ref{{ if $tag }} tag{{end}}" href="{{ $path | safeURL }}">{{ .Text | safeHTML }}</a>
+{{ else }}
+  <a href="{{ .Destination | safeURL }}" target="_blank" rel="noreferrer">{{ .Text | safeHTML }}</a>
 {{ end }}
-
-<a class="ref" href="{{ $path | safeURL }}" {{ if hasPrefix $path "http" }} target="_blank" rel="noreferrer" {{ end }}>{{ .Text | safeHTML }}</a>

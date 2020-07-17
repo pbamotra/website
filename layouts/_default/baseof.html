@@ -107,7 +107,7 @@
 
     {{ if hasPrefix .RelPermalink "/amp/" }}
     {{ else }}
-      {{ $prerender := resources.Get "js/prerender-links.js" }}
+      {{ $prerender := resources.Get "js/main.js" }}
       {{ $script:= $prerender | resources.Minify }}
       <script src="{{ $script.Permalink }}"></script>
     {{ end }}

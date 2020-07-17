@@ -5,7 +5,7 @@
 {{ end }}
 
 {{ define "title" }}
-  <title>Wiki - {{ .Title }}</title>
+  <title>Wiki - {{ if ne .Parent.Title "Wiki" }}{{ .Parent.Title }} - {{ end }}{{ .Title }}</title>
 {{ end }}
 
 {{ define "main" }}

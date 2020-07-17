@@ -34,7 +34,7 @@
     {{ range sort .Pages "Lastmod" "desc" }}
       {{ if eq .Parent.Permalink $parent }}
         <li>
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
+          <a class="ref" href="{{ .Permalink }}">{{ .Title }}</a>
         </li>
       {{ end }}
     {{ end }}

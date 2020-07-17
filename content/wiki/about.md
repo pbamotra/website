@@ -15,18 +15,21 @@ This [hugo] theme has several features which aid the wiki:
   - bidirectional linking
     - this is in the form of the "Linked references" section that appears at the bottom of the page
     - sections with "Nested references" link to their children and their children to the parents 
+    - references are highlighted when jumping
   - pre-rendering pages on hover
-    - this makes navigation feel almost instant
+    - this makes navigation feel almost instant, see [fast-link-loading]
   - resolve markdown links
     - not possible with vanilla [hugo], this is done to avoid using [shortcodes] for linking
-  - search
+  - search [#TODO]
     - this hasn't been done yet, but once done will allow you to quickly jump to arbitrary pages
     
 
-[exobrain]: ./exobrain.md
-[hugo]: ./hugo.md
-[shortcodes]: ./hugo.md#shortcodes
-[mdbook]: ./mdbook.md
-[longtermism]: ./longtermism.md
+[#TODO]: ./todo.md
 [bennetthardwick/website]: https://github.com/bennetthardwick/website/tree/development/content/wiki
+[exobrain]: ./exobrain.md
+[fast-link-loading]: ./fast-link-loading.md
+[hugo]: ./hugo.md
+[longtermism]: ./longtermism.md
+[mdbook]: ./mdbook.md
+[shortcodes]: ./hugo.md#shortcodes
 [viewed on Github]: https://github.com/bennetthardwick/website/blob/development/content/wiki/_index.md

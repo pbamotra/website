@@ -78,3 +78,45 @@ img {
     margin-bottom: 0.5rem;
   }
 }
+
+a.ref {
+  border-bottom: none;
+
+  &:not(.tag) {
+    &:before {
+      content: '[';
+    }
+
+    &:after {
+      content: ']';
+    }
+
+    &:hover {
+      &:before, &:after {
+        opacity: 0.8;
+      }
+    }
+
+    &:before, &:after {
+        opacity: 0.4;
+    }
+  }
+
+  &:hover {
+    &.tag {
+      color: rgba( 0, 0, 0, 0.6);
+    }
+  }
+  span.brackets {
+    opacity: 0.4;
+  }
+
+  &.tag {
+    color: rgba( 0, 0, 0, 0.4);
+  }
+}
+
+.twitter-tweet-rendered {
+  margin-left: auto;
+  margin-right: auto;
+}
