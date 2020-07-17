@@ -49,6 +49,11 @@ body {
   }
 }
 
+ul {
+  padding-left: 2rem;
+  list-style-type: disc;
+}
+
 nav ul {
   display: inline-block;
 }
@@ -125,12 +130,16 @@ hr {
   margin: 2rem 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   body {
     padding: 1rem;
   }
 
   main {
     padding-top: 1rem;
+  }
+
+  h1 {
+    line-height: 1.4;
   }
 }

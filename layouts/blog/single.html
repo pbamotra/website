@@ -83,17 +83,17 @@
 {{ end }}
 
 <div class="related-container">
-  {{ if .Prev }}
+  {{ if .PrevInSection }}
     <div class="link">
       Previous <br />
-      <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
+      <a href="{{ .PrevInSection.Permalink }}">{{ .PrevInSection.Title }}</a>
     </div>
   {{ end }}
 
-  {{ if .Next }}
+  {{ if .NextInSection }}
     <div class="link">
       Next <br />
-      <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
+      <a href="{{ .NextInSection.Permalink }}">{{ .NextInSection.Title }}</a>
     </div>
   {{ end }}
 </div>

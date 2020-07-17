@@ -6,19 +6,47 @@
   <h1>{{ .Title }}</h1>
   {{ .Content }}
 
-  <ul>
-
   {{ $permalink := .Permalink }}
 
-  {{ range first 100 (sort (where .Site.Pages "Section" "wiki") "Lastmod" "desc") }}
-    {{ if ne $permalink .Permalink }}
-      <li>
-        <a href="{{ .Permalink | safeURL }}">{{ .Lastmod.Format "January 02, 2006" }} - {{ .Title }}</a>
-      </li>
-    {{ end }}
-  {{ end }}
-  </ul>
+  <ul>
 
+  {{ range (first 200 (sort (where (where .Site.Pages "Title" "!=" "Wiki") "Section" "wiki") "Lastmod" "desc")).GroupByLastmod "January 02, 2006" }}
+
+    <li>
+      <p>{{ .Key }}</p>
+      <ul>
+
+    {{ $key := .Key }}
+    {{ $outerFirst := false }}
+
+    {{ range .Pages.GroupBy "Parent" }}
+      {{ $first := true }}
+
+      {{ range .Pages }}
+        {{ if $first }}
+          {{ $first = false }}
+          <li>
+            {{ .Parent.Title }}
+            <ul>
+        {{ end }}
+
+        <li>
+          <a href="{{ .Permalink | safeURL }}">{{ .Title | safeHTML }}</a>
+        </li>
+
+      {{ end }}
+
+      {{ if not $first }}
+        </ul></li>
+      {{ end }}
+    {{ end }}
+
+      </ul>
+    </li>
+
+  {{ end }}
+
+  </ul>
 
   {{ partial "backlinks.html" . }}
 {{ end }}
