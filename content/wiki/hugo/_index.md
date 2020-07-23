@@ -1,5 +1,6 @@
 ---
 title: Hugo static site generator
+parent: true
 ---
 
 A fast and heavily customisable static site generator written in Go.

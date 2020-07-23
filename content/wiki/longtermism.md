@@ -2,5 +2,7 @@
 title: Longtermism
 ---
 
-Ref: 
-  - https://wiki.xxiivv.com/site/longtermism.html
+Longtermism is the idea
+
+### References
+- https://wiki.xxiivv.com/site/longtermism.html

@@ -1,5 +1,5 @@
 ---
-title: About
+title: About the Wiki
 ---
 
 This is a wiki is inspired by the concept of an [exobrain] as well as [longtermism].
@@ -28,8 +28,8 @@ This [hugo] theme has several features which aid the wiki:
 [bennetthardwick/website]: https://github.com/bennetthardwick/website/tree/development/content/wiki
 [exobrain]: ./exobrain.md
 [fast-link-loading]: ./fast-link-loading.md
-[hugo]: ./hugo.md
+[hugo]: ./hugo/_index.md
 [longtermism]: ./longtermism.md
 [mdbook]: ./mdbook.md
-[shortcodes]: ./hugo.md#shortcodes
+[shortcodes]: ./hugo/_index.md#shortcodes
 [viewed on Github]: https://github.com/bennetthardwick/website/blob/development/content/wiki/_index.md

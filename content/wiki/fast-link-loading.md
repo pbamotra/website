@@ -2,7 +2,7 @@
 title: Fast link loading
 ---
 
-Using a simple [JavaScript] snippet you can make navigation of static sites feel almost instant.
+Using a simple [JavaScript] snippet you can make navigation of static sites feel almost instant by using the [`prerender`][prerender] tag.
 
 I talk about this a little bit in [a blog post][bfss] about building this site (at least it's Zola incarnation).
 
@@ -41,3 +41,4 @@ Array.from(document.querySelectorAll("a")).forEach((element) => {
 
 [bfss]: ../blog/creating-a-blazingly-fast-blog-without-js-or-gatsby/index.md
 [JavaScript]: ./javascript/_index.md
+[prerender]: https://developer.mozilla.org/en-US/docs/Glossary/prerender
