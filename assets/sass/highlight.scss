@@ -2,6 +2,11 @@
 pre.chroma {
   color: #111111;
   background-color: #f9f9f9;
+
+  & > code {
+    width: 100%;
+    display: block;
+  }
 }
 /* Punctuation */
 .chroma .p {
@@ -235,6 +240,12 @@ pre.chroma {
 /* Literal String Symbol */
 .chroma .ss {
   color: #f07219;
+}
+
+.chroma .hl {
+  background: rgba(255, 255, 0, 0.15);
+  width: 100%;
+  display: block;
 }
 
 // These currently don't seem to be used? :shrug:
