@@ -11,7 +11,7 @@ date: 2020-07-01
 - [Software Engineering - NATO Science Committee]
 - My point today is that, if we wish to count lines of code, we should not regard them as "lines produced" but as "lines spent" - [Edsger Dijkstra], [#quotes]
 - [Lions' Commentary on UNIX 6th Edition], [John Lions]
-- Look into: "The UNIX Time-Sharing System - [Dennis Ritchie] and [Ken Thompson], [#TODO]
+- Look into: "The UNIX Time-Sharing System - [Dennis Ritchie] and [Ken Thompson]
 - "This is the Unix philosophy: Write programs that do one thing and do it well." - [Doug Mcllroy], [#quotes]
 
 [#quotes]: ../quotes.md
@@ -22,7 +22,6 @@ date: 2020-07-01
 [edsger dijkstra]: ../people/edsger-dijkstra.md
 [margaret hamilton]: ../people/margaret-hamilton.md
 [youtube]: ./_index.md
-[#TODO]: ../todo.md
 [#thoughts]: ../thoughts/_index.md
 [Software Engineering - NATO Science Committee]: ../software-eng-nato.md
 [Lions' Commentary on UNIX 6th Edition]: ../books/lions-commentary-on-unix.md
