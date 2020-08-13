@@ -50,11 +50,6 @@ projects = "/:section/:slug/"
   weight = 2
 
 [[menu.main]]
-  name = "Wiki"
-  url = "/wiki/"
-  weight = 3
-
-[[menu.main]]
   name = "Blog"
   url = "/blog/"
   weight = 4

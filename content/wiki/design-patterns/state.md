@@ -1,3 +1,0 @@
----
-title: State Pattern
----

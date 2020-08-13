@@ -1,4 +1,0 @@
----
-title: mdbook
-dev: true
----

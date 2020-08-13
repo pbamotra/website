@@ -1,3 +1,0 @@
----
-title: Template Method Pattern
----
