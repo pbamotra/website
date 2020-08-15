@@ -1,0 +1,6 @@
+<img
+  src="{{ .RelPermalink }}"
+  width="{{ .Width }}"
+  height="{{ .Height }}"
+  alt="{{ if .Alt }}{{ .Alt }}{{ else if .Caption }}{{ .Caption | markdownify | plainify }}{{ else }}&nbsp;{{ end }}"
+  />

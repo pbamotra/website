@@ -9,20 +9,20 @@
 
 {{ if .Description }}
 <meta name="description" content="{{ .Description }}">
-<meta name="twitter:description" content="{{ .Description }}">
+<meta property="twitter:description" content="{{ .Description }}">
 {{ else if .Site.Params.description }}
 <meta name="description" content="{{ .Site.Params.description }}">
-<meta name="twitter:description" content="{{ .Site.Params.description }}">
+<meta property="twitter:description" content="{{ .Site.Params.description }}">
 {{ end }}
 
-<meta name="twitter:card" content="summary">
+<meta property="twitter:card" content="summary">
 {{ if isset .Site.Params "twitter" }}
-  <meta name="twitter:creator" content="@{{ .Site.Params.twitter }}">
-  <meta name="twitter:site" content="@{{ .Site.Params.twitter }}">
+  <meta property="twitter:creator" content="@{{ .Site.Params.twitter }}">
+  <meta property="twitter:site" content="@{{ .Site.Params.twitter }}">
 {{ end }}
 
 {{ if isset .Site.Params "accent" }}
-<meta name="theme-color" content="{{ .Site.Params.accent }}" />
+<meta property="theme-color" content="{{ .Site.Params.accent }}" />
 {{ end }}
 
 {{ if and (isset .Site.Params "accent") (isset .Site.Params "accent_light") }}
@@ -35,6 +35,17 @@
     }
   </style>
   {{ end }}
+{{ end }}
+
+{{ if .Params.image }}
+{{ $image := resources.Get .Params.image }}
+<meta property="og:image" content="{{ $image.Permalink }}" />
+{{ else if isset .Site.Params "profile" }}
+{{ $profile := resources.Get .Site.Params.profile }}
+{{ $icon := $profile.Fit "512x512" }}
+<meta property="og:image" content="{{ $icon.Permalink }}" />
+<meta property="og:image:width" content="512" />
+<meta property="og:image:height" content="512" />
 {{ end }}
 
 {{ if isset .Site.Params "profile" }}
@@ -57,4 +68,3 @@
 {{ end }}
 {{ end }}
 
-<meta property="og:type" content="website">

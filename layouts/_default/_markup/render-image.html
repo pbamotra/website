@@ -14,19 +14,12 @@
   {{ $caption = . | safeHTML }}
 {{ end }}
 
+
+
+{{ $image_object := (dict "RelPermalink" $resized.RelPermalink "Width" $resized.Width "Height" $resized.Height "Alt" $alt "Caption" $caption) }}
+
 {{ if hasPrefix .Page.RelPermalink "/amp/" }}
-<amp-img
-  src="{{ $resized.RelPermalink }}"
-  width="{{ $resized.Width }}"
-  height="{{ $resized.Height }}"
-  layout="responsive"
-  alt="{{ if $alt }}{{ $alt }}{{ else if $caption }}{{ $caption | markdownify | plainify }}{{ else }}&nbsp;{{ end }}"
-  >
+{{ partial "image.amp" $image_object }}
 {{ else }}
-<img
-  src="{{ $resized.RelPermalink }}"
-  width="{{ $resized.Width }}"
-  height="{{ $resized.Height }}"
-  alt="{{ if $alt }}{{ $alt }}{{ else if $caption }}{{ $caption | markdownify | plainify }}{{ else }}&nbsp;{{ end }}"
-  >
+{{ partial "image" $image_object }}
 {{ end }}
