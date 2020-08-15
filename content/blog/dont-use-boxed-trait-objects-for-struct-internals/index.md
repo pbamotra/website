@@ -94,7 +94,7 @@ let person = zoo.last_person().unwrap();
 This is where things get a little annoying.
 We have a type with not much information that we want to turn back into our original type.
 
-The safe way do this is to cast a reference to `&dyn Any` and use the downcast family of functions to get a reference to our original type back.
+The safe way do this is to cast a reference to `&dyn Any` and use the [downcast] family of functions to get a reference to our original type back.
 
 Unfortunately this means that we have to retrofit our original `Person` trait with a method that allows us to do this.
 
@@ -286,3 +286,5 @@ fn main() {
   This method allows developers to use enums to limit heap allocations and make it easier to find the original type, at the expense of greater memory consumption and slightly more code.
 
 - Implementing your trait for it's boxed counterpart makes it easier to use boxed traits in generic parameters.
+
+[downcast]: ../../wiki/rust/rust-downcast-trait-object.md

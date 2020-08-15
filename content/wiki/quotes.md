@@ -1,0 +1,3 @@
+---
+title: Neat Quotes
+---
