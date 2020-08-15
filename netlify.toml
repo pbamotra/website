@@ -1,10 +1,10 @@
 [build]
 base    = "."
 publish = "./public"
-command = "hugo --gc --minify"
+command = "hugo --gc --minify && ./replace-amp-images ./public"
 
 [build.environment]
 HUGO_VERSION = "0.74.1"
 
 [context.deploy-preview]
-command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./replace-amp-images ./public"
