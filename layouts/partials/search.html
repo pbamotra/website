@@ -1,0 +1,8 @@
+<div id="search">
+  <input placeholder="Loading..." disabed />
+</div>
+
+{{ $defines := dict "COMMIT" (printf `"%s"` (string .GitInfo.Hash)) "process.env.NODE_ENV" `"production"` }}
+{{ $opts := dict "targetPath" "search.js" "defines" $defines }}
+{{ $built := resources.Get "js/search.jsx" | js.Build $opts | resources.Minify | resources.Fingerprint "md5" }}
+<script type="text/javascript" src="{{ $built.RelPermalink }}" defer></script>

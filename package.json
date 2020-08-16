@@ -4,8 +4,8 @@
   "description": "Bennett's speedy personal website.",
   "main": "index.js",
   "scripts": {
-    "index-wiki": "./create-index.js ./content wiki ./static/wiki-index.json https://bennetthardwick.com",
-    "index-wiki:dev": "./create-index.js ./content wiki ./static/wiki-index.json http://localhost:1313"
+    "index-wiki": "./create-index.js ./content wiki ./static/wiki-index.json https://bennetthardwick.com/wiki",
+    "index-wiki:dev": "./create-index.js ./content wiki ./static/wiki-index.json http://localhost:1313/wiki"
   },
   "repository": {
     "type": "git",

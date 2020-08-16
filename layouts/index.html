@@ -1,5 +1,5 @@
 {{ define "stylesheet" }}
-  {{ $style := resources.Get "sass/index.scss" | resources.ToCSS (dict "outputStyle" "compressed") }}
+  {{ $style := resources.Get "sass/index.scss" | resources.ToCSS (dict "outputStyle" "compressed") | resources.Minify | resources.Fingerprint "md5" }}
   <link rel="stylesheet" href="{{ $style.Permalink }}" />
 {{ end }}
 

@@ -10,7 +10,7 @@
 {{ end }}
 
 {{ define "main" }}
-  <div id="search"></div>
+  {{ partial "search" . }}
 
   {{ if ne .Title "Wiki" }}
     <a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a>
@@ -24,10 +24,5 @@
   {{ end }}
   {{ .Content }}
   {{ partial "backlinks.html" . }}
-
-  {{ $defines := dict "COMMIT" `"wow"` "process.env.NODE_ENV" `"production"` }}
-  {{ $opts := dict "targetPath" "search.js" "defines" $defines }}
-  {{ $built := resources.Get "js/search.jsx" | js.Build $opts }}
-  <script type="text/javascript" src="{{ $built.RelPermalink }}" defer></script>
 
 {{ end }}

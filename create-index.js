@@ -21,6 +21,15 @@ if (process.argv.length !== 6) {
   process.exit(1);
 }
 
+const baseDirectory = path.join(process.cwd(), process.argv[2]);
+const contentFolder = process.argv[3];
+const outputFile = process.argv[4];
+const baseUrl = process.argv[5];
+
+const startRe = new RegExp(
+  `^${quote(path.join(baseDirectory, contentFolder))}`
+);
+
 function quote(str) {
   return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
 }
@@ -41,10 +50,35 @@ function getBreadcrumbsForPath(relativePath) {
       }
 
       let indexPath;
-      if (fs.existsSync(path.join(baseDirectory, acc, "_index.md"))) {
-        indexPath = path.join(baseDirectory, acc, "_index.md");
-      } else if (fs.existsSync(path.join(baseDirectory, acc, "index.md"))) {
-        indexPath = path.join(baseDirectory, acc, "index.md");
+
+      if (a === "index.md" || a === "_index.md") {
+        return segment;
+      }
+
+      if (segment.endsWith(".md")) {
+        indexPath = path.join(baseDirectory, contentFolder, segment);
+      } else if (
+        fs.existsSync(
+          path.join(baseDirectory, contentFolder, segment, "_index.md")
+        )
+      ) {
+        indexPath = path.join(
+          baseDirectory,
+          contentFolder,
+          segment,
+          "_index.md"
+        );
+      } else if (
+        fs.existsSync(
+          path.join(baseDirectory, contentFolder, segment, "index.md")
+        )
+      ) {
+        indexPath = path.join(
+          baseDirectory,
+          contentFolder,
+          segment,
+          "index.md"
+        );
       }
 
       let title = a;
@@ -65,13 +99,6 @@ function getBreadcrumbsForPath(relativePath) {
   return titledCrumbs.join(" » ");
 }
 
-const baseDirectory = path.join(process.cwd(), process.argv[2]);
-const contentFolder = process.argv[3];
-const outputFile = process.argv[4];
-const baseUrl = process.argv[5];
-
-const startRe = new RegExp(`^${quote(baseDirectory)}`);
-
 const index = elasticlunr(function () {
   this.addField("title");
   this.addField("body");
@@ -86,7 +113,7 @@ for (const file of glob.sync(
   id++;
 
   const relativePath = file.replace(startRe, "");
-  const breadcrumbs = getBreadcrumbsForPath(relativePath);
+
   const content = fs.readFileSync(file);
   const { data, content: matterContent } = matter(content);
 
@@ -111,18 +138,24 @@ for (const file of glob.sync(
     }
   }
 
-  const href = `${baseUrl}/${relativePath
+  const breadcrumbs = getBreadcrumbsForPath(relativePath) || title;
+
+  let href = `${baseUrl}/${relativePath
     .split("/")
     .map((x) => x.replace(/.md$/, ""))
     .filter((x) => !!x && !(x === "index" || x === "_index"))
-    .join("/")}/`;
+    .join("/")}`;
+
+  if (!href.endsWith('/')) {
+    href += '/';
+  }
 
   index.addDoc({
     id,
     title,
     body,
     breadcrumbs,
-    href
+    href,
   });
 }
 
