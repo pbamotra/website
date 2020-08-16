@@ -3,6 +3,8 @@
 {{ end }}
 
 {{ define "main" }}
+  {{ partial "search" . }}
+
   <h1>{{ .Title }}</h1>
   {{ .Content }}
 

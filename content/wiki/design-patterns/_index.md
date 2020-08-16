@@ -2,6 +2,7 @@
 title: Programming Design Patterns
 parent: true
 dev: true
+draft: true
 ---
 
 Books:
