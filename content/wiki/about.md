@@ -11,12 +11,7 @@ This means that this wiki could be [viewed on Github], or as an [mdbook], or wit
 The code for this wiki lives in a Github repository ([bennetthardwick/website]) and is free to be forked, copied or stolen.
 At the bottom of each page is an "edit on Github" link in case you want to fix anything up.
 
-## How To Use
-
-- [#TODO]
-  - internal links have square brackets, nested references, linked references, referenced paragraphs get highlighted
-
-## Features
+## Feature Overview
 
 This [hugo] theme has several features which aid the wiki:
 
@@ -28,16 +23,40 @@ This [hugo] theme has several features which aid the wiki:
   - this makes navigation feel almost instant, see [fast-link-loading]
 - resolve markdown links
   - not possible with vanilla [hugo], this is done to avoid using [shortcodes] for linking
-- search [#TODO]
-  - this hasn't been done yet, but once done will allow you to quickly jump to arbitrary pages
+- search
+  - you can search through the wiki using the above search bar
 
-## Search
+## How To Use
+
+In order to best use this site there's a few things you should know.
+
+### References
+
+When you link to another page you create a reference to that page.
+References can be in the form of links which are surrounded by square brackets, or tags which start with the pound symbol.
+Any other links are external and might take a bit longer to load.
+
+When you reference a page you create a bidirectional link.
+These links show in the "linked references" section on the page.
+
+### Parent
+
+Parent pages are special pages that contain other pages - they can essentially be thought of as groups.
+
+A parent page displays it's children under the "nested references" section.
+
+### Search
 
 You can search through the wiki using the search bar at the top of the page.
 You can also press `/` to open the search and `Esc` to close it.
 Pressing tab and enter will allow you to select any of the entries.
 
+---
+
+That's it! If you're looking for a place to start, try [rust]. Have fun!
+
 [#todo]: ./todo.md
+[rust]: ./rust/_index.md
 [bennetthardwick/website]: https://github.com/bennetthardwick/website/tree/development/content/wiki
 [exobrain]: ./exobrain.md
 [fast-link-loading]: ./fast-link-loading.md
