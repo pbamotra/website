@@ -1,0 +1,33 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Bennett's speedy personal website.",
+  "main": "index.js",
+  "scripts": {
+    "index-wiki": "./create-index.js ./content wiki ./static/wiki-index.json https://bennetthardwick.com",
+    "index-wiki:dev": "./create-index.js ./content wiki ./static/wiki-index.json http://localhost:1313"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bennetthardwick/website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bennetthardwick/website/issues"
+  },
+  "homepage": "https://github.com/bennetthardwick/website#readme",
+  "devDependencies": {
+    "elasticlunr": "^0.9.5",
+    "glob": "^7.1.6",
+    "gray-matter": "^4.0.2",
+    "html-to-text": "^5.1.1",
+    "marked": "^1.1.1",
+    "marked-plaintext": "0.0.2"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
