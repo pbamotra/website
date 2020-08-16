@@ -31,6 +31,12 @@ This [hugo] theme has several features which aid the wiki:
 - search [#TODO]
   - this hasn't been done yet, but once done will allow you to quickly jump to arbitrary pages
 
+## Search
+
+You can search through the wiki using the search bar at the top of the page.
+You can also press `/` to open the search and `Esc` to close it.
+Pressing tab and enter will allow you to select any of the entries.
+
 [#todo]: ./todo.md
 [bennetthardwick/website]: https://github.com/bennetthardwick/website/tree/development/content/wiki
 [exobrain]: ./exobrain.md

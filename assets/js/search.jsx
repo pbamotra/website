@@ -13,13 +13,28 @@ if (!searchRoot) {
   return;
 }
 
+const FETCHED = {};
+
 const Results = ({ data }) => {
+  const fetchLinkFactory = (link) => () => {
+    if (!FETCHED[link]) {
+      FETCHED[link] = true;
+
+      const link = document.createElement("link");
+      link.href = element.href;
+      link.rel = "prerender";
+      document.head.appendChild(link);
+    }
+  };
+
   return (
     <ul>
       {" "}
       {data.map((x) => (
         <li key={x.id}>
-          <a href={x.href}>{x.breadcrumbs}</a>
+          <a href={x.href} onMouseEnter={fetchLinkFactory(x.href)}>
+            {x.breadcrumbs}
+          </a>
           {x.teaser && <div dangerouslySetInnerHTML={{ __html: x.teaser }} />}
         </li>
       ))}
