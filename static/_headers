@@ -10,3 +10,9 @@
 /*.mp4
   cache-control: max-age=31536000
   cache-control: public
+/*.js
+  cache-control: max-age=31536000
+  cache-control: public
+/*.json
+  cache-control: max-age=31536000
+  cache-control: public

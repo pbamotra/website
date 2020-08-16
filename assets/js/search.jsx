@@ -46,6 +46,14 @@ const SearchBar = ({ index }) => {
         searchRef.current.focus();
         window.scroll(0, 0);
       }
+
+      if (e.key === "Escape") {
+        setOutput({
+          term: undefined,
+          loading: false,
+          results: [],
+        });
+      }
     });
 
     return () => {
