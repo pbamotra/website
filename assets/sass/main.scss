@@ -145,7 +145,7 @@ div#search {
       color: red;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
       border: solid rgba(0, 0, 0, 0.2);
     }
 
