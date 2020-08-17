@@ -2,6 +2,8 @@
   {{ if .Params.noindex }}
     <meta name="robots" content="noindex">
   {{ end }}
+
+  {{ partial "data-article" . }}
 {{ end }}
 
 {{ define "title" }}

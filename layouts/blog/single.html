@@ -2,67 +2,7 @@
 
   <meta property="og:type" content="article" />
 
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://google.com/article"
-      },
-      "headline": "{{ .Title }}",
-      "image": [
-        {{ if .Params.image }}
-        {{ $image := resources.Get .Params.image }}
-        "{{ $image.Permalink }}",
-        {{ end }}
-
-        {{ if isset .Site.Params "profile" }}
-        {{ $profile := resources.Get .Site.Params.profile }}
-        {{ $icon := $profile.Fit "512x512" }}
-        "{{ $icon.Permalink }}"
-        {{ end }}
-      ],
-      "datePublished": "{{ .Date.Format $.Site.Params.json_ld_time_format }}",
-      {{ if .GitInfo }}
-        "dateModified": "{{ .Lastmod.Format $.Site.Params.json_ld_time_format }}",
-      {{ else }}
-        "dateModified": "{{ .Date.Format $.Site.Params.json_ld_time_format }}",
-      {{ end }}
-      "author": {
-        "@type": "Person",
-        "name": "Bennett Hardwick"
-      },
-       "publisher": {
-        "@type": "Organization",
-        "name": "Bennett Hardwick",
-        "logo": {
-          "@type": "ImageObject",
-          {{ $profile := resources.Get .Site.Params.profile }}
-          {{ $icon := $profile.Fit "500x500" }}
-          "url": "{{ $icon.Permalink }}"
-        }
-      }
-    }
-  </script>
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "{{ .Parent.Title }}",
-        "item": "{{ .Parent.Permalink }}"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "{{ .Title }}",
-        "item": "{{ .Permalink }}"
-      }]
-    }
-  </script>
+  {{ partial "data-article" . }}
 
   {{ range .AlternativeOutputFormats -}}
     <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
