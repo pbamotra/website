@@ -13,6 +13,11 @@
   {{ partial "search" . }}
 
   {{ if ne .Title "Wiki" }}
+  {{ if ne .Parent.Title "Wiki" }}
+    {{ with .Site.GetPage "/wiki" }}
+    <a href="{{ .Permalink }}">{{ .Title }}</a> »
+    {{ end }}
+  {{ end }}
     <a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a>
   {{ end }}
   <h1>{{ .Title }}</h1>
