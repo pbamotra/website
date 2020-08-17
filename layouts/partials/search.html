@@ -2,7 +2,13 @@
   <input placeholder="Loading..." disabled />
 </div>
 
-{{ $defines := dict "COMMIT" (printf `"%s"` (string .GitInfo.Hash)) "process.env.NODE_ENV" `"production"` }}
+{{ $commit := "none" }}
+
+{{ if .GitInfo }}
+{{ $commit = (string .GitInfo.Hash) }}
+{{ end }}
+
+{{ $defines := dict "COMMIT" (printf `"%s"` $commit) "process.env.NODE_ENV" `"production"` }}
 {{ $opts := dict "targetPath" "search.js" "defines" $defines "minify" true "bundle" true }}
 {{ $built := resources.Get "js/search.jsx" | js.Build $opts | resources.Fingerprint "md5" }}
 <script type="text/javascript" src="{{ $built.RelPermalink }}" defer></script>

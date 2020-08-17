@@ -1,10 +1,9 @@
 ---
 title: How to write easy to refactor Rust
+dev: true
 ---
 
-> Note: this section is still under development, who knows if it’ll exist in the future
-
-Tags: [rust], [easy-to-refactor]
+Tags: [#rust], [#easy-to-refactor]
 
 ### Ideas
 
@@ -42,7 +41,7 @@ Tags: [rust], [easy-to-refactor]
   - Rule of thumb: if you have to write something multiple times why not write it once with a macro?
 - If all else fails, learn some Vim-fu
 
-[rust]: ./_index.md
-[easy-to-refactor]: ../easy-to-refactor.md
+[#rust]: ./_index.md
+[#easy-to-refactor]: ../easy-to-refactor.md
 [where-clause]: https://users.rust-lang.org/t/where-clause-requires-too-much-information/45463/2?u=bennetthardwick
 [mdbook get and insert macro]: https://github.com/rust-lang/mdBook/blob/ec495a7823384eefc15002b41eb05a51f3527b87/src/config.rs#L259-L269

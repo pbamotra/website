@@ -7,4 +7,8 @@ tags:
 draft: true
 ---
 
-WOWW
+1. Build the site
+2. Link markdown to markdown
+3. Bidirectional linking
+4. Prerender pages on hover
+5. Search
