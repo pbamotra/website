@@ -1,10 +1,11 @@
 ---
-title: Lions’ Commentary on UNIX 6th Edition
-draft: true
+title: Lions' Commentary on UNIX 6th Edition
 ---
 
--  [#TODO]
+> Keep reading! [#todo]
+
+- [Buy on Amazon](https://amzn.to/2PZrUwy)
 - Author: [John Lions]
 
-[#TODO]: ../todo.md
-[John Lions]: ../people/john-lions.md
+[#todo]: ../todo.md
+[john lions]: ../people/john-lions.md

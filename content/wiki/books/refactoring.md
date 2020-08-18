@@ -2,6 +2,7 @@
 title: "Refactoring: Improving the design of Existing Code"
 ---
 
-Written by [Martin Fowler].
+- [Buy on Amazon](https://amzn.to/2EbVNa8)
+- Author: [Martin Fowler].
 
 [martin fowler]: ../people/martin-fowler.md

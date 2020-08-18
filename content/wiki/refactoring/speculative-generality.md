@@ -2,7 +2,9 @@
 title: Speculative Generality
 ---
 
-Mentioned in the [Refactoring] book, Speculative Generality is when you engineer code to handle cases that aren't required, but might be required some day.
+> Read more in the book [Refactoring]
+
+Speculative Generality is when you engineer code to handle cases that aren't required, but might be required some day.
 
 More often than not the "some day" never comes and you're left with bloated code that can be annoying to maintain[^1].
 

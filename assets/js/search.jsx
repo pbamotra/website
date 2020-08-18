@@ -20,10 +20,10 @@ const Results = ({ data }) => {
     if (!FETCHED[link]) {
       FETCHED[link] = true;
 
-      const link = document.createElement("link");
-      link.href = element.href;
-      link.rel = "prerender";
-      document.head.appendChild(link);
+      const l = document.createElement("link");
+      l.href = element.href;
+      l.rel = "prerender";
+      document.head.appendChild(l);
     }
   };
 
