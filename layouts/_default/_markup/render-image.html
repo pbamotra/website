@@ -1,20 +1,18 @@
 {{ $file := replaceRE "^./" "" .Destination  }}
 {{ $image := .Page.Resources.GetMatch (printf "%s" ($file | safeURL)) }}
 
-{{ $resized := "" }}
+{{ $resized := $image }}
 {{ if strings.HasSuffix $image.RelPermalink ".gif" }}
-  {{ $resized = $image }}
-{{ else }}
-  {{ $resized = $image.Resize "694x" }}
+{{ $resized = $image }}
+{{ else if gt $image.Width 694 }}
+{{ $resized = $image.Resize "694x" }}
 {{ end }}
 
 {{ $alt := .PlainText | safeHTML }}
 {{ $caption := "" }}
-{{ with .Title }}
-  {{ $caption = . | safeHTML }}
+{{ with.Title }}
+{{ $caption = . | safeHTML }}
 {{ end }}
-
-
 
 {{ $image_object := (dict "RelPermalink" $resized.RelPermalink "Width" $resized.Width "Height" $resized.Height "Alt" $alt "Caption" $caption) }}
 

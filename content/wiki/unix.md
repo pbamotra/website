@@ -10,12 +10,11 @@ You can read more about Unix in [Lions Commentary on Unix].
 
 ## History
 
-> "You often have this well told story of [Ken Thompson] finding a little used [PDP-7] upon which he builds, in a month, an operating system. And the rest is Unix history"
+> "You often have this well told story of [Ken Thompson] finding a little used PDP-7 upon which he builds, in a month, an operating system. And the rest is Unix history"
 > \- [Brian Kernighan]
 
 [lions commentary on unix]: ./books/lions-commentary-on-unix.md
 [bell labs]: ./bell-labs.md
 [dennis ritchie]: ./people/dennis-ritchie.md
 [ken thompson]: ./people/ken-thompson.md
-[pdp-7]: ./pdp-7.md
 [brian kernighan]: ./people/brian-kernighan.md

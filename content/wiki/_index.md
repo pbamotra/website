@@ -6,7 +6,7 @@ Welcome to my wiki!
 
 It's an attempt at building an [exobrain], but you can read more in the [about] section.
 
-I often write about [rust] things.
+I often write about [programming] and [rust] things.
 
 ## Quick links
 
@@ -23,3 +23,4 @@ I often write about [rust] things.
 [rust]: ./rust/_index.md
 [recently updated]: ./recently-updated.md
 [todo]: ./todo.md
+[programming]: ./programming/_index.md
