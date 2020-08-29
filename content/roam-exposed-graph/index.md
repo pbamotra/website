@@ -1,5 +1,6 @@
 ---
 title: "Is my Roam Research graph exposed?"
+description: "Check whether your Roam graph is exposed using the experimental Page Permissions feature."
 ---
 
 # Is my Roam Research graph exposed?
