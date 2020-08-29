@@ -118,10 +118,14 @@ const Tester = () => {
           BUCKETS
         )}/v10/dbs/${name}/log.json?orderBy="t"&limitToFirst=1`
       )
-        .then((x) => x.json())
+        .then((x) => {
+          if (x.status < 300) {
+            return x.json();
+          } else {
+            throw new Error("Graph is private!");
+          }
+        })
         .then((roam) => {
-          console.log(roam);
-
           if (!mounted) {
             return;
           }
@@ -140,7 +144,7 @@ const Tester = () => {
             },
           }));
         })
-        .catch((e) => {
+        .catch(() => {
           setState((x) => ({
             ...x,
             shouldFetch: false,
