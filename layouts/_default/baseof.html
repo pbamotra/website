@@ -9,6 +9,8 @@
 
   {{ block "title" . }}
     <title>{{ .Title }}</title>
+    <meta property="twitter:title" content="{{ .Title }}">
+    <meta property="og:title" content="{{ .Title }}">
   {{ end }}
 
   {{ block "stylesheet" . }}
