@@ -173,30 +173,93 @@ A selector is Recoil's version of "computed values" or "reducers". In their [own
 
 > A selector represents a piece of derived state. You can think of derived state as the output of passing state to a pure function that modifies the given state in some way.
 
+
 The API for selectors in Recoil is quite simple, you create an object with a method called `get` and whatever that method returns is the value of your state.
 Inside the `get` method you can subscribe to other pieces of state, and whenever they update so too will your selector.
 
 In our case, I'm going to rename the `get` method to be called `generator`.
 I'm calling it this because it's essentially a factory function that's supposed to generate the next value of the state, based on whatever is piped into it.
 
-The way that selectors listen to atoms and selectors is by using another method - curiously named `get` as well.
-Whenever this `get` method is called, we fetch the dependency's value and listen for changes.
-To make sure we only ever subscribe once, we use a `Set` to keep track of the deps.
+![a flowchart demonstrating two atoms (titled "hello" and "bob") being piped into a selector, with the output becomming "Hello, Bob"](./atom-selector-flow.png)
 
-After this, we finish running the `generator` method and update the selector's internal state.
+In code, we can capture this `generate` method with the following type signature.
+
+```typescript
+type SelectorGenerator<T> = (context: GeneratorContext) => T;
+```
+
+For those unfamilar with Typescript, it's a function that takes a context object (`GeneratorContext`) as a parameter and returns some value `T`. 
+This return value is what becomes the internal state of the selector.
+
+What does the `GeneratorContext` object do?
+
+Well that's how selectors use other pieces of state when generating their own internal state.
+From now on I'll refer to these pieces of state as "dependencies".
+
+```typescript
+interface GeneratorContext {
+  get: <V>(dependency: Stateful<V>) => V
+}
+```
+
+Whenever someone calls the `get` method on the `GeneratorContext`, it adds a piece of state as a dependency.
+This means that whenever a dependency updates, so too will the selector.
+
+Here's what creating a selector's generate function might look like:
+
+```typescript
+function generate(context) {
+  // Register the NameAtom as a dependency
+  // and get it's value
+  const name = context.get(NameAtom);
+  // Do the same for AgeAtom
+  const age = context.get(AgeAtom);
+
+  // Return a new value using the previous atoms
+  // E.g. "Bob is 20 years old"
+  return `${name} is ${age} years old.`;
+};
+```
+
+With the generate function out of the way, let's create the `Selector` class.
+This class should accept the generate function as a constructor parameter and use a `getDep` method on the class to return the value of the `Atom` dependencies.
 
 You might notice in the constructor that I've written `super(undefined as any)`.
 This is because `super` must be the very first line in a derived class's constructor.
 If it helps, in this case you can think of `undefined` as uninitialised memory.
 
 ```typescript
-type SelectorGenerator<T> =
-  (context: { get: <V>(dep: Stateful<V>) => V }) => T;
+export class Selector<T> extends Stateful<T> {
+  private getDep<V>(dep: Stateful<V>): V {
+    return dep.snapshot();
+  }
 
+  constructor(
+    private readonly generate: SelectorGenerator<T>
+  ) {
+    super(undefined as any);
+    const context = {
+      get: dep => this.getDep(dep) 
+    };
+    this.value = generate(context);
+  }
+}
+```
+
+This selector is only good for generating state once.
+In order to react to changes in the dependencies, we need to subscribe to them.
+
+To do this, let's update the `getDep` method to subscribe to the dependencies and call the `updateSelector` method.
+To make sure the selector only updates once per change, let's keep track of the deps using a `Set`. 
+
+The `updateSelector` method is very similar to the constructor in the previous example.
+It creates the `GeneratorContext`, runs the `generate` method and then uses the `update` method from the `Stateful` base class.
+
+```typescript {hl_lines=[2,"5-8","13-18"]}
 export class Selector<T> extends Stateful<T> {
   private registeredDeps = new Set<Stateful>();
 
-  private addDep<V>(dep: Stateful<V>): V {
+  private getDep<V>(dep: Stateful<V>): V {
     if (!this.registeredDeps.has(dep)) {
       dep.subscribe(() => this.updateSelector());
       this.registeredDeps.add(dep);
@@ -206,18 +269,20 @@ export class Selector<T> extends Stateful<T> {
   }
 
   private updateSelector() {
-    this.update(this.generate({
-      get: dep => this.addDep(dep)
-    }));
+    const context = {
+      get: dep => this.getDep(dep)
+    };
+    this.update(this.generate(context));
   }
 
   constructor(
     private readonly generate: SelectorGenerator<T>
   ) {
     super(undefined as any);
-    this.value = generate({
-      get: dep => this.addDep(dep) 
-    });
+    const context = {
+      get: dep => this.getDep(dep) 
+    };
+    this.value = generate(context);
   }
 }
 ```
