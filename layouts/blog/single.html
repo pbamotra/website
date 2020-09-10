@@ -28,7 +28,19 @@
 </div>
 {{ .Content }}
 
-<hr class="footer-rule" />
+
+<div class="share-box">
+  <a target="__blank" href="https://twitter.com/intent/tweet?{{ querify "url" .Permalink "via" "bennettbackward" "text" .Title | safeURL }}" class="twitter">
+    <i></i>
+      Tweet
+  </a>
+  
+  <a target="__blank" href="https://reddit.com/submit?{{ querify "url" .Permalink "title" .Title | safeURL }}" class="reddit">
+    <i></i>
+      Reddit
+  </a>
+</div>
+
 
 {{ if .Site.Params.footer_about }}
   <div class="footer-about">
