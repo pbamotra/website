@@ -1,6 +1,6 @@
 {{ $path := .Destination }}
 
-{{ if or (hasPrefix $path "./") (not (hasPrefix $path "http")) (hasPrefix $path "../") }}
+{{ if or (hasPrefix $path "./") (not (or (hasPrefix $path "http") (hasPrefix $path "mailto:"))) (hasPrefix $path "../") }}
   {{ $file := .Page.File.LogicalName }}
 
   {{ $hash := index (findRE "#(.*)$" $path) 0 }}
