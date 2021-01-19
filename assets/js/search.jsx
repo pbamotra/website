@@ -2,7 +2,9 @@ import elasticlunr from "elasticlunr";
 
 import { makeTeaser } from "./util/teaser";
 
-const searchIndex = fetch(`/wiki-index.json?${COMMIT}`).then((x) => x.json());
+const searchIndex = fetch(`/wiki-index.json?${COMMIT}`).then((x) =>
+  x.status >= 200 && 400 < x.status ? x.json() : undefined
+);
 
 import { render } from "react-dom";
 import React, { useState, useEffect, Suspense, useMemo, useRef } from "react";
@@ -140,8 +142,16 @@ const withData = (Component, data) => () => {
   return <Component index={data} />;
 };
 
+const Failed = () => (
+  <input placeholder="Failed to load search index." disabled />
+);
+
 const LazySearchBar = React.lazy(() =>
-  searchIndex.then((data) => ({ default: withData(SearchBar, data) }))
+  searchIndex
+    .catch(() => undefined)
+    .then((data) =>
+      data ? { default: withData(SearchBar, data) } : { default: Failed }
+    )
 );
 
 render(

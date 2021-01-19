@@ -7,9 +7,6 @@ A fast and heavily customisable static site generator written in Go.
 
 Currently it powers this site.
 
-Ref:
-  - [website](https://gohugo.io/)
-
 ## Shortcodes
 
 [Shortcode documentation](https://gohugo.io/content-management/shortcodes/)

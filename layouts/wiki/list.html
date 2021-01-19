@@ -31,9 +31,9 @@
   {{ .Content }}
 
   {{ if .Params.parent }}
-    <h2>Nested references</h2>
-    <ul>
-
+    <div class="linked-references">
+      <h2>Nested references:</h2>
+        <ul>
     {{ $parent := .Permalink }}
     {{ range sort .Pages "Lastmod" "desc" }}
       {{ if eq .Parent.Permalink $parent }}
@@ -42,7 +42,8 @@
         </li>
       {{ end }}
     {{ end }}
-    </ul>
+      </ul>
+    </div>
   {{ end }}
 
   {{ partial "backlinks.html" . }}

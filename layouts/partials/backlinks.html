@@ -13,8 +13,9 @@
       {{ $count := len $matches }}
       {{ if $first }}
         {{ $first = false }}
-        <h2>Linked references:</h2>
-          <ul>
+        <div class="linked-references">
+          <h2>Linked references:</h2>
+            <ul>
       {{ end }}
       {{ $noResults = false }}
       <li>
@@ -25,5 +26,6 @@
   {{ end }}
 {{ end }}
 {{ if not $noResults }}
-</ul>
+  </ul>
+</div>
 {{ end }}
