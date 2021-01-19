@@ -3,7 +3,7 @@ import elasticlunr from "elasticlunr";
 import { makeTeaser } from "./util/teaser";
 
 const searchIndex = fetch(`/wiki-index.json?${COMMIT}`).then((x) =>
-  x.status >= 200 && 400 < x.status ? x.json() : undefined
+  x.status >= 400 ? undefined : x.json()
 );
 
 import { render } from "react-dom";
