@@ -9,8 +9,12 @@
 {{ define "title" }}
   {{ if ne .Title "Wiki" }}
     <title>Wiki - {{ .Title }}</title>
+    <meta property="twitter:title" content="Wiki - {{ .Title }}">
+    <meta property="og:title" content="Wiki - {{ .Title }}">
   {{ else }}
     <title>Wiki</title>
+    <meta property="twitter:title" content="Title">
+    <meta property="og:title" content="Title">
   {{ end }} 
 {{ end }}
 
