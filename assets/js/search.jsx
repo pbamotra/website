@@ -2,9 +2,7 @@ import elasticlunr from "elasticlunr";
 
 import { makeTeaser } from "./util/teaser";
 
-const searchIndex = fetch(`/wiki-index.json?${COMMIT}`).then((x) =>
-  x.status >= 400 ? undefined : x.json()
-);
+const searchIndex = fetch(`/wiki-index.json?${COMMIT}`).then((x) => x.json());
 
 import { render } from "react-dom";
 import React, { useState, useEffect, Suspense, useMemo, useRef } from "react";
