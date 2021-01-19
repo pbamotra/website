@@ -152,9 +152,11 @@ const LazySearchBar = React.lazy(() =>
     )
 );
 
-render(
-  <Suspense fallback={<input placeholder="Loading..." disabled />}>
-    <LazySearchBar />
-  </Suspense>,
-  searchRoot
-);
+setTimeout(() => {
+  render(
+    <Suspense fallback={<input placeholder="Loading..." disabled />}>
+      <LazySearchBar />
+    </Suspense>,
+    searchRoot
+  );
+}, 100);
