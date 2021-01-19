@@ -3,7 +3,7 @@
 {{ end }}
 
 {{ define "main" }}
-  <h2>{{ len .Data.Pages }} pages tagged with "{{ .Title }}"</h2>
+  <h1>{{ len .Data.Pages }} pages tagged with "{{ .Title }}"</h1>
 
   {{ range .Data.Pages }}
     {{ partial "post-preview.html" . }}
