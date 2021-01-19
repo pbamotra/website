@@ -28,16 +28,13 @@
     <blockquote>
       <p>Note: this section is still under development, who knows if it’ll exist in the future</p>
     </blockquote>
-
-
-{{ range .Site.RegularPages.Related . }}
-  Tits: {{ .Title }}
-{{ end }}
-
-
-
   {{ end }}
+
   {{ .Content }}
+
+  {{ partial "share.html" . }}
+
   {{ partial "backlinks.html" . }}
+  
 
 {{ end }}
