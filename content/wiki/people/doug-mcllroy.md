@@ -1,3 +1,0 @@
----
-title: Doug Mcllroy
----
