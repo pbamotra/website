@@ -136,6 +136,7 @@ interface Post {
   createdAt: number;
   modifiedAt: number;
   type: PostType;
+  draft: boolean;
 }
 
 function loadType(type: unknown): PostType {
@@ -144,6 +145,18 @@ function loadType(type: unknown): PostType {
   }
 
   return "generic";
+}
+
+function loadBoolean(bool: unknown) {
+  if (typeof bool === "boolean") {
+    return bool;
+  }
+
+  if (bool === "false") {
+    return false;
+  }
+
+  return Boolean(bool);
 }
 
 async function loadPostByName(name: string): Promise<Post> {
@@ -195,6 +208,8 @@ async function loadPostByName(name: string): Promise<Post> {
 
   const title = frontmatter.title ?? name;
 
+  console.log(frontmatter, title);
+
   return {
     slug: `/${name}`,
     modifiedAt,
@@ -203,6 +218,7 @@ async function loadPostByName(name: string): Promise<Post> {
     code,
     title,
     type: loadType(frontmatter.type),
+    draft: loadBoolean(frontmatter.draft),
   };
 }
 
