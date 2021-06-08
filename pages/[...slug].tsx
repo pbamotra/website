@@ -1,11 +1,23 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 
+import "prismjs/themes/prism.css";
+
 import { getMDXComponent } from "mdx-bundler/client";
 
-import { getAllPosts, getPostByPath } from "lib/posts";
+import {
+  getAllPosts,
+  getAllPostSlugs,
+  getPostByPath,
+  getRecentPosts,
+} from "lib/posts";
 import { useMemo } from "react";
 import styled from "@emotion/styled";
+
+interface PostLink {
+  title: string;
+  slug: string;
+}
 
 interface PostProps {
   slug: string;
@@ -14,9 +26,19 @@ interface PostProps {
   createdAt: number;
   modifiedAt: number;
   tags: string[];
+  previous?: PostLink;
+  next?: PostLink;
 }
 
 const PostTitle = styled.h1({});
+
+const PostContainer = styled.div({
+  width: "100%",
+  maxWidth: "660px",
+  margin: "0 auto",
+});
+
+const PostContent = styled.div({});
 
 export default function Post({ slug, title, code, createdAt }: PostProps) {
   const router = useRouter();
@@ -24,11 +46,12 @@ export default function Post({ slug, title, code, createdAt }: PostProps) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    <div>
-      craeted: {String(new Date(createdAt))}
+    <PostContainer>
       <PostTitle>{title}</PostTitle>
-      <Component />
-    </div>
+      <PostContent>
+        <Component />
+      </PostContent>
+    </PostContainer>
   );
 }
 
@@ -37,18 +60,56 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
     throw new Error("Expected slug to be string!");
   }
 
-  const { createdAt, code, slug, title, modifiedAt } = await getPostByPath(
-    params.slug.join("/")
-  );
+  const {
+    createdAt,
+    code,
+    slug,
+    title,
+    modifiedAt,
+    type,
+  } = await getPostByPath(params.slug.join("/"));
 
-  return { props: { slug, code, createdAt, tags: [], modifiedAt, title } };
+  const props: PostProps = {
+    slug,
+    code: await code(),
+    createdAt,
+    tags: [],
+    modifiedAt,
+    title,
+  };
+
+  if (type === "article") {
+    const allArticles = await getRecentPosts();
+
+    const index = allArticles.findIndex((x) => x.slug === slug);
+
+    const previous = allArticles[index - 1];
+
+    if (previous) {
+      props.previous = { title: previous.title, slug: previous.slug };
+    }
+
+    const next = allArticles[index + 1];
+
+    if (next) {
+      props.next = {
+        title: next.title,
+        slug: next.slug,
+      };
+    }
+  }
+
+  return {
+    props,
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getAllPostSlugs();
+  const paths = posts.map((slug) => ({ params: { slug: slug.split("/") } }));
+
   return {
-    paths: (await getAllPosts()).map((post) => ({
-      params: { slug: post.slug.split("/") },
-    })),
+    paths,
     fallback: false,
   };
 };

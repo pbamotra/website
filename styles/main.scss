@@ -1,5 +1,10 @@
 @import "./fonts.scss", "./normalize.scss";
 
+:root {
+  --accent-color: #2f76d0;
+  --accent-color-light: #82ade3;
+}
+
 body {
   font-family: "Rubik", "PT Serif", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",

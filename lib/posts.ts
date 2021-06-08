@@ -4,18 +4,36 @@ import path from "path";
 import { remarkMdxImages } from "remark-mdx-images";
 import remarkFrontmatter from "remark-frontmatter";
 import { remarkMdxFrontmatter } from "remark-mdx-frontmatter";
+import remarkPrism from "remark-prism";
+import matter from "gray-matter";
 
 import { exec } from "child_process";
 
-function loadDate(val: unknown, or: Date = new Date()): Date {
-  console.log("Parsing", val);
+import { performance } from "perf_hooks";
 
+function loadDate(val: unknown, or: Date = new Date()): Date {
   const date = new Date(String(val));
   if (isNaN(Number(date)) || date < new Date("2015-01-01")) {
     return or;
   } else {
     return date;
   }
+}
+
+function loadString(val: unknown): string | undefined {
+  if (typeof val !== "string") {
+    return undefined;
+  }
+
+  return val;
+}
+
+function loadStringArray(val: unknown): string[] {
+  if (Array.isArray(val) && val.every((x) => typeof x === "string")) {
+    return val;
+  }
+
+  return [];
 }
 
 function getFileCreatedDate(file: string): Promise<Date> {
@@ -26,8 +44,6 @@ function getFileCreatedDate(file: string): Promise<Date> {
         if (error) {
           return reject(error);
         }
-
-        console.log(file);
 
         resolve(loadDate(stdout));
       }
@@ -126,11 +142,16 @@ async function collect<T>(generator: AsyncGenerator<T>): Promise<T[]> {
   return arr;
 }
 
-type PostType = "article" | "generic";
+const TYPES = ["article", "garden", "generic"] as const;
+type PostType = typeof TYPES[number];
 
 interface Post {
-  code: string;
+  code: () => Promise<string>;
+  subtitle?: string;
+  description?: string;
   title: string;
+  tags: string[];
+  slugParts: string[];
   frontmatter: Record<string, unknown>;
   slug: string;
   createdAt: number;
@@ -140,8 +161,8 @@ interface Post {
 }
 
 function loadType(type: unknown): PostType {
-  if (type === "article") {
-    return "article";
+  if (TYPES.includes(type as PostType)) {
+    return type as PostType;
   }
 
   return "generic";
@@ -159,44 +180,75 @@ function loadBoolean(bool: unknown) {
   return Boolean(bool);
 }
 
+async function readMdxFile(
+  slug: string
+): Promise<{ content: string; mdxPath: string }> {
+  const paths = [slug + ".mdx", slug + "/index.mdx", slug + "/_index.mdx"];
+
+  for (const p of paths) {
+    try {
+      const mdxPath = path.join(contentDir, p);
+      const content = await readFile(mdxPath);
+
+      return { mdxPath, content };
+    } catch (e) {}
+  }
+
+  throw new Error(`Couldn't find file!`);
+}
+
 async function loadPostByName(name: string): Promise<Post> {
-  const mdxPath = path.join(
-    contentDir,
-    (name.endsWith("/") ? name.slice(0, -1) : name) + ".mdx"
-  );
+  const parts = name.split("/");
 
-  const content = await readFile(mdxPath);
+  if (
+    parts[parts.length - 1] === "index" ||
+    parts[parts.length - 1] === "_index"
+  ) {
+    parts.pop();
+  }
 
-  const { code, frontmatter } = await bundleMDX(content, {
-    cwd: path.dirname(mdxPath),
-    files: {
-      ...(await loadTsFiles("lib")),
-      ...(await loadTsFiles("components")),
-    },
-    xdmOptions: (options) => {
-      return {
-        ...options,
-        remarkPlugins: [
-          remarkMdxImages,
-          remarkFrontmatter,
-          remarkMdxFrontmatter,
-        ],
-      };
-    },
-    esbuildOptions: (options) => {
-      return {
-        ...options,
-        outdir: path.join(process.cwd(), "public/img"),
-        loader: {
-          ...options.loader,
-          ".png": "file",
-          ".jpg": "file",
+  const slug = `/${parts.join("/")}`;
+
+  const { content, mdxPath } = await readMdxFile(slug);
+
+  const code = async () => {
+    return (
+      await bundleMDX(content, {
+        cwd: path.dirname(mdxPath),
+        files: {
+          ...(await loadTsFiles("lib")),
+          ...(await loadTsFiles("components")),
         },
-        publicPath: "/img/",
-        write: true,
-      };
-    },
-  });
+        xdmOptions: (options) => {
+          return {
+            ...options,
+            remarkPlugins: [
+              remarkMdxImages,
+              remarkFrontmatter,
+              remarkMdxFrontmatter,
+              remarkPrism,
+            ],
+          };
+        },
+        esbuildOptions: (options) => {
+          return {
+            ...options,
+            outdir: path.join(process.cwd(), "public/img"),
+            loader: {
+              ...options.loader,
+              ".png": "file",
+              ".jpg": "file",
+              ".gif": "file",
+            },
+            publicPath: "/img/",
+            write: true,
+          };
+        },
+      })
+    ).code;
+  };
+
+  const { data: frontmatter } = matter(content);
 
   const modifiedAt = Number(
     loadDate(frontmatter.modifiedAt, await getFileModifiedDate(mdxPath))
@@ -206,19 +258,21 @@ async function loadPostByName(name: string): Promise<Post> {
     loadDate(frontmatter.createdAt, await getFileCreatedDate(mdxPath))
   );
 
-  const title = frontmatter.title ?? name;
-
-  console.log(frontmatter, title);
+  const title = frontmatter.title ?? slug;
 
   return {
-    slug: `/${name}`,
+    slug,
     modifiedAt,
     createdAt,
     frontmatter,
     code,
     title,
+    tags: loadStringArray(frontmatter.tags),
+    subtitle: loadString(frontmatter.subtitle),
+    description: loadString(frontmatter.description),
     type: loadType(frontmatter.type),
     draft: loadBoolean(frontmatter.draft),
+    slugParts: parts,
   };
 }
 
@@ -229,21 +283,72 @@ export async function getPostByPath(file: string): Promise<Post> {
 export async function getRecentPosts(): Promise<Post[]> {
   return (await getAllPosts())
     .filter((x) => x.type === "article")
-    .sort((a, b) => a.createdAt - b.createdAt);
+    .sort((a, b) => b.createdAt - a.createdAt);
+}
+
+export async function getRecentGarden(): Promise<Post[]> {
+  return (await getAllPosts())
+    .filter((x) => x.type === "garden")
+    .sort((a, b) => b.createdAt - a.createdAt);
 }
 
 export async function getAllPostsSorted(): Promise<Post[]> {
-  return (await getAllPosts()).sort((a, b) => a.createdAt - b.createdAt);
+  return (await getAllPosts()).sort((a, b) => b.createdAt - a.createdAt);
 }
 
-export async function getAllPosts(): Promise<Post[]> {
-  const posts: Post[] = [];
+interface Tag {
+  name: string;
+  posts: Post[];
+}
 
-  for await (const file of paths("", contentDir)) {
-    if (file.endsWith(".mdx")) {
-      posts.push(await loadPostByName(file.slice(0, -".mdx".length)));
+export async function getAllTags(): Promise<Tag[]> {
+  const tags = new Map<string, Tag>();
+
+  for (const post of await getAllPostsSorted()) {
+    for (const tag of post.tags) {
+      const t = tags.get(tag) ?? { name: tag, posts: [] };
+
+      t.posts.push(post);
+
+      tags.set(tag, t);
     }
   }
 
-  return posts;
+  return Array.from(tags.values()).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export async function getTag(name: string): Promise<Tag | undefined> {
+  return (await getAllTags()).find((x) => x.name === name);
+}
+
+export async function getAllPostSlugs(): Promise<string[]> {
+  const seen = new Set<string>();
+
+  for await (const file of paths("", contentDir)) {
+    if (file.endsWith(".mdx")) {
+      const parts = file
+        .slice(0, -".mdx".length)
+        .split("/")
+        .filter((x) => !!x);
+
+      if (
+        parts[parts.length - 1] === "index" ||
+        parts[parts.length - 1] === "_index"
+      ) {
+        parts.pop();
+      }
+
+      const slug = parts.join("/");
+
+      seen.add(slug);
+    }
+  }
+
+  return Array.from(seen.values());
+}
+
+export async function getAllPosts(): Promise<Post[]> {
+  return await Promise.all(
+    (await getAllPostSlugs()).map(async (slug) => await loadPostByName(slug))
+  );
 }
