@@ -1,22 +1,19 @@
 import { Global } from "@emotion/react";
+import styled from "@emotion/styled";
 
 import "../styles/main.scss";
 
-const globals = (
-  <Global
-    styles={{
-      html: {
-        fontFamily: "Rubik",
-      },
-    }}
-  />
-);
+const Container = styled.div({
+  margin: "auto",
+  maxWidth: "1100px",
+  width: "100%",
+  marginBottom: "20vh",
+});
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
-      {globals}
+    <Container>
       <Component {...pageProps} />
-    </>
+    </Container>
   );
 }

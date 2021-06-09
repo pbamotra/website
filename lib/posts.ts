@@ -212,40 +212,40 @@ async function loadPostByName(name: string): Promise<Post> {
   const { content, mdxPath } = await readMdxFile(slug);
 
   const code = async () => {
-    return (
-      await bundleMDX(content, {
-        cwd: path.dirname(mdxPath),
-        files: {
-          ...(await loadTsFiles("lib")),
-          ...(await loadTsFiles("components")),
-        },
-        xdmOptions: (options) => {
-          return {
-            ...options,
-            remarkPlugins: [
-              remarkMdxImages,
-              remarkFrontmatter,
-              remarkMdxFrontmatter,
-              remarkPrism,
-            ],
-          };
-        },
-        esbuildOptions: (options) => {
-          return {
-            ...options,
-            outdir: path.join(process.cwd(), "public/img"),
-            loader: {
-              ...options.loader,
-              ".png": "file",
-              ".jpg": "file",
-              ".gif": "file",
-            },
-            publicPath: "/img/",
-            write: true,
-          };
-        },
-      })
-    ).code;
+    const { code } = await bundleMDX(content, {
+      cwd: path.dirname(mdxPath),
+      files: {
+        ...(await loadTsFiles("lib")),
+        ...(await loadTsFiles("components")),
+      },
+      xdmOptions: (options) => {
+        return {
+          ...options,
+          remarkPlugins: [
+            remarkMdxImages,
+            remarkFrontmatter,
+            remarkMdxFrontmatter,
+            remarkPrism,
+          ],
+        };
+      },
+      esbuildOptions: (options) => {
+        return {
+          ...options,
+          outdir: path.join(process.cwd(), "public/img"),
+          loader: {
+            ...options.loader,
+            ".png": "file",
+            ".jpg": "file",
+            ".gif": "file",
+          },
+          publicPath: "/img/",
+          write: true,
+        };
+      },
+    });
+
+    return code;
   };
 
   const { data: frontmatter } = matter(content);

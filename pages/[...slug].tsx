@@ -1,16 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import "prismjs/themes/prism.css";
 
 import { getMDXComponent } from "mdx-bundler/client";
 
-import {
-  getAllPosts,
-  getAllPostSlugs,
-  getPostByPath,
-  getRecentPosts,
-} from "lib/posts";
+import { getAllPostSlugs, getPostByPath, getRecentPosts } from "lib/posts";
 import { useMemo } from "react";
 import styled from "@emotion/styled";
 
@@ -35,18 +31,25 @@ const PostTitle = styled.h1({});
 const PostContainer = styled.div({
   width: "100%",
   maxWidth: "660px",
-  margin: "0 auto",
+  paddingTop: "1rem",
 });
 
 const PostContent = styled.div({});
 
-export default function Post({ slug, title, code, createdAt }: PostProps) {
-  const router = useRouter();
+const HomeLink = styled.a({
+  borderBottom: "none",
+  color: "black",
+  cursor: "pointer",
+});
 
+export default function Post({ slug, title, code }: PostProps) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
     <PostContainer>
+      <Link href={"/"}>
+        <HomeLink>Home</HomeLink>
+      </Link>
       <PostTitle>{title}</PostTitle>
       <PostContent>
         <Component />

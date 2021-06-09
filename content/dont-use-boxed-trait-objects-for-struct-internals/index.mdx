@@ -1,6 +1,6 @@
 ---
-title: "Don't use boxed trait objects for struct internals"
-description: "When writing a struct with the intention of it being reused, it’s important not to use boxed trait objects to represent interior data as they make it very hard to consume."
+title: "Don't use boxed trait objects"
+description: "Boxed trait objects are a great scape goat for solving hard borrow checker errors. But when writing a struct that needs to be reused, you're better off using something else for their interior structure."
 createdAt: 2019-12-24
 type: article
 tags:
