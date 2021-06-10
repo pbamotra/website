@@ -23,6 +23,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     slug,
     title,
     modifiedAt,
+    description,
     type,
     tags,
   } = await getPostByPath(params.slug.join("/"));
@@ -34,6 +35,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     modifiedAt,
     tags,
     title,
+    description,
   };
 
   if (type === "article") {

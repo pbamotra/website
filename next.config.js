@@ -51,6 +51,26 @@ module.exports = {
         permanent: true,
       },
       {
+        source: "/blog/beginner-advanced-vim-tips-and-tricks/",
+        destination: "/beginner-advanced-vim-tips",
+        permanent: true,
+      },
+      {
+        source: "/blog/beginner-advanced-vim-tips-and-tricks",
+        destination: "/beginner-advanced-vim-tips",
+        permanent: true,
+      },
+      {
+        source: "/blog/2019-01-06-beginner-advanced-vim-tips-and-tricks/",
+        destination: "/beginner-advanced-vim-tips",
+        permanent: true,
+      },
+      {
+        source: "/blog/2019-01-06-beginner-advanced-vim-tips-and-tricks",
+        destination: "/beginner-advanced-vim-tips",
+        permanent: true,
+      },
+      {
         source: "/blog/creating-a-blazingly-fast-blog-without-js-or-gatsby/",
         destination: "/creating-a-blazingly-fast-blog-without-js-or-gatsby",
         permanent: true,

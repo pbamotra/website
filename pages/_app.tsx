@@ -11,6 +11,9 @@ const Container = styled.div({
   marginBottom: "20vh",
 });
 
+const DESCRIPTION =
+  "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer making videos at Clipchamp.";
+
 export default function App({ Component, pageProps }) {
   const router = useRouter();
 
@@ -18,6 +21,10 @@ export default function App({ Component, pageProps }) {
     <Container>
       <Head>
         <title>Bennett's Rust Journal</title>
+
+        <meta name="description" content={DESCRIPTION} />
+        <meta property="twitter:description" content={DESCRIPTION} />
+
         <meta property="og:title" content="Bennett's Rust Journal" />
         <meta property="twitter:title" content="Bennett's Rust Journal" />
 
