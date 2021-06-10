@@ -62,7 +62,7 @@ module.exports = {
       },
       {
         source: "/amp/:slug*",
-        destination: "/:slug*",
+        destination: "/:slug*/",
         permanent: true,
       },
     ];
