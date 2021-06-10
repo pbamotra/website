@@ -29,7 +29,7 @@
     </item>
 <item>
       <guid>https://bennetthardwick.com/writing-native-node-extensions-in-rust</guid>
-      <title>Safe, efficient and parallel Node extensions with Rust</title>
+      <title>Safe, efficient and fast native Node extensions with Rust</title>
       <link>https://bennetthardwick.com/writing-native-node-extensions-in-rust</link>
       <description>Everyone seems to be rewriting all their JavaScript in Rust. I look at how you can use Rust, Rayon and Neon to write user fast and parallel native Node extensions.</description>
       <pubDate>Tue, 26 Nov 2019 00:00:00 GMT</pubDate>
@@ -42,11 +42,25 @@
       <pubDate>Sun, 23 Jun 2019 00:00:00 GMT</pubDate>
     </item>
 <item>
+      <guid>https://bennetthardwick.com/force-push-your-branches</guid>
+      <title>Force push your branches</title>
+      <link>https://bennetthardwick.com/force-push-your-branches</link>
+      <description>A slightly hyperbolic argument for why you should force push your branches. I look at how force pushing helps you to keep your git history readable and free of merge commits.</description>
+      <pubDate>Mon, 27 May 2019 00:00:00 GMT</pubDate>
+    </item>
+<item>
       <guid>https://bennetthardwick.com/beginner-advanced-vim-tips</guid>
       <title>Advanced beginner Vim tricks</title>
       <link>https://bennetthardwick.com/beginner-advanced-vim-tips</link>
       <description>After you get past the beginner level in Vim it can be a bit hard to figure out what to learn next. To help, I explore some tips and tricks to help you overcome the valley of despair and become an advanced Vim user.</description>
       <pubDate>Sun, 06 Jan 2019 00:00:00 GMT</pubDate>
+    </item>
+<item>
+      <guid>https://bennetthardwick.com/aoc-rust-intro</guid>
+      <title>Learning Rust through the Advent of Code</title>
+      <link>https://bennetthardwick.com/aoc-rust-intro</link>
+      <description>An introduction to the Rust programming language through an Advent of Code 2018 challenge.</description>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 GMT</pubDate>
     </item>
 <item>
       <guid>https://bennetthardwick.com/change-to-sway-arch-linux</guid>

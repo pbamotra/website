@@ -9,6 +9,8 @@ tags:
   - "react"
   - "recoil"
   - "beginner"
+aliases:
+  - "/blog/recoil-js-clone-from-scratch-in-100-lines/"
 ---
 
 Recoil is a slick new React library written by some people at Facebook that work on a tool called ["Comparison View."](https://www.youtube.com/watch?v=_ISAA_Jt9kI)
@@ -58,7 +60,7 @@ Next, a method called `emit` is added. This method loops through each of the lis
 
 Finally I update the `update` method to emit the new values whenever the state is set.
 
-```typescript {hl_lines=[1,4,10,"17-21","23-30"]}
+```typescript{1,4,10,17-21,23-30}
 type Disconnecter = { disconnect: () => void };
 
 class Atom<T> {
@@ -132,7 +134,7 @@ A selector is a stateful value, just like an atom.
 To make implementing them a bit easier,
 I'll move most of the logic out of `Atom` into a base class called `Stateful`.
 
-```typescript {hl_lines=[1,6,"25-29"]}
+```typescript{1,6,25-29}
 class Stateful<T> {
   private listeners = new Set<(value: T) => void>();
 
@@ -256,7 +258,7 @@ To make sure the selector only updates once per change, let's keep track of the 
 The `updateSelector` method is very similar to the constructor in the previous example.
 It creates the `GeneratorContext`, runs the `generate` method and then uses the `update` method from the `Stateful` base class.
 
-```typescript {hl_lines=[2,"5-8","13-18"]}
+```typescript{2,5-8,13-18}
 export class Selector<T> extends Stateful<T> {
   private registeredDeps = new Set<Stateful>();
 
@@ -314,7 +316,7 @@ export function selector<V>(value: {
 
 Oh, remember that `useCoiledValue` hook from before? Let's update that to accept selectors too:
 
-```typescript {hl_lines=[1]}
+```typescript{1}
 export function useCoiledValue<T>(value: Stateful<T>): T {
   const [, updateState] = useState({});
 

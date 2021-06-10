@@ -5,11 +5,10 @@ import { remarkMdxImages } from "remark-mdx-images";
 import remarkFrontmatter from "remark-frontmatter";
 import { remarkMdxFrontmatter } from "remark-mdx-frontmatter";
 import remarkPrism from "remark-prism";
+
 import matter from "gray-matter";
 
 import { exec } from "child_process";
-
-import { performance } from "perf_hooks";
 
 function loadDate(val: unknown, or: Date = new Date()): Date {
   const date = new Date(String(val));
@@ -157,6 +156,7 @@ interface Post {
   createdAt: number;
   modifiedAt: number;
   type: PostType;
+  aliases: string[];
   draft: boolean;
 }
 
@@ -225,7 +225,15 @@ async function loadPostByName(name: string): Promise<Post> {
             remarkMdxImages,
             remarkFrontmatter,
             remarkMdxFrontmatter,
-            remarkPrism,
+            [
+              remarkPrism,
+              {
+                showSpotlight: true,
+                plugins: [
+                  "prismjs/plugins/unescaped-markup/prism-unescaped-markup",
+                ],
+              },
+            ],
           ],
         };
       },
@@ -270,6 +278,7 @@ async function loadPostByName(name: string): Promise<Post> {
     tags: loadStringArray(frontmatter.tags),
     subtitle: loadString(frontmatter.subtitle),
     description: loadString(frontmatter.description),
+    aliases: loadStringArray(frontmatter.aliases),
     type: loadType(frontmatter.type),
     draft: loadBoolean(frontmatter.draft),
     slugParts: parts,
@@ -380,6 +389,29 @@ export async function getAllPostSlugs(): Promise<string[]> {
   }
 
   return Array.from(seen.values());
+}
+
+interface Redirect {
+  source: string;
+  destination: string;
+}
+
+export async function getRedirects(): Promise<void> {
+  const redirects: Redirect[] = [];
+
+  for (const post of await getAllPosts()) {
+    for (const source of post.aliases) {
+      redirects.push({
+        source,
+        destination: post.slug,
+      });
+    }
+  }
+
+  require("fs").writeFileSync(
+    path.join(process.cwd(), "public", "output.js"),
+    `module.exports = ${JSON.stringify(redirects)};`
+  );
 }
 
 export async function getAllPosts(): Promise<Post[]> {

@@ -1,5 +1,5 @@
 ---
-title: "Safe, efficient and parallel Node extensions with Rust"
+title: "Safe, efficient and fast native Node extensions with Rust"
 description: "Everyone seems to be rewriting all their JavaScript in Rust. I look at how you can use Rust, Rayon and Neon to write user fast and parallel native Node extensions."
 createdAt: 2019-11-26
 type: article
@@ -7,6 +7,8 @@ tags:
   - "rust"
   - "javascript"
   - "nodejs"
+aliases:
+  - "/blog/writing-safe-efficient-parallel-native-node-extensions-in-rust-and-neon/"
 ---
 
 When writing server applications with Node.js, sometimes JavaScript just doesn't cut it and you need to employ native code.
@@ -36,10 +38,6 @@ After installing `rustup` and configuring your `PATH`, it's time to install Neon
 
 ## Getting started with Neon
 
-```
-
-```
-
 Before starting a Neon project, you have to install the CLI. The Neon CLI can easily be installed by using the NPM package manager.
 
 ```
@@ -60,10 +58,6 @@ If there are any errors at this point, ensure that you have the Rust tool-chain 
 
 Let's make a simple project that finds the factorial of `n`.
 
-```
-
-```
-
 Before getting started, you'll need to add the `rayon` crate to your `native/Cargo.toml` file.
 
 Rayon is an awesome library with a simple interface that allows you to take full advantage of your system by multi-threading many of the common tasks done by Rust iterators.
@@ -77,10 +71,6 @@ rayon = "1.2.1"
 After adding it to your `native/Cargo.toml` file, run `cd native && cargo build` to check that everything builds correctly.
 
 Now that everything is ready to go, start by opening `native/src/lib.rs` in your favourite editor.
-
-```
-
-```
 
 In order to use `neon` and `rayon` they need to be imported.
 `rayon` and `neon` both expose a prelude of common stable APIs.
@@ -123,10 +113,6 @@ impl Task for FactorialTask {
 
 The next part of the Task trait that needs to be implemented is the `perform` function.
 This is the function is what does all the work.
-
-```
-
-```
 
 The factorial of a number if all the numbers from `1` to `n` multiplied together.
 When the task is run in parallel `1 * 2` may be added together in one thread while `3 * 4` is added together in another thread, and so on.

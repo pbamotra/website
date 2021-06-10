@@ -3,6 +3,10 @@ createdAt: 2020-07-30
 title: Downcast Trait Object
 description: "How to downcast a trait back to a concrete type in Rust"
 type: garden
+tags:
+  - "rust"
+aliases:
+  -  "/wiki/rust/rust-downcast-trait-object/"
 ---
 
 Downcasting is Rust's method of converting a trait into a concrete type.
@@ -39,7 +43,7 @@ fn main() {
 
 In order to make use of it, you need to add a method into your trait so the
 
-```rust {hl_lines=[1,5,"14-16"]}
+```rust{1,5,14-16}
 use std::any::Any;
 
 trait Print {
@@ -61,7 +65,7 @@ impl Print for TrustyPrinter {
 
 You can now use the [`downcast_ref`][dr] method to convert the reference to your trait object back into your concrete type.
 
-```rust {hl_lines=["10-15"]}
+```rust{10-15}
 fn main() {
   // Create your struct that implements your trait
   let t = TrustyPrinter;

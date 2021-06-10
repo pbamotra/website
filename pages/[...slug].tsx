@@ -24,14 +24,15 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     title,
     modifiedAt,
     type,
+    tags,
   } = await getPostByPath(params.slug.join("/"));
 
   const props: PostPageProps = {
     slug,
     code: await code(),
     createdAt,
-    tags: [],
     modifiedAt,
+    tags,
     title,
   };
 
@@ -40,13 +41,13 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
 
     const index = allArticles.findIndex((x) => x.slug === slug);
 
-    const previous = allArticles[index - 1];
+    const previous = allArticles[index + 1];
 
     if (previous) {
       props.previous = { title: previous.title, slug: previous.slug };
     }
 
-    const next = allArticles[index + 1];
+    const next = allArticles[index - 1];
 
     if (next) {
       props.next = {

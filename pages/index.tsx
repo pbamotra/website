@@ -4,7 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import styled from "@emotion/styled";
-import { getAllTags, getRecentGarden, getRecentPosts, toRss } from "lib/posts";
+import {
+  getAllTags,
+  getRedirects,
+  getRecentGarden,
+  getRecentPosts,
+  toRss,
+} from "lib/posts";
 import PostPreview from "components/PostPreview";
 import fs from "fs";
 import path from "path";
@@ -163,6 +169,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const rss = toRss(allPosts);
 
   fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
+
+  // Uncomment to output redirects
+  // await getRedirects();
 
   return {
     props: {
