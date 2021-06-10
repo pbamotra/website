@@ -296,6 +296,41 @@ export async function getAllPostsSorted(): Promise<Post[]> {
   return (await getAllPosts()).sort((a, b) => b.createdAt - a.createdAt);
 }
 
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+export function toRss(posts: Post[]): string {
+  const items = posts.map(
+    (x) => `<item>
+      <guid>https://bennetthardwick.com${x.slug}</guid>
+      <title>${escapeHtml(x.title)}</title>
+      <link>https://bennetthardwick.com${x.slug}</link>
+      <description>${escapeHtml(x.description)}</description>
+      <pubDate>${new Date(x.createdAt).toUTCString()}</pubDate>
+    </item>`
+  );
+
+  return `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>Bennett Hardwick</title>
+      <link>https://bennetthardwick.com</link>
+      <description>Bennett's Rust Journal</description>
+      <language>en</language>
+      <lastBuildDate>${new Date(
+        posts[0].createdAt
+      ).toUTCString()}</lastBuildDate>
+      <atom:link href="https://bennetthardwick.com/rss.xml" rel="self" type="application/rss+xml"/>
+      ${items.join("\n")}
+    </channel>
+  </rss>`;
+}
+
 interface Tag {
   name: string;
   posts: Post[];

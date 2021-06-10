@@ -1,6 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 
+import Link from "next/link";
+import Head from "next/head";
+
 import { getAllTags, getTag } from "lib/posts";
+import HomeLink from "components/HomeLink";
+import styled from "@emotion/styled";
 
 interface PostSnapshot {
   slug: string;
@@ -12,8 +17,33 @@ interface TagPageProps {
   posts: PostSnapshot[];
 }
 
+const TagPageContainer = styled.div({
+  width: "100%",
+  maxWidth: "660px",
+});
+
 export default function TagPage({ name, posts }: TagPageProps) {
-  return <div>Tag page for {name}</div>;
+  return (
+    <>
+      <Head>
+        <title>Everything tagged "{name}" 🏷️</title>
+      </Head>
+      <TagPageContainer>
+        <HomeLink />
+        <h1>Everything tagged "{name}" 🏷️</h1>
+        <h2>Posts 📚</h2>
+        <ul>
+          {posts.map((x) => (
+            <li key={x.slug}>
+              <Link href={x.slug}>
+                <a>{x.title}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </TagPageContainer>
+    </>
+  );
 }
 
 export const getStaticProps: GetStaticProps<TagPageProps> = async ({

@@ -11,6 +11,7 @@ interface PostPreviewProps {
 
 const PostPreviewTitle = styled.h3({
   display: "inline",
+  fontSize: "1.4rem",
 });
 
 const PostPreviewExcerpt = styled.p({
@@ -19,7 +20,8 @@ const PostPreviewExcerpt = styled.p({
 
 const PostPreviewContainer = styled.a({
   display: "block",
-  margin: "2rem 0",
+  margin: "0",
+  marginBottom: "2rem",
   cursor: "pointer",
   border: "none",
   color: "inherit",

@@ -5,6 +5,10 @@
   --accent-color-light: #82ade3;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Rubik", "PT Serif", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -102,6 +106,12 @@ a.profile-icon {
   img {
     border-radius: 50%;
   }
+}
+
+img {
+  max-width: 100%;
+  margin: auto;
+  display: block;
 }
 
 nav {

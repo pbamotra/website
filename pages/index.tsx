@@ -1,9 +1,13 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import styled from "@emotion/styled";
-import { getAllTags, getRecentGarden, getRecentPosts } from "lib/posts";
+import { getAllTags, getRecentGarden, getRecentPosts, toRss } from "lib/posts";
 import PostPreview from "components/PostPreview";
+import fs from "fs";
+import path from "path";
 
 const ContentContainer = styled.div({
   display: "grid",
@@ -13,7 +17,6 @@ const ContentContainer = styled.div({
   "@media (max-width: 800px)": {
     gridTemplateColumns: "1fr",
   },
-  marginTop: "8rem",
 });
 
 const RecentPosts = styled.div({});
@@ -26,8 +29,9 @@ const PopularContent = styled.div({
   marginBottom: "2rem",
 });
 
-const CategoryTitle = styled.h2({
+const CategoryTitle = styled.h3({
   margin: "0",
+  fontSize: "1.4rem",
 });
 
 const IntroContainer = styled.div({
@@ -68,21 +72,33 @@ const TagContainer = styled.div({
   flexWrap: "wrap",
 });
 
+const Title = styled.h1({
+  fontSize: "3rem",
+});
+
+const Subtitle = styled.p({
+  fontSize: "1.4rem",
+  marginRight: "4rem",
+});
+
+const RecentTitle = styled.h2({
+  fontSize: "2rem",
+  marginTop: "4rem",
+});
+
 export default function Home({ recent, tags, recentGarden }: HomeProps) {
   return (
     <>
-      <Head>
-        <title>Bennett Hardwick</title>
-      </Head>
       <IntroContainer>
-        <h1>Hi, Bennett here!</h1>
+        <Title>Hi, Bennett here! 👋</Title>
         <div>
+          <Subtitle>
+            I'm a software developer at{" "}
+            <a href="https://clipchamp.com">Clipchamp</a>, where I help people
+            make cinematic masterpieces with their browser.
+          </Subtitle>
           <p>
-            I'm a software developer living in Mackay, working on makes movies
-            in the browser at <a href="https://clipchamp.com">Clipchamp</a>.
-          </p>
-          <p>
-            When I’m not at work, you’ll find me ricing Archlinux, evangelizing
+            When I’m not at work, you’ll find me ricing Arch Linux, evangelizing
             Vim and spending hours and hours fighting the borrow-checker in
             Rust.
           </p>
@@ -98,10 +114,11 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
         </div>
       </IntroContainer>
 
+      <RecentTitle>Recent Posts 📚</RecentTitle>
+
       <ContentContainer>
         <div>
           <RecentPosts>
-            <CategoryTitle>Recent Posts</CategoryTitle>
             {recent.map((x) => (
               <PostPreview key={x.slug} post={x} />
             ))}
@@ -109,7 +126,7 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
         </div>
         <div>
           <PopularContent>
-            <CategoryTitle>Posts from the Garden</CategoryTitle>
+            <CategoryTitle>The Garden 🌳</CategoryTitle>
             <ul>
               {recentGarden.map((x) => (
                 <li key={x.slug}>
@@ -121,7 +138,7 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
             </ul>
           </PopularContent>
           <PopularTags>
-            <CategoryTitle>Tags</CategoryTitle>
+            <CategoryTitle>Tags 🏷️</CategoryTitle>
             <TagContainer>
               <ul>
                 {tags.map((x) => (
@@ -141,15 +158,19 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const allPosts = await getRecentPosts();
+
+  const rss = toRss(allPosts);
+
+  fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
+
   return {
     props: {
-      recent: (await getRecentPosts())
-        .slice(0, 10)
-        .map(({ title, slug, description }) => ({
-          title,
-          description,
-          slug,
-        })),
+      recent: allPosts.slice(0, 10).map(({ title, slug, description }) => ({
+        title,
+        description,
+        slug,
+      })),
       recentGarden: (await getRecentGarden())
         .slice(0, 10)
         .map(({ title, slug }) => ({
