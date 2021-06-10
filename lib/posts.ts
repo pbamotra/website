@@ -394,6 +394,7 @@ export async function getAllPostSlugs(): Promise<string[]> {
 interface Redirect {
   source: string;
   destination: string;
+  permanent: boolean;
 }
 
 export async function getRedirects(): Promise<void> {
@@ -402,8 +403,15 @@ export async function getRedirects(): Promise<void> {
   for (const post of await getAllPosts()) {
     for (const source of post.aliases) {
       redirects.push({
-        source,
+        source: source.endsWith("/") ? source : `${source}/`,
         destination: post.slug,
+        permanent: true,
+      });
+
+      redirects.push({
+        source: source.endsWith("/") ? source.slice(0, -1) : source,
+        destination: post.slug,
+        permanent: true,
       });
     }
   }
