@@ -32,6 +32,8 @@ export default function App({ Component, pageProps }) {
 
         <meta property="twitter:site" content="@bennettbackward" />
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"></script>
+
         <link
           rel="canonical"
           href={`https://bennetthardwick.com${router.asPath}`}
