@@ -14,6 +14,17 @@ const Container = styled.div({
 const DESCRIPTION =
   "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer making videos at Clipchamp.";
 
+const dataLayer =
+  typeof window === "undefined"
+    ? []
+    : ((window as any).dataLayer = ((window as any).dataLayer as []) ?? []);
+
+function gtag(..._args: unknown[]) {
+  dataLayer.push(arguments);
+}
+gtag("js", new Date());
+gtag("config", "UA-153493405-1");
+
 export default function App({ Component, pageProps }) {
   const router = useRouter();
 
@@ -32,7 +43,10 @@ export default function App({ Component, pageProps }) {
 
         <meta property="twitter:site" content="@bennettbackward" />
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"></script>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"
+        ></script>
 
         <link
           rel="canonical"
