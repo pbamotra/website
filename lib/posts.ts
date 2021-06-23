@@ -436,7 +436,9 @@ export async function getRedirects(): Promise<void> {
 }
 
 export async function getAllPosts(): Promise<Post[]> {
-  return await Promise.all(
-    (await getAllPostSlugs()).map(async (slug) => await loadPostByName(slug))
-  );
+  return (
+    await Promise.all(
+      (await getAllPostSlugs()).map(async (slug) => await loadPostByName(slug))
+    )
+  ).filter((x) => (process.env.NODE_ENV === "production" ? !x.draft : true));
 }

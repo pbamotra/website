@@ -60,7 +60,9 @@ const PostContainer = styled.div({
   },
 });
 
-const PostContent = styled.div({});
+const PostContent = styled.div({
+  marginTop: "2rem",
+});
 
 interface PostLink {
   title: string;
@@ -96,7 +98,11 @@ const LinkSection = styled.div({
 
 const TagContainer = styled.div({
   display: "flex",
-  marginBottom: "2rem",
+});
+
+const DateContainer = styled.div({
+  fontSize: "0.8rem",
+  margin: "0.5rem 0",
 });
 
 const Tag = styled.a({
@@ -121,6 +127,14 @@ const COMPONENT_MAP = {
   code: Code,
 } as const;
 
+function formatDate(date: number): string {
+  return new Date(date).toLocaleString("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 export default function PostPage({
   slug,
   description,
@@ -137,6 +151,9 @@ export default function PostPage({
 }: PostPageProps) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
   const router = useRouter();
+
+  const createdAtString = useMemo(() => formatDate(createdAt), [createdAt]);
+  const modifiedAtString = useMemo(() => formatDate(modifiedAt), [modifiedAt]);
 
   return (
     <PostContainer>
@@ -188,6 +205,7 @@ export default function PostPage({
       </Head>
       <HomeLink />
       <PostTitle>{title}</PostTitle>
+
       {tags.length > 0 && (
         <TagContainer>
           {tags.map((x) => (
@@ -197,6 +215,18 @@ export default function PostPage({
           ))}
         </TagContainer>
       )}
+
+      <DateContainer>
+        {createdAtString !== modifiedAtString && (
+          <>
+            Updated {modifiedAtString} - Published {createdAtString}
+          </>
+        )}
+        {createdAtString === modifiedAtString && (
+          <>Published {createdAtString}</>
+        )}
+      </DateContainer>
+
       <PostContent>
         <Component components={COMPONENT_MAP} />
       </PostContent>
