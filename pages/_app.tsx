@@ -34,14 +34,14 @@ export default function App({ Component, pageProps }) {
         <title>Bennett's Rust Journal</title>
 
         <meta name="description" content={DESCRIPTION} />
-        <meta property="twitter:description" content={DESCRIPTION} />
+        <meta name="twitter:description" content={DESCRIPTION} />
 
-        <meta property="og:title" content="Bennett's Rust Journal" />
-        <meta property="twitter:title" content="Bennett's Rust Journal" />
+        <meta name="og:title" content="Bennett's Rust Journal" />
+        <meta name="twitter:title" content="Bennett's Rust Journal" />
 
-        <meta property="twitter:creator" content="@bennettbackward" />
+        <meta name="twitter:creator" content="@bennettbackward" />
 
-        <meta property="twitter:site" content="@bennettbackward" />
+        <meta name="twitter:site" content="@bennettbackward" />
 
         <script
           async
@@ -54,23 +54,23 @@ export default function App({ Component, pageProps }) {
         />
 
         <meta
-          property="og:url"
+          name="og:url"
           content={`https://bennetthardwick.com${router.asPath}`}
         />
 
         <meta
-          property="og:image"
+          name="og:image"
           content={"https://bennetthardwick.com/profile.jpg"}
         />
         <meta
-          property="twitter:image"
+          name="twitter:image"
           content={"https://bennetthardwick.com/profile.jpg"}
         />
-        <meta property="og:image:width" content={"400"} />
+        <meta name="og:image:width" content={"400"} />
 
-        <meta property="og:image:height" content={"400"} />
+        <meta name="og:image:height" content={"400"} />
 
-        <meta property="og:type" content="article" />
+        <meta name="og:type" content="article" />
       </Head>
       <Component {...pageProps} />
     </Container>

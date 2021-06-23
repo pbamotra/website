@@ -171,7 +171,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
 
   // Uncomment to output redirects
-  // await getRedirects();
+  await getRedirects();
 
   return {
     props: {

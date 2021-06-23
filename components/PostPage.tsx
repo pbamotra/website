@@ -78,6 +78,8 @@ export interface PostPageProps {
   next?: PostLink;
   description?: string;
   isAmp?: boolean;
+  type: string;
+  status?: string;
   image?: { width: number; height: number; src: string };
 }
 
@@ -130,6 +132,8 @@ export default function PostPage({
   createdAt,
   modifiedAt,
   tags,
+  type,
+  status,
 }: PostPageProps) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
   const router = useRouter();
@@ -139,22 +143,22 @@ export default function PostPage({
       <Head>
         {description && <meta name="description" content={description} />}
         {description && (
-          <meta property="twitter:description" content={description} />
+          <meta name="twitter:description" content={description} />
         )}
 
         <title>{title}</title>
 
-        <meta property="og:title" content={title} />
-        <meta property="twitter:title" content={title} />
+        <meta name="og:title" content={title} />
+        <meta name="twitter:title" content={title} />
 
-        <meta property="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary" />
 
         {image && (
           <>
-            <meta property="og:image" content={image.src} />
-            <meta property="twitter:image" content={image.src} />
-            <meta property="og:image:width" content={`${image.width}`} />
-            <meta property="og:image:height" content={`${image.height}`} />
+            <meta name="og:image" content={image.src} />
+            <meta name="twitter:image" content={image.src} />
+            <meta name="og:image:width" content={`${image.width}`} />
+            <meta name="og:image:height" content={`${image.height}`} />
           </>
         )}
 
@@ -196,7 +200,10 @@ export default function PostPage({
       <PostContent>
         <Component components={COMPONENT_MAP} />
       </PostContent>
-      <TweetSection slug={slug} title={title} />
+      <hr />
+      {type === "garden" && status !== "evergreen" ? null : (
+        <TweetSection slug={slug} title={title} />
+      )}
       <About />
       <NextPreviousContainer>
         <LinkSection>

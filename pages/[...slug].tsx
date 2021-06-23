@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     description,
     type,
     tags,
+    status,
   } = await getPostByPath(params.slug.join("/"));
 
   const props: PostPageProps = {
@@ -35,8 +36,13 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     modifiedAt,
     tags,
     title,
+    type,
     description,
   };
+
+  if (status) {
+    props.status = status;
+  }
 
   if (type === "article") {
     const allArticles = await getRecentPosts();

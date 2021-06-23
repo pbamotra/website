@@ -100,6 +100,8 @@ module.exports = {
         destination: "/force-push-your-branches",
         permanent: true,
       },
+      { source: "/wiki/", destination: "/garden", permanent: true },
+      { source: "/wiki", destination: "/garden", permanent: true },
       {
         source: "/blog/recoil-js-clone-from-scratch-in-100-lines/",
         destination: "/recoil-from-scratch",

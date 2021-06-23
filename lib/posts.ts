@@ -144,6 +144,9 @@ async function collect<T>(generator: AsyncGenerator<T>): Promise<T[]> {
 const TYPES = ["article", "garden", "generic"] as const;
 type PostType = typeof TYPES[number];
 
+const STATUS = ["evergreen", "budding", "seedling"] as const;
+type Status = typeof STATUS[number];
+
 interface Post {
   code: () => Promise<string>;
   subtitle?: string;
@@ -156,6 +159,7 @@ interface Post {
   createdAt: number;
   modifiedAt: number;
   type: PostType;
+  status?: Status;
   aliases: string[];
   draft: boolean;
 }
@@ -166,6 +170,14 @@ function loadType(type: unknown): PostType {
   }
 
   return "generic";
+}
+
+function loadStatus(status: unknown): Status | undefined {
+  if (STATUS.includes(status as Status)) {
+    return status as Status;
+  }
+
+  return undefined;
 }
 
 function loadBoolean(bool: unknown) {
@@ -280,6 +292,7 @@ async function loadPostByName(name: string): Promise<Post> {
     description: loadString(frontmatter.description),
     aliases: loadStringArray(frontmatter.aliases),
     type: loadType(frontmatter.type),
+    status: loadStatus(frontmatter.status),
     draft: loadBoolean(frontmatter.draft),
     slugParts: parts,
   };
