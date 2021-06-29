@@ -143,7 +143,7 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
               ))}
             </ul>
           </PopularContent>
-          <PopularTags>
+          <PopularContent>
             <CategoryTitle>Tags 🏷️</CategoryTitle>
             <TagContainer>
               <ul>
@@ -156,7 +156,27 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
                 ))}
               </ul>
             </TagContainer>
-          </PopularTags>
+          </PopularContent>
+          <PopularContent>
+            <CategoryTitle>Links</CategoryTitle>
+            <ul>
+              <li>
+                <Link href={`/projects`}>
+                  <a>Projects</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/now`}>
+                  <a>Now</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/archive`}>
+                  <a>Archive</a>
+                </Link>
+              </li>
+            </ul>
+          </PopularContent>
         </div>
       </ContentContainer>
     </>
@@ -171,7 +191,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
 
   // Uncomment to output redirects
-  await getRedirects();
+  // await getRedirects();
 
   return {
     props: {
