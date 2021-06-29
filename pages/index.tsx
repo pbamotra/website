@@ -111,7 +111,7 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
           <p>
             If you'd like to get in contact, you can{" "}
             <a href="mailto:me@bennetthardwick.com">email me</a> or find me on{" "}
-            <a href="https://github.com/bennetthardwick">Github</a> or{" "}
+              <a href="https://github.com/bennetthardwick">Github</a> or{" "}
             <a href="https://twitter.com/intent/user?screen_name=bennettbackward">
               Twitter
             </a>
