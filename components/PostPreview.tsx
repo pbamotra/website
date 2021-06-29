@@ -35,7 +35,7 @@ export default function PostPreview({
   post: { title, slug, description },
 }: PostPreviewProps) {
   return (
-    <Link href={slug}>
+    <Link href={slug} passHref>
       <PostPreviewContainer>
         <PostPreviewTitle>{title}</PostPreviewTitle>
         <PostPreviewExcerpt>{description}</PostPreviewExcerpt>

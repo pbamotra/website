@@ -149,7 +149,7 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
               <ul>
                 {tags.map((x) => (
                   <li key={x}>
-                    <Link href={`/tag/${x}`}>
+                    <Link href={`/tag/${x}`} passHref>
                       <Tag>{x}</Tag>
                     </Link>
                   </li>

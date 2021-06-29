@@ -209,7 +209,7 @@ export default function PostPage({
       {tags.length > 0 && (
         <TagContainer>
           {tags.map((x) => (
-            <Link href={`/tag/${x}`} key={x}>
+            <Link href={`/tag/${x}`} key={x} passHref>
               <Tag>{x}</Tag>
             </Link>
           ))}
