@@ -150,6 +150,18 @@ module.exports = {
         destination: "/:slug*/",
         permanent: true,
       },
+
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true,
+      },
+
+      {
+        source: "/about/",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };
