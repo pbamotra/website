@@ -29,6 +29,9 @@ const PostPreviewContainer = styled.a({
     color: "var(--accent-color)",
     borderBottom: "1px solid var(--accent-color-light)",
   },
+  ":visited": {
+    color: "inherit",
+  },
 });
 
 export default function PostPreview({
