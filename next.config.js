@@ -80,6 +80,14 @@ module.exports = {
         destination: "/creating-a-blazingly-fast-blog-without-js-or-gatsby",
         permanent: true,
       },
+
+      {
+        source:
+          "/blog/2019-12-24-dont-use-boxed-trait-objects-for-struct-internals",
+        destination: "/dont-use-boxed-trait-objects-for-struct-internals",
+        permanent: true,
+      },
+
       {
         source: "/blog/dont-use-boxed-trait-objects-for-struct-internals/",
         destination: "/dont-use-boxed-trait-objects-for-struct-internals",
