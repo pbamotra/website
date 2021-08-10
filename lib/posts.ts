@@ -24,7 +24,7 @@ const contentDir = path.join(process.cwd(), "content");
 const TYPES = ["article", "garden", "generic"] as const;
 type PostType = typeof TYPES[number];
 
-const STATUS = ["evergreen", "budding", "seedling"] as const;
+const STATUS = ["evergreen", "budding", "seedling", "seed"] as const;
 type Status = typeof STATUS[number];
 
 interface Post {
@@ -177,7 +177,7 @@ export async function getRecentPosts(): Promise<Post[]> {
 
 export async function getRecentGarden(): Promise<Post[]> {
   return (await getAllPosts())
-    .filter((x) => x.type === "garden")
+    .filter((x) => x.type === "garden" && x.status !== "seed")
     .sort((a, b) => b.createdAt - a.createdAt);
 }
 
@@ -245,13 +245,26 @@ export async function getTag(name: string): Promise<Tag | undefined> {
   return (await getAllTags()).find((x) => x.name === name);
 }
 
+function withoutExtension(file: string): string {
+  if (file.endsWith(".mdx")) {
+    return file.slice(0, -".mdx".length);
+  }
+
+  if (file.endsWith(".md")) {
+    return file.slice(0, -".md".length);
+  }
+}
+
+function hasExtension(file: string): boolean {
+  return file.endsWith(".mdx") || file.endsWith(".md");
+}
+
 export async function getAllPostSlugs(): Promise<string[]> {
   const seen = new Set<string>();
 
   for await (const file of paths("", contentDir)) {
-    if (file.endsWith(".mdx")) {
-      const parts = file
-        .slice(0, -".mdx".length)
+    if (hasExtension(file)) {
+      const parts = withoutExtension(file)
         .split("/")
         .filter((x) => !!x);
 
@@ -303,9 +316,13 @@ export async function getRedirects(): Promise<void> {
 }
 
 export async function getAllPosts(): Promise<Post[]> {
-  return (
-    await Promise.all(
-      (await getAllPostSlugs()).map(async (slug) => await loadPostByName(slug))
-    )
-  ).filter((x) => (process.env.NODE_ENV === "production" ? !x.draft : true));
+  const posts = await Promise.all(
+    (await getAllPostSlugs()).map(async (slug) => await loadPostByName(slug))
+  );
+
+  const backlinks = new Map<string, string[]>();
+
+  return posts.filter((x) =>
+    process.env.NODE_ENV === "production" ? !x.draft : true
+  );
 }

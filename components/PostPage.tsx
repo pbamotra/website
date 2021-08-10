@@ -16,9 +16,19 @@ const PostTitle = styled.h1({
   marginBottom: ".4rem",
 });
 
+const CONTENT_WIDTH = "660px";
+
 const PostContainer = styled.div({
   width: "100%",
-  maxWidth: "660px",
+  display: "grid",
+  gridTemplateColumns: `${CONTENT_WIDTH} 1fr`,
+  gridRowGap: "2rem",
+  gridColumnGap: "1rem",
+
+  "@media (max-width: 950px)": {
+    gridTemplateColumns: "1fr",
+  },
+
   img: {
     boxShadow: "0px 3px 6px rgb(0 0 0 / 5%)",
     maxWidth: "100%",
@@ -62,9 +72,7 @@ const PostContainer = styled.div({
   },
 });
 
-const PostContent = styled.div({
-  marginTop: "2rem",
-});
+const PostContent = styled.div({});
 
 interface PostLink {
   title: string;
@@ -112,6 +120,28 @@ const Tag = styled.a({
   cursor: "pointer",
 });
 
+const InternalLink = styled.a({
+  borderBottom: "none",
+  ":before": {
+    opacity: 0.4,
+    content: "'['",
+    transition: "opacity 50ms",
+  },
+  ":after": {
+    opacity: 0.4,
+    content: "']'",
+    transition: "opacity 50ms",
+  },
+  ":hover": {
+    ":before": {
+      opacity: 0.8,
+    },
+    ":after": {
+      opacity: 0.8,
+    },
+  },
+});
+
 const REPLACE_LANGUAGES = new Set(["language-unknown"]);
 
 const Code: React.FC<{ [key: string]: unknown }> = (props) => {
@@ -133,7 +163,7 @@ const Anchor: React.FC<{ [key: string]: unknown }> = (props) => {
 
     if (href.startsWith(".") || href.startsWith("/")) {
       if (href.startsWith(".")) {
-        href = join(router.pathname, href);
+        href = join(router.asPath, "..", href);
       }
 
       if (href.endsWith("/_index.mdx")) {
@@ -154,7 +184,7 @@ const Anchor: React.FC<{ [key: string]: unknown }> = (props) => {
 
       return (
         <Link href={href} passHref>
-          <a {...rest} />
+          <InternalLink {...rest} />
         </Link>
       );
     }
@@ -180,7 +210,36 @@ const STATUS_TEXT = {
   seedling: <>Seedling 🌱</>,
   budding: <>Budding 🌿</>,
   evergreen: <>Evergreen 🌳</>,
+  seed: <>Seed 🌰</>,
 };
+
+const Warning = styled.div({
+  background: "#fff9bb",
+  border: "solid 2px #f5dd64",
+  padding: "8px 24px",
+  borderRadius: "4px",
+});
+
+const HeaderContainer = styled.div({
+  gridColumn: "1 / span 2",
+  maxWidth: CONTENT_WIDTH,
+  width: "100%",
+});
+
+const FooterContainer = styled.div({});
+
+const BacklinksContainer = styled.div({});
+
+function SeedWarning() {
+  return (
+    <Warning>
+      <p>
+        This page is a seed and hasn't had a chance to grow just yet - it might
+        not be ready for human consumption.
+      </p>
+    </Warning>
+  );
+}
 
 export default function PostPage({
   slug,
@@ -209,14 +268,13 @@ export default function PostPage({
         {description && (
           <meta name="twitter:description" content={description} />
         )}
-
+        {(type === "garden" && status === "seed") ||
+          (status === "seedling" && <meta name="robots" content="noindex" />)}
         <title>{title}</title>
-
         <meta name="og:title" content={title} />
         <meta name="twitter:title" content={title} />
-
+        2 /
         <meta name="twitter:card" content="summary" />
-
         {image && (
           <>
             <meta name="og:image" content={image.src} />
@@ -225,7 +283,6 @@ export default function PostPage({
             <meta name="og:image:height" content={`${image.height}`} />
           </>
         )}
-
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -250,63 +307,74 @@ export default function PostPage({
           })}
         </script>
       </Head>
-      <HomeLink />
-      <PostTitle>{title}</PostTitle>
 
-      {tags.length > 0 && (
-        <TagContainer>
-          {tags.map((x) => (
-            <Link href={`/tag/${x}`} key={x} passHref>
-              <Tag>{x}</Tag>
-            </Link>
-          ))}
-        </TagContainer>
-      )}
+      <HeaderContainer>
+        <HomeLink />
+        <PostTitle>{title}</PostTitle>
 
-      <DateContainer>
-        {type === "garden" && STATUS_TEXT[status] && (
-          <>{STATUS_TEXT[status]} - </>
+        {tags.length > 0 && (
+          <TagContainer>
+            {tags.map((x) => (
+              <Link href={`/tag/${x}`} key={x} passHref>
+                <Tag>{x}</Tag>
+              </Link>
+            ))}
+          </TagContainer>
         )}
-        {createdAtString !== modifiedAtString && (
-          <>
-            Updated {modifiedAtString} - Published {createdAtString}
-          </>
-        )}
-        {createdAtString === modifiedAtString && (
-          <>Published {createdAtString}</>
-        )}
-      </DateContainer>
+
+        <DateContainer>
+          {type === "garden" && STATUS_TEXT[status] && (
+            <>{STATUS_TEXT[status]} - </>
+          )}
+          {createdAtString !== modifiedAtString && (
+            <>
+              Updated {modifiedAtString} - Published {createdAtString}
+            </>
+          )}
+          {createdAtString === modifiedAtString && (
+            <>Published {createdAtString}</>
+          )}
+        </DateContainer>
+      </HeaderContainer>
 
       <PostContent>
+        {type === "garden" && status === "seed" && <SeedWarning />}
+
         <Component components={COMPONENT_MAP} />
       </PostContent>
-      <hr />
-      {type === "garden" && status !== "evergreen" ? null : (
-        <TweetSection slug={slug} title={title} />
-      )}
-      <About />
-      <NextPreviousContainer>
-        <LinkSection>
-          {previous && (
-            <>
-              <div>Previous</div>
-              <Link href={previous.slug}>
-                <a>{previous.title}</a>
-              </Link>
-            </>
-          )}
-        </LinkSection>
-        <LinkSection>
-          {next && (
-            <>
-              <div>Next</div>
-              <Link href={next.slug}>
-                <a>{next.title}</a>
-              </Link>
-            </>
-          )}
-        </LinkSection>
-      </NextPreviousContainer>
+
+      <BacklinksContainer></BacklinksContainer>
+
+      <FooterContainer>
+        <hr />
+
+        {type === "garden" && status !== "evergreen" ? null : (
+          <TweetSection slug={slug} title={title} />
+        )}
+        <About />
+        <NextPreviousContainer>
+          <LinkSection>
+            {previous && (
+              <>
+                <div>Previous</div>
+                <Link href={previous.slug}>
+                  <a>{previous.title}</a>
+                </Link>
+              </>
+            )}
+          </LinkSection>
+          <LinkSection>
+            {next && (
+              <>
+                <div>Next</div>
+                <Link href={next.slug}>
+                  <a>{next.title}</a>
+                </Link>
+              </>
+            )}
+          </LinkSection>
+        </NextPreviousContainer>
+      </FooterContainer>
     </PostContainer>
   );
 }
