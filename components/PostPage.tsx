@@ -9,6 +9,8 @@ import TweetSection from "./TweetSection";
 import About from "./About";
 import { useRouter } from "next/router";
 
+import { join } from "path";
+
 const PostTitle = styled.h1({
   fontSize: "2.4rem",
   marginBottom: ".4rem",
@@ -123,8 +125,47 @@ const Code: React.FC<{ [key: string]: unknown }> = (props) => {
   return <code {...props} />;
 };
 
+const Anchor: React.FC<{ [key: string]: unknown }> = (props) => {
+  const router = useRouter();
+
+  if (typeof props.href === "string") {
+    let { href, ...rest } = props;
+
+    if (href.startsWith(".") || href.startsWith("/")) {
+      if (href.startsWith(".")) {
+        href = join(router.pathname, href);
+      }
+
+      if (href.endsWith("/_index.mdx")) {
+        href = href.slice(0, -"/_index.mdx".length);
+      }
+
+      if (href.endsWith("/index.mdx")) {
+        href = href.slice(0, -"/index.mdx".length);
+      }
+
+      if (href.endsWith(".mdx")) {
+        href = href.slice(0, -".mdx".length);
+      }
+
+      if (href.endsWith("/")) {
+        href = href.slice(0, -"/".length);
+      }
+
+      return (
+        <Link href={href} passHref>
+          <a {...rest} />
+        </Link>
+      );
+    }
+  }
+
+  return <a {...props} />;
+};
+
 const COMPONENT_MAP = {
   code: Code,
+  a: Anchor,
 } as const;
 
 function formatDate(date: number): string {
@@ -134,6 +175,12 @@ function formatDate(date: number): string {
     year: "numeric",
   });
 }
+
+const STATUS_TEXT = {
+  seedling: <>Seedling 🌱</>,
+  budding: <>Budding 🌿</>,
+  evergreen: <>Evergreen 🌳</>,
+};
 
 export default function PostPage({
   slug,
@@ -217,6 +264,9 @@ export default function PostPage({
       )}
 
       <DateContainer>
+        {type === "garden" && STATUS_TEXT[status] && (
+          <>{STATUS_TEXT[status]} - </>
+        )}
         {createdAtString !== modifiedAtString && (
           <>
             Updated {modifiedAtString} - Published {createdAtString}
