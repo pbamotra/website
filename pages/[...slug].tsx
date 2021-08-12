@@ -10,6 +10,18 @@ export default function Post(props: PostPageProps) {
   return <PostPage {...props} />;
 }
 
+function withoutUndefined<T extends { [key: string]: unknown }>(obj: T): T {
+  const next: T = {} as T;
+
+  for (const key in obj) {
+    if (obj[key] !== undefined) {
+      next[key] = obj[key];
+    }
+  }
+
+  return next;
+}
+
 export const getStaticProps: GetStaticProps<PostPageProps> = async ({
   params,
 }) => {
@@ -29,7 +41,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     status,
   } = await getPostByPath(params.slug.join("/"));
 
-  const props: PostPageProps = {
+  const props: PostPageProps = withoutUndefined({
     slug,
     code: await code(),
     createdAt,
@@ -38,7 +50,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     title,
     type,
     description,
-  };
+  });
 
   if (status) {
     props.status = status;

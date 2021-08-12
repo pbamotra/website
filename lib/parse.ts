@@ -1,10 +1,13 @@
-export function loadDate(val: unknown, or: Date = new Date()): Date {
-  const date = new Date(String(val));
+export function loadValidDate(date: Date, or: Date = new Date()): Date {
   if (isNaN(Number(date)) || date < new Date("2015-01-01")) {
-    return or;
+    return loadValidDate(or, new Date());
   } else {
     return date;
   }
+}
+
+export function loadDate(val: unknown, or: Date = new Date()): Date {
+  return loadValidDate(new Date(String(val)), or);
 }
 
 export function loadString(val: unknown): string | undefined {
