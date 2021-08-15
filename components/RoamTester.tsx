@@ -116,11 +116,11 @@ export default function RoamTester() {
     if (state.shouldFetch) {
       let mounted = true;
 
-      let name = state.name;
+      let name = state.name ?? "";
 
       if (name.includes(ROAM_URL)) {
-        name = name.split(ROAM_URL)[1];
-        name = name.split("/")[0];
+        name = name.split(ROAM_URL)[1] ?? "";
+        name = name.split("/")[0] ?? "";
       }
 
       setState((x) => ({

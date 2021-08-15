@@ -5,7 +5,7 @@ interface PostPreviewProps {
   post: {
     title: string;
     slug: string;
-    description: string;
+    description?: string;
   };
 }
 
@@ -41,7 +41,7 @@ export default function PostPreview({
     <Link href={slug} passHref>
       <PostPreviewContainer>
         <PostPreviewTitle>{title}</PostPreviewTitle>
-        <PostPreviewExcerpt>{description}</PostPreviewExcerpt>
+        {description && <PostPreviewExcerpt>{description}</PostPreviewExcerpt>}
       </PostPreviewContainer>
     </Link>
   );

@@ -25,6 +25,10 @@
       <title>Don&#039;t use boxed trait objects</title>
       <link>https://bennetthardwick.com/dont-use-boxed-trait-objects-for-struct-internals</link>
       <description>Boxed trait objects are a great scape goat for solving hard borrow checker errors. But when writing a struct that needs to be reused, you&#039;re better off using something else for their interior structure.</description>
+
+
+
+
       <pubDate>Tue, 24 Dec 2019 00:00:00 GMT</pubDate>
     </item>
 <item>

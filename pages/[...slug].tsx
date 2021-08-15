@@ -5,27 +5,16 @@ import "prismjs/themes/prism.css";
 import { getAllPostSlugs, getPostByPath, getRecentPosts } from "lib/posts";
 
 import PostPage, { PostPageProps } from "components/PostPage";
+import { withoutUndefined } from "lib/undefined";
 
 export default function Post(props: PostPageProps) {
   return <PostPage {...props} />;
 }
 
-function withoutUndefined<T extends { [key: string]: unknown }>(obj: T): T {
-  const next: T = {} as T;
-
-  for (const key in obj) {
-    if (obj[key] !== undefined) {
-      next[key] = obj[key];
-    }
-  }
-
-  return next;
-}
-
 export const getStaticProps: GetStaticProps<PostPageProps> = async ({
   params,
 }) => {
-  if (!Array.isArray(params.slug)) {
+  if (!params || !Array.isArray(params.slug)) {
     throw new Error("Expected slug to be string!");
   }
 
@@ -39,6 +28,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     type,
     tags,
     status,
+    backlinks,
   } = await getPostByPath(params.slug.join("/"));
 
   const props: PostPageProps = withoutUndefined({
@@ -50,6 +40,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     title,
     type,
     description,
+    backlinks,
   });
 
   if (status) {
@@ -79,10 +70,13 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
 
   return {
     props,
+    revalidate: true,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  console.log("Static paths...");
+
   const posts = await getAllPostSlugs();
   const paths = posts.map((slug) => ({ params: { slug: slug.split("/") } }));
 

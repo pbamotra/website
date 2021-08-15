@@ -49,7 +49,10 @@ export default function TagPage({ name, posts }: TagPageProps) {
 export const getStaticProps: GetStaticProps<TagPageProps> = async ({
   params,
 }) => {
-  if (typeof params.tag !== "string") {
+
+  console.log("Tag static props");
+  
+  if (!params || typeof params.tag !== "string") {
     throw new Error("Expected tag to be string");
   }
 
@@ -68,6 +71,9 @@ export const getStaticProps: GetStaticProps<TagPageProps> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+
+  console.log("Tag static paths");
+
   const tags = await getAllTags();
   return {
     paths: tags.map((x) => ({ params: { tag: x.name } })),

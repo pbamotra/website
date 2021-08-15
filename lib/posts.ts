@@ -4,6 +4,12 @@ import { remarkMdxImages } from "remark-mdx-images";
 import remarkFrontmatter from "remark-frontmatter";
 import { remarkMdxFrontmatter } from "remark-mdx-frontmatter";
 import remarkPrism from "remark-prism";
+import remarkFootnotes from "remark-footnotes";
+import getConfig from "next/config";
+
+import chokidar from "chokidar";
+
+const md = require("markdown-link-extractor");
 
 import matter from "gray-matter";
 
@@ -18,6 +24,8 @@ import {
 
 import { loadTsFiles, paths, readFile } from "./fs";
 import { getFileCreatedDate, getFileModifiedDate } from "./date";
+import { DeduplicatedQueue } from "./queue";
+import { withoutUndefined } from "./undefined";
 
 const contentDir = path.join(process.cwd(), "content");
 
@@ -27,7 +35,15 @@ type PostType = typeof TYPES[number];
 const STATUS = ["evergreen", "budding", "seedling", "seed"] as const;
 type Status = typeof STATUS[number];
 
-interface Post {
+export interface Backlink {
+  slug: string;
+  title: string;
+  description?: string;
+  createdAt: number;
+  modifiedAt: number;
+}
+
+interface BasePost {
   code: () => Promise<string>;
   subtitle?: string;
   description?: string;
@@ -42,6 +58,162 @@ interface Post {
   status?: Status;
   aliases: string[];
   draft: boolean;
+  linksTo: string[];
+}
+
+interface Post extends BasePost {
+  backlinks: Backlink[];
+}
+
+class BacklinkRegistry {
+  private state = new Map<string, Map<string, Backlink>>();
+
+  get(page: string): Backlink[] {
+    return Array.from(this.state.get(page)?.values() ?? []);
+  }
+
+  add(to: string, link: Backlink): void {
+    const links = this.state.get(to) ?? new Map<string, Backlink>();
+    links.set(link.slug, link);
+    this.state.set(to, links);
+  }
+
+  remove(to: string, from: string): void {
+    this.state.get(to)?.delete(from);
+  }
+}
+
+type TaskType = "delete" | "add";
+
+class PostCollection {
+  static async load(): Promise<PostCollection> {
+    const backlinks = new BacklinkRegistry();
+    const posts = new Map<string, BasePost>();
+
+    const addPostQueue = new DeduplicatedQueue<TaskType>(async (path, task) => {
+      switch (task) {
+        case "add": {
+          const newPost = await loadPostByName(path);
+          const slug = newPost.slug;
+          const existing = posts.get(slug);
+
+          if (existing) {
+            for (const link of existing.linksTo) {
+              backlinks.remove(link, existing.slug);
+            }
+          }
+
+          for (const link of newPost.linksTo) {
+            backlinks.add(
+              link,
+              withoutUndefined({
+                slug: newPost.slug,
+                modifiedAt: newPost.modifiedAt,
+                createdAt: newPost.createdAt,
+                title: newPost.title,
+                description: newPost.description,
+              })
+            );
+          }
+
+          posts.set(slug, newPost);
+          break;
+        }
+        case "delete": {
+          const { slug } = asSlug(path);
+          const existing = posts.get(slug);
+
+          if (existing) {
+            for (const link of existing.linksTo) {
+              backlinks.remove(link, existing.slug);
+            }
+          }
+
+          posts.delete(slug);
+        }
+      }
+    });
+
+    await new Promise<void>((resolve) => {
+      const watcher = chokidar
+        .watch(contentDir, { cwd: contentDir })
+        .on("all", (event, path) => {
+          if (!hasExtension(path)) {
+            return;
+          }
+
+          switch (event) {
+            case "add":
+            case "change":
+              addPostQueue.add(path, "add");
+              break;
+            case "unlink":
+              addPostQueue.add(path, "delete");
+              break;
+          }
+        })
+        .on("ready", () => {
+          if (process.env.NODE_ENV !== "development") {
+            console.log("Removing watcher.");
+            watcher.close();
+          }
+
+          resolve();
+        });
+    });
+
+    await addPostQueue.waitUntilEmpty();
+
+    return new PostCollection(backlinks, posts);
+  }
+
+  private constructor(
+    private readonly backlinks: BacklinkRegistry,
+    private readonly posts: Map<string, BasePost>
+  ) {}
+
+  get(slug: string): Post | undefined {
+    const post = this.posts.get(slug);
+
+    if (!post) {
+      return undefined;
+    }
+
+    const backlinks = this.backlinks.get(slug);
+
+    return {
+      ...post,
+      backlinks,
+    };
+  }
+
+  keys(): string[] {
+    return Array.from(this.posts.keys());
+  }
+
+  all(): Post[] {
+    const posts: Post[] = [];
+
+    for (const slug of this.keys()) {
+      const post = this.get(slug);
+
+      if (post) {
+        posts.push(post);
+      }
+    }
+
+    return posts;
+  }
+}
+
+function getPostCollection(): Promise<PostCollection> {
+  const x = getConfig();
+
+  if (!x["POST_COLLECTION"]) {
+    x["POST_COLLECTION"] = PostCollection.load();
+  }
+
+  return x["POST_COLLECTION"];
 }
 
 function loadType(type: unknown): PostType {
@@ -54,7 +226,7 @@ function loadStatus(status: unknown): Status | undefined {
 
 async function readMdxFile(
   slug: string
-): Promise<{ content: string; mdxPath: string }> {
+): Promise<{ content: string; pathname: string; mdxPath: string }> {
   const paths = [
     slug + ".mdx",
     slug + ".md",
@@ -69,15 +241,15 @@ async function readMdxFile(
       const mdxPath = path.join(contentDir, p);
       const content = await readFile(mdxPath);
 
-      return { mdxPath, content };
+      return { mdxPath, content, pathname: p };
     } catch (e) {}
   }
 
   throw new Error(`Couldn't find file!`);
 }
 
-async function loadPostByName(name: string): Promise<Post> {
-  const parts = name.split("/");
+function asSlug(name: string): { slug: string; parts: string[] } {
+  const parts = withoutExtension(name).split("/");
 
   if (
     parts[parts.length - 1] === "index" ||
@@ -86,9 +258,13 @@ async function loadPostByName(name: string): Promise<Post> {
     parts.pop();
   }
 
-  const slug = `/${parts.join("/")}`;
+  return { slug: `/${parts.filter((x) => !!x).join("/")}`, parts };
+}
 
-  const { content, mdxPath } = await readMdxFile(slug);
+async function loadPostByName(name: string): Promise<BasePost> {
+  const { slug, parts } = asSlug(name);
+
+  const { content, pathname, mdxPath } = await readMdxFile(slug);
 
   const code = async () => {
     const { code } = await bundleMDX(content, {
@@ -104,6 +280,8 @@ async function loadPostByName(name: string): Promise<Post> {
             remarkMdxImages,
             remarkFrontmatter,
             remarkMdxFrontmatter,
+            // The types have some trouble here... seems to be fine though
+            remarkFootnotes as typeof remarkMdxFrontmatter,
             [
               remarkPrism,
               {
@@ -147,7 +325,14 @@ async function loadPostByName(name: string): Promise<Post> {
 
   const title = frontmatter.title ?? slug;
 
-  return {
+  const linksTo = (md(content) as string[])
+    .filter((x) => x.startsWith(".") || x.startsWith("/"))
+    .map(
+      (x) => asSlug(x.startsWith(".") ? path.join(pathname, "..", x) : x).slug
+    )
+    .filter((x) => ["", ".mdx", ".md"].includes(path.extname(x)));
+
+  return withoutUndefined({
     slug,
     modifiedAt,
     createdAt,
@@ -162,11 +347,24 @@ async function loadPostByName(name: string): Promise<Post> {
     status: loadStatus(frontmatter.status),
     draft: loadBoolean(frontmatter.draft),
     slugParts: parts,
-  };
+    linksTo,
+  });
 }
 
 export async function getPostByPath(file: string): Promise<Post> {
-  return await loadPostByName(file);
+  const post = (await getPostCollection()).get(asSlug(file).slug);
+
+  if (!post) {
+    throw new Error("Expected post to be defined");
+  }
+
+  return withoutUndefined(post);
+}
+
+export async function getAllPosts(): Promise<Post[]> {
+  return (await getPostCollection())
+    .all()
+    .filter((x) => (process.env.NODE_ENV === "production" ? !x.draft : true));
 }
 
 export async function getRecentPosts(): Promise<Post[]> {
@@ -200,7 +398,7 @@ export function toRss(posts: Post[]): string {
       <guid>https://bennetthardwick.com${x.slug}</guid>
       <title>${escapeHtml(x.title)}</title>
       <link>https://bennetthardwick.com${x.slug}</link>
-      <description>${escapeHtml(x.description)}</description>
+      <description>${escapeHtml(x.description ?? "")}</description>
       <pubDate>${new Date(x.createdAt).toUTCString()}</pubDate>
     </item>`
   );
@@ -212,7 +410,7 @@ export function toRss(posts: Post[]): string {
       <description>Bennett's Rust Journal</description>
       <language>en</language>
       <lastBuildDate>${new Date(
-        posts[0].createdAt
+        posts[0]?.createdAt ?? new Date()
       ).toUTCString()}</lastBuildDate>
       <atom:link href="https://bennetthardwick.com/rss.xml" rel="self" type="application/rss+xml"/>
       ${items.join("\n")}
@@ -253,6 +451,8 @@ function withoutExtension(file: string): string {
   if (file.endsWith(".md")) {
     return file.slice(0, -".md".length);
   }
+
+  return file;
 }
 
 function hasExtension(file: string): boolean {
@@ -260,28 +460,10 @@ function hasExtension(file: string): boolean {
 }
 
 export async function getAllPostSlugs(): Promise<string[]> {
-  const seen = new Set<string>();
-
-  for await (const file of paths("", contentDir)) {
-    if (hasExtension(file)) {
-      const parts = withoutExtension(file)
-        .split("/")
-        .filter((x) => !!x);
-
-      if (
-        parts[parts.length - 1] === "index" ||
-        parts[parts.length - 1] === "_index"
-      ) {
-        parts.pop();
-      }
-
-      const slug = parts.join("/");
-
-      seen.add(slug);
-    }
-  }
-
-  return Array.from(seen.values());
+  return (await getPostCollection()).keys().map((x) => {
+    // Slugs can't have a slash at the start!
+    return x.slice(1);
+  });
 }
 
 interface Redirect {
@@ -312,17 +494,5 @@ export async function getRedirects(): Promise<void> {
   require("fs").writeFileSync(
     path.join(process.cwd(), "public", "output.js"),
     `module.exports = ${JSON.stringify(redirects)};`
-  );
-}
-
-export async function getAllPosts(): Promise<Post[]> {
-  const posts = await Promise.all(
-    (await getAllPostSlugs()).map(async (slug) => await loadPostByName(slug))
-  );
-
-  const backlinks = new Map<string, string[]>();
-
-  return posts.filter((x) =>
-    process.env.NODE_ENV === "production" ? !x.draft : true
   );
 }

@@ -10,6 +10,7 @@ import About from "./About";
 import { useRouter } from "next/router";
 
 import { join } from "path";
+import { Backlink } from "lib/posts";
 
 const PostTitle = styled.h1({
   fontSize: "2.4rem",
@@ -93,6 +94,7 @@ export interface PostPageProps {
   type: string;
   status?: string;
   image?: { width: number; height: number; src: string };
+  backlinks: Backlink[];
 }
 
 const NextPreviousContainer = styled.div({
@@ -206,7 +208,7 @@ function formatDate(date: number): string {
   });
 }
 
-const STATUS_TEXT = {
+const STATUS_TEXT: { [key: string]: React.ReactNode } = {
   seedling: <>Seedling 🌱</>,
   budding: <>Budding 🌿</>,
   evergreen: <>Evergreen 🌳</>,
@@ -253,6 +255,7 @@ export default function PostPage({
   modifiedAt,
   tags,
   type,
+  backlinks,
   status,
 }: PostPageProps) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
@@ -323,7 +326,7 @@ export default function PostPage({
         )}
 
         <DateContainer>
-          {type === "garden" && STATUS_TEXT[status] && (
+          {type === "garden" && status && STATUS_TEXT[status] && (
             <>{STATUS_TEXT[status]} - </>
           )}
           {createdAtString !== modifiedAtString && (
@@ -343,7 +346,11 @@ export default function PostPage({
         <Component components={COMPONENT_MAP} />
       </PostContent>
 
-      <BacklinksContainer></BacklinksContainer>
+      <BacklinksContainer>
+        {backlinks.map((x) => (
+          <div key={x.slug}>{x.title}</div>
+        ))}
+      </BacklinksContainer>
 
       <FooterContainer>
         <hr />

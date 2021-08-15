@@ -6,15 +6,25 @@ function next<T>(iter: IterableIterator<T>): T | undefined {
   return undefined;
 }
 
-export class DeduplicatedQueue {
-  private readonly tasks = new Set<string>();
+export class DeduplicatedQueue<T> {
+  private readonly tasks = new Map<string, T>();
 
   private running?: Promise<void>;
 
-  constructor(private readonly handle: (value: string) => Promise<void>) {}
+  constructor(
+    private readonly handle: (value: string, context: T) => Promise<void>
+  ) {}
 
-  add(value: string): void {
-    this.tasks.add(value);
+  waitUntilEmpty(): Promise<void> {
+    if (this.running) {
+      return this.running;
+    }
+
+    return Promise.resolve();
+  }
+
+  add(value: string, task: T): void {
+    this.tasks.set(value, task);
 
     if (this.running) {
       return;
@@ -22,16 +32,18 @@ export class DeduplicatedQueue {
 
     this.running = (async () => {
       while (this.tasks.size > 0) {
-        const task = next(this.tasks.values());
+        const task = next(this.tasks.entries());
 
         if (!task) {
           throw new Error("Expected task!");
         }
 
-        this.tasks.delete(task);
+        const [key, context] = task;
+
+        this.tasks.delete(key);
 
         try {
-          await this.handle(task);
+          await this.handle(key, context);
         } catch (e) {
           console.error("Handle function threw an error");
           console.error(e);

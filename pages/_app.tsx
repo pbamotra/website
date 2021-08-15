@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { AppProps } from "next/app";
 
 import "../styles/main.scss";
 
@@ -19,13 +20,13 @@ const dataLayer =
     ? []
     : ((window as any).dataLayer = ((window as any).dataLayer as []) ?? []);
 
-function gtag(..._args: unknown[]) {
-  dataLayer.push(arguments);
+function gtag(...args: unknown[]) {
+  dataLayer.push(...(args as never[]));
 }
 gtag("js", new Date());
 gtag("config", "UA-153493405-1");
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   return (

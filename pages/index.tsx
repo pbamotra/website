@@ -47,7 +47,7 @@ const IntroContainer = styled.div({
 interface RecentPost {
   title: string;
   slug: string;
-  description: string;
+  description?: string;
 }
 
 interface RecentGarden {
@@ -189,9 +189,9 @@ export default function Home({ recent, tags, recentGarden }: HomeProps) {
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const allPosts = await getRecentPosts();
 
-  const rss = toRss(allPosts);
+  // const rss = toRss(allPosts);
 
-  fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
+  // fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
 
   // Uncomment to output redirects
   // await getRedirects();
