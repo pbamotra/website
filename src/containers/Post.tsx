@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { getMDXComponent } from "mdx-bundler/client";
 import styled from "@emotion/styled";
 import { Head, useRouteData } from "react-static";
-import { Link } from "@reach/router";
+import { Link, useLocation } from "@reach/router";
 
 import HomeLink from "components/HomeLink";
 import TweetSection from "components/TweetSection";
@@ -266,9 +266,7 @@ export default function PostPage() {
   } = useRouteData<PostPageProps>();
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
-  // const router = useRouter();
-
-  const router = { asPath: "test" };
+  const location = useLocation();
 
   const createdAtString = useMemo(() => formatDate(createdAt), [createdAt]);
   const modifiedAtString = useMemo(() => formatDate(modifiedAt), [modifiedAt]);
@@ -301,7 +299,7 @@ export default function PostPage() {
             "@type": "TechArticle",
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://bennetthardwick.com${router.asPath}`,
+              "@id": `https://bennetthardwick.com${location.pathname}`,
             },
             headline: title,
             image: ["https://bennetthardwick.com/profile.jpg"],

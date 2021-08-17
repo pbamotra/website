@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Root, Routes } from "react-static";
-import { Router } from "@reach/router";
+import { Router, useLocation, globalHistory } from "@reach/router";
 
 import "./styles/main.scss";
 
@@ -28,9 +28,50 @@ function gtag(...args: unknown[]) {
 gtag("js", new Date());
 gtag("config", "UA-153493405-1");
 
-export default function App(props: any) {
-  console.log("Props", props);
+import { MutableRefObject, useEffect, useRef } from "react";
 
+export function useScrollBehaviour() {
+  const location = useLocation();
+  const historyState: MutableRefObject<{ [key: string]: number }> = useRef({});
+
+  useEffect(() => {
+    return globalHistory.listen(({ location, action }) => {
+      if (action === "PUSH") {
+        historyState.current[location.pathname] = 0;
+        window.scrollTo(0, 0);
+      }
+
+      if (action === "POP") {
+        const scroll = historyState.current[location.pathname] ?? 0;
+        window.scrollTo(0, scroll);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    function scrollHandler() {
+      historyState.current[location.pathname] = window.scrollY;
+    }
+
+    window.addEventListener("scroll", scrollHandler);
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, [location.pathname]);
+}
+
+function RouteHead() {
+  const { pathname } = useLocation();
+
+  useScrollBehaviour();
+
+  return (
+    <Head>
+      <link rel="canonical" href={`https://bennetthardwick.com${pathname}`} />
+      <meta name="og:url" content={`https://bennetthardwick.com${pathname}`} />
+    </Head>
+  );
+}
+
+export default function App() {
   return (
     <Root>
       <Container>
@@ -47,21 +88,6 @@ export default function App(props: any) {
 
           <meta name="twitter:site" content="@bennettbackward" />
 
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"
-          ></script>
-
-          <link
-            rel="canonical"
-            href={`https://bennetthardwick.com${location?.pathname}`}
-          />
-
-          <meta
-            name="og:url"
-            content={`https://bennetthardwick.com${location?.pathname}`}
-          />
-
           <meta
             name="og:image"
             content={"https://bennetthardwick.com/profile.jpg"}
@@ -75,10 +101,25 @@ export default function App(props: any) {
           <meta name="og:image:height" content={"400"} />
 
           <meta name="og:type" content="article" />
+
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"
+          ></script>
         </Head>
         <React.Suspense fallback={<em>Loading...</em>}>
           <Router>
-            <Routes path="*" />
+            <Routes
+              path="*"
+              render={useCallback(({ routePath, getComponentForPath }) => {
+                return (
+                  <>
+                    <RouteHead />
+                    {getComponentForPath(routePath)}
+                  </>
+                );
+              }, [])}
+            />
           </Router>
         </React.Suspense>
       </Container>
