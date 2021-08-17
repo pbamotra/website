@@ -14,26 +14,24 @@ export default App;
 if (typeof document !== "undefined") {
   const target = document.getElementById("root");
 
-  const renderMethod = target.hasChildNodes()
-    ? ReactDOM.hydrate
-    : ReactDOM.render;
-
-  const render = (Comp: Function) => {
-    renderMethod(
+  if (target.hasChildNodes()) {
+    ReactDOM.hydrate(<App />, target);
+  } else {
+    const element = (
       <AppContainer>
-        <Comp />
-      </AppContainer>,
-      target
+        <App />
+      </AppContainer>
     );
-  };
 
-  // Render!
-  render(App);
+    ReactDOM.render(element, target);
 
-  // Hot Module Replacement
-  if (module && module.hot) {
-    module.hot.accept("./App", () => {
-      render(App);
-    });
+    if (process.env.NODE_ENV === "development") {
+      // Hot Module Replacement
+      if (module && module.hot) {
+        module.hot.accept("./App", () => {
+          ReactDOM.hydrate(element, target);
+        });
+      }
+    }
   }
 }
