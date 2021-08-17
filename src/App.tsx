@@ -111,14 +111,15 @@ export default function App() {
           <Router>
             <Routes
               path="*"
-              render={useCallback(({ routePath, getComponentForPath }) => {
-                return (
+              render={useCallback(
+                ({ routePath, getComponentForPath }) => (
                   <>
                     <RouteHead />
                     {getComponentForPath(routePath)}
                   </>
-                );
-              }, [])}
+                ),
+                []
+              )}
             />
           </Router>
         </React.Suspense>
