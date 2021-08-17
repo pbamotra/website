@@ -1004,10 +1004,10 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
-"@bennetthardwick/react-static-plugin-emotion@8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@bennetthardwick/react-static-plugin-emotion/-/react-static-plugin-emotion-8.0.0.tgz#c77d61d05c54f8ecd86e1c704060f060bcff34ac"
-  integrity sha512-vqHpL20eTtHbeOfu31b8csFMPJDxNIpnTAEtn8G8N036/aq883OeEFchVysFK0ZBwXWnDG94hjO6v1hECLS9Bg==
+"@bennetthardwick/react-static-plugin-emotion@8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@bennetthardwick/react-static-plugin-emotion/-/react-static-plugin-emotion-8.0.2.tgz#be577d51e61a846be3b26d332a62396e0fed8f32"
+  integrity sha512-IoC8F9H1M/3dyT3BHqph7aesqPNlbVl8LwonVOFIhCXgQkdgqi121ilpoxS9iZA6hgw/xNUlziJfoLfI2r714A==
   dependencies:
     "@emotion/cache" "^11.1.3"
     "@emotion/react" "^11.1.4"
