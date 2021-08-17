@@ -18,6 +18,7 @@ console.log("Finished importing...");
 
 export default {
   entry: path.join(__dirname, "src", "index.tsx"),
+  generateSourceMaps: true,
   getRoutes: async () => {
     console.log("Getting all routes!");
 
