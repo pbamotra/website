@@ -325,7 +325,7 @@ export default function PostPage() {
         {tags.length > 0 && (
           <TagContainer>
             {tags.map((x) => (
-              <Tag to={`/tag/${x}`} key={x}>
+              <Tag to={`/tag/${x}/`} key={x}>
                 {x}
               </Tag>
             ))}

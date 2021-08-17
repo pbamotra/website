@@ -234,9 +234,19 @@ function loadStatus(status: unknown): Status | undefined {
   return loadLiteral(status, STATUS);
 }
 
+function withoutTrailingSlash(val: string): string {
+  if (val.endsWith("/")) {
+    return val.slice(0, -"/".length);
+  }
+
+  return val;
+}
+
 async function readMdxFile(
   slug: string
 ): Promise<{ content: string; pathname: string; mdxPath: string }> {
+  slug = withoutTrailingSlash(slug);
+
   const paths = [
     slug + ".mdx",
     slug + ".md",
@@ -268,7 +278,7 @@ function asSlug(name: string): { slug: string; parts: string[] } {
     parts.pop();
   }
 
-  return { slug: `/${parts.filter((x) => !!x).join("/")}`, parts };
+  return { slug: `/${parts.filter((x) => !!x).join("/")}/`, parts };
 }
 
 async function loadPostByName(name: string): Promise<BasePost> {

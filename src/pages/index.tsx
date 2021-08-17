@@ -122,7 +122,7 @@ export default function Home() {
               <ul>
                 {tags.map((x) => (
                   <li key={x}>
-                    <Tag to={`/tag/${x}`}>{x}</Tag>
+                    <Tag to={`/tag/${x}/`}>{x}</Tag>
                   </li>
                 ))}
               </ul>
@@ -132,13 +132,13 @@ export default function Home() {
             <CategoryTitle>Links</CategoryTitle>
             <ul>
               <li>
-                <Link to={`/projects`}>Projects</Link>
+                <Link to={`/projects/`}>Projects</Link>
               </li>
               <li>
-                <Link to={`/now`}>Now</Link>
+                <Link to={`/now/`}>Now</Link>
               </li>
               <li>
-                <Link to={`/archive`}>Archive</Link>
+                <Link to={`/archive/`}>Archive</Link>
               </li>
             </ul>
           </PopularContent>

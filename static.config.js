@@ -19,7 +19,7 @@ export default {
         getData: getHomeData,
       },
       {
-        path: "/archive",
+        path: "/archive/",
         getData: getArchiveData,
       },
       ...(await getAllPostSlugs()).map((slug) => ({
@@ -28,7 +28,7 @@ export default {
         getData: () => getPostData(slug),
       })),
       ...(await getAllTagNames()).map((name) => ({
-        path: `/tag/${name}`,
+        path: `/tag/${name}/`,
         template: "src/containers/Tag",
         getData: () => getTagData(name),
       })),
