@@ -278,8 +278,9 @@ export default function PostPage() {
         {description && (
           <meta name="twitter:description" content={description} />
         )}
-        {(type === "garden" && status === "seed") ||
-          (status === "seedling" && <meta name="robots" content="noindex" />)}
+        {type === "garden" && (status === "seed" || status === "seedling") && (
+          <meta name="robots" content="noindex" />
+        )}
         <title>{title}</title>
         <meta name="og:title" content={title} />
         <meta name="twitter:title" content={title} />
