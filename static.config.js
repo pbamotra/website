@@ -46,6 +46,7 @@ export default {
   plugins: [
     "react-static-plugin-typescript",
     "react-static-plugin-sass",
+    "react-static-plugin-emotion",
     [
       require.resolve("react-static-plugin-source-filesystem"),
       {
