@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { getMDXComponent } from "mdx-bundler/client";
 import styled from "@emotion/styled";
 import { Head, useRouteData } from "react-static";
@@ -14,6 +14,7 @@ import { join } from "path";
 import type { PostPageProps } from "lib/posts";
 
 import "prismjs/themes/prism.css";
+import Preview, { useIsPreview } from "components/Preview";
 
 const PostTitle = styled.h1({
   fontSize: "2.4rem",
@@ -78,7 +79,7 @@ const PostContainer = styled.div({
 });
 
 const PostContent = styled.div({
-  "> *:first-child": {
+  "> *:first-child-of-type": {
     marginTop: "0",
   },
 });
@@ -143,16 +144,37 @@ const Code: React.FC<{ [key: string]: unknown }> = (props) => {
   return <code {...props} />;
 };
 
+type InternalAnchorProps = {
+  slug: string;
+};
+
+function InternalAnchor({ slug, ...rest }: InternalAnchorProps) {
+  const [hovered, setHovered] = useState(false);
+  const [element, setElement] = useState<HTMLAnchorElement>();
+
+  return (
+    <>
+      <InternalLink
+        {...rest}
+        to={slug}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        ref={setElement}
+      />
+      <Preview slug={slug} show={hovered} referenceElement={element} />
+    </>
+  );
+}
+
 const Anchor: React.FC<{ [key: string]: unknown }> = (props) => {
-  // const router = useRouter();
-  const pathname = "";
+  const location = useLocation();
 
   if (typeof props.href === "string") {
     let { href, ...rest } = props;
 
     if (href.startsWith(".") || href.startsWith("/")) {
       if (href.startsWith(".")) {
-        href = join(pathname, "..", href);
+        href = join(location.pathname, "..", href);
       }
 
       if (href.endsWith("/_index.mdx")) {
@@ -167,11 +189,11 @@ const Anchor: React.FC<{ [key: string]: unknown }> = (props) => {
         href = href.slice(0, -".mdx".length);
       }
 
-      if (href.endsWith("/")) {
-        href = href.slice(0, -"/".length);
+      if (!href.endsWith("/")) {
+        href = href + "/";
       }
 
-      return <InternalLink {...rest} to={href} />;
+      return <InternalAnchor {...rest} slug={href} />;
     }
   }
 
@@ -271,56 +293,61 @@ export default function PostPage() {
   const createdAtString = useMemo(() => formatDate(createdAt), [createdAt]);
   const modifiedAtString = useMemo(() => formatDate(modifiedAt), [modifiedAt]);
 
+  const isPreview = useIsPreview();
+
   return (
     <PostContainer>
-      <Head>
-        {description && <meta name="description" content={description} />}
-        {description && (
-          <meta name="twitter:description" content={description} />
-        )}
-        {type === "garden" && (status === "seed" || status === "seedling") && (
-          <meta name="robots" content="noindex" />
-        )}
-        <title>{title}</title>
-        <meta name="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
-        2 /
-        <meta name="twitter:card" content="summary" />
-        {image && (
-          <>
-            <meta name="og:image" content={image.src} />
-            <meta name="twitter:image" content={image.src} />
-            <meta name="og:image:width" content={`${image.width}`} />
-            <meta name="og:image:height" content={`${image.height}`} />
-          </>
-        )}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "TechArticle",
-            mainEntityOfPage: {
-              "@type": "WebPage",
-              "@id": `https://bennetthardwick.com${location.pathname}`,
-            },
-            headline: title,
-            image: ["https://bennetthardwick.com/profile.jpg"],
-            datePublished: new Date(createdAt).toISOString(),
-            dateModified: new Date(modifiedAt).toISOString(),
-            author: { "@type": "Person", name: "Bennett Hardwick" },
-            publisher: {
-              "@type": "Organization",
-              name: "Bennett Hardwick",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://bennetthardwick.com/profile.jpg",
+      {!isPreview && (
+        <Head>
+          {description && <meta name="description" content={description} />}
+          {description && (
+            <meta name="twitter:description" content={description} />
+          )}
+          {type === "garden" &&
+            (status === "seed" || status === "seedling") && (
+              <meta name="robots" content="noindex" />
+            )}
+          <title>{title}</title>
+          <meta name="og:title" content={title} />
+          <meta name="twitter:title" content={title} />
+          2 /
+          <meta name="twitter:card" content="summary" />
+          {image && (
+            <>
+              <meta name="og:image" content={image.src} />
+              <meta name="twitter:image" content={image.src} />
+              <meta name="og:image:width" content={`${image.width}`} />
+              <meta name="og:image:height" content={`${image.height}`} />
+            </>
+          )}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TechArticle",
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://bennetthardwick.com${location.pathname}`,
               },
-            },
-          })}
-        </script>
-      </Head>
+              headline: title,
+              image: ["https://bennetthardwick.com/profile.jpg"],
+              datePublished: new Date(createdAt).toISOString(),
+              dateModified: new Date(modifiedAt).toISOString(),
+              author: { "@type": "Person", name: "Bennett Hardwick" },
+              publisher: {
+                "@type": "Organization",
+                name: "Bennett Hardwick",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://bennetthardwick.com/profile.jpg",
+                },
+              },
+            })}
+          </script>
+        </Head>
+      )}
 
       <HeaderContainer>
-        <HomeLink />
+        {!isPreview && <HomeLink />}
         <PostTitle>{title}</PostTitle>
 
         {tags.length > 0 && (
@@ -354,8 +381,8 @@ export default function PostPage() {
         <Component components={COMPONENT_MAP} />
       </PostContent>
 
-      {backlinks.length <= 0 && <div />}
-      {backlinks.length > 0 && (
+      {!isPreview && backlinks.length <= 0 && <div />}
+      {!isPreview && backlinks.length > 0 && (
         <BacklinksOuterContainer>
           <BacklinkTitle>Links to this note</BacklinkTitle>
           <BacklinksContainer>
@@ -366,32 +393,34 @@ export default function PostPage() {
         </BacklinksOuterContainer>
       )}
 
-      <FooterContainer>
-        <hr />
+      {!isPreview && (
+        <FooterContainer>
+          <hr />
 
-        {type === "garden" && status !== "evergreen" ? null : (
-          <TweetSection slug={slug} title={title} />
-        )}
-        <About />
-        <NextPreviousContainer>
-          <LinkSection>
-            {previous && (
-              <>
-                <div>Previous</div>
-                <Link to={previous.slug}>{previous.title}</Link>
-              </>
-            )}
-          </LinkSection>
-          <LinkSection>
-            {next && (
-              <>
-                <div>Next</div>
-                <Link to={next.slug}>{next.title}</Link>
-              </>
-            )}
-          </LinkSection>
-        </NextPreviousContainer>
-      </FooterContainer>
+          {type === "garden" && status !== "evergreen" ? null : (
+            <TweetSection slug={slug} title={title} />
+          )}
+          <About />
+          <NextPreviousContainer>
+            <LinkSection>
+              {previous && (
+                <>
+                  <div>Previous</div>
+                  <Link to={previous.slug}>{previous.title}</Link>
+                </>
+              )}
+            </LinkSection>
+            <LinkSection>
+              {next && (
+                <>
+                  <div>Next</div>
+                  <Link to={next.slug}>{next.title}</Link>
+                </>
+              )}
+            </LinkSection>
+          </NextPreviousContainer>
+        </FooterContainer>
+      )}
     </PostContainer>
   );
 }

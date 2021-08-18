@@ -12,10 +12,12 @@ export class DeduplicatedQueue<T> {
   private running?: Promise<void>;
 
   constructor(
-    private readonly handle: (value: string, context: T) => Promise<void>
+    private readonly handle: (value: string, context: T) => Promise<void>,
   ) {}
 
   waitUntilEmpty(): Promise<void> {
+    console.log(`Waiting for ${this.tasks.size} to finish`);
+
     if (this.running) {
       return this.running;
     }

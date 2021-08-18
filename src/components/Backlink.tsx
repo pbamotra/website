@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Backlink as BacklinkType } from "lib/posts";
 import styled from "@emotion/styled";
+import Preview from "components/Preview";
 import { Link } from "@reach/router";
 
 interface BacklinkProps {
@@ -9,6 +10,7 @@ interface BacklinkProps {
 
 const BacklinkContainer = styled(Link)({
   display: "block",
+  position: "relative",
   cursor: "pointer",
   border: "none",
   color: "inherit",
@@ -36,10 +38,22 @@ const BacklinkDescription = styled.div({
 });
 
 export default function Backlink({ backlink }: BacklinkProps) {
+  const [element, setElement] = useState<HTMLAnchorElement>();
+
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <BacklinkContainer to={backlink.slug}>
-      <BacklinkTitle>{backlink.title}</BacklinkTitle>
-      <BacklinkDescription>{backlink.description}</BacklinkDescription>
-    </BacklinkContainer>
+    <>
+      <BacklinkContainer
+        ref={setElement}
+        to={backlink.slug}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <BacklinkTitle>{backlink.title}</BacklinkTitle>
+        <BacklinkDescription>{backlink.description}</BacklinkDescription>
+      </BacklinkContainer>
+      <Preview show={hovered} referenceElement={element} slug={backlink.slug} />
+    </>
   );
 }
