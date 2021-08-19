@@ -1,6 +1,6 @@
 My speedy personal website and digital garden.
 
-Build with:
+Built with:
 - [react-static]
 - [emotion]
 
