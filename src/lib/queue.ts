@@ -89,7 +89,13 @@ export class GroupedQueue<T> {
 
   private finished(): void {
     if (this.running.size === 0) {
-      this.completeSubscriptions.forEach((x) => x());
+      const subs = Array.from(this.completeSubscriptions);
+      this.completeSubscriptions.clear();
+      subs.forEach((x) => {
+        try {
+          x();
+        } catch (e) {}
+      });
     }
   }
 
@@ -101,13 +107,6 @@ export class GroupedQueue<T> {
     }
 
     const running = (async () => {
-      const task = this.tasks.get(key);
-      this.tasks.delete(key);
-
-      if (!task) {
-        return;
-      }
-
       while (true) {
         const task = this.tasks.get(key);
         this.tasks.delete(key);
