@@ -51,6 +51,10 @@ export default function Preview<T extends HTMLElement>({
   });
 
   const outlet = useMemo(() => {
+    if (typeof document === "undefined") {
+      return undefined;
+    }
+
     let element = document.getElementById("popover-outlet");
 
     if (!element) {
@@ -62,8 +66,12 @@ export default function Preview<T extends HTMLElement>({
     return element;
   }, []);
 
+  if (outlet === undefined) {
+    return null;
+  }
+
   // Disable for now since it's borked
-  return (false && show)
+  return false && show
     ? createPortal(
         <PreviewContainer
           style={styles.popper}

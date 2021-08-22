@@ -25,7 +25,7 @@ import {
 
 import { loadTsFiles, readFile } from "./fs";
 import { getFileCreatedDate, getFileModifiedDate } from "./date";
-import { DeduplicatedQueue } from "./queue";
+import { GroupedQueue } from "./queue";
 import { withoutUndefined } from "./undefined";
 
 const contentDir = path.join(__dirname, "../../content");
@@ -93,7 +93,7 @@ class PostCollection {
 
     let started = false;
 
-    const addPostQueue = new DeduplicatedQueue<TaskType>(async (path, task) => {
+    const addPostQueue = new GroupedQueue<TaskType>(async (path, task) => {
       switch (task) {
         case "add": {
           const newPost = await loadPostByName(path);
