@@ -25,6 +25,7 @@ const dataLayer: { push: (...args: unknown[]) => void } =
 function gtag(...args: unknown[]) {
   dataLayer.push(...(args as never[]));
 }
+
 gtag("js", new Date());
 gtag("config", "UA-153493405-1");
 
@@ -105,7 +106,7 @@ export default function App() {
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"
-          ></script>
+          />
         </Head>
         <React.Suspense fallback={<em>Loading...</em>}>
           <Router>
