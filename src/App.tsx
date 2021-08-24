@@ -23,7 +23,7 @@ const dataLayer: { push: (...args: unknown[]) => void } =
     : ((window as any).dataLayer = ((window as any).dataLayer as []) ?? []);
 
 function gtag(...args: unknown[]) {
-  dataLayer.push(...(args as never[]));
+  dataLayer.push((args as never[]));
 }
 
 gtag("js", new Date());

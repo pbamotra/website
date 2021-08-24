@@ -7,8 +7,6 @@ import { getAllTagNames, getData as getTagData } from "./src/lib/tags";
 import { getData as getHomeData } from "./src/lib/home";
 import { getData as getArchiveData } from "./src/lib/archive";
 
-console.log("Finished importing...");
-
 export default {
   entry: path.join(__dirname, "src", "index.tsx"),
   generateSourceMaps: true,
