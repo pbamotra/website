@@ -26,7 +26,6 @@ import {
 import { loadTsFiles, readFile } from "./fs";
 import { getFileCreatedDate, getFileModifiedDate } from "./date";
 import { GroupedQueue } from "./queue";
-import { withoutUndefined } from "./undefined";
 
 const contentDir = path.join(__dirname, "../../content");
 
@@ -107,16 +106,13 @@ class PostCollection {
           }
 
           for (const link of newPost.linksTo) {
-            backlinks.add(
-              link,
-              withoutUndefined({
-                slug: newPost.slug,
-                modifiedAt: newPost.modifiedAt,
-                createdAt: newPost.createdAt,
-                title: newPost.title,
-                description: newPost.description,
-              })
-            );
+            backlinks.add(link, {
+              slug: newPost.slug,
+              modifiedAt: newPost.modifiedAt,
+              createdAt: newPost.createdAt,
+              title: newPost.title,
+              description: newPost.description,
+            });
           }
 
           posts.set(slug, newPost);
@@ -163,7 +159,6 @@ class PostCollection {
         })
         .on("ready", () => {
           if (process.env.NODE_ENV !== "development") {
-            console.log("Removing watcher.");
             watcher.close();
           }
 
@@ -219,7 +214,6 @@ class PostCollection {
 
 function getPostCollection(): Promise<PostCollection> {
   if (!(global as any)["POST_COLLECTION"]) {
-    console.log("Creating post collection");
     (global as any)["POST_COLLECTION"] = PostCollection.load();
   }
 
@@ -281,17 +275,22 @@ function asSlug(name: string): { slug: string; parts: string[] } {
   return { slug: `/${parts.filter((x) => !!x).join("/")}/`, parts };
 }
 
+const libFiles = loadTsFiles("lib");
+const componentFiles = loadTsFiles("components");
+
 async function loadPostByName(name: string): Promise<BasePost> {
   const { slug, parts } = asSlug(name);
 
   const { content, pathname, mdxPath } = await readMdxFile(slug);
 
+  let cached: Promise<string> | undefined;
+
   const code = async () => {
     const { code } = await bundleMDX(content, {
       cwd: path.dirname(mdxPath),
       files: {
-        ...(await loadTsFiles("lib")),
-        ...(await loadTsFiles("components")),
+        ...(await libFiles),
+        ...(await componentFiles),
       },
       xdmOptions: (options) => {
         return {
@@ -352,12 +351,12 @@ async function loadPostByName(name: string): Promise<BasePost> {
     )
     .filter((x) => ["", ".mdx", ".md"].includes(path.extname(x)));
 
-  return withoutUndefined({
+  return {
     slug,
     modifiedAt,
     createdAt,
     frontmatter,
-    code,
+    code: () => cached ?? (cached = code()),
     title,
     tags: loadStringArray(frontmatter.tags),
     subtitle: loadString(frontmatter.subtitle),
@@ -368,7 +367,7 @@ async function loadPostByName(name: string): Promise<BasePost> {
     draft: loadBoolean(frontmatter.draft),
     slugParts: parts,
     linksTo,
-  });
+  };
 }
 
 export async function getPostByPath(file: string): Promise<Post> {
@@ -378,7 +377,7 @@ export async function getPostByPath(file: string): Promise<Post> {
     throw new Error("Expected post to be defined");
   }
 
-  return withoutUndefined(post);
+  return post;
 }
 
 export async function getAllPosts(): Promise<Post[]> {
@@ -509,8 +508,6 @@ export interface PostPageProps {
 }
 
 export async function getData(path: string): Promise<PostPageProps> {
-  console.error("Getting post data");
-
   const {
     createdAt,
     code,
@@ -560,8 +557,6 @@ export async function getData(path: string): Promise<PostPageProps> {
       };
     }
   }
-
-  console.error("Finished getting post");
 
   return props;
 }
