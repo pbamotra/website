@@ -17,13 +17,8 @@ const Container = styled.div({
 const DESCRIPTION =
   "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer making videos at Clipchamp.";
 
-const dataLayer: { push: (...args: unknown[]) => void } =
-  typeof window === "undefined"
-    ? []
-    : ((window as any).dataLayer = ((window as any).dataLayer as []) ?? []);
-
-function gtag(...args: unknown[]) {
-  dataLayer.push((args as never[]));
+function gtag(..._args: unknown[]) {
+  ((window as any).dataLayer = (window as any).dataLayer || []).push(arguments);
 }
 
 gtag("js", new Date());
