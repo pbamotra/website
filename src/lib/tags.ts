@@ -3,6 +3,7 @@ import { getTag, getAllTags } from "./posts";
 interface PostSnapshot {
   slug: string;
   title: string;
+  status: string;
 }
 
 export interface TagPageProps {
@@ -19,7 +20,11 @@ export async function getData(name: string): Promise<TagPageProps> {
 
   return {
     name: tag.name,
-    posts: tag.posts.map(({ title, slug }) => ({ title, slug })),
+    posts: tag.posts.map(({ title, slug, status }) => ({
+      title,
+      status,
+      slug,
+    })),
   };
 }
 

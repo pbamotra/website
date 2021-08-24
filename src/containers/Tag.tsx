@@ -5,6 +5,7 @@ import { Head, useRouteData } from "react-static";
 import type { TagPageProps } from "lib/tags";
 import HomeLink from "components/HomeLink";
 import styled from "@emotion/styled";
+import { useShowSeeds } from "lib/seed";
 
 const TagPageContainer = styled.div({
   width: "100%",
@@ -13,6 +14,15 @@ const TagPageContainer = styled.div({
 
 export default function TagPage() {
   const { name, posts } = useRouteData<TagPageProps>();
+  const showSeeds = useShowSeeds();
+
+  const filtered = posts
+    .filter((x) => (!showSeeds ? x.status !== "seed" : true))
+    .map((x) => (
+      <li key={x.slug}>
+        <Link to={x.slug}>{x.title}</Link>
+      </li>
+    ));
 
   return (
     <>
@@ -23,13 +33,10 @@ export default function TagPage() {
         <HomeLink />
         <h1>Everything tagged "{name}" 🏷️</h1>
         <h2>Posts 📚</h2>
-        <ul>
-          {posts.map((x) => (
-            <li key={x.slug}>
-              <Link to={x.slug}>{x.title}</Link>
-            </li>
-          ))}
-        </ul>
+        {filtered.length === 0 && (
+          <div>No posts for this tag. Check back again later.</div>
+        )}
+        {filtered.length > 0 && <ul>{filtered}</ul>}
       </TagPageContainer>
     </>
   );
