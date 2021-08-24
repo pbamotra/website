@@ -6,6 +6,7 @@ import { Link } from "@reach/router";
 
 import styled from "@emotion/styled";
 import PostPreview from "components/PostPreview";
+import { useShowSeeds } from "lib/seed";
 
 const ContentContainer = styled.div({
   display: "grid",
@@ -67,6 +68,7 @@ const RecentTitle = styled.h2({
 
 export default function Home() {
   const { recent, tags, recentGarden } = useRouteData<HomeRouteData>();
+  const showSeeds = useShowSeeds();
 
   return (
     <>
@@ -109,11 +111,13 @@ export default function Home() {
           <PopularContent>
             <CategoryTitle>The Garden 🌳</CategoryTitle>
             <ul>
-              {recentGarden.map((x) => (
-                <li key={x.slug}>
-                  <Link to={x.slug}>{x.title}</Link>
-                </li>
-              ))}
+              {recentGarden
+                .filter((x) => (!showSeeds ? x.status !== "seed" : true))
+                .map((x) => (
+                  <li key={x.slug}>
+                    <Link to={x.slug}>{x.title}</Link>
+                  </li>
+                ))}
             </ul>
           </PopularContent>
           <PopularContent>

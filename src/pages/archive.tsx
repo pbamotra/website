@@ -6,6 +6,7 @@ import HomeLink from "components/HomeLink";
 import styled from "@emotion/styled";
 
 import type { ArchiveProps } from "lib/archive";
+import { useShowSeeds } from "lib/seed";
 
 const ArchivePageContainer = styled.div({
   width: "100%",
@@ -14,6 +15,7 @@ const ArchivePageContainer = styled.div({
 
 export default function ArchivePage() {
   const { posts } = useRouteData<ArchiveProps>();
+  const showSeeds = useShowSeeds();
 
   return (
     <>
@@ -25,11 +27,13 @@ export default function ArchivePage() {
         <h1>Archive</h1>
         <h2>Posts 📚</h2>
         <ul>
-          {posts.map((x) => (
-            <li key={x.slug}>
-              <Link to={x.slug}>{x.title}</Link>
-            </li>
-          ))}
+          {posts
+            .filter((x) => (showSeeds ? true : x.status !== "seed"))
+            .map((x) => (
+              <li key={x.slug}>
+                <Link to={x.slug}>{x.title}</Link>
+              </li>
+            ))}
         </ul>
       </ArchivePageContainer>
     </>

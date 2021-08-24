@@ -15,6 +15,7 @@ import type { PostPageProps } from "lib/posts";
 
 import "prismjs/themes/prism.css";
 import Preview, { useIsPreview } from "components/Preview";
+import { useShowSeeds } from "lib/seed";
 
 const PostTitle = styled.h1({
   fontSize: "2.4rem",
@@ -283,8 +284,8 @@ export default function PostPage() {
     modifiedAt,
     tags,
     type,
-    backlinks,
     status,
+    ...rest
   } = useRouteData<PostPageProps>();
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
@@ -294,6 +295,12 @@ export default function PostPage() {
   const modifiedAtString = useMemo(() => formatDate(modifiedAt), [modifiedAt]);
 
   const isPreview = useIsPreview();
+
+  const showSeeds = useShowSeeds();
+
+  const backlinks = !showSeeds
+    ? rest.backlinks.filter((x) => x.status !== "seed")
+    : rest.backlinks;
 
   return (
     <PostContainer>

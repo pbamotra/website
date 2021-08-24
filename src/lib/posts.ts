@@ -41,6 +41,7 @@ export interface Backlink {
   description?: string;
   createdAt: number;
   modifiedAt: number;
+  status: string;
 }
 
 interface BasePost {
@@ -112,6 +113,7 @@ class PostCollection {
               createdAt: newPost.createdAt,
               title: newPost.title,
               description: newPost.description,
+              status: newPost.status,
             });
           }
 

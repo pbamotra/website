@@ -29,6 +29,7 @@ gtag("js", new Date());
 gtag("config", "UA-153493405-1");
 
 import { MutableRefObject, useEffect, useRef } from "react";
+import { DetailToggle } from "components/DetailToggle";
 
 export function useScrollBehaviour() {
   const location = useLocation();
@@ -122,6 +123,7 @@ export default function App() {
               )}
             />
           </Router>
+          <DetailToggle />
         </React.Suspense>
       </Container>
     </Root>
