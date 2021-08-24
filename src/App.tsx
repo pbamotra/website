@@ -18,6 +18,10 @@ const DESCRIPTION =
   "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer making videos at Clipchamp.";
 
 function gtag(..._args: unknown[]) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   ((window as any).dataLayer = (window as any).dataLayer || []).push(arguments);
 }
 
