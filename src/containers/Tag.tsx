@@ -12,6 +12,10 @@ const TagPageContainer = styled.div({
   maxWidth: "660px",
 });
 
+if (useRouteData === undefined && typeof window !== "undefined") {
+  window.location.reload();
+}
+
 export default function TagPage() {
   const { name, posts } = useRouteData<TagPageProps>();
   const showSeeds = useShowSeeds();

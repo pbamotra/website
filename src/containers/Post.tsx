@@ -271,6 +271,10 @@ function SeedWarning() {
   );
 }
 
+if (useRouteData === undefined && typeof window !== "undefined") {
+  window.location.reload();
+}
+
 export default function PostPage() {
   const {
     slug,
