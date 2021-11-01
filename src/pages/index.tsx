@@ -73,7 +73,7 @@ export default function Home() {
   return (
     <>
       <IntroContainer>
-        <Title>Hi, Bennett here! 👋</Title>
+        <Title>Hi, Bennett here!</Title>
         <div>
           <Subtitle>
             I'm a software developer at{" "}
@@ -97,7 +97,7 @@ export default function Home() {
         </div>
       </IntroContainer>
 
-      <RecentTitle>Recent Posts 📚</RecentTitle>
+      <RecentTitle>Recent Posts</RecentTitle>
 
       <ContentContainer>
         <div>
@@ -109,7 +109,7 @@ export default function Home() {
         </div>
         <div>
           <PopularContent>
-            <CategoryTitle>The Garden 🌳</CategoryTitle>
+            <CategoryTitle>The Garden</CategoryTitle>
             <ul>
               {recentGarden
                 .filter((x) => (!showSeeds ? x.status !== "seed" : true))
@@ -121,7 +121,7 @@ export default function Home() {
             </ul>
           </PopularContent>
           <PopularContent>
-            <CategoryTitle>Tags 🏷️</CategoryTitle>
+            <CategoryTitle>Tags</CategoryTitle>
             <TagContainer>
               <ul>
                 {tags.map((x) => (

@@ -25,7 +25,7 @@ export default function ArchivePage() {
       <ArchivePageContainer>
         <HomeLink />
         <h1>Archive</h1>
-        <h2>Posts 📚</h2>
+        <h2>Posts</h2>
         <ul>
           {posts
             .filter((x) => (showSeeds ? true : x.status !== "seed"))

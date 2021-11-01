@@ -31,12 +31,12 @@ export default function TagPage() {
   return (
     <>
       <Head>
-        <title>Everything tagged "{name}" 🏷️</title>
+        <title>Everything tagged "{name}"</title>
       </Head>
       <TagPageContainer>
         <HomeLink />
-        <h1>Everything tagged "{name}" 🏷️</h1>
-        <h2>Posts 📚</h2>
+        <h1>Everything tagged "{name}"</h1>
+        <h2>Posts</h2>
         {filtered.length === 0 && (
           <div>No posts for this tag. Check back again later.</div>
         )}

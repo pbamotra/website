@@ -13,5 +13,5 @@ const HomeLinkAnchor = styled(Link)({
 });
 
 export default function HomeLink() {
-  return <HomeLinkAnchor to="/">Home 🏡</HomeLinkAnchor>;
+  return <HomeLinkAnchor to="/">Home</HomeLinkAnchor>;
 }
