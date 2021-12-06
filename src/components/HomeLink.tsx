@@ -4,11 +4,11 @@ import { Link } from "@reach/router";
 
 const HomeLinkAnchor = styled(Link)({
   borderBottom: "none",
-  color: "black",
+  color: "inherit",
   cursor: "pointer",
 
   ":visited": {
-    color: "black",
+    color: "inherit",
   },
 });
 

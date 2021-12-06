@@ -33,19 +33,7 @@ const IntroContainer = styled.div({
   maxWidth: "680px",
 });
 
-const Tag = styled(Link)({
-  cursor: "pointer",
-  border: "none",
-  color: "black",
-  padding: "4px",
-  borderRadius: "4px",
-  ":hover": {
-    textDecoration: "underline",
-  },
-  ":visited": {
-    color: "black",
-  },
-});
+const Tag = styled(Link)({});
 
 const TagContainer = styled.div({
   display: "flex",
