@@ -5,7 +5,7 @@ import { Head, useRouteData } from "react-static";
 import { Link, useLocation } from "@reach/router";
 
 import HomeLink from "components/HomeLink";
-import TweetSection from "components/TweetSection";
+// import TweetSection from "components/TweetSection";
 import About from "components/About";
 import Backlink from "components/Backlink";
 
@@ -13,7 +13,8 @@ import { join } from "path";
 
 import type { PostPageProps } from "lib/posts";
 
-import "prismjs/themes/prism.css";
+import "./theme.css";
+
 import Preview, { useIsPreview } from "components/Preview";
 import { useShowSeeds } from "lib/seed";
 
@@ -65,16 +66,17 @@ const PostContainer = styled.div({
     },
   },
   ".remark-highlight > pre": {
-    background: "none",
     overflow: "unset",
+    margin: 0,
     ".token": {
       background: "none",
     },
     ".remark-highlight-code-line": {
-      background: "#19bbce26",
-      width: "100%",
+      background: "var(--highlight-color)",
+      width: "calc(100% + 32px)",
       display: "block",
-      padding: "4px",
+      padding: "2px 16px",
+      marginLeft: "-16px",
     },
   },
 });
@@ -408,9 +410,9 @@ export default function PostPage() {
         <FooterContainer>
           <hr />
 
-          {type === "garden" && status !== "evergreen" ? null : (
+          {/*{type === "garden" && status !== "evergreen" ? null : (
             <TweetSection slug={slug} title={title} />
-          )}
+          )}*/}
           <About />
           <NextPreviousContainer>
             <LinkSection>

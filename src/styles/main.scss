@@ -7,16 +7,20 @@
   --background-color: #fff;
   --text-color: #000;
   --heading-color: #000;
+
+  --highlight-color: hsl(221deg 87% 60% / 15%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #202124;
+    --background-color: #222730;
     --heading-color: #dddee1;
     --text-color: #bdc1c6;
 
-    --accent-color: #8ab4f8;
-    --accent-color-light: #8ab4f8;
+    --accent-color: #88c0d0;
+    --accent-color-light: #88c0d0;
+
+    --highlight-color: #81a1c11a;
   }
 }
 
