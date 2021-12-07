@@ -52,6 +52,8 @@ const PostContainer = styled.div({
     display: "block",
     border: "solid 1px rgba(0, 0, 0, 0.1)",
     borderRadius: "4px",
+  },
+  ".remark-highlight > pre": {
     overflow: "auto",
 
     "::-webkit-scrollbar": {
@@ -64,9 +66,7 @@ const PostContainer = styled.div({
       borderRadius: "4px",
       background: "rgba(0, 0, 0, 0.15)",
     },
-  },
-  ".remark-highlight > pre": {
-    overflow: "unset",
+
     margin: 0,
     ".token": {
       background: "none",
