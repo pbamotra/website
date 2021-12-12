@@ -7,6 +7,11 @@ import "./styles/main.scss";
 import styled from "@emotion/styled";
 import { Head } from "react-static";
 
+const RootContainer = styled.div({
+  padding: "2rem",
+  width: "100%",
+});
+
 const Container = styled.div({
   margin: "auto",
   maxWidth: "1100px",
@@ -75,57 +80,59 @@ function RouteHead() {
 export default function App() {
   return (
     <Root>
-      <Container>
-        <Head>
-          <title>Bennett's Rust Journal</title>
+      <RootContainer>
+        <Container>
+          <Head>
+            <title>Bennett's Rust Journal</title>
 
-          <meta name="description" content={DESCRIPTION} />
-          <meta name="twitter:description" content={DESCRIPTION} />
+            <meta name="description" content={DESCRIPTION} />
+            <meta name="twitter:description" content={DESCRIPTION} />
 
-          <meta name="og:title" content="Bennett's Rust Journal" />
-          <meta name="twitter:title" content="Bennett's Rust Journal" />
+            <meta name="og:title" content="Bennett's Rust Journal" />
+            <meta name="twitter:title" content="Bennett's Rust Journal" />
 
-          <meta name="twitter:creator" content="@bennettbackward" />
+            <meta name="twitter:creator" content="@bennettbackward" />
 
-          <meta name="twitter:site" content="@bennettbackward" />
+            <meta name="twitter:site" content="@bennettbackward" />
 
-          <meta
-            name="og:image"
-            content={"https://bennetthardwick.com/profile.jpg"}
-          />
-          <meta
-            name="twitter:image"
-            content={"https://bennetthardwick.com/profile.jpg"}
-          />
-          <meta name="og:image:width" content={"400"} />
-
-          <meta name="og:image:height" content={"400"} />
-
-          <meta name="og:type" content="article" />
-
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"
-          />
-        </Head>
-        <React.Suspense fallback={<em>Loading...</em>}>
-          <Router>
-            <Routes
-              path="*"
-              render={useCallback(
-                ({ routePath, getComponentForPath }) => (
-                  <>
-                    <RouteHead />
-                    {getComponentForPath(routePath)}
-                  </>
-                ),
-                []
-              )}
+            <meta
+              name="og:image"
+              content={"https://bennetthardwick.com/profile.jpg"}
             />
-          </Router>
-          <DetailToggle />
-        </React.Suspense>
-      </Container>
+            <meta
+              name="twitter:image"
+              content={"https://bennetthardwick.com/profile.jpg"}
+            />
+            <meta name="og:image:width" content={"400"} />
+
+            <meta name="og:image:height" content={"400"} />
+
+            <meta name="og:type" content="article" />
+
+            <script
+              async
+              src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"
+            />
+          </Head>
+          <React.Suspense fallback={<em>Loading...</em>}>
+            <Router>
+              <Routes
+                path="*"
+                render={useCallback(
+                  ({ routePath, getComponentForPath }) => (
+                    <>
+                      <RouteHead />
+                      {getComponentForPath(routePath)}
+                    </>
+                  ),
+                  []
+                )}
+              />
+            </Router>
+            <DetailToggle />
+          </React.Suspense>
+        </Container>
+      </RootContainer>
     </Root>
   );
 }
