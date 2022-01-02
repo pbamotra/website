@@ -10,6 +10,9 @@ import { Head } from "react-static";
 const RootContainer = styled.div({
   padding: "2rem",
   width: "100%",
+  "@media (max-width: 900px)": {
+    padding: "1rem",
+  },
 });
 
 const Container = styled.div({
