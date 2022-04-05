@@ -1,23 +1,20 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { Head, useRouteData } from "react-static";
+import { Head } from "react-static";
 
 import type { TagPageProps } from "lib/tags";
 import HomeLink from "components/HomeLink";
 import styled from "@emotion/styled";
 import { useShowSeeds } from "lib/seed";
+import { useData } from "lib/useData";
 
 const TagPageContainer = styled.div({
   width: "100%",
   maxWidth: "660px",
 });
 
-if (useRouteData === undefined && typeof window !== "undefined") {
-  window.location.reload();
-}
-
 export default function TagPage() {
-  const { name, posts } = useRouteData<TagPageProps>();
+  const { name, posts } = useData<TagPageProps>();
   const showSeeds = useShowSeeds();
 
   const filtered = posts

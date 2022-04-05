@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { getMDXComponent } from "mdx-bundler/client";
 import styled from "@emotion/styled";
-import { Head, useRouteData } from "react-static";
+import { Head } from "react-static";
 import { Link, useLocation } from "@reach/router";
 
 import HomeLink from "components/HomeLink";
@@ -17,6 +17,7 @@ import "./theme.css";
 
 import Preview, { useIsPreview } from "components/Preview";
 import { useShowSeeds } from "lib/seed";
+import { useData } from "lib/useData";
 
 const PostTitle = styled.h1({
   fontSize: "2.4rem",
@@ -273,10 +274,6 @@ function SeedWarning() {
   );
 }
 
-if (useRouteData === undefined && typeof window !== "undefined") {
-  window.location.reload();
-}
-
 export default function PostPage() {
   const {
     slug,
@@ -292,7 +289,7 @@ export default function PostPage() {
     type,
     status,
     ...rest
-  } = useRouteData<PostPageProps>();
+  } = useData<PostPageProps>();
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
   const location = useLocation();

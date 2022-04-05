@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { Head, useRouteData } from "react-static";
+import { Head } from "react-static";
 
 import HomeLink from "components/HomeLink";
 import styled from "@emotion/styled";
 
 import type { ArchiveProps } from "lib/archive";
 import { useShowSeeds } from "lib/seed";
+import { useData } from "lib/useData";
 
 const ArchivePageContainer = styled.div({
   width: "100%",
@@ -14,7 +15,7 @@ const ArchivePageContainer = styled.div({
 });
 
 export default function ArchivePage() {
-  const { posts } = useRouteData<ArchiveProps>();
+  const { posts } = useData<ArchiveProps>();
   const showSeeds = useShowSeeds();
 
   return (

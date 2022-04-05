@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouteData } from "react-static";
 import type { HomeRouteData } from "lib/home";
 
 import { Link } from "@reach/router";
@@ -7,6 +6,7 @@ import { Link } from "@reach/router";
 import styled from "@emotion/styled";
 import PostPreview from "components/PostPreview";
 import { useShowSeeds } from "lib/seed";
+import { useData } from "lib/useData";
 
 const ContentContainer = styled.div({
   display: "grid",
@@ -55,7 +55,7 @@ const RecentTitle = styled.h2({
 });
 
 export default function Home() {
-  const { recent, tags, recentGarden } = useRouteData<HomeRouteData>();
+  const { recent, tags, recentGarden } = useData<HomeRouteData>();
   const showSeeds = useShowSeeds();
 
   return (
@@ -65,7 +65,8 @@ export default function Home() {
         <div>
           <Subtitle>
             I'm a software developer at{" "}
-            <a href="https://cipherstash.com">CipherStash</a>, where I build a searchable encrypted database.
+            <a href="https://cipherstash.com">CipherStash</a>, where I build a
+            searchable encrypted database.
           </Subtitle>
           <p>
             When I’m not at work, you’ll find me ricing Arch Linux, evangelizing
