@@ -1,6 +1,7 @@
 @import "./fonts.scss", "./normalize.scss";
 
-:root {
+body,
+body.light {
   --accent-color: #2f76d0;
   --accent-color-light: #82ade3;
 
@@ -11,8 +12,8 @@
   --highlight-color: hsl(221deg 87% 60% / 15%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+@mixin dark() {
+  body {
     --background-color: #222730;
     --heading-color: #dddee1;
     --text-color: #bdc1c6;
@@ -22,6 +23,14 @@
 
     --highlight-color: #81a1c11a;
   }
+}
+
+@media (prefers-color-scheme: dark) {
+  @include dark();
+}
+
+body.dark {
+  @include dark();
 }
 
 * {

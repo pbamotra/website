@@ -4,7 +4,11 @@ export function useData<T extends object>(): T {
   try {
     return useRouteData<T>();
   } catch (e) {
-    debugger;
-    window.location.reload();
+    if (e instanceof TypeError && e.message.includes("Cannot read properties of undefined (reading 'useRouteData')")) {
+      debugger;
+      window.location.reload();
+    }
+
+    throw e;
   }
 }

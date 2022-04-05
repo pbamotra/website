@@ -13,7 +13,7 @@ import { join } from "path";
 
 import type { PostPageProps } from "lib/posts";
 
-import "./theme.css";
+import "./theme.scss";
 
 import Preview, { useIsPreview } from "components/Preview";
 import { useShowSeeds } from "lib/seed";

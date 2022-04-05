@@ -38,6 +38,7 @@ gtag("config", "UA-153493405-1");
 
 import { MutableRefObject, useEffect, useRef } from "react";
 import { DetailToggle } from "components/DetailToggle";
+import {DarkModeToggle} from "components/DarkModeToggle";
 
 export function useScrollBehaviour() {
   const location = useLocation();
@@ -132,6 +133,7 @@ export default function App() {
                 )}
               />
             </Router>
+            <DarkModeToggle />
             <DetailToggle />
           </React.Suspense>
         </Container>
