@@ -5,16 +5,13 @@ type: garden
 status: budding
 ---
 
-During my work hours I'm building [Clipchamp] - a video editor that works entirely in the browser.
-Rather than working on product code, I'm working on building tools and abstractions to make other devs at Clipchamp's life easier and safer.
+During my work hours I'm building [CipherStash] - a searchable encrypted database.
 
-In my spare time I'm tending my [digital garden] and working on a secret Roam Research inspired tool for thought.
+In my spare time I'm tending my [digital garden] and not much else really.
 
-On the weekends I've been getting more and more into garden and I'm trying to build some raised garden beds without spending any money (a lot harder than it sounds.)
-
-Check out my [projects page](./projects/) for links to things I've worked on in the past.
+Check out my [projects page](./projects.md) for links to things I've worked on in the past.
 
 This page is inspired by the ["now page" movement](https://nownownow.com/about).
 
-[Clipchamp]: https://clipchamp.com
-[digital garden]: /garden
+[CipherStash]: https://cipherstash.com
+[digital garden]: ./garden.md

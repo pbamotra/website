@@ -23,7 +23,7 @@ const Container = styled.div({
 });
 
 const DESCRIPTION =
-  "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer making videos at Clipchamp.";
+  "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer encrypting things at CipherStash.";
 
 function gtag(..._args: unknown[]) {
   if (typeof window === "undefined") {

@@ -65,8 +65,7 @@ export default function Home() {
         <div>
           <Subtitle>
             I'm a software developer at{" "}
-            <a href="https://clipchamp.com">Clipchamp</a>, where I help people
-            make cinematic masterpieces with their browser.
+            <a href="https://cipherstash.com">CipherStash</a>, where I build a searchable encrypted database.
           </Subtitle>
           <p>
             When I’m not at work, you’ll find me ricing Arch Linux, evangelizing
