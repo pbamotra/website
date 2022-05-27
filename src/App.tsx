@@ -38,7 +38,7 @@ gtag("config", "UA-153493405-1");
 
 import { MutableRefObject, useEffect, useRef } from "react";
 import { DetailToggle } from "components/DetailToggle";
-import {DarkModeToggle} from "components/DarkModeToggle";
+import { DarkModeToggle } from "components/DarkModeToggle";
 
 export function useScrollBehaviour() {
   const location = useLocation();
