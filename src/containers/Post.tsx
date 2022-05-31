@@ -170,6 +170,14 @@ function InternalAnchor({ slug, ...rest }: InternalAnchorProps) {
   );
 }
 
+function withoutEnding(x: string, ending: string): string {
+  if (x.endsWith(ending)) {
+    return x.slice(0, -ending.length);
+  }
+
+  return x;
+}
+
 const Anchor: React.FC<{ [key: string]: unknown }> = (props) => {
   const location = useLocation();
 
@@ -181,17 +189,11 @@ const Anchor: React.FC<{ [key: string]: unknown }> = (props) => {
         href = join(location.pathname, "..", href);
       }
 
-      if (href.endsWith("/_index.mdx")) {
-        href = href.slice(0, -"/_index.mdx".length);
-      }
-
-      if (href.endsWith("/index.mdx")) {
-        href = href.slice(0, -"/index.mdx".length);
-      }
-
-      if (href.endsWith(".mdx")) {
-        href = href.slice(0, -".mdx".length);
-      }
+      href = withoutEnding(href, '/')
+      href = withoutEnding(href, '.mdx')
+      href = withoutEnding(href, '.md')
+      href = withoutEnding(href, '_index')
+      href = withoutEnding(href, 'index')
 
       if (!href.endsWith("/")) {
         href = href + "/";
