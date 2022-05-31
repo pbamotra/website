@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "@reach/router";
 import { Head } from "react-static";
 
@@ -18,6 +18,19 @@ export default function ArchivePage() {
   const { posts } = useData<ArchiveProps>();
   const showSeeds = useShowSeeds();
 
+  const modifiedPosts = useMemo(() => {
+    const map = new Map<number, ArchiveProps["posts"]>();
+
+    for (const post of posts) {
+      const key = new Date(post.createdAt).getFullYear();
+      const x = map.get(key) ?? [];
+      x.push(post);
+      map.set(key, x);
+    }
+
+    return Array.from(map.entries()).sort(([a], [b]) => b - a);
+  }, [posts]);
+
   return (
     <>
       <Head>
@@ -27,15 +40,20 @@ export default function ArchivePage() {
         <HomeLink />
         <h1>Archive</h1>
         <h2>Posts</h2>
-        <ul>
-          {posts
-            .filter((x) => (showSeeds ? true : x.status !== "seed"))
-            .map((x) => (
-              <li key={x.slug}>
-                <Link to={x.slug}>{x.title}</Link>
-              </li>
-            ))}
-        </ul>
+        {modifiedPosts.map(([year, p]) => (
+          <div key={String(year)}>
+            <h3>{year}</h3>
+            <ul>
+              {p
+                .filter((x) => (showSeeds ? true : x.status !== "seed"))
+                .map((x) => (
+                  <li key={x.slug}>
+                    <Link to={x.slug}>{x.title}</Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ))}
       </ArchivePageContainer>
     </>
   );

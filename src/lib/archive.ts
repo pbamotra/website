@@ -4,6 +4,7 @@ interface PostSnapshot {
   slug: string;
   title: string;
   status: string;
+  createdAt: number;
 }
 
 export interface ArchiveProps {
@@ -14,6 +15,6 @@ export async function getData(): Promise<ArchiveProps> {
   const posts = await getAllPostsSorted();
 
   return {
-    posts: posts.map(({ title, status, slug }) => ({ title, status, slug })),
+    posts: posts.map(({ title, status, slug, createdAt }) => ({ title, status, slug, createdAt })),
   };
 }

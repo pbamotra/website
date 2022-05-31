@@ -231,6 +231,7 @@ const Warning = styled.div({
   border: "solid 2px #f5dd64",
   padding: "8px 24px",
   borderRadius: "4px",
+  color: "black"
 });
 
 const HeaderContainer = styled.div({
