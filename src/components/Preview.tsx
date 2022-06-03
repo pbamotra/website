@@ -1,4 +1,3 @@
-import { ServerLocation, Router } from "@reach/router";
 import React, {
   createContext,
   PropsWithChildren,
@@ -41,7 +40,6 @@ const PreviewContainer = styled.div({
 
 export default function Preview<T extends HTMLElement>({
   show,
-  slug,
   referenceElement,
 }: PreviewProps<T>) {
   const [popover, setPreview] = useState<HTMLDivElement>();
@@ -80,11 +78,7 @@ export default function Preview<T extends HTMLElement>({
         >
           <PreviewProvider>
             <Suspense fallback={<em>Loading...</em>}>
-              <ServerLocation url={slug}>
-                <Router>
-                  <Routes path="*" />
-                </Router>
-              </ServerLocation>
+              <Routes path="*" />
             </Suspense>
           </PreviewProvider>
         </PreviewContainer>,

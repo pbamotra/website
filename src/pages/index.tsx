@@ -1,7 +1,7 @@
 import React from "react";
 import type { HomeRouteData } from "lib/home";
 
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 
 import styled from "@emotion/styled";
 import PostPreview from "components/PostPreview";

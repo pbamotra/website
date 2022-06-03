@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { Backlink as BacklinkType } from "lib/posts";
 import styled from "@emotion/styled";
 import Preview from "components/Preview";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 
 interface BacklinkProps {
   backlink: BacklinkType;

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { getMDXComponent } from "mdx-bundler/client";
 import styled from "@emotion/styled";
 import { Head } from "react-static";
-import { Link, useLocation } from "@reach/router";
+import { Link, useLocation } from "react-router-dom";
 
 import HomeLink from "components/HomeLink";
 // import TweetSection from "components/TweetSection";
@@ -135,7 +135,7 @@ const InternalLink = styled(Link)({
   },
 });
 
-const REPLACE_LANGUAGES = new Set(["language-unknown"]);
+const REPLACE_LANGUAGES = new Set(["language-unknown", "language-plaintext", "language-txt"]);
 
 const Code: React.FC<{ [key: string]: unknown }> = (props) => {
   if (

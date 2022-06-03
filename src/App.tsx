@@ -1,6 +1,9 @@
 import React, { useCallback } from "react";
 import { Root, Routes } from "react-static";
-import { Router, useLocation, globalHistory } from "@reach/router";
+
+// import { Router, useLocation, globalHistory } from "@reach/router";
+
+import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 
 import "./styles/main.scss";
 
@@ -42,10 +45,11 @@ import { DarkModeToggle } from "components/DarkModeToggle";
 
 export function useScrollBehaviour() {
   const location = useLocation();
+  const history = useHistory();
   const historyState: MutableRefObject<{ [key: string]: number }> = useRef({});
 
   useEffect(() => {
-    return globalHistory.listen(({ location, action }) => {
+    return history.listen((location, action) => {
       if (action === "PUSH") {
         historyState.current[location.pathname] = 0;
         window.scrollTo(0, 0);
@@ -56,7 +60,7 @@ export function useScrollBehaviour() {
         window.scrollTo(0, scroll);
       }
     });
-  }, []);
+  }, [history]);
 
   useEffect(() => {
     function scrollHandler() {
@@ -119,20 +123,22 @@ export default function App() {
             />
           </Head>
           <React.Suspense fallback={<em>Loading...</em>}>
-            <Router>
-              <Routes
-                path="*"
-                render={useCallback(
-                  ({ routePath, getComponentForPath }) => (
-                    <>
-                      <RouteHead />
-                      {getComponentForPath(routePath)}
-                    </>
-                  ),
-                  []
-                )}
-              />
-            </Router>
+            <Switch>
+              <Route path="*">
+                <Routes
+                  path="*"
+                  render={useCallback(
+                    ({ routePath, getComponentForPath }) => (
+                      <>
+                        <RouteHead />
+                        {getComponentForPath(routePath)}
+                      </>
+                    ),
+                    []
+                  )}
+                />
+              </Route>
+            </Switch>
             <DarkModeToggle />
             <DetailToggle />
           </React.Suspense>
