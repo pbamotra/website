@@ -9,7 +9,12 @@ body.light {
   --text-color: #000;
   --heading-color: #000;
 
+  --contrast-text-color: #000;
+
   --highlight-color: hsl(221deg 87% 60% / 15%);
+
+  --background-tint: rgba(0, 0, 0, 0.05);
+  --background-tint-hovered: rgba(0, 0, 0, 0.1);
 }
 
 @mixin dark() {
@@ -17,11 +22,15 @@ body.light {
     --background-color: #222730;
     --heading-color: #dddee1;
     --text-color: #bdc1c6;
+  --contrast-text-color: #fff;
 
     --accent-color: #88c0d0;
     --accent-color-light: #88c0d0;
 
     --highlight-color: #81a1c11a;
+
+    --background-tint: rgba(255, 255, 255, 0.02);
+    --background-tint-hovered: rgba(255, 255, 255, 0.05);
   }
 }
 
@@ -144,32 +153,6 @@ img {
   max-width: 100%;
   margin: auto;
   display: block;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: auto;
-
-  & > ul {
-    margin: 0;
-  }
-
-  & > ul > li {
-    & {
-      margin: 0;
-      display: inline;
-    }
-
-    &:not(:last-child) {
-      margin-right: 1.2rem;
-    }
-
-    a {
-      margin: 0;
-    }
-  }
 }
 
 hr {

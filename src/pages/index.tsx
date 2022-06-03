@@ -8,36 +8,29 @@ import PostPreview from "components/PostPreview";
 import { useShowSeeds } from "lib/seed";
 import { useData } from "lib/useData";
 
-const ContentContainer = styled.div({
-  display: "grid",
-  gridTemplateColumns: "2fr 1fr",
-  gridTemplateRows: "auto",
-  gridGap: "4rem",
-  "@media (max-width: 800px)": {
-    gridTemplateColumns: "1fr",
-  },
-});
-
 const RecentPosts = styled.div({});
 
-const PopularContent = styled.div({
-  marginBottom: "2rem",
-});
-
-const CategoryTitle = styled.h3({
-  margin: "0",
-  fontSize: "1.4rem",
-});
-
-const IntroContainer = styled.div({
+const ContentContainer = styled.div({
   maxWidth: "680px",
 });
 
-const Tag = styled(Link)({});
+const Tag = styled(Link)({
+  background: "var(--background-tint)",
+  borderBottom: "none",
 
-const TagContainer = styled.div({
-  display: "flex",
-  flexWrap: "wrap",
+  color: "var(--contrast-text-color)",
+
+  ":visited": {
+    color: "var(--contrast-text-color)",
+  },
+
+  ":hover": {
+    background: "var(--background-tint-hovered)",
+  },
+
+  padding: "0.5rem 1rem",
+  borderRadius: "4px",
+  display: "block",
 });
 
 const Title = styled.h1({
@@ -54,13 +47,82 @@ const RecentTitle = styled.h2({
   marginTop: "4rem",
 });
 
+const RecentNotesContainer = styled.ul({
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+
+  "@media (max-width: 900px)": {
+    gridTemplateColumns: "1fr",
+  },
+
+  flexWrap: "wrap",
+  padding: "0",
+  gridGap: "0.5rem",
+  "> li": {
+    listStyle: "none",
+    margin: 0,
+  },
+});
+
+const RecentNotesLink = styled(Link)({
+  background: "var(--background-tint)",
+  borderBottom: "none",
+
+  color: "var(--contrast-text-color)",
+
+  ":visited": {
+    color: "var(--contrast-text-color)",
+  },
+
+  ":hover": {
+    background: "var(--background-tint-hovered)",
+  },
+
+  padding: "0.5rem 1rem",
+  borderRadius: "4px",
+  display: "block",
+});
+
+const SubtleText = styled.span({
+  opacity: 0.5,
+});
+
+const NavLink = styled(Link)({
+  margin: "1em",
+  padding: "0.5rem 2rem",
+  borderRadius: "4px",
+  borderBottom: "none",
+  fontSize: "0.8rem",
+
+  // background: "var(--background-tint)",
+});
+
+const Nav = styled.nav({
+  margin: "4rem 0",
+
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
+
+const TagContainer = styled.ul({
+  display: "flex",
+  flexWrap: "wrap",
+  padding: "0",
+  gridGap: "0.5rem",
+  "> li": {
+    listStyle: "none",
+    margin: 0,
+  },
+});
+
 export default function Home() {
   const { recent, tags, recentGarden } = useData<HomeRouteData>();
   const showSeeds = useShowSeeds();
 
   return (
-    <>
-      <IntroContainer>
+    <ContentContainer>
+      <div>
         <Title>Hi, Bennett here!</Title>
         <div>
           <Subtitle>
@@ -83,59 +145,53 @@ export default function Home() {
             .
           </p>
         </div>
-      </IntroContainer>
+      </div>
+
+      <RecentTitle>Recent Notes</RecentTitle>
+
+      <RecentNotesContainer>
+        {recentGarden
+          .filter((x) => (!showSeeds ? x.status !== "seed" : true))
+          .map((x) => (
+            <li key={x.slug}>
+              <RecentNotesLink to={x.slug}>
+                <span>{x.title}</span>
+                <br />
+                <SubtleText>
+                  {new Date(x.createdAt).toLocaleString(undefined, {
+                    weekday: "long",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </SubtleText>
+              </RecentNotesLink>
+            </li>
+          ))}
+      </RecentNotesContainer>
 
       <RecentTitle>Recent Posts</RecentTitle>
 
-      <ContentContainer>
-        <div>
-          <RecentPosts>
-            {recent.map((x) => (
-              <PostPreview key={x.slug} post={x} />
-            ))}
-          </RecentPosts>
-        </div>
-        <div>
-          <PopularContent>
-            <CategoryTitle>The Garden</CategoryTitle>
-            <ul>
-              {recentGarden
-                .filter((x) => (!showSeeds ? x.status !== "seed" : true))
-                .map((x) => (
-                  <li key={x.slug}>
-                    <Link to={x.slug}>{x.title}</Link>
-                  </li>
-                ))}
-            </ul>
-          </PopularContent>
-          <PopularContent>
-            <CategoryTitle>Tags</CategoryTitle>
-            <TagContainer>
-              <ul>
-                {tags.map((x) => (
-                  <li key={x}>
-                    <Tag to={`/tag/${x}/`}>{x}</Tag>
-                  </li>
-                ))}
-              </ul>
-            </TagContainer>
-          </PopularContent>
-          <PopularContent>
-            <CategoryTitle>Links</CategoryTitle>
-            <ul>
-              <li>
-                <Link to={`/projects/`}>Projects</Link>
-              </li>
-              <li>
-                <Link to={`/now/`}>Now</Link>
-              </li>
-              <li>
-                <Link to={`/archive/`}>Archive</Link>
-              </li>
-            </ul>
-          </PopularContent>
-        </div>
-      </ContentContainer>
-    </>
+      <RecentPosts>
+        {recent.map((x) => (
+          <PostPreview key={x.slug} post={x} />
+        ))}
+      </RecentPosts>
+
+      <RecentTitle>Tags</RecentTitle>
+
+      <TagContainer>
+        {tags.map((x) => (
+          <li key={x}>
+            <Tag to={`/tag/${x}/`}>{x}</Tag>
+          </li>
+        ))}
+      </TagContainer>
+
+      <Nav>
+        <NavLink to={`/projects/`}>Projects</NavLink> ·{" "}
+        <NavLink to={`/now/`}>Now</NavLink> ·
+        <NavLink to={`/archive/`}>Archive</NavLink>
+      </Nav>
+    </ContentContainer>
   );
 }

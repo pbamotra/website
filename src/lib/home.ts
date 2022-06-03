@@ -10,6 +10,7 @@ interface RecentGarden {
   title: string;
   slug: string;
   status: string;
+  createdAt: number;
 }
 
 export interface HomeRouteData {
@@ -37,10 +38,11 @@ export async function getData(): Promise<HomeRouteData> {
     })),
     recentGarden: (await getRecentGarden())
       .slice(0, 10)
-      .map(({ title, status, slug }) => ({
+      .map(({ title, status, slug, createdAt }) => ({
         title,
         status,
         slug,
+        createdAt
       })),
     tags: (await getAllTags())
       .filter((x) => x.posts.length > 1)

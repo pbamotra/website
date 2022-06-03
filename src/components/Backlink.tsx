@@ -20,11 +20,11 @@ const BacklinkContainer = styled(Link)({
 
   borderRadius: "4px",
   padding: "8px",
-  background: "rgba(0, 0, 0, 0.1)",
+  background: "var(--background-tint)",
   transition: "background 100ms",
 
   ":hover": {
-    background: "rgba(0, 0, 0, 0.15)",
+    background: "var(--background-tint-hovered)",
   },
 });
 
