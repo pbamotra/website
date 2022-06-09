@@ -80,6 +80,7 @@ const TesterContainer = styled.div({
   borderRadius: "4px",
   padding: "24px",
   border: "solid 2px rgba(0, 0, 0, 0.1)",
+  background: "var(--background-tint)"
 });
 
 const Input = styled.input({
