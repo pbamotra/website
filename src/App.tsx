@@ -28,17 +28,6 @@ const Container = styled.div({
 const DESCRIPTION =
   "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer encrypting things at CipherStash.";
 
-function gtag(..._args: unknown[]) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  ((window as any).dataLayer = (window as any).dataLayer || []).push(arguments);
-}
-
-gtag("js", new Date());
-gtag("config", "UA-153493405-1");
-
 import { MutableRefObject, useEffect, useRef } from "react";
 import { DetailToggle } from "components/DetailToggle";
 import { DarkModeToggle } from "components/DarkModeToggle";
@@ -118,9 +107,10 @@ export default function App() {
             <meta name="og:type" content="article" />
 
             <script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=UA-153493405-1"
-            />
+              defer
+              data-domain="bennetthardwick.com"
+              src="https://plausible.io/js/plausible.js"
+            ></script>
           </Head>
           <React.Suspense fallback={<em>Loading...</em>}>
             <Switch>
