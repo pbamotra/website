@@ -360,6 +360,7 @@ export default function PostPage() {
       )}
 
       <HeaderContainer>
+        <br/>
         {!isPreview && <HomeLink />}
         <PostTitle>{title}</PostTitle>
 

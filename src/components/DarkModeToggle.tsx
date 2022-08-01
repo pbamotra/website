@@ -1,6 +1,7 @@
 import React from "react";
 import { useIsDark } from "lib/useIsDark";
 import styled from "@emotion/styled";
+import { BiSun, BiMoon } from 'react-icons/bi';
 
 const DetailContainer = styled.div({
   fontSize: "0.8rem",
@@ -14,8 +15,8 @@ export function DarkModeToggle() {
 
   return (
     <DetailContainer onClick={toggle}>
-      {isDark && "Dark mode"}
-      {!isDark && "Light mode"}
+      {isDark && <BiSun size={70} />}
+      {!isDark &&  <BiMoon size={70} />}
     </DetailContainer>
   );
 }

@@ -113,6 +113,7 @@ export default function App() {
             ></script>
           </Head>
           <React.Suspense fallback={<em>Loading...</em>}>
+            <DarkModeToggle />
             <Switch>
               <Route path="*">
                 <Routes
@@ -129,7 +130,6 @@ export default function App() {
                 />
               </Route>
             </Switch>
-            <DarkModeToggle />
             <DetailToggle />
           </React.Suspense>
         </Container>
