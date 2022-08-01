@@ -1,4 +1,6 @@
-import { getRecentPosts, getRecentGarden, getAllTags } from "./posts";
+import fs from "fs";
+import path from "path";
+import { getRecentPosts, getRecentGarden, getAllTags, toRss } from "./posts";
 
 interface RecentPost {
   title: string;
@@ -23,9 +25,9 @@ export interface HomeRouteData {
 export async function getData(): Promise<HomeRouteData> {
   const allPosts = await getRecentPosts();
 
-  // const rss = toRss(allPosts);
+  const rss = toRss(allPosts);
 
-  // fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
+  fs.writeFileSync(path.join(process.cwd(), "public", "rss.xml"), rss);
 
   // Uncomment to output redirects
   // await getRedirects();

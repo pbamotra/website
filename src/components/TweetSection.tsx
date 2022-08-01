@@ -61,8 +61,8 @@ export default function TweetSection({
       <TweetTagline
         target="_blank"
         href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-          `https://bennetthardwick.com${slug}`
-        )}&via=bennettbackward&text=${encodeURIComponent(title)}`}
+          `https://pankesh.com${slug}`
+        )}&via=pankeshbackward&text=${encodeURIComponent(title)}`}
       >
         Tell me on Twitter {twitterIcon}
       </TweetTagline>

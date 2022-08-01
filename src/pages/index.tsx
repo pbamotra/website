@@ -74,10 +74,6 @@ const RecentNotesLink = styled(Link)({
     color: "var(--contrast-text-color)",
   },
 
-  ":hover": {
-    background: "var(--background-tint-hovered)",
-  },
-
   padding: "0.5rem 1rem",
   borderRadius: "4px",
   display: "block",
@@ -123,23 +119,21 @@ export default function Home() {
   return (
     <ContentContainer>
       <div>
-        <Title>Hi, Bennett here!</Title>
+        <Title>Hi, Pankesh here!</Title>
         <div>
           <Subtitle>
-            I'm a software developer at{" "}
-            <a href="https://cipherstash.com">CipherStash</a>, where I build a
-            searchable encrypted database.
+            I'm an ML engineer at{" "}
+            <a href="https://autodesk.com">Autodesk</a>, where I build 
+            assistive automation for <a href="https://help.autodesk.com/view/ACD/2023/ENU/?guid=GUID-64CFD65E-ABD0-49A8-9218-D4E2D22BC070">AutoCAD</a>.
           </Subtitle>
-          <p>
-            When I’m not at work, you’ll find me ricing Arch Linux, evangelizing
-            Vim and spending hours and hours fighting the borrow-checker in
-            Rust.
-          </p>
+          {/* <p>
+             More description can be added here. But, let's hold our horses for now.
+          </p> */}
           <p>
             If you'd like to get in contact, you can{" "}
-            <a href="mailto:me@bennetthardwick.com">email me</a> or find me on{" "}
-            <a href="https://github.com/bennetthardwick">Github</a> or{" "}
-            <a href="https://twitter.com/intent/user?screen_name=bennettbackward">
+            <a href="mailto:info@pankesh.com">email me</a> or find me on{" "}
+            <a href="https://github.com/pbamotra">Github</a> or{" "}
+            <a href="https://twitter.com/intent/user?screen_name=_pbamotra_">
               Twitter
             </a>
             .

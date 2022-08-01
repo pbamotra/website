@@ -5,7 +5,7 @@ import { Head } from "react-static";
 import { Link, useLocation } from "react-router-dom";
 
 import HomeLink from "components/HomeLink";
-// import TweetSection from "components/TweetSection";
+import TweetSection from "components/TweetSection";
 import About from "components/About";
 import Backlink from "components/Backlink";
 
@@ -339,19 +339,19 @@ export default function PostPage() {
               "@type": "TechArticle",
               mainEntityOfPage: {
                 "@type": "WebPage",
-                "@id": `https://bennetthardwick.com${location.pathname}`,
+                "@id": `https://pankesh.com${location.pathname}`,
               },
               headline: title,
-              image: ["https://bennetthardwick.com/profile.jpg"],
+              image: ["https://pankesh.com/profile.jpg"],
               datePublished: new Date(createdAt).toISOString(),
               dateModified: new Date(modifiedAt).toISOString(),
-              author: { "@type": "Person", name: "Bennett Hardwick" },
+              author: { "@type": "Person", name: "Pankesh Bamotra" },
               publisher: {
                 "@type": "Organization",
-                name: "Bennett Hardwick",
+                name: "Pankesh Bamotra",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://bennetthardwick.com/profile.jpg",
+                  url: "https://pankesh.com/profile.jpg",
                 },
               },
             })}
@@ -410,9 +410,9 @@ export default function PostPage() {
         <FooterContainer>
           <hr />
 
-          {/*{type === "garden" && status !== "evergreen" ? null : (
+          {type === "garden" && status !== "evergreen" ? null : (
             <TweetSection slug={slug} title={title} />
-          )}*/}
+          )}
           <About />
           <NextPreviousContainer>
             <LinkSection>

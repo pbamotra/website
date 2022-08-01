@@ -26,7 +26,7 @@ const Container = styled.div({
 });
 
 const DESCRIPTION =
-  "The blog, exobrain, digital garden, personal musings and thoughts of me, Bennett, a Software Developer encrypting things at CipherStash.";
+  "I am a machine learning engineer and I work on image classification, visual search, and object detection";
 
 import { MutableRefObject, useEffect, useRef } from "react";
 import { DetailToggle } from "components/DetailToggle";
@@ -68,8 +68,8 @@ function RouteHead() {
 
   return (
     <Head>
-      <link rel="canonical" href={`https://bennetthardwick.com${pathname}`} />
-      <meta name="og:url" content={`https://bennetthardwick.com${pathname}`} />
+      <link rel="canonical" href={`https://pankesh.com${pathname}`} />
+      <meta name="og:url" content={`https://pankesh.com${pathname}`} />
     </Head>
   );
 }
@@ -80,25 +80,25 @@ export default function App() {
       <RootContainer>
         <Container>
           <Head>
-            <title>Bennett's Rust Journal</title>
+            <title>Pankesh Bamotra</title>
 
             <meta name="description" content={DESCRIPTION} />
             <meta name="twitter:description" content={DESCRIPTION} />
 
-            <meta name="og:title" content="Bennett's Rust Journal" />
-            <meta name="twitter:title" content="Bennett's Rust Journal" />
+            <meta name="og:title" content="Pankesh Bamotra" />
+            <meta name="twitter:title" content="Pankesh Bamotra" />
 
-            <meta name="twitter:creator" content="@bennettbackward" />
+            <meta name="twitter:creator" content="@_pbamotra_" />
 
-            <meta name="twitter:site" content="@bennettbackward" />
+            <meta name="twitter:site" content="@_pbamotra_" />
 
             <meta
               name="og:image"
-              content={"https://bennetthardwick.com/profile.jpg"}
+              content={"https://pankesh.com/profile.jpg"}
             />
             <meta
               name="twitter:image"
-              content={"https://bennetthardwick.com/profile.jpg"}
+              content={"https://pankesh.com/profile.jpg"}
             />
             <meta name="og:image:width" content={"400"} />
 
@@ -108,7 +108,7 @@ export default function App() {
 
             <script
               defer
-              data-domain="bennetthardwick.com"
+              data-domain="pankesh.com"
               src="https://plausible.io/js/plausible.js"
             ></script>
           </Head>

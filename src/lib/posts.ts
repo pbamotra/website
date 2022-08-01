@@ -416,9 +416,9 @@ function escapeHtml(unsafe: string): string {
 export function toRss(posts: Post[]): string {
   const items = posts.map(
     (x) => `<item>
-      <guid>https://bennetthardwick.com${x.slug}</guid>
+      <guid>https://pankesh.com${x.slug}</guid>
       <title>${escapeHtml(x.title)}</title>
-      <link>https://bennetthardwick.com${x.slug}</link>
+      <link>https://pankesh.com${x.slug}</link>
       <description>${escapeHtml(x.description ?? "")}</description>
       <pubDate>${new Date(x.createdAt).toUTCString()}</pubDate>
     </item>`
@@ -426,14 +426,14 @@ export function toRss(posts: Post[]): string {
 
   return `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>Bennett Hardwick</title>
-      <link>https://bennetthardwick.com</link>
-      <description>Bennett's Rust Journal</description>
+      <title>Pankesh Bamotra</title>
+      <link>https://pankesh.com</link>
+      <description>Pankesh Bamotra</description>
       <language>en</language>
       <lastBuildDate>${new Date(
         posts[0]?.createdAt ?? new Date()
       ).toUTCString()}</lastBuildDate>
-      <atom:link href="https://bennetthardwick.com/rss.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://pankesh.com/rss.xml" rel="self" type="application/rss+xml"/>
       ${items.join("\n")}
     </channel>
   </rss>`;

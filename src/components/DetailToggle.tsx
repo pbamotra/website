@@ -15,7 +15,7 @@ export function DetailToggle() {
   return (
     <DetailContainer onClick={() => setShowing(!showing)}>
       {showing && "Showing drafts and unfinished posts. Click to hide."}
-      {!showing && "Hiding drafs and unfinished posts. Click to show."}
+      {!showing && "Hiding drafts and unfinished posts. Click to show."}
     </DetailContainer>
   );
 }
