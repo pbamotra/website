@@ -4,7 +4,9 @@ Built with:
 - [react-static]
 - [emotion]
 
-Hosted at: [bennetthardwick.com](https://bennetthardwick.com)
+Hosted at: tbd
 
 [emotion]: https://emotion.sh/docs/introduction
 [react-static]: https://github.com/react-static/react-static
+
+Credits: @bennetthardwick
