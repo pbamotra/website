@@ -1,30 +1,7 @@
 @import "./fonts.scss", "./normalize.scss";
 
-@mixin light {
-  body {
-    --accent-color: #2f76d0;
-    --accent-color-light: #82ade3;
-
-    --background-color: #fff;
-    --text-color: #000;
-    --heading-color: #000;
-
-    --contrast-text-color: #000;
-
-    --highlight-color: hsl(221deg 87% 60% / 15%);
-
-    --background-tint: rgba(0, 0, 0, 0.05);
-    --background-tint-hovered: rgba(0, 0, 0, 0.1);
-  }
-}
-
 body,
-body.light {
-  @include light();
-}
-
-@mixin dark() {
-  body {
+body.dark {
     --background-color: #222730;
     --heading-color: #dddee1;
     --text-color: #bdc1c6;
@@ -37,6 +14,22 @@ body.light {
 
     --background-tint: rgba(255, 255, 255, 0.02);
     --background-tint-hovered: rgba(255, 255, 255, 0.05);
+}
+
+@mixin light() {
+  body {
+    --background-color: #fff;
+    --heading-color: #000;
+    --text-color: #000;
+    --contrast-text-color: #000;
+
+    --accent-color: #2f76d0;
+    --accent-color-light: #82ade3;
+
+    --highlight-color: hsl(221deg 87% 60% / 15%);
+
+    --background-tint: rgba(0, 0, 0, 0.05);
+    --background-tint-hovered: rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -44,8 +37,8 @@ body.light {
   @include light();
 }
 
-body.dark {
-  @include dark();
+body.light {
+  @include light();
 }
 
 * {
