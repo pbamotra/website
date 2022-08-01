@@ -4,10 +4,14 @@ const key = "theme-override";
 
 if (typeof window !== "undefined") {
   try {
+    const isMediaDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const current = isMediaDark ? "dark" : "light";
+
     var x = window.localStorage.getItem(key);
     if (x === "dark" || x === "light") {
       document.body.className = x;
     }
+    localStorage.setItem(key, current);
   } catch (e) {
     console.error(e);
   }
