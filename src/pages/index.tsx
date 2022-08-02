@@ -14,6 +14,13 @@ const ContentContainer = styled.div({
   maxWidth: "680px",
 });
 
+const DetailContainer = styled.div({
+  fontSize: "0.8rem",
+  opacity: 0.8,
+  marginTop: "2rem",
+  cursor: "pointer",
+});
+
 const Tag = styled(Link)({
   background: "var(--background-tint)",
   borderBottom: "none",
@@ -186,6 +193,10 @@ export default function Home() {
         <NavLink to={`/now/`}>Now</NavLink> ·
         <NavLink to={`/archive/`}>Archive</NavLink>
       </Nav>
+
+      <DetailContainer>
+        Theme credits: <a href="https://bennetthardwick.com">@bennetthardwick</a>
+      </DetailContainer>
     </ContentContainer>
   );
 }

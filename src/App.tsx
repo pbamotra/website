@@ -29,7 +29,7 @@ const DESCRIPTION =
   "I am a machine learning engineer and I work on image classification, visual search, and object detection";
 
 import { MutableRefObject, useEffect, useRef } from "react";
-import { DetailToggle } from "components/DetailToggle";
+// import { DetailToggle } from "components/DetailToggle";
 import { DarkModeToggle } from "components/DarkModeToggle";
 
 export function useScrollBehaviour() {
@@ -130,7 +130,7 @@ export default function App() {
                 />
               </Route>
             </Switch>
-            <DetailToggle />
+            {/* <DetailToggle /> */}
           </React.Suspense>
         </Container>
       </RootContainer>

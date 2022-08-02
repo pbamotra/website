@@ -33,7 +33,7 @@ export async function getData(): Promise<HomeRouteData> {
   // await getRedirects();
 
   return {
-    recent: allPosts.slice(0, 10).map(({ title, slug, description }) => ({
+    recent: allPosts.slice(0, 5).map(({ title, slug, description }) => ({
       title,
       description,
       slug,
