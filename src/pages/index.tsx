@@ -16,9 +16,9 @@ const ContentContainer = styled.div({
 
 const DetailContainer = styled.div({
   fontSize: "0.8rem",
-  opacity: 0.8,
+  opacity: 0.5,
+  padding: "1rem",
   marginTop: "2rem",
-  cursor: "pointer",
 });
 
 const Tag = styled(Link)({
@@ -91,8 +91,7 @@ const SubtleText = styled.span({
 });
 
 const NavLink = styled(Link)({
-  margin: "1em",
-  padding: "0.5rem 2rem",
+  padding: "1rem",
   borderRadius: "4px",
   borderBottom: "none",
   fontSize: "0.8rem",
@@ -102,10 +101,6 @@ const NavLink = styled(Link)({
 
 const Nav = styled.nav({
   margin: "4rem 0",
-
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
 });
 
 const TagContainer = styled.ul({
@@ -192,11 +187,11 @@ export default function Home() {
         <NavLink to={`/projects/`}>Projects</NavLink> ·{" "}
         <NavLink to={`/now/`}>Now</NavLink> ·
         <NavLink to={`/archive/`}>Archive</NavLink>
-      </Nav>
 
-      <DetailContainer>
+        <DetailContainer>
         Theme credits: <a href="https://bennetthardwick.com">@bennetthardwick</a>
-      </DetailContainer>
+        </DetailContainer>
+      </Nav>
     </ContentContainer>
   );
 }

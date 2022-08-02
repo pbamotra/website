@@ -6,7 +6,9 @@ const HomeLinkAnchor = styled(Link)({
   borderBottom: "none",
   color: "inherit",
   cursor: "pointer",
-
+  margin: "0.67rem",
+  paddingTop: "1rem",
+  display: "flex",
   ":visited": {
     color: "inherit",
   },
