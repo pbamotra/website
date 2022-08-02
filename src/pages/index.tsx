@@ -126,7 +126,7 @@ export default function Home() {
   return (
     <ContentContainer>
       <div>
-        <Title>Hi, Pankesh here!</Title>
+        <Title>Hi, <span className="emoji wave-hand animated"></span> Pankesh here!</Title>
         <div>
           <Subtitle>
             I'm an ML engineer at{" "}
