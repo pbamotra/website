@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import styled from "@emotion/styled";
 import PostPreview from "components/PostPreview";
+
 import { useShowSeeds } from "lib/seed";
 import { useData } from "lib/useData";
 
@@ -20,6 +21,13 @@ const DetailContainer = styled.div({
   padding: "1rem",
   marginTop: "2rem",
 });
+
+const STATUS_ICON: { [key: string]: React.ReactNode } = {
+  seedling: <>🌱</>,
+  budding: <>🌿</>,
+  evergreen: <>🌳</>,
+  seed: <>🌰</>,
+};
 
 const Tag = styled(Link)({
   background: "var(--background-tint)",
@@ -151,7 +159,7 @@ export default function Home() {
           .map((x) => (
             <li key={x.slug}>
               <RecentNotesLink to={x.slug}>
-                <span>{x.title}</span>
+                <span>{x.title} {STATUS_ICON[x.status]}</span>
                 <br />
                 <SubtleText>
                   {new Date(x.createdAt).toLocaleString(undefined, {
