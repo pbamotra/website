@@ -8,10 +8,10 @@ aliases:
 
 Hi there, welcome to my digital garden.
 
-This is my attempt at building a personal wiki or exobrain.
+These are my ever evolving notes. I write these notes to organize my thoughts around different topics and to connect dots between ideas. These notes reflect my own understanding and has been shared publicly because it might help you discover even more connections.
 
-I generally like to write about programming or rust things, but recently I've started writing more about tools for thought.
+I generally like to write about books I'm reading, poetry, [shayari](https://en.wikipedia.org/wiki/Urdu_poetry), and my mental models.
 
-My garden hasn't been tended very well - but I'm working on that. Check back in later or follow me on [twitter] to stay up to date.
+This garden is a living being so choose your own adventure. Write to me or follow me on [twitter].
 
-[twitter]: https://twitter.com/intent/user?screen_name=bennettbackward
+[twitter]: https://twitter.com/intent/user?screen_name=_pbamotra_

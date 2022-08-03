@@ -4,77 +4,8 @@
       <link>https://pankesh.com</link>
       <description>Pankesh Bamotra</description>
       <language>en</language>
-      <lastBuildDate>Wed, 09 Sep 2020 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Wed, 03 Aug 2022 09:30:20 GMT</lastBuildDate>
       <atom:link href="https://pankesh.com/rss.xml" rel="self" type="application/rss+xml"/>
-      <item>
-      <guid>https://pankesh.com/recoil-from-scratch/</guid>
-      <title>Rewriting Recoil from scratch</title>
-      <link>https://pankesh.com/recoil-from-scratch/</link>
-      <description>A brief exploration into how to build an &quot;atom&quot; based state management library like Recoil. I talk about how I&#039;d build atoms, selectors as well as the hooks to use them from React. What&#039;s more - it&#039;s all in under 100 lines of code.</description>
-      <pubDate>Wed, 09 Sep 2020 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/creating-a-blazingly-fast-blog-without-js-or-gatsby/</guid>
-      <title>Building a JavaScript-free fast static site</title>
-      <link>https://pankesh.com/creating-a-blazingly-fast-blog-without-js-or-gatsby/</link>
-      <description>How to build a blazingly fast static site without relying on Gatsby or JavaScript. I talk about common features of websites that make them slow and give tips on how to build a purely static site that meets all the Core Web Vitals.</description>
-      <pubDate>Tue, 09 Jun 2020 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/dont-use-boxed-trait-objects-for-struct-internals/</guid>
-      <title>Don&#039;t use boxed trait objects</title>
-      <link>https://pankesh.com/dont-use-boxed-trait-objects-for-struct-internals/</link>
-      <description>Boxed trait objects are a great scape goat for solving hard borrow checker errors. But when writing a struct that needs to be reused, you&#039;re better off using something else for their interior structure.</description>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/writing-native-node-extensions-in-rust/</guid>
-      <title>Safe, efficient and fast native Node extensions with Rust</title>
-      <link>https://pankesh.com/writing-native-node-extensions-in-rust/</link>
-      <description>Everyone seems to be rewriting all their JavaScript in Rust. I look at how you can use Rust, Rayon and Neon to write user fast and parallel native Node extensions.</description>
-      <pubDate>Tue, 26 Nov 2019 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/vim-webdev-ide/</guid>
-      <title>Vim for Webdev</title>
-      <link>https://pankesh.com/vim-webdev-ide/</link>
-      <description>I&#039;ve been using the Vim emulator for Visual Studio Code for a really long time. In this one I finally look at how to make the switch to Neovim but keep all the perks of using a full fledged web development IDE.</description>
-      <pubDate>Sun, 23 Jun 2019 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/force-push-your-branches/</guid>
-      <title>Force push your branches</title>
-      <link>https://pankesh.com/force-push-your-branches/</link>
-      <description>A slightly hyperbolic argument for why you should force push your branches. I look at how force pushing helps you to keep your git history readable and free of merge commits.</description>
-      <pubDate>Mon, 27 May 2019 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/beginner-advanced-vim-tips/</guid>
-      <title>Advanced beginner Vim tricks</title>
-      <link>https://pankesh.com/beginner-advanced-vim-tips/</link>
-      <description>After you get past the beginner level in Vim it can be a bit hard to figure out what to learn next. To help, I explore some tips and tricks to help you overcome the valley of despair and become an advanced Vim user.</description>
-      <pubDate>Sun, 06 Jan 2019 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/aoc-rust-intro/</guid>
-      <title>Learning Rust through the Advent of Code</title>
-      <link>https://pankesh.com/aoc-rust-intro/</link>
-      <description>An introduction to the Rust programming language through an Advent of Code 2018 challenge.</description>
-      <pubDate>Fri, 07 Dec 2018 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/change-to-sway-arch-linux/</guid>
-      <title>Leaving i3 and Xorg for Sway and Wayland</title>
-      <link>https://pankesh.com/change-to-sway-arch-linux/</link>
-      <description>A brief journey into leaving behind Xorg and i3 for the newer Wayland compositor and Sway window manager. I talk about a few issues I ran into during the migration and how I (tried) to fix them.</description>
-      <pubDate>Sat, 06 Oct 2018 00:00:00 GMT</pubDate>
-    </item>
-<item>
-      <guid>https://pankesh.com/arch-japanese-fonts/</guid>
-      <title>Japanese Fonts on Arch Linux</title>
-      <link>https://pankesh.com/arch-japanese-fonts/</link>
-      <description>How to get Japanese fonts working properly on Arch Linux. I look at how to configure the default system fonts as well as getting Japanese input working with Fcitx and Mozc.</description>
-      <pubDate>Fri, 30 Mar 2018 00:00:00 GMT</pubDate>
-    </item>
+      
     </channel>
   </rss>
